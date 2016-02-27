@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical" 
+    android:background="@color/light_gray">
+    
+    <!-- 导航栏 -->  
+    <RelativeLayout
+     android:layout_width="fill_parent"
+     android:layout_height="@dimen/nav_bar"
+     android:background="@color/theme_blue"
+     android:orientation="horizontal">
+    
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignWithParentIfMissing="true"
+         android:layout_centerHorizontal="true"
+         android:layout_centerInParent="true"
+         android:layout_centerVertical="true"
+         android:text="@string/books_floating"
+         android:textColor="@color/white"
+         android:textSize="@dimen/nav_textsize_20" />
+
+     <Button
+         android:id="@+id/btn_login"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_centerHorizontal="true"
+         android:layout_centerVertical="true"
+         android:layout_gravity="center"
+         android:layout_marginRight="10dp"
+         android:background="@color/transparent"
+         android:text="@string/login_now"
+         android:textColor="@color/white"
+         android:textSize="@dimen/nav_textsize_18" />
+     
+	 </RelativeLayout>
+	 
+     <ImageView
+     android:id="@+id/iv_logo"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_gravity="center_vertical|center_horizontal"
+     android:src="@drawable/logo_books_floating"
+     android:layout_marginTop="20dp" />
+
+   <LinearLayout
+     android:layout_width="fill_parent"
+     android:layout_height="@dimen/single_input_height"
+     android:layout_marginLeft="@dimen/input_box_marginLeft_5"
+     android:layout_marginRight="@dimen/input_box_marginLeft_5"
+     android:layout_marginTop="30dp"
+     android:orientation="horizontal" 
+     android:background="@drawable/input_box"
+     android:gravity="right">
+
+       <EditText
+           android:id="@+id/et_search_books"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginLeft="@dimen/input_box_marginLeft_5"
+           android:layout_weight="0.1"
+           android:ems="10" />
+     
+       <Button
+           android:id="@+id/btn_search_books"
+           android:layout_width="40dp"
+           android:layout_height="match_parent"
+           android:background="@color/theme_blue"
+           android:text="@string/search_books"
+           android:textColor="@color/white"
+           android:textSize="@dimen/nav_textsize_15" />
+   
+       </LinearLayout>
+
+   <Spinner
+       android:id="@+id/spinner_schools"
+       android:layout_width="fill_parent"
+       android:layout_height="48dp"
+       android:layout_marginLeft="@dimen/input_box_marginLeft_5"
+       android:layout_marginRight="@dimen/input_box_marginLeft_5"
+       android:layout_marginTop="@dimen/nav_marginTop_10"
+       android:prompt="@string/spinner_prompt" />
+
+</LinearLayout>

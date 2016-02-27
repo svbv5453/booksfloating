@@ -1,0 +1,63 @@
+<resources>
+
+    <string name="app_name">图书漂流</string>
+    <string name ="search_books">搜书</string>
+    <string name="info_notice">信息公告</string>
+    <string name="books_recommend">图书推荐</string>
+    <string name="my_info">我的</string>
+    <string name="user_login">用户登录</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="remember_password">记住密码</string>
+    <string name="register">注册</string>
+    <string name="filter">筛选</string>
+    <string name="books_floating">图书漂流</string>
+    <string name="books_info">图书信息</string>
+    <string name="detail_info">详细信息</string>
+    <string name="check_all">全选</string>
+    <string name="release_message">发布信息</string>
+    <string name="direct_release">直接发布</string>
+    <string name="login_now">登录</string>
+    <string name="search_school">搜学校</string>
+    <string name="send_email">发送邮件</string>
+    <string name="btn_sure">确定</string>
+	<string name="btn_search">搜索</string>
+	<string name="helptoborrow_info">帮借信息</string>
+	 <string name="tv_books_recommend">根据本周用户检索的图书次数，我们为您推荐：</string>
+    <string name="btn_my_info_publish">我的发布</string>
+    <string name="btn_my_info_order">我的订单</string>
+    <string name="btn_my_info_remind">到期提醒</string>
+    <string name="btn_my_info_creditScore">信用积分</string>
+    <string name="btn_my_info_set">设置</string>
+    <string name="btn_my_info_exit">退出账号</string>
+    <string name="my_info_search_bookName">书名:</string>
+    <string name="btn_my_info_search_book">搜索</string>
+    <string name="btn_my_info_set_reset_password">重置密码</string>
+    <string name="btn_my_info_set_feedback">反馈问题</string>
+    <string name="btn_my_info_set_version_check">版本检查</string>
+    <string name="btn_my_info_set_about">关于</string>
+    <string name="btn_my_info_set_reset_confirm">确认</string>
+    <string name="feedback_problem">请输入您对图书漂流app的建议！</string>
+    <string name="about_title">图书漂流app</string>
+    <string name="about_content">该款app致力于解决高校间的图书互借问题，方便广大学子的学习交流，同时有助于提高高校图书资源的利用率</string>
+    <string name="integral_rule">积分规则</string>
+    <string name="common_user">普通用户: 一个月可借一本书</string>
+    <string name="sliver_user">银牌用户: 一个月可借三本书</string>
+    <string name="gold_user">金牌用户: 一个月可借六本书</string>
+    <string name="integral_rule_register">用户注册: 奖励5个积分</string>
+    <string name="integral_rule_sign">每日签到: 奖励2个积分</string>
+    <string name="integral_rule_help">帮他人借书: 奖励20积分</string>
+    <string name="integral_rule_returnbook_inadvance">超前一周（及以上）还书， 奖励5个积分</string>
+    <string name="integral_rule_overdue_book">逾期未还:扣20个积分</string>
+    <string name="btn_integral_rule_sign">今日签到</string>
+    <string name="spinner_prompt">请选择一个学校</string>
+	<string-array name="spinner_item">
+	    <item>西安电子科技大学</item>
+	    <item >西北工业大学</item>
+	    <item >陕西师范大学</item>
+	    <item >长安大学</item>
+	    <item >西安工业大学</item>
+	    <item >西安工程大学</item>
+	    <item >西安科技大学</item>
+	    <item >可以根据学校进行查询：</item>
+	</string-array>
+</resources>

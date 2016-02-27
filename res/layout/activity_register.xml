@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/light_gray">
+    
+  <!-- 导航栏 -->  
+    <LinearLayout 
+     android:layout_width="fill_parent"
+     android:layout_height="@dimen/nav_bar"
+     android:background="@color/theme_blue">
+     
+     <Button 
+         android:id="@+id/back"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:background="@drawable/back"
+         android:layout_marginTop="@dimen/nav_marginTop_10"
+         android:layout_marginLeft="@dimen/nav_marginLeft_10"/>
+     
+     <TextView 
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/register"
+         android:textColor="@color/white"
+         android:textSize="@dimen/nav_textsize_16"
+         android:layout_marginTop="@dimen/nav_marginTop_10"
+         android:layout_marginLeft="@dimen/nav_marginLeft_13"/>
+	 </LinearLayout>
+	 
+	<!-- 学号 --> 
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_input_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="学号"
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="10dp"/>
+        
+        <EditText 
+            android:id="@+id/et_stuid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:inputType="number"
+            android:textSize="@dimen/nav_textsize_16"
+            android:hint="请输入真实学号"/>
+
+    </LinearLayout>
+    
+    <!-- 学校 -->
+     <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_input_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="学校"
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="10dp"/>
+        
+        <EditText 
+            android:id="@+id/et_schoolname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:inputType="text"
+            android:textSize="@dimen/nav_textsize_16"
+            android:hint="请输入学校全称"/>
+
+    </LinearLayout>
+    
+     <!-- 手机号 -->
+      <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_input_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="手机号"
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="10dp"/>
+        
+        <EditText 
+            android:id="@+id/et_phonenum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:inputType="number"
+            android:textSize="@dimen/nav_textsize_16"
+            android:hint="请输入手机号"/>
+
+    </LinearLayout>
+
+      <!-- 邮箱 -->
+       <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_input_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="邮箱"
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="10dp"/>
+        
+        <EditText 
+            android:id="@+id/et_emailadderss"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/nav_textsize_16"
+            android:hint="请输入邮箱地址"/>
+
+    </LinearLayout>
+      
+      <!-- 用户名 -->
+      <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_input_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="用户名"
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="10dp"/>
+        
+        <EditText 
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:inputType="text"
+            android:textSize="@dimen/nav_textsize_16"
+            android:hint="请输入用户名"/>
+
+    </LinearLayout>
+    
+      <!-- 密码 -->
+      <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_input_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="密码 "
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="10dp"/>
+        
+        <EditText 
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="28dp"
+            android:inputType="textPassword"
+            android:textSize="@dimen/nav_textsize_16"
+            android:hint="请输入密码"/>
+
+    </LinearLayout>
+    
+      <!-- 确认密码 -->
+	<LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_input_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="确认密码"
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="10dp"/>
+        
+        <EditText 
+            android:id="@+id/et_confirmpsd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:inputType="textPassword"
+            android:textSize="@dimen/nav_textsize_16"
+            android:hint="再次输入密码"/>
+
+    </LinearLayout>
+    
+	 <Button
+       android:id="@+id/btn_register_now"
+       android:layout_width="300dp"
+       android:layout_height="32dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginTop="30dp"
+       android:background="@drawable/button_blue"
+       android:text="@string/register"
+       android:textColor="@color/white"
+       android:textSize="16sp" />
+</LinearLayout>

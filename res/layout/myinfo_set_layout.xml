@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical" >
+    
+    <Button 
+        android:id="@+id/btn_my_info_set_reset_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:text="@string/btn_my_info_set_reset_password"/>
+    
+    <Button 
+        android:id="@+id/btn_my_info_set_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:text="@string/btn_my_info_set_feedback"/>
+    <Button 
+        android:id="@+id/btn_my_info_set_version_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:text="@string/btn_my_info_set_version_check"/>
+    <Button 
+        android:id="@+id/btn_my_info_set_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       
+        android:text="@string/btn_my_info_set_about"/>
+    
+
+</LinearLayout>

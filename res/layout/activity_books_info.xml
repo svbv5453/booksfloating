@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical" >
+
+    <!-- 导航栏 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/nav_bar"
+        android:background="@color/theme_blue" >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="@dimen/nav_marginLeft_10"
+            android:layout_marginTop="@dimen/nav_marginTop_10"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nav_marginLeft_13"
+            android:layout_marginTop="@dimen/nav_marginTop_10"
+            android:text="@string/books_info"
+            android:textColor="@color/white"
+            android:textSize="@dimen/nav_textsize_16" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp" 
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_books_image"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"            
+            android:src="@drawable/thinking_in_java"
+            android:layout_marginRight="5dp" />
+
+        <TextView
+            android:id="@+id/tv_books_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_books_image"
+            android:layout_marginTop="5dp"
+            android:text="Thinking in Java 4th"
+            android:textColor="@color/black"
+            android:textSize="@dimen/nav_textsize_16" />
+
+        <TextView
+            android:id="@+id/tv_books_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_books_title"
+            android:layout_toRightOf="@+id/iv_books_image"
+            android:layout_marginTop="3dp"
+            android:text="作者：（美）埃克尔" 
+            android:textColor="@color/gray"/>
+
+        <TextView
+            android:id="@+id/tv_books_publisher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/iv_books_image"
+            android:layout_below="@+id/tv_books_author"
+            android:layout_marginTop="3dp"
+            android:text="出版社：机械工业出版社" 
+            android:textColor="@color/gray"/>
+
+        <TextView
+            android:id="@+id/tv_books_publish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_books_publisher"
+            android:layout_toRightOf="@+id/iv_books_image"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="3dp"
+            android:text="年份：2007"
+            android:textColor="@color/gray" />
+
+    </RelativeLayout>
+
+    <!-- 发布时间 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nav_marginLeft_10"
+            android:layout_marginRight="5dp"
+            android:text="发布时间："
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16" />
+
+        <TextView
+            android:id="@+id/tv_info_publish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.88"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="@dimen/nav_textsize_16" />
+
+    </LinearLayout>
+    
+    <!-- 馆藏位置 -->
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nav_marginLeft_10"
+            android:layout_marginRight="5dp"
+            android:text="馆藏位置："
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16" />
+
+        <TextView
+            android:id="@+id/tv_library_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.88"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="@dimen/nav_textsize_16" />
+
+    </LinearLayout>
+    
+     <!-- 索书号 -->
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nav_marginLeft_10"
+            android:layout_marginRight="5dp"
+            android:text="索书号："
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16" />
+
+        <TextView
+            android:id="@+id/tv_reference_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.88"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="@dimen/nav_textsize_16" />
+
+    </LinearLayout>
+    
+     <!-- 馆藏副本/可借复本 -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nav_marginLeft_10"
+            android:layout_marginRight="5dp"
+            android:text="馆藏副本/可借复本："
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16" />
+
+        <TextView
+            android:id="@+id/tv_whether_borrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.88"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="@dimen/nav_textsize_16" />
+
+    </LinearLayout>
+     
+      <!-- 备注 -->
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nav_marginLeft_10"
+            android:layout_marginRight="5dp"
+            android:text="备注："
+            android:textColor="@color/theme_blue"
+            android:textSize="@dimen/nav_textsize_16" />
+
+        <TextView
+            android:id="@+id/tv_remarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.88"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="@dimen/nav_textsize_16" />
+
+    </LinearLayout>
+    
+     <Button
+       android:id="@+id/btn_gotohelp"
+       android:layout_width="300dp"
+       android:layout_height="32dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginTop="40dp"
+       android:background="@drawable/button_blue"
+       android:text="去帮忙"
+       android:textColor="@color/white"
+       android:textSize="16sp" />
+
+</LinearLayout>

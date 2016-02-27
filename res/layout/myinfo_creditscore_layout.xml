@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:text="@string/common_user"/>
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:text="@string/sliver_user"/>
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:text="@string/gold_user"/>
+    <ProgressBar 
+        android:id="@+id/pb_myinfo_crditscore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        style="@android:style/Widget.ProgressBar.Horizontal"/>
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:text="当前: 完成注册，积5分"/>
+
+</LinearLayout>

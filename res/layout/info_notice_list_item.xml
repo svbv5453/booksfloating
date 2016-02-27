@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:background="@color/white">
+      
+        <TextView
+            android:id="@+id/tv_books_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_books_image"
+            android:layout_marginTop="5dp"
+            android:text="Thinking in Java 4th"
+            android:textColor="@color/black"
+            android:textSize="@dimen/nav_textsize_16" />
+
+        <TextView
+            android:id="@+id/tv_books_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_books_title"
+            android:layout_toRightOf="@+id/imageView1"
+            android:layout_marginTop="3dp"
+            android:text="作者：（美）埃克尔" 
+            android:textColor="@color/gray"
+            android:textSize="@dimen/nav_textsize_13"/>
+
+        <TextView
+            android:id="@+id/tv_borrow_library"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/iv_books_image"
+            android:layout_below="@+id/tv_books_author"
+            android:layout_marginTop="3dp"
+            android:text="可借馆藏：西安电子科技大学北馆" 
+            android:textColor="@color/gray"
+            android:textSize="@dimen/nav_textsize_13"/>
+        
+        <TextView 
+            android:id="@+id/tv_books_publish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_borrow_library"
+            android:layout_toRightOf="@+id/iv_books_image"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="3dp"
+            android:text="发布时间：2016年2月10日15时00分"
+            android:textColor="@color/orange" 
+            android:textSize="@dimen/nav_textsize_13"/>
+
+        <TextView
+            android:id="@+id/tv_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_books_publish_time"
+            android:layout_toRightOf="@+id/iv_books_image"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="3dp"
+            android:text="备注：希望好心人尽快帮我借到"
+            android:textColor="@color/orange" 
+            android:textSize="@dimen/nav_textsize_13"/>
+
+        <ImageView
+            android:id="@+id/iv_books_image"
+            android:layout_width="80dp"
+            android:layout_height="95dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/tv_books_title"
+            android:layout_marginRight="3dp"
+            android:src="@drawable/thinking_in_java" />
+
+</RelativeLayout>

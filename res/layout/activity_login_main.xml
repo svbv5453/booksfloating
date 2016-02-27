@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/light_gray">
+ <RelativeLayout 
+     android:layout_width="fill_parent"
+     android:layout_height="@dimen/nav_bar"
+     android:background="@color/theme_blue">
+     
+     <Button 
+         android:id="@+id/btn_back"
+         android:layout_width="20dp"
+         android:layout_height="20dp"
+         android:background="@drawable/back"
+         android:layout_marginTop="@dimen/nav_marginTop_10"
+         android:layout_marginLeft="@dimen/nav_marginLeft_10"/>
+     
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:layout_centerInParent="true"
+         android:layout_centerVertical="true"
+         android:layout_marginLeft="@dimen/nav_marginLeft_13"
+         android:layout_marginTop="@dimen/nav_marginTop_10"
+         android:text="@string/user_login"
+         android:textColor="@color/white"
+         android:textSize="@dimen/nav_textsize_20" />
+
+ </RelativeLayout>
+
+ <ImageView
+     android:id="@+id/iv_logo"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_gravity="center_vertical|center_horizontal"
+     android:src="@drawable/logo_books_floating"
+     android:layout_marginTop="10dp" />
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/single_input_height"
+     android:layout_marginLeft="@dimen/input_box_marginLeft_5"
+     android:layout_marginRight="@dimen/input_box_marginLeft_5"
+     android:layout_marginTop="50dp"
+     android:background="@drawable/input_box"
+     android:orientation="horizontal" >
+
+     <ImageView
+         android:layout_width="23dp"
+         android:layout_height="25dp"
+         android:layout_marginLeft="@dimen/input_box_marginLeft_5"
+         android:layout_marginTop="@dimen/input_box_marginTop_5"
+         android:contentDescription="用户图片"
+         android:src="@drawable/user" />
+
+     <EditText
+         android:id="@+id/et_username"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:ems="10"
+         android:hint="请输入邮箱或者用户名"
+         android:inputType="textEmailAddress|text"
+         android:textColor="@color/black"
+         android:textSize="@dimen/nav_textsize_16" >
+
+         <requestFocus />
+     </EditText>
+
+ </LinearLayout>
+ 
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/single_input_height"
+      android:layout_marginLeft="@dimen/input_box_marginLeft_5"
+      android:layout_marginRight="@dimen/input_box_marginLeft_5"
+      android:layout_marginTop="10dp"
+      android:background="@drawable/input_box"
+      android:orientation="horizontal" >
+
+      <ImageView
+          android:layout_width="23dp"
+          android:layout_height="25dp"
+          android:layout_marginLeft="@dimen/input_box_marginLeft_5"
+          android:layout_marginTop="@dimen/input_box_marginTop_5"
+          android:contentDescription="密码图片"
+          android:src="@drawable/password" />
+
+     <EditText
+          android:id="@+id/et_password"
+          android:layout_width="210dp"
+          android:layout_height="match_parent"
+          android:layout_marginLeft="5dp"
+          android:layout_marginTop="0dp"
+          android:hint="请输入密码"
+          android:textColor="@color/black" 
+          android:textSize="@dimen/nav_textsize_16"
+          android:inputType="textPassword"/>    
+
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="25dp"
+          android:layout_marginLeft="0dp"
+          android:layout_marginTop="2dp"
+          android:background="@color/white"
+          android:text="@string/forget_password"
+          android:textColor="@color/theme_blue"
+          android:textSize="@dimen/nav_textsize_15" />
+
+  </LinearLayout>
+  
+   <LinearLayout
+      android:layout_width="@dimen/single_input_width"
+      android:layout_height="@dimen/single_input_height"
+      android:layout_marginLeft="@dimen/input_box_marginLeft_5"
+      android:layout_marginTop="10dp"
+      android:orientation="horizontal" >
+      
+       <Button
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:background="@drawable/remember_password"
+          android:layout_marginLeft="5dp"/>
+           
+      <TextView 
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/remember_password"
+          android:textColor="@color/black"
+          android:layout_marginLeft="5dp"/>
+   </LinearLayout>
+
+   <Button
+       android:id="@+id/btn_login_now"
+       android:layout_width="300dp"
+       android:layout_height="32dp"
+       android:layout_marginLeft="10dp"
+       android:background="@drawable/button_blue"
+       android:text="@string/login_now"
+       android:textColor="@color/white"
+       android:textSize="@dimen/nav_textsize_18" />
+
+   <Button
+       android:id="@+id/btn_goto_register"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="80dp"
+       android:layout_marginTop="130dp"
+       android:background="@color/transparent"
+       android:text="还没有账户？注册账户"
+       android:textColor="@color/theme_blue"
+       android:textSize="@dimen/nav_textsize_16" />
+
+</LinearLayout>

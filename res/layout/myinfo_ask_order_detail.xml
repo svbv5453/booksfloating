@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical" >
+    <TextView 
+        android:id="@+id/tv_myinfo_ask_orderNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="订单号 : 100001111"/>
+    <TextView 
+        android:id="@+id/tv_myinfo_ask_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="时间: 2016年2月1日15时11分"/>
+    <TextView 
+        android:id="@+id/tv_myinfo_ask_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="昵称为小李飞刀的用户已接受您关于“thinking in java，（美）埃克尔，西安电子科技大学北馆”的求助"/>
+    <TextView 
+        android:id="@+id/tv_myinfo_ask_borrowDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="借书日 : 2016年2月2日"
+        />
+    <TextView 
+        android:id="@+id/tv_myinfo_ask_returnDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="还书日 : 2016年4月2日"
+        />
+    
+    <TextView 
+        android:id="@+id/tv_myinfo_ask_university"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="他所在的学校: 西安电子科技大学"/>
+    <TextView 
+        android:id="@+id/tv_myinfo_ask_phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="他的手机号: 18711112222"
+        />
+    <TextView 
+        android:id="@+id/tv_myinfo_ask_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="您可与他线下联系！"
+        />
+    
+
+</LinearLayout>

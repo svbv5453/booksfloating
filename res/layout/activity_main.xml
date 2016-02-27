@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lwy="http://schemas.android.com/apk/res/com.xd.booksfloating"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/light_gray">     
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main_activity"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/rg_main_activity"
+        android:layout_gravity="center"
+        android:background="@color/light_gray"
+        android:paddingBottom="55dip"
+        android:persistentDrawingCache="animation" />
+    
+     <RadioGroup
+        android:id="@+id/rg_main_activity"
+        android:layout_width="fill_parent"
+        android:layout_height="55dip"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" 
+        android:background="@drawable/tab_bar">
+ 
+ 		<!-- tab 1-->
+        <com.booksfloating.widget.MyRadioButton
+            android:id="@+id/mrb_search_books"
+            style="@style/radioButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="50dip"
+            android:layout_weight="1"
+            android:checked="true"
+            android:background="@drawable/navigation_item"
+            lwy:image="@drawable/logo_search_books"
+            android:text="@string/search_books" 
+            android:textColor="@color/black"/>
+
+        <!-- tab 2 -->
+        <com.booksfloating.widget.MyRadioButton
+            android:id="@+id/mrb_info_notice"
+            style="@style/radioButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_weight="1"
+            lwy:image="@drawable/logo_info_notice"
+            android:text="@string/info_notice"
+            android:textColor="@color/black"/>
+
+        <!-- tab 3 -->
+        <com.booksfloating.widget.MyRadioButton
+            android:id="@+id/mrb_books_recommend"
+            style="@style/radioButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_weight="1"
+            lwy:image="@drawable/logo_books_recommend"
+            android:text="@string/books_recommend"
+            android:textColor="@color/black" />
+        
+        <!-- tab 4 -->
+        <com.booksfloating.widget.MyRadioButton
+            android:id="@+id/mrb_my_info"
+            style="@style/radioButtonStyle"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_weight="1"
+            lwy:image="@drawable/logo_my_info"
+            android:text="@string/my_info" 
+            android:textColor="@color/black"/>
+
+    </RadioGroup>
+    
+</RelativeLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/iv_books_image"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_alignTop="@+id/tv_books_title"
+        android:src="@drawable/thinking_in_java" />
+    
+    <TextView
+        android:id="@+id/tv_books_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/iv_books_image"
+        android:layout_marginTop="5dp"
+        android:text="Thinking in Java 4th"
+        android:textColor="@color/black"
+        android:textSize="@dimen/nav_textsize_16" />
+
+    <TextView
+        android:id="@+id/tv_books_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_books_title"
+        android:layout_toRightOf="@+id/iv_books_image"
+        android:layout_marginTop="3dp"
+        android:text="作者：（美）埃克尔" 
+        android:textColor="@color/gray"/>
+
+    <TextView
+        android:id="@+id/tv_borrow_library"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/iv_books_image"
+        android:layout_below="@+id/tv_books_author"
+        android:layout_marginTop="3dp"
+        android:text="可借馆藏：西电、西工大..." 
+        android:textColor="@color/gray"/>
+
+</RelativeLayout>

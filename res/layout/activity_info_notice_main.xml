@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical" >
+    
+    <!-- 导航栏 -->  
+    <RelativeLayout
+     android:layout_width="fill_parent"
+     android:layout_height="@dimen/nav_bar"
+     android:background="@color/theme_blue"
+     android:orientation="horizontal">
+    
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignWithParentIfMissing="true"
+         android:layout_centerHorizontal="true"
+         android:layout_centerInParent="true"
+         android:layout_centerVertical="true"
+         android:text="@string/books_floating"
+         android:textColor="@color/white"
+         android:textSize="@dimen/nav_textsize_20" />
+
+     <Button
+         android:id="@+id/btn_login"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_centerHorizontal="true"
+         android:layout_centerVertical="true"
+         android:layout_gravity="center"
+         android:layout_marginRight="10dp"
+         android:background="@color/transparent"
+         android:text="@string/login_now"
+         android:textColor="@color/white"
+         android:textSize="@dimen/nav_textsize_18" />
+     
+	 </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/search_box">
+     
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/search_icon" />
+
+        <Button
+            android:id="@+id/btn_search_school"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/btn_search_school"
+            android:text="@string/search_school"
+            android:textColor="@color/white"
+            android:textSize="@dimen/nav_textsize_15" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btn_search_school"
+            android:layout_toRightOf="@+id/imageView1"
+            android:ems="10" >
+
+        </EditText>
+
+    </RelativeLayout>
+    
+    <ListView 
+        android:id="@+id/lv_info_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="3dp"
+     
+        ></ListView>
+	 
+</LinearLayout>

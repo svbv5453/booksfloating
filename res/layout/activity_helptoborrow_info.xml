@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/light_gray">
+    
+    
+    <!-- 导航栏 -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/nav_bar"
+        android:background="@color/theme_blue" >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nav_marginLeft_10"
+            android:layout_marginTop="@dimen/nav_marginTop_10"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nav_marginLeft_13"
+            android:layout_marginTop="@dimen/nav_marginTop_10"
+            android:text="@string/helptoborrow_info"
+            android:textColor="@color/white"
+            android:textSize="@dimen/nav_textsize_16" />
+    </LinearLayout>
+    
+	<!-- 预期帮借时间 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp" 
+        android:layout_marginTop="10dp"
+        android:background="@color/theme_blue" >
+
+     <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"   
+        android:layout_marginLeft="10dp"     
+        android:gravity="center_vertical|center_horizontal"
+        android:text="预期帮借时间："
+        android:textColor="@color/white"
+        android:textSize="@dimen/nav_textsize_16"/>
+      
+     <TextView
+        android:id="@+id/tv_expect_borrow_time"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"   
+        android:layout_marginLeft="0dp" 
+        android:gravity="center_vertical"    
+        android:text="2016年2月5日"
+        android:textColor="@color/white"
+        android:textSize="@dimen/nav_textsize_16"/>
+
+    </LinearLayout>
+
+   
+    <DatePicker
+        android:id="@+id/dp_expect_borrow_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_gravity="center"
+        android:foregroundGravity="center" />
+
+    <!-- 预期还书时间 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp" 
+        android:layout_marginTop="20dp"
+        android:background="@color/theme_blue" >
+
+     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"   
+        android:layout_marginLeft="10dp"     
+        android:gravity="center_vertical|center_horizontal"
+        android:text="预期还书时间："
+        android:textColor="@color/white"
+        android:textSize="@dimen/nav_textsize_16"/>
+      
+     <TextView
+        android:id="@+id/tv_expect_return_time"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"   
+        android:layout_marginLeft="0dp" 
+        android:gravity="center_vertical"    
+        android:text="2016年4月5日"
+        android:textColor="@color/white"
+        android:textSize="@dimen/nav_textsize_16"/>
+
+    </LinearLayout>
+
+    <DatePicker
+        android:id="@+id/dp_expect_return_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/btn_suretoborrow"
+        android:layout_width="290dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_blue"
+        android:text="@string/btn_sure"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

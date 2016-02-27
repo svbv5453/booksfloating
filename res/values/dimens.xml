@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <dimen name="nav_bar">40sp</dimen>
+   <dimen name="nav_textsize_20">20sp</dimen> 
+   <dimen name="nav_textsize_18">18sp</dimen> 
+   <dimen name="nav_textsize_16">16sp</dimen>
+   <dimen name="nav_textsize_15">15sp</dimen>
+   <dimen name="nav_textsize_13">13sp</dimen>
+   <dimen name="nav_marginTop_10">10sp</dimen>
+   <dimen name="nav_marginLeft_10">10sp</dimen>
+   <dimen name="nav_marginLeft_13">13sp</dimen>
+   <dimen name="input_box_marginLeft_5">5sp</dimen>
+   <dimen name="input_box_marginTop_5">5sp</dimen>
+   <dimen name="single_input_height">35sp</dimen>
+   <dimen name="single_input_width">307sp</dimen>
+   <dimen name="edittext_size_15">15sp</dimen>
+</resources>
