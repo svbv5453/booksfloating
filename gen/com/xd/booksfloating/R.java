@@ -342,6 +342,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int AppTheme=0x7f080001;
         public static final int Theme_NoTitleBar=0x7f080002;
+        public static final int nav_main_style=0x7f080004;
         public static final int radioButtonStyle=0x7f080003;
     }
     public static final class styleable {
