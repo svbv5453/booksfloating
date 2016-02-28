@@ -100,6 +100,7 @@
           android:inputType="textPassword"/>    
 
       <Button
+          android:id="@+id/btn_forget_psd"
           android:layout_width="wrap_content"
           android:layout_height="25dp"
           android:layout_marginLeft="0dp"
@@ -119,6 +120,7 @@
       android:orientation="horizontal" >
       
        <Button
+           android:id="@+id/btn_remember_psd"
           android:layout_width="20dp"
           android:layout_height="20dp"
           android:background="@drawable/remember_password"
