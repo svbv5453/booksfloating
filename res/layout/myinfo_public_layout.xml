@@ -3,7 +3,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+     <!-- 导航栏 -->  
     <LinearLayout 
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/nav_bar"
+     android:background="@color/theme_blue">
+     
+     <Button 
+         android:id="@+id/back"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:background="@drawable/back"
+         android:layout_marginTop="@dimen/nav_marginTop_10"
+         android:layout_marginLeft="@dimen/nav_marginLeft_10"/>
+     
+     <TextView 
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/btn_my_info_publish"
+         android:textColor="@color/white"
+         android:textSize="@dimen/nav_textsize_16"
+         android:layout_marginTop="@dimen/nav_marginTop_10"
+         android:layout_marginLeft="@dimen/nav_marginLeft_13"/>
+	 </LinearLayout>
+	 <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/search_box">
+     
+       
+
+        <Button
+            android:id="@+id/btn_my_info_search_book"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/shape_search"
+            android:text="@string/btn_my_info_search_book"
+            android:textColor="@color/white"
+            android:textSize="@dimen/nav_textsize_15" />
+
+        <EditText
+            android:id="@+id/et_my_info_search_publish"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btn_my_info_search_book"
+            
+            android:ems="10" >
+
+        </EditText>
+
+    </RelativeLayout>
+    
+    <!-- <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:padding="2dp"
@@ -25,7 +79,7 @@
 	        android:gravity="center"
 	        android:textSize="15sp"
 	        android:textColor="@color/white"/>
-    </LinearLayout>
+    </LinearLayout> -->
     <ListView 
         android:id="@+id/lv_my_info_book_publish"
         android:layout_width="match_parent"

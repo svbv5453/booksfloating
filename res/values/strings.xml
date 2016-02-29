@@ -25,6 +25,7 @@
 	 <string name="tv_books_recommend">根据本周用户检索的图书次数，我们为您推荐：</string>
     <string name="btn_my_info_publish">我的发布</string>
     <string name="btn_my_info_order">我的订单</string>
+    <string name="order_detail">订单详情</string>
     <string name="btn_my_info_remind">到期提醒</string>
     <string name="btn_my_info_creditScore">信用积分</string>
     <string name="btn_my_info_set">设置</string>
