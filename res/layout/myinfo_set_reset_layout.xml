@@ -3,12 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     
-    android:padding="15dp"
+    
     android:orientation="vertical" >
+    <!-- 导航栏 -->  
+     <include layout="@layout/nav_resetpassword_layout"/>
     
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:paddingTop="10dp"
         android:orientation="horizontal">
         <TextView 
@@ -26,13 +29,14 @@
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:paddingTop="10dp"
         android:orientation="horizontal">
         <TextView 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="原密码:"/>
+            android:text="新密码:"/>
         <EditText 
             android:id="@+id/et_myinfo_set_reset_newPassword"
             android:layout_width="0dp"
@@ -43,6 +47,7 @@
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:paddingTop="10dp"
         android:orientation="horizontal">
         <TextView 
@@ -63,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:layout_margin="15dp"
         android:background="@drawable/shape"
         android:text="@string/btn_my_info_set_reset_confirm"
         android:textColor="@color/white"/>

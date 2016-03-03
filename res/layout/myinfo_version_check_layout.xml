@@ -3,10 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+    <!-- 导航栏 -->  
+     <include layout="@layout/nav_version_check_layout"/>
+    
     <TextView 
-        android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="搜索书籍"/>
+        android:layout_margin="15dp"
+        android:text="该版本是最新版本"/>
+    
 
 </LinearLayout>

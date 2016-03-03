@@ -5,28 +5,7 @@
     
     android:orientation="vertical" >
     <!-- 导航栏 -->  
-    <LinearLayout 
-     android:layout_width="match_parent"
-     android:layout_height="@dimen/nav_bar"
-     android:background="@color/theme_blue">
-     
-     <Button 
-         android:id="@+id/back"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:background="@drawable/back"
-         android:layout_marginTop="@dimen/nav_marginTop_10"
-         android:layout_marginLeft="@dimen/nav_marginLeft_10"/>
-     
-     <TextView 
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="@string/btn_my_info_order"
-         android:textColor="@color/white"
-         android:textSize="@dimen/nav_textsize_16"
-         android:layout_marginTop="@dimen/nav_marginTop_10"
-         android:layout_marginLeft="@dimen/nav_marginLeft_13"/>
-	 </LinearLayout>
+     <include layout="@layout/nav_order_layout"/>
    
     <RelativeLayout
         android:layout_width="match_parent"
@@ -52,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/btn_my_info_search_book"
-            
+            android:hint="书名:"
             android:ems="10" >
 
         </EditText>
