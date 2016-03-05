@@ -5,7 +5,37 @@
     
     android:orientation="vertical" >
      <!-- 导航栏 -->  
-    <include layout="@layout/nav_creditscore_layout"/>
+     <RelativeLayout 
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/nav_bar"
+		 android:layout_gravity="center"
+		 android:background="@color/theme_blue"
+         android:orientation="horizontal">
+         <Button 
+         android:id="@+id/back"
+         android:gravity="center"
+         style="@style/navBackButtonStyle"/>
+     
+     
+	     <TextView 
+	         style="@style/navTextStyle"
+	         android:layout_toRightOf="@id/back"
+	         android:text="@string/btn_my_info_creditScore"
+	        />
+	     <Button 
+	         android:id="@+id/btn_myinfo_integral_rule"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_alignParentRight="true"
+	         android:background="@color/transparent"
+	         android:padding="10dp"
+	         android:gravity="center"
+	         android:text="@string/btn_my_info_integral_rule"
+	         android:textColor="@color/white"
+	         android:textSize="@dimen/nav_textsize_16"
+	         />
+     </RelativeLayout>
+    
     
     <TextView 
         android:layout_width="match_parent"

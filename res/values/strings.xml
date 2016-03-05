@@ -28,6 +28,7 @@
     <string name="order_detail">订单详情</string>
     <string name="btn_my_info_remind">到期提醒</string>
     <string name="btn_my_info_creditScore">信用积分</string>
+    <string name="btn_my_info_integral_rule">积分规则</string>
     <string name="btn_my_info_set">设置</string>
     <string name="btn_my_info_exit">退出账号</string>
     <string name="my_info_search_bookName">书名:</string>

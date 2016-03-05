@@ -15,7 +15,7 @@
      
      <TextView 
          style="@style/navTextStyle"
-         android:text="@string/btn_my_info_creditScore"
+         android:text="@string/btn_my_info_integral_rule"
         />
 	 
 
