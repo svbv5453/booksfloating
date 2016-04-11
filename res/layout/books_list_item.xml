@@ -11,8 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:layout_alignTop="@+id/tv_books_title"
-        android:src="@drawable/thinking_in_java" />
+        android:layout_alignTop="@+id/tv_books_title"/>
     
     <TextView
         android:id="@+id/tv_books_title"
