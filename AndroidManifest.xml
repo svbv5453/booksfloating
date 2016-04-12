@@ -35,6 +35,16 @@
             </intent-filter>
         </activity>
         
+        <activity android:name="com.booksfloating.activity.LoginActivity"></activity>
+        
+        <activity android:name="com.booksfloating.activity.ForgetPasswordActivity"></activity>
+        
+        <activity android:name="com.booksfloating.activity.RegisterActivity"></activity>
+        
+        <activity android:name="com.booklsfloating.activity.searchbooks.BorrowBooksDetailInfoActivity"></activity>
+        <activity android:name="com.booklsfloating.activity.searchbooks.PublishInfoActivity"></activity>
+        <activity android:name="com.booklsfloating.activity.searchbooks.SearchBooksDetailActivity"></activity>  
+        
          <activity 
             android:name="com.booksfloating.activity.MyInfoPublish"></activity>
         <activity 

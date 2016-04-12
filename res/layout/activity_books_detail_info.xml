@@ -13,9 +13,9 @@
         android:background="@color/theme_blue" >
 
         <Button
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="@dimen/nav_marginLeft_10"
             android:layout_marginTop="@dimen/nav_marginTop_10"
             android:background="@drawable/back" />
@@ -26,10 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/nav_marginLeft_13"
             android:layout_marginTop="@dimen/nav_marginTop_10"
-            android:layout_toRightOf="@+id/back"
+            android:layout_toRightOf="@+id/btn_back"
             android:text="@string/detail_info"
             android:textColor="@color/white"
-            android:textSize="@dimen/nav_textsize_16" />     
+            android:textSize="@dimen/nav_textsize_20" />     
 
         <Button
             android:id="@+id/btn_publish_info"

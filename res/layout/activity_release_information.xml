@@ -13,9 +13,9 @@
         android:background="@color/theme_blue" >
 
         <Button
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="@dimen/nav_marginLeft_10"
             android:layout_marginTop="@dimen/nav_marginTop_10"
             android:background="@drawable/back" />
@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/nav_marginTop_10"
             android:text="@string/release_message"
             android:textColor="@color/white"
-            android:textSize="@dimen/nav_textsize_16" />
+            android:textSize="@dimen/nav_textsize_20" />
     </LinearLayout>
 
     <TextView
@@ -41,7 +41,7 @@
         android:textSize="@dimen/nav_textsize_16" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/et_remark"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
@@ -50,14 +50,16 @@
         android:hint="写下你想说的话吧……"
         android:inputType="textMultiLine"
         android:singleLine="false"
-        android:textSize="@dimen/nav_textsize_16" >
+        android:textSize="@dimen/nav_textsize_16"
+        android:background="@color/white" >
 
         <requestFocus />
     </EditText>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal">
         
       <Button
        android:id="@+id/btn_sure"
@@ -65,22 +67,24 @@
        android:layout_height="32dp"
        android:layout_marginLeft="15dp"
        android:layout_marginTop="30dp"
+       android:layout_alignParentLeft="true"
        android:background="@drawable/button_blue"
        android:text="@string/btn_sure"
        android:textColor="@color/white"
        android:textSize="16sp" />
-      
+
       <Button
-       android:id="@+id/btn_direct_release"
-       android:layout_width="110dp"
-       android:layout_height="32dp"
-       android:layout_marginLeft="75dp"
-       android:layout_marginTop="30dp"
-       android:background="@drawable/button_blue"
-       android:text="@string/direct_release"
-       android:textColor="@color/white"
-       android:textSize="16sp" />
+          android:id="@+id/btn_direct_release"
+          android:layout_width="110dp"
+          android:layout_height="32dp"
+          android:layout_marginRight="15dp"
+          android:layout_marginTop="30dp"
+          android:layout_alignParentRight="true"
+          android:background="@drawable/button_blue"
+          android:text="@string/direct_release"
+          android:textColor="@color/white"
+          android:textSize="16sp" />
          
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

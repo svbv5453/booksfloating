@@ -1,10 +1,10 @@
 package com.booksfloating.adapter;
 
+import com.booklsfloating.activity.searchbooks.SearchBooksFragment;
 import com.booksfloating.activity.BooksRecommendFragment;
 import com.booksfloating.activity.InfoNoticeFragment;
 import com.booksfloating.activity.MainActivity;
 import com.booksfloating.activity.MyInfoFragment;
-import com.booksfloating.activity.SearchBooksFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

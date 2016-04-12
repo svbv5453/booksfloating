@@ -17,7 +17,7 @@ public class MySpinnerAdapter extends ArrayAdapter<String>{
 
 	@Override
     public int getCount() {
-        return super.getCount() - 1; // This makes the trick: do not show last item
+        return super.getCount(); // This makes the trick: do not show last item
     }
 
     @Override
