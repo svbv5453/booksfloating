@@ -34,7 +34,7 @@ public class AskFragment extends Fragment {
 	private List<BooksRecommendBean> booksBeanList;
 
 	private ListView myInfoOrderListView = null;
-	private Button btn_myinfo_search_book = null;
+	//private Button btn_myinfo_search_book = null;
 	private static String urlTest = "http://www.imooc.com/api/teacher?type=4&num=30";
 	
 	@Override
@@ -43,7 +43,7 @@ public class AskFragment extends Fragment {
 		//View view = inflater.inflate(R.layout.myinfo_order_askfragment_test, container, false);
 		View view = inflater.inflate(R.layout.myinfo_order_layout, container, false);
 		myInfoOrderListView = (ListView)view.findViewById(R.id.lv_my_info_book_order);
-		btn_myinfo_search_book = (Button) view.findViewById(R.id.btn_my_info_search_book);
+	   /* btn_myinfo_search_book = (Button) view.findViewById(R.id.btn_my_info_search_book);
 		btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -51,7 +51,7 @@ public class AskFragment extends Fragment {
 				
 				Toast.makeText(getActivity(), "预留搜索", Toast.LENGTH_SHORT).show();
 			}
-		});
+		});*/
 		loadData(getActivity(), urlTest);
 		myInfoOrderListView.setOnItemClickListener(new OnItemClickListener() {
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_bar"
+    android:layout_gravity="center"
+    android:background="@color/theme_blue"
+    android:orientation="horizontal" >
+    
+     <!-- 导航栏 -->  
+    
+    <Button 
+         android:id="@+id/back"
+         style="@style/navBackButtonStyle"/>
+     
+     
+     <TextView 
+         style="@style/navTextStyle"
+         android:text="@string/btn_my_info_remind"
+        />
+	 
+
+</LinearLayout>

@@ -76,8 +76,17 @@ public class BookRecommendAdapter extends BaseAdapter{
 		new LoaderImageUseVelloy().LoaderImage(myContext, viewHolder.bookImage, url);
 		//内存溢出，使用单例模式解决，context不能为Activity，必须是context.getApplicationContext()才可以
 		
+		if(position == 0){
+			viewHolder.bookRanking.setText("No.1");
+			viewHolder.bookRanking.setBackgroundResource(R.drawable.bg_books_ranking1);
+		}else if(position == 1){
+			viewHolder.bookRanking.setText("No.2");
+			viewHolder.bookRanking.setBackgroundResource(R.drawable.bg_books_ranking2);
+		}else if(position == 2){
+			viewHolder.bookRanking.setText("No.3");
+			viewHolder.bookRanking.setBackgroundResource(R.drawable.bg_books_ranking3);
+		}
 		
-		viewHolder.bookRanking.setText(booksBeanList.get(position).bookRanking);
 		return convertView;
 	}
 	class ViewHolder{

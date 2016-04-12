@@ -2,12 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    
     android:orientation="vertical" >
+    <!-- 导航栏 -->  
+     <include layout="@layout/nav_order_layout"/>
+   
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/search_box">
+     
+       
+
+        <Button
+            android:id="@+id/btn_my_info_search_book"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/shape_search"
+            android:text="@string/btn_my_info_search_book"
+            android:textColor="@color/white"
+            android:textSize="@dimen/nav_textsize_15" />
+
+        <EditText
+            android:id="@+id/et_my_info_search_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btn_my_info_search_book"
+            android:hint="书名:"
+            android:ems="10" >
+
+        </EditText>
+
+    </RelativeLayout>
     
     <FrameLayout 
         android:id="@+id/fl_my_info_tab_content"
         android:layout_width="match_parent"
+        
         android:layout_height="0dp"
         android:layout_weight="1"/>
     
@@ -15,12 +49,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_margin="10dp"
         >
         <TextView 
         android:id="@+id/tv_my_info_order_ask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
+        android:paddingTop="20dp"
         android:padding="5dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -29,7 +64,7 @@
         android:id="@+id/tv_my_info_order_help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
+        android:paddingTop="20dp"
         android:padding="5dp"
         android:layout_weight="1"
         android:gravity="center"

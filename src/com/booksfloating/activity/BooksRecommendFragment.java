@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -31,6 +32,8 @@ import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
 
 public class BooksRecommendFragment extends Fragment{
+	
+	
 	private static String url = "www.baidu.com";
 	private static String book_info = "{\"status\":\"1\",\"booklist\":" +
 			"[{\"book\":\"java编程思想\",\"author\":\"Bruce Eckel\",\"picture\":\"https://img1.doubanio.com/lpic/s1320039.jpg\"}," +
@@ -55,32 +58,22 @@ public class BooksRecommendFragment extends Fragment{
 		int maxMemory = (int) (Runtime.getRuntime().maxMemory()/1024);
 		Log.d("TAG", "Max memory is " + maxMemory + "KB");
 		View view = inflater.inflate(R.layout.books_recommend, container, false);
+		
 		booksRecommendList = (ListView) view.findViewById(R.id.books_recommend_list);
+
+		
+		loadData(getActivity(), urltest);
+
 		/*BooksRecommendAsyncTask booksRecommendAsyncTask = new BooksRecommendAsyncTask();
 		booksRecommendAsyncTask.execute(urltest);
 		*/
 		//loadData(getActivity(), urltest);
+
 		
 		return view;
 	}
 	
-	//暂时不用
-	/*class BooksRecommendAsyncTask extends AsyncTask<String, Void, List<BooksRecommendBean>>{
-
-		@Override
-		protected List<BooksRecommendBean> doInBackground(String... params) {
-			String jsonData = HttpUtil.getJsonData(params[0]);
-			return parseJsonData(jsonData);
-		}
-		@Override
-		protected void onPostExecute(List<BooksRecommendBean> result) {
-			super.onPostExecute(result);
-			BookRecommendAdapter adapter = new BookRecommendAdapter(getActivity(), booksBeanList);
-			booksRecommendList.setAdapter(adapter);
-		}
-
-		
-	}*/
+	
 	public void loadData(Context context, String url){
 		if(isNetwrokAvaliable(context)){
 			loadListData(context, url);
@@ -167,8 +160,10 @@ public class BooksRecommendFragment extends Fragment{
 					booksRecommendBean.bookName = jsonObject.getString("name");
 					booksRecommendBean.bookAuthor = jsonObject.getString("description");
 					booksRecommendBean.bookImageUrl = jsonObject.getString("picSmall");
+					/*if(jsonArray.length() <= 2){
+						booksRecommendBean.bookRanking = "No."+ (i+1);
+					}*/
 					
-					booksRecommendBean.bookRanking = "No."+ (i+1);
 					booksBeanList.add(booksRecommendBean);
 					
 				}

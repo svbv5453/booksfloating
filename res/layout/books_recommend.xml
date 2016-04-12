@@ -14,7 +14,8 @@
         android:padding="5dp"
         android:layout_marginTop="5dp"
         android:text="@string/tv_books_recommend"
-        />
+        android:textColor="@color/black"
+        android:textSize="@dimen/nav_textsize_18"/>
     <ListView 
         android:id="@+id/books_recommend_list"
         android:layout_width="match_parent"

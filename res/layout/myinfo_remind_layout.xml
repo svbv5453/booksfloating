@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+     <!-- 导航栏 -->  
+     <include layout="@layout/nav_remind_layout"/>
     <ListView 
         android:id="@+id/lv_myinfo_remind"
         android:layout_width="match_parent"

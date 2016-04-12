@@ -1,57 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:layout_height="wrap_content" >
     
     <ImageView 
         android:id="@+id/sh_book_image"
         android:layout_width="64dp"
         android:layout_height="91dp"
+        android:layout_alignParentLeft="true"
         android:src="@drawable/wall"
-        android:padding="5dp"
+        android:layout_margin="10dp"
         />
-    <LinearLayout 
-        android:id="@+id/sh_listLayout"
-        android:layout_width="0dp"
+    <TextView 
+        android:id="@+id/sh_book_ranking"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:textSize="16sp"
+        android:padding="3dp"
+        
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="No.1"
+        />
         <TextView 
         android:id="@+id/sh_book_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/sh_book_image"
+        android:layout_toLeftOf="@id/sh_book_ranking"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
         android:maxLines="1"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:text="围城"
-        />
+        android:textSize="18sp"
+        android:gravity="left"
+        android:text="围胜多负少粉城"
+        android:textColor="@color/black"/>
         
    	   <TextView 
         android:id="@+id/sh_book_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        
+        android:layout_below="@id/sh_book_name"
+        android:layout_alignLeft="@id/sh_book_name"
+        android:layout_toLeftOf="@id/sh_book_ranking"
+        android:padding="5dp"
         android:maxLines="1"
-        android:textSize="15sp"
-        android:gravity="center" 
+        android:textSize="16sp"
+        android:gravity="left" 
         android:text="钱钟书"
-        
+        android:textColor="@color/gray"
         />
-    </LinearLayout>
    
-    <TextView 
-        android:id="@+id/sh_book_ranking"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:layout_marginRight="10dp"
-        android:text="No.1"
-        />
+   
+    
 
-</LinearLayout>
+</RelativeLayout>

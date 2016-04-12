@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xd.booksfloating.R;
 
@@ -20,7 +22,7 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 	private Fragment helpFragment;
 	private Fragment currentFragment;
 	private FragmentManager fragmentManage;
-	
+	private Button btn_myinfo_search_book = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,7 +36,15 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 		fragmentManage = getFragmentManager();
 		initView();
 		initTab();
-		
+		 btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
+			btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					
+					Toast.makeText(MyInfoOrderFragmentActivity.this, "预留搜索", Toast.LENGTH_SHORT).show();
+				}
+			});
 	}
 	
 

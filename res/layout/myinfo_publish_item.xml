@@ -43,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="发布时间: 2016年2月1日15时01分"
+                android:textColor="@color/sh_orange"
                 android:textSize="12sp"
                 />
             <TextView 
@@ -50,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="备注: 希望好心人尽快帮我借到"
+                android:textColor="@color/sh_orange"
                 android:textSize="12sp"
                 />
         </LinearLayout>
