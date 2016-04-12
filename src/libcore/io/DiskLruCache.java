@@ -38,6 +38,7 @@ import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -46,6 +47,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 
 /**
  ******************************************************************************
@@ -162,6 +170,8 @@ public final class DiskLruCache implements Closeable {
     private final LinkedHashMap<String, Entry> lruEntries
             = new LinkedHashMap<String, Entry>(0, 0.75f, true);
     private int redundantOpCount;
+    private final Map<String, String> mLinkedHashMap = Collections.synchronizedMap(new LinkedHashMap<String, String>(32, 0.75f, true));
+
 
     /**
      * To differentiate between old and current snapshots, each entry is given
@@ -464,6 +474,7 @@ public final class DiskLruCache implements Closeable {
             throw new IOException();
         }
     }
+	
 
     /**
      * Returns a snapshot of the entry named {@code key}, or null if it doesn't

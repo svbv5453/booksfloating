@@ -15,6 +15,9 @@ import com.xd.booksfloating.R;
 
 public class LoaderImageUseVelloy {
 	
+	public void LoaderLocalImage(Context context, ImageView imageView, int resId){
+		
+	}
 	public void LoaderImage(Context context, ImageView imageView, String imageUrl){
 		RequestQueue requestQueue = SingleRequestQueue.getInstance(context);
 		ImageLoader imageLoader = new ImageLoader(requestQueue, new MyImageCache());

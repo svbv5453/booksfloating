@@ -49,7 +49,7 @@ public class BooksRecommendFragment extends Fragment{
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		loadData(getActivity(), urltest);
+		//loadData(getActivity(), urltest);
 	}
 
 	@Override
@@ -60,8 +60,15 @@ public class BooksRecommendFragment extends Fragment{
 		View view = inflater.inflate(R.layout.books_recommend, container, false);
 		
 		booksRecommendList = (ListView) view.findViewById(R.id.books_recommend_list);
+
 		
 		loadData(getActivity(), urltest);
+
+		/*BooksRecommendAsyncTask booksRecommendAsyncTask = new BooksRecommendAsyncTask();
+		booksRecommendAsyncTask.execute(urltest);
+		*/
+		//loadData(getActivity(), urltest);
+
 		
 		return view;
 	}

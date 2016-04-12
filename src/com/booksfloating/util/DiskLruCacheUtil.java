@@ -24,10 +24,6 @@ public class DiskLruCacheUtil {
 	
 	DiskLruCache myDiskLruCache;
 	
-	
-	
-	
-	
 	public void writeDiskLurCache(Context context, final String imageUrl){
 		
 		File cacheDir = getDiskCacheDir(context, "Bitmap");
@@ -165,6 +161,7 @@ public class DiskLruCacheUtil {
 		}
 		return sb.toString();
 	}
+	
 	public File getDiskCacheDir(Context context, String uniqueName){
 		
 		String cachePath;
@@ -177,6 +174,7 @@ public class DiskLruCacheUtil {
 		return new File(cachePath + File.separator + uniqueName);
 		
 	}
+	
 	public int getAppVersion(Context context){
 		try {
 			PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
