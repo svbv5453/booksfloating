@@ -6,11 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
+import com.booklsfloating.activity.searchbooks.SearchBooksFragment;
 import com.booksfloating.activity.BooksRecommendFragment;
 import com.booksfloating.activity.InfoNoticeFragment;
 import com.booksfloating.activity.MainActivity;
 import com.booksfloating.activity.MyInfoFragment;
-import com.booksfloating.activity.SearchBooksFragment;
 
 public class MyFragmentPagerAdater extends FragmentPagerAdapter{
 

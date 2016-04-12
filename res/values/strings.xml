@@ -53,6 +53,7 @@
     <string name="btn_integral_rule_sign">今日签到</string>
     <string name="spinner_prompt">请选择一个学校</string>
 	<string-array name="spinner_item">
+	    <item>所有学校</item>
 	    <item>西安电子科技大学</item>
 	    <item >西北工业大学</item>
 	    <item >陕西师范大学</item>
@@ -60,6 +61,5 @@
 	    <item >西安工业大学</item>
 	    <item >西安工程大学</item>
 	    <item >西安科技大学</item>
-	    <item >可以根据学校进行查询：</item>
 	</string-array>
 </resources>

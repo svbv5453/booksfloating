@@ -39,6 +39,7 @@
         <item name="android:textSize">@dimen/nav_textsize_20</item>
         <item name="android:gravity">center</item>
     </style>
+
     <!-- 导航栏 -->
     <style name="navBackButtonStyle">
         <item name="android:layout_width">25dp</item>
@@ -55,6 +56,20 @@
         <item name="android:textSize">@dimen/nav_textsize_16</item>
         <item name="android:layout_marginTop">@dimen/nav_marginTop_10</item>
         <item name="android:layout_marginLeft">@dimen/nav_marginLeft_10</item>
+   </style>
+    
+     <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <!-- 设置未浮动窗口 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 设置无边框 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置无标题 -->
+        <item name="android:windowBackground">@color/lwy_transparent_background</item>
+        <!-- 设置完全透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 设置屏幕变暗 -->
+
     </style>
 
 </resources>

@@ -15,8 +15,8 @@
 
         <Button
             android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="@dimen/nav_marginLeft_10"
             android:layout_marginTop="@dimen/nav_marginTop_10"
             android:background="@drawable/back" />

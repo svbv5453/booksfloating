@@ -4,23 +4,22 @@
     android:layout_height="wrap_content"
     android:background="@color/white" >
 
-    <Button
-        android:id="@+id/btn_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <CheckBox
+        android:id="@+id/cb_choose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" 
-        android:background="@drawable/checkbox_nor"/>
+        android:layout_alignParentTop="true" />
 
     <TextView
         android:id="@+id/tv_lib_collection_loc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btn_check"
-        android:layout_alignBottom="@+id/btn_check"
+        android:layout_alignBaseline="@+id/cb_choose"
+        android:layout_alignBottom="@+id/cb_choose"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/btn_check"
-        android:text="馆藏：西安电子科技大学北馆" 
+        android:layout_toRightOf="@+id/cb_choose"
+        android:text="馆藏位置：西安电子科技大学北馆" 
         android:textColor="@color/black"
         android:textSize="@dimen/nav_textsize_15"/>
 
@@ -30,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv_lib_collection_loc"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/btn_check"
+        android:layout_below="@+id/cb_choose"
         android:text="索书号：TP312JA"
         android:textColor="@color/black"
         android:textSize="@dimen/nav_textsize_15" />
