@@ -3,6 +3,7 @@ package com.booksfloating.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.booksfloating.domain.BooksRecommendBean;
+import com.booksfloating.util.ImageLoader;
+import com.booksfloating.util.ImageManager;
 import com.booksfloating.util.LoaderImageUseVelloy;
+import com.booksfloating.util.ImageLoader.RequestCallback;
 import com.xd.booksfloating.R;
 
 public class BookRecommendAdapter extends BaseAdapter{
-	List<BooksRecommendBean> booksBeanList;
-
-	LayoutInflater mLayoutInflater;
-	
+	List<BooksRecommendBean> booksBeanList;	
+	LayoutInflater mLayoutInflater;	
 	Context myContext;
-
 	
 	public BookRecommendAdapter(Context context, List<BooksRecommendBean> booksBeanList) {
 		super();
@@ -28,7 +29,6 @@ public class BookRecommendAdapter extends BaseAdapter{
 		
 		this.mLayoutInflater = LayoutInflater.from(context);
 		this.myContext = context;
-		
 		
 	}
 	
@@ -51,7 +51,7 @@ public class BookRecommendAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder = null;
+		final ViewHolder viewHolder;
 		if(convertView == null){
 			viewHolder = new ViewHolder();
 			convertView = mLayoutInflater.inflate(R.layout.booklist_item, null);
@@ -75,6 +75,7 @@ public class BookRecommendAdapter extends BaseAdapter{
 		
 		new LoaderImageUseVelloy().LoaderImage(myContext, viewHolder.bookImage, url);
 		//内存溢出，使用单例模式解决，context不能为Activity，必须是context.getApplicationContext()才可以
+		//ImageManager.from(myContext).displayImage(viewHolder.bookImage, url, R.drawable.default_book);
 		
 		if(position == 0){
 			viewHolder.bookRanking.setText("No.1");

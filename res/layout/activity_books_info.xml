@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/nav_marginTop_10"
             android:text="@string/books_info"
             android:textColor="@color/white"
-            android:textSize="@dimen/nav_textsize_16" />
+            android:textSize="@dimen/nav_textsize_20" />
     </LinearLayout>
 
     <RelativeLayout
@@ -40,11 +40,10 @@
 
         <ImageView
             android:id="@+id/iv_books_image"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"            
-            android:src="@drawable/thinking_in_java"
             android:layout_marginRight="5dp" />
 
         <TextView

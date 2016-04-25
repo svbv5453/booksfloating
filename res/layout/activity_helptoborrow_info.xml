@@ -14,7 +14,7 @@
         android:background="@color/theme_blue" >
 
         <Button
-            android:id="@+id/back"
+            android:id="@+id/btn_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="@dimen/nav_marginLeft_10"

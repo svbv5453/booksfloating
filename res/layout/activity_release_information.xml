@@ -38,12 +38,14 @@
         android:layout_marginTop="@dimen/nav_marginTop_10"
         android:text="备注："
         android:textColor="@color/black"
-        android:textSize="@dimen/nav_textsize_16" />
+        android:textSize="@dimen/nav_textsize_18" />
 
     <EditText
         android:id="@+id/et_remark"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/nav_marginTop_10"
         android:gravity="center_vertical|top"
@@ -51,7 +53,7 @@
         android:inputType="textMultiLine"
         android:singleLine="false"
         android:textSize="@dimen/nav_textsize_16"
-        android:background="@color/white" >
+        android:background="@drawable/textview_bg" >
 
         <requestFocus />
     </EditText>
@@ -64,11 +66,11 @@
       <Button
        android:id="@+id/btn_sure"
        android:layout_width="100dp"
-       android:layout_height="32dp"
+       android:layout_height="40dp"
        android:layout_marginLeft="15dp"
        android:layout_marginTop="30dp"
        android:layout_alignParentLeft="true"
-       android:background="@drawable/button_blue"
+       android:background="@color/theme_blue"
        android:text="@string/btn_sure"
        android:textColor="@color/white"
        android:textSize="16sp" />
@@ -76,11 +78,11 @@
       <Button
           android:id="@+id/btn_direct_release"
           android:layout_width="110dp"
-          android:layout_height="32dp"
+          android:layout_height="40dp"
           android:layout_marginRight="15dp"
           android:layout_marginTop="30dp"
           android:layout_alignParentRight="true"
-          android:background="@drawable/button_blue"
+          android:background="@color/theme_blue"
           android:text="@string/direct_release"
           android:textColor="@color/white"
           android:textSize="16sp" />

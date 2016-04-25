@@ -17,7 +17,7 @@ import android.view.View.OnClickListener;
 
 /**
  * 
- * @author liuwenyuan
+ * @author wenyuanliu
  *
  */
 public class MainActivity extends FragmentActivity implements OnClickListener{
@@ -122,4 +122,17 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			break;
 		}
 	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//getIntExtra的原型为getIntExtra(String name, int defaultValue),其中defaultValue为当name对应的值为null时设置的默认值
+		int id = getIntent().getIntExtra("intent_fragmentId", -1);
+		if (id == TAB_INFO_NOTICE) {
+			viewPager.setCurrentItem(TAB_INFO_NOTICE, true);
+		}
+	}
+	
+	
 }

@@ -20,17 +20,23 @@ public class BooksAttr implements Serializable{
 	//书的缩略图
 	private String bookImageUrl;
 	//本地图片资源
-	private int resImageId;
+	//private int resImageId;
 	//出版社
 	private String bookPublisher;
 	//可以借到这本书的信息列表，BorrowInfo中包括了可借的学校位置和索书号
 	private List<BorrowInfo> borrowInfoList;
 	//单个的可借学校
 	private String borrowSchool;
+	//BorrowInfo类型
+	private BorrowInfo borrowInfo;
 	//出版的时间
 	private String publishDate;
 	//要借书的人写的备注
 	private String remark;
+	//信息发布的时间
+	private String noticePublishTime;
+	//发布信息的订单号
+	private String orderID;
 	
 	public String getBookTitle() {
 		return bookTitle;
@@ -65,13 +71,20 @@ public class BooksAttr implements Serializable{
 		this.bookImageUrl = bookImageUrl;
 	}
 	
-	public int getLocalResId()
+	/*public int getLocalResId()
 	{
 		return resImageId;
 	}
 	public void setBookImageUrl(int resImageId)
 	{
 		this.resImageId = resImageId;
+	}*/
+	
+	public BorrowInfo getBorrowInfo() {
+		return borrowInfo;
+	}
+	public void setBorrowInfo(BorrowInfo borrowInfo) {
+		this.borrowInfo = borrowInfo;
 	}
 	
 	public String getBookPublisher() {
@@ -97,7 +110,6 @@ public class BooksAttr implements Serializable{
 		this.publishDate = publishDate;
 	}
 
-
 	public String getRemark() {
 		return remark;
 	}
@@ -105,10 +117,37 @@ public class BooksAttr implements Serializable{
 		this.remark = remark;
 	}
 
+	public String getNoticePublishTime() {
+		return noticePublishTime;
+	}
+	public void setNoticePublishTime(String noticePublishTime) {
+		this.noticePublishTime = noticePublishTime;
+	}
 
-	public static class BorrowInfo{
+	public String getOrderID() {
+		return orderID;
+	}
+	public void setOrderID(String orderID) {
+		this.orderID = orderID;
+	}
+
+
+
+
+
+	public static class BorrowInfo implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		//馆藏位置
 		public String borrowLoc;
+		//索引
 		public String borrowIndex; 
+		//馆藏复本
+		public int libraryTotalBooksNum;
+		//可借复本
+		public int canBorrowBooksNum;
 	}
 	
 }

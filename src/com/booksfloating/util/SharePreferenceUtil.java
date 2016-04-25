@@ -56,6 +56,16 @@ public class SharePreferenceUtil {
 		editor.commit();
 	}
 	
+	//用户是否登录身份验证token，在每次用户登录的时候更新token
+	//用户退出的时候要注销token
+	public String getToken(){
+		return sp.getString("token", "");
+	}
+	public void setToken(String token){
+		editor.putString("token", token);
+		editor.commit();
+	}
+	
 	// 是否第一次运行本应用
 	public void setIsFirst(boolean isFirst) {
 		editor.putBoolean("isFirst", isFirst);
