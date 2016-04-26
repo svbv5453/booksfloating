@@ -1,5 +1,6 @@
 package com.booklsfloating.activity.searchbooks;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,9 @@ import com.booksfloating.adapter.SearchBooksDetailAdapter;
 import com.booksfloating.attr.BooksAttr;
 import com.booksfloating.parse.ParseBooksAttrJson;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.ListViewCompat;
+import com.booksfloating.util.ListViewCompat.OnLoadListener;
+import com.booksfloating.util.ListViewCompat.OnRefreshListener;
 import com.xd.booksfloating.R;
 import com.xd.connect.PostParameter;
 import com.xd.dialog.DialogFactory;
@@ -26,6 +30,7 @@ import android.os.Message;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,75 +41,56 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class SearchBooksDetailActivity extends Activity implements OnClickListener,OnItemClickListener{
-	private ListView lv_books_list,lv_left_drawer;
+public class SearchBooksDetailActivity extends Activity implements OnClickListener,OnItemClickListener,
+OnRefreshListener,OnLoadListener{
+	private ListView lv_left_drawer;
+	private ListViewCompat lv_books_list;
 	private Button btn_filter, btn_search, btn_filter_too;
 	private SearchBooksDetailAdapter adapter;
 	private DrawerLayout drawerLayout;
 	private String[] schoolArray;
 	private String filterSchool;
 	private String searchKeyword;
-	private String universityCode;
+	private int universityCode;
 	//向服务器发送请求的次数，刚启动为第一次
 	private int requestTime = 1;
 	
-    private ActionBarDrawerToggle mDrawerToggle;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_searchbooks_detail);
 		
-		//Intent intent = getIntent();
-		//searchKeyword = intent.getStringExtra("searchKeyword");
-		//universityCode = intent.getStringExtra("universityCode");
+		Intent intent = getIntent();
+		searchKeyword = intent.getStringExtra("intent_keyword");
+		universityCode = intent.getIntExtra("intent_universitycode", 0);
+		System.out.println("intent_keyword:"+searchKeyword);
+		System.out.println("intent_universitycode:"+universityCode);
 		
 		drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		schoolArray = getResources().getStringArray(R.array.spinner_item);
+		
 		lv_left_drawer = (ListView)findViewById(R.id.lv_left_drawer);
 		//lv_left_drawer.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, schoolArray));
 		lv_left_drawer.setAdapter(new DrawerLayoutAdapter(this, schoolArray));
 		lv_left_drawer.setOnItemClickListener(new DrawerItemClickListener());
-		// ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                drawerLayout,         /* DrawerLayout object */
-                R.drawable.filter_bg,  /* nav drawer image to replace 'Up' caret */
-                R.string.filter,  /* "open drawer" description for accessibility */
-                R.string.filter  /* "close drawer" description for accessibility */
-                ) {
-            public void onDrawerClosed(View view) {
-                //getActionBar().setTitle("筛选");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                //getActionBar().setTitle("筛选");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-        //drawerLayout.setDrawerListener(mDrawerToggle);
-
-        if (savedInstanceState == null) {
-            //selectItem(0);
-        }
-        
-		
+			
 		btn_filter = (Button)findViewById(R.id.btn_filter);
 		btn_filter.setOnClickListener(this);
 		
 		btn_filter_too = (Button)findViewById(R.id.btn_filter_too);
 		btn_filter_too.setOnClickListener(this);
 		
-		testData();
-		lv_books_list = (ListView)findViewById(R.id.lv_books_list);
+		//testData();
+		lv_books_list = (ListViewCompat)findViewById(R.id.lv_books_list);
 		adapter = new SearchBooksDetailAdapter(this, booksAttrsList);
 		lv_books_list.setAdapter(adapter);
 		lv_books_list.setOnItemClickListener(this);
-		//refreshFromServer();
-		//还要添加下拉刷新和上拉刷新
+		lv_books_list.setOnRefreshListener(this);
+		lv_books_list.setOnLoadListener(this);
+		
+		refreshFromServer(0);
 	}
 	
 	//arraylist的测试数据
@@ -116,14 +102,12 @@ public class SearchBooksDetailActivity extends Activity implements OnClickListen
 		BooksAttr booksAttr = new BooksAttr();
 		booksAttr.setBookTitle("thinking in java");
 		booksAttr.setBookAuthor("埃克尔");
-		booksAttr.setBookImageUrl(R.drawable.thinking_in_java);
 		booksAttr.setCanBorrowSchoolList(list);		
 		booksAttrsList.add(booksAttr);
 		
 		BooksAttr booksAttr2 = new BooksAttr();
-		booksAttr2.setBookTitle("深入学习java");
+		booksAttr2.setBookTitle("深入学习C++");
 		booksAttr2.setBookAuthor("埃克尔");
-		booksAttr2.setBookImageUrl(R.drawable.c_primer);
 		booksAttr2.setCanBorrowSchoolList(list);
 		booksAttrsList.add(booksAttr2);
 	}
@@ -135,12 +119,18 @@ public class SearchBooksDetailActivity extends Activity implements OnClickListen
 				long id) {
 			// TODO Auto-generated method stub
 			//根据用户选择的item，设置筛选条件
-			filterSchool  = schoolArray[position];
+			filterSchool  = schoolArray[position-1];
+			if(drawerLayout.isDrawerOpen(Gravity.LEFT))
+				drawerLayout.closeDrawer(Gravity.LEFT);
+			else {
+				drawerLayout.openDrawer(Gravity.LEFT);
+			}
 			if(filterSchool.equals("所有学校"))
 			{
 				//啥也不干
 			}
 			else{
+				Log.i("filterSchool :", filterSchool);
 				//根据筛选条件设置主页面的list
 				newList.clear();
 				BooksAttr booksAttr = new BooksAttr();
@@ -176,15 +166,40 @@ public class SearchBooksDetailActivity extends Activity implements OnClickListen
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
+			dismissLoadingDialog();
 			switch (msg.what) {
 			//解析成功返回0，否则返回-1
-			case 0:
-				//刷新适配器
-				adapter.notifyDataSetChanged();
-				dismissLoadingDialog();
+			case ListViewCompat.REFRESH:
+				newList.clear();
+				//解析返回的数据
+				newList = pJson.parseBookList(jsonString);
+				if (newList != null || newList.size() != 0) {
+					booksAttrsList.clear();			
+					booksAttrsList.addAll(newList);
+					//刷新适配器
+					adapter.notifyDataSetChanged();
+					lv_books_list.onRefreshComplete();
+					requestTime = 1;
+				}else {
+					Toast.makeText(SearchBooksDetailActivity.this, "无数据返回！", Toast.LENGTH_SHORT).show();
+				}												
+				break;
+			case ListViewCompat.LOAD:
+				newList.clear();
+				//解析返回的数据
+				newList = pJson.parseBookList(jsonString);
+				if (newList != null || newList.size() != 0) {		
+					booksAttrsList.addAll(newList);
+					//刷新适配器
+					adapter.notifyDataSetChanged();
+					lv_books_list.onLoadComplete();
+					requestTime++;
+				}else {
+					Toast.makeText(SearchBooksDetailActivity.this, "已经到底啦！", Toast.LENGTH_SHORT).show();
+				}
 				break;
 			case -1:
-				Toast.makeText(SearchBooksDetailActivity.this, "服务器出错，请重试！", Toast.LENGTH_SHORT).show();				
+				Toast.makeText(SearchBooksDetailActivity.this, "服务器错误，请重试！", Toast.LENGTH_SHORT).show();				
 				break;
 			default:
 				break;
@@ -193,7 +208,7 @@ public class SearchBooksDetailActivity extends Activity implements OnClickListen
 		
 	};
 		
-	private void refreshFromServer()
+	private void refreshFromServer(final int what)
 	{
 		showLoadingDialog();		
 		final PostParameter[] postParameters = new PostParameter[3];
@@ -205,26 +220,23 @@ public class SearchBooksDetailActivity extends Activity implements OnClickListen
 				//第一次请求
 				if (requestTime == 1) {
 					postParameters[0] = new PostParameter("keyword", searchKeyword);
-					postParameters[1] = new PostParameter("university", universityCode);
+					postParameters[1] = new PostParameter("university", Integer.toString(universityCode));
 					postParameters[2] = new PostParameter("page", Integer.toString(requestTime));
 				}
 				else{
 					postParameters[0] = new PostParameter("keyword", searchKeyword);
-					postParameters[1] = new PostParameter("university", universityCode);
+					postParameters[1] = new PostParameter("university", Integer.toString(universityCode));
 					postParameters[2] = new PostParameter("page", Integer.toString(requestTime));
 				}
 				jsonString = HttpUtil.httpRequest(HttpUtil.USER_SEARCHBOOKS, postParameters, HttpUtil.POST);
-				newList.clear();
-				//解析返回的数据
-				newList = pJson.parseBookList(jsonString);
-				if (newList != null || newList.size() != 0) {
-					booksAttrsList.addAll(newList);
-					handler.sendEmptyMessage(0);
+				if (jsonString != null) {					
+					Message msg = handler.obtainMessage();
+					msg.what = what;
+					handler.sendMessage(msg);					
 				}
-				else {
+				else{
 					handler.sendEmptyMessage(-1);
 				}
-				requestTime++;
 			}
 		}).start();
 	}
@@ -258,7 +270,7 @@ public class SearchBooksDetailActivity extends Activity implements OnClickListen
 		//长按某一项跳转到另一个页面
 		Intent intent = new Intent();
 		intent.setClass(this, BorrowBooksDetailInfoActivity.class);
-		intent.putExtra("intent_booksAttr", booksAttrsList.get(position));
+		intent.putExtra("intent_booksAttr", (Serializable)booksAttrsList.get(position-1));
 		startActivity(intent);
 	}
 	
@@ -266,7 +278,7 @@ public class SearchBooksDetailActivity extends Activity implements OnClickListen
 	private void showLoadingDialog(){
 		if(dialog == null)
 		{
-			dialog = DialogFactory.creatLoadingDialog(this, "正在注册，请稍后...");
+			dialog = DialogFactory.creatLoadingDialog(this, "正在搜索，请稍后...");
 			dialog.show();
 		}
 		else {
@@ -278,6 +290,18 @@ public class SearchBooksDetailActivity extends Activity implements OnClickListen
 		if (dialog != null) {
 			dialog.dismiss();
 		}
+	}
+
+	@Override
+	public void onLoad() {
+		// TODO Auto-generated method stub
+		refreshFromServer(ListViewCompat.LOAD);
+	}
+
+	@Override
+	public void onRefresh() {
+		// TODO Auto-generated method stub
+		refreshFromServer(ListViewCompat.REFRESH);
 	}
 
 }

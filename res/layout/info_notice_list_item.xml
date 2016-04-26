@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/tv_books_title"
-            android:layout_toRightOf="@+id/imageView1"
+            android:layout_toRightOf="@+id/iv_books_image"
             android:layout_marginTop="3dp"
             android:text="作者：（美）埃克尔" 
             android:textColor="@color/gray"

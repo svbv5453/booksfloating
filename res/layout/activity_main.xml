@@ -45,6 +45,7 @@
             android:layout_width="0dip"
             android:layout_height="50dip"
             android:layout_weight="1"
+            android:background="@drawable/navigation_item"
             lwy:image="@drawable/logo_info_notice"
             android:text="@string/info_notice"
             android:textColor="@color/black"/>
@@ -56,6 +57,7 @@
             android:layout_width="0dip"
             android:layout_height="50dip"
             android:layout_weight="1"
+            android:background="@drawable/navigation_item"
             lwy:image="@drawable/logo_books_recommend"
             android:text="@string/books_recommend"
             android:textColor="@color/black" />
@@ -67,6 +69,7 @@
             android:layout_width="0dip"
             android:layout_height="50dip"
             android:layout_weight="1"
+            android:background="@drawable/navigation_item"
             lwy:image="@drawable/logo_my_info"
             android:text="@string/my_info" 
             android:textColor="@color/black"/>

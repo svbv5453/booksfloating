@@ -142,7 +142,7 @@
        android:layout_height="32dp"
        android:layout_marginLeft="10dp"
        android:layout_marginRight="10dp"
-       android:background="@drawable/button_blue"
+       android:background="@color/theme_blue"
        android:text="@string/login_now"
        android:textColor="@color/white"
        android:textSize="@dimen/nav_textsize_18" />

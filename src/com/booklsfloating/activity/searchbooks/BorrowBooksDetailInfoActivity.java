@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import com.booksfloating.adapter.BorrowBookDetailInfoAdapter;
 import com.booksfloating.attr.BooksAttr;
 import com.booksfloating.attr.BooksAttr.BorrowInfo;
+import com.booksfloating.util.ImageLoader;
+import com.booksfloating.util.ImageManager;
 import com.booksfloating.util.LoaderImageUseVelloy;
+import com.booksfloating.util.ImageLoader.RequestCallback;
 import com.xd.booksfloating.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,8 +30,9 @@ public class BorrowBooksDetailInfoActivity extends Activity implements OnClickLi
 	private ImageView iv_books_image;
 	private ListView lv_library_collection;
 	private ArrayList<BorrowInfo> borrowInfoList = new ArrayList<BorrowInfo>();
-	private BooksAttr booksAttr;
+	private BooksAttr booksAttr = new BooksAttr();
 	private BorrowBookDetailInfoAdapter adapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -51,12 +56,21 @@ public class BorrowBooksDetailInfoActivity extends Activity implements OnClickLi
 		tv_books_publisher.setText(booksAttr.getBookPublisher());
 		tv_books_publish_time.setText(booksAttr.getPublishDate());
 		
+		iv_books_image = (ImageView)findViewById(R.id.iv_books_image);
 		if(booksAttr.getBookImageUrl() != null)
-			new LoaderImageUseVelloy().LoaderImage(this, iv_books_image, booksAttr.getBookImageUrl());
+		{
+			ImageManager.from(this).displayImage(iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
+			
+		}else {
+			iv_books_image.setImageDrawable(getResources().getDrawable(R.drawable.default_book));
+		}
 		
 		lv_library_collection = (ListView)findViewById(R.id.lv_library_collection);
 		borrowInfoList.clear();
 		borrowInfoList.addAll(booksAttr.getBorrowInfoList());
+		for (int i = 0; i < booksAttr.getBorrowInfoList().size(); i++) {
+			System.out.println("borrowInfoList-------->"+borrowInfoList.get(i).borrowLoc);
+		}
 		adapter = new BorrowBookDetailInfoAdapter(this, borrowInfoList);
 		lv_library_collection.setAdapter(adapter);
 	}
@@ -70,23 +84,24 @@ public class BorrowBooksDetailInfoActivity extends Activity implements OnClickLi
 			break;
 		//如果是全选，则直接把booksAttr传到下一个页面即可
 		case R.id.btn_choose_all:
-			Intent intent1 = new Intent();
+			/*Intent intent1 = new Intent();
 			intent1.setClass(this, PublishInfoActivity.class);
 			intent1.putExtra("intent_booksAttr", booksAttr);
-			startActivity(intent1);
-			finish();
-			
+			startActivity(intent1);	*/	
 			break;
 		//需要先统计哪些checkbox被选中
 		case R.id.btn_publish_info:
-			calculateCheck();
-			//将数据传递到下一页
-			Intent intent = new Intent();
-			intent.setClass(this, PublishInfoActivity.class);
-			intent.putExtra("intent_booksAttr", booksAttr);
-			intent.putExtra("intent_borrowInfoList", deliverBorrowInfoList);
-			startActivity(intent);
-			finish();
+			if (calculateCheck()) {
+				//将数据传递到下一页
+				Intent intent = new Intent();
+				intent.setClass(this, PublishInfoActivity.class);
+				intent.putExtra("intent_booksAttr", booksAttr);
+				intent.putExtra("intent_borrowInfoList", deliverBorrowInfoList);
+				startActivity(intent);
+			}	
+			else {
+				Toast.makeText(this, "请选择借书的学校！", Toast.LENGTH_LONG).show();
+			}
 			
 			break;
 		default:
@@ -95,16 +110,17 @@ public class BorrowBooksDetailInfoActivity extends Activity implements OnClickLi
 	}
 	
 	private ArrayList<BorrowInfo> deliverBorrowInfoList = new ArrayList<BorrowInfo>();
-	private void calculateCheck()
+	private boolean calculateCheck()
 	{
 		for (int i = 0; i < borrowInfoList.size(); i++) {
 			if (BorrowBookDetailInfoAdapter.getSelected().get(i)) {
 				deliverBorrowInfoList.add(borrowInfoList.get(i));
 			}
 		}
-		if(deliverBorrowInfoList.size() == 0){
-			Toast.makeText(this, "请选择借书的学校！", Toast.LENGTH_LONG).show();
+		if(deliverBorrowInfoList.size() == 0){			
+			return false;
 		}
+		return true;
 	}
 
 }

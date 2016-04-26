@@ -13,8 +13,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="5dp"
         android:textSize="18dp"
-        android:layout_gravity="center_vertical|left"
-        android:text="TextView" />
+        android:layout_gravity="center_vertical|left"/>
     
     <View android:layout_width="wrap_content"
         android:layout_height="5dp"

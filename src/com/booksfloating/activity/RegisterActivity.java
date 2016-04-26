@@ -295,20 +295,35 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 		{
 			super.handleMessage(msg);
 			switch (msg.what) {
-			case 0:
-				//服务器反正正确的数据，刷新界面
-				Toast toast = Toast.makeText(context, "注册成功", Toast.LENGTH_SHORT);
-				toast.show();
+			case 0:	
+				int result = 0;
+				//解析json数据，判断是否注册成功
+				result = parseReturnJson(jsonStr);
+				if (result == 1) {
+					Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+					System.out.println("用户注册成功");
+				}else if(result == -1){
+					Toast.makeText(RegisterActivity.this, "用户名已被使用", Toast.LENGTH_SHORT).show();
+					et_username.setText("");
+					System.out.println("用户名已被使用");
+				}else if (result == -2) {
+					Toast.makeText(RegisterActivity.this, "手机号已被使用", Toast.LENGTH_SHORT).show();
+					et_phonenum.setText("");
+					System.out.println("手机号已被使用");
+				}
 				try {
 					Thread.sleep(50);
-					finish();
+					if (result == 1) {
+						finish();
+					}					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
 			case -1:
-				//服务器返回错误，啥也不干
+				//服务器返回错误
+				Toast.makeText(RegisterActivity.this, "服务器错误，登录失败！", Toast.LENGTH_SHORT).show();
 				break;
 			
 			default:
@@ -343,12 +358,9 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 				if(jsonStr != null)
 				{
 					dismissLoadingDialog();
-					//判断是否注册成功
-					parseReturnJson(jsonStr);
 					handler.sendEmptyMessage(0);
 				}
 				else {
-					DialogFactory.AlertDialog(RegisterActivity.this, "错误提示", "服务器错误，登录失败！");
 					dismissLoadingDialog();
 					handler.sendEmptyMessage(-1);
 				}
@@ -357,7 +369,7 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 		}).start();
 	}
 	
-	private void parseReturnJson(String jsonString)
+	private int parseReturnJson(String jsonString)
 	{
 		try {
 			JSONObject jsonObj = new JSONObject(jsonString);
@@ -365,21 +377,19 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 			String token = jsonObj.optString("token");
 			if(status.equals("1"))
 			{
-				Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-				System.out.println("用户注册成功");
+				return 1;				
 			}
 			else if (status.equals("-1")) {
-				Toast.makeText(RegisterActivity.this, "用户名已被使用", Toast.LENGTH_SHORT).show();
-				System.out.println("用户名已被使用");
+				return -1;				
 			}
 			else if (status.equals("-2")) {
-				Toast.makeText(RegisterActivity.this, "手机号已被使用", Toast.LENGTH_SHORT).show();
-				System.out.println("手机号已被使用");
+				return -2;				
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return 0;
 	}
 	
 	private Dialog dialog = null;

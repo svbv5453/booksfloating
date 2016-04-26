@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.booksfloating.attr.BooksAttr;
+import com.booksfloating.globalvar.Constants;
+import com.booksfloating.util.ImageLoader;
+import com.booksfloating.util.ImageLoader.RequestCallback;
+import com.booksfloating.util.ImageManager;
 import com.booksfloating.util.LoadBookImage;
 import com.booksfloating.util.LoaderImageUseVelloy;
 import com.xd.booksfloating.R;
 
+import android.R.interpolator;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.widget.DrawerLayout;
@@ -59,7 +64,7 @@ public class SearchBooksDetailAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		BooksAttr booksAttr = booksAttrsList.get(position);
-		ViewHolder viewHolder = null;
+		final ViewHolder viewHolder;
 		if(convertView == null)
 		{
 			viewHolder = new ViewHolder();
@@ -75,24 +80,26 @@ public class SearchBooksDetailAdapter extends BaseAdapter{
 		if(booksAttr.getBookImageUrl() == null)
 		{
 			//加载本地图片
-			Drawable drawable = context.getResources().getDrawable(booksAttr.getLocalResId());
-			viewHolder.iv_books_image.setBackgroundDrawable(drawable);
+			viewHolder.iv_books_image.setImageDrawable(context.getResources().getDrawable(R.drawable.default_book));
 		}
 		else {
-			//加载网络图片
-			new LoaderImageUseVelloy().LoaderImage(context, viewHolder.iv_books_image, booksAttr.getBookImageUrl());
+			ImageManager.from(context).displayImage(viewHolder.iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
 		}
 		
 		viewHolder.tv_books_title.setText(booksAttr.getBookTitle());
 		viewHolder.tv_books_author.setText(booksAttr.getBookAuthor());
 		StringBuffer borrowLibrary = new StringBuffer();
-
+		
 		if(booksAttr.getCanBorrowSchoolList().size() == 1)
-		{
+		{	
+			//Integer temp = Integer.parseInt(booksAttr.getCanBorrowSchoolList().get(0));
+			//borrowLibrary.append(Constants.schoolIDtoNameMap.get(temp));
 			borrowLibrary.append(booksAttr.getCanBorrowSchoolList().get(0));
 		}
-		else {
+		else if(booksAttr.getCanBorrowSchoolList().size() > 1){
 			for (String str : booksAttr.getCanBorrowSchoolList()) {
+				//Integer temp2 = Integer.parseInt(str);
+				//borrowLibrary.append(Constants.schoolIDtoNameMap.get(str));
 				borrowLibrary.append(str);
 				borrowLibrary.append(",");
 			}

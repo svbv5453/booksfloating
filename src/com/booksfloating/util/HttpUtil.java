@@ -29,6 +29,10 @@ public class HttpUtil {
 	public static final String USER_LOGIN = Constants.SERVER_IP + "/login";
 	public static final String USER_REGISTER = Constants.SERVER_IP+"/register";
 	public static final String USER_SEARCHBOOKS = Constants.SERVER_IP+"/search";
+	public static final String UPDATE_BOOKINFO = Constants.SERVER_IP+"/update";
+	public static final String HELP_BORROW = Constants.SERVER_IP+"/help";
+	public static final String PUBLISH_INFO = Constants.SERVER_IP+"/publish";
+	public static final String BROWSE_BOOK = Constants.SERVER_IP+"/browse";
 	
 	public static String getJsonData(final String urlString) {
 		
@@ -56,6 +60,7 @@ public class HttpUtil {
 	
 	/**
 	 * 通用的http请求类（默认采用POST方式）
+	 * 这种方式是将参数作为post的地址的参数传输的
 	 * @param url 请求地址
 	 * @param postParams post传递的参数
 	 * @param httpMethod http的请求方法 默认采用post
@@ -93,7 +98,7 @@ public class HttpUtil {
 					con.setRequestProperty("Content-Length",
 							Integer.toString(bytes.length));
 
-                   System.out.println("URL地址"+con.getURL()+"?" + postParam);
+                   System.out.println("URL地址:"+con.getURL()+"?" + postParam);
                    ostream = con.getOutputStream();
                    ostream.write(bytes);
                    ostream.flush();

@@ -21,7 +21,7 @@ public class LoaderImageUseVelloy {
 	public void LoaderImage(Context context, ImageView imageView, String imageUrl){
 		RequestQueue requestQueue = SingleRequestQueue.getInstance(context);
 		ImageLoader imageLoader = new ImageLoader(requestQueue, new MyImageCache());
-		ImageListener listener = imageLoader.getImageListener(imageView, R.drawable.dog, R.drawable.ic_launcher);
+		ImageListener listener = ImageLoader.getImageListener(imageView, 0, R.drawable.default_book);
 		imageLoader.get(imageUrl, listener);
 	}
 	class MyImageCache implements ImageCache{

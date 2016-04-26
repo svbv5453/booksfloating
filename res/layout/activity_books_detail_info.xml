@@ -39,7 +39,7 @@
             android:layout_centerVertical="true"
             android:text="发布信息" 
             android:textColor="@color/white"
-            android:textSize="@dimen/nav_textsize_16"
+            android:textSize="@dimen/nav_textsize_20"
             android:background="@color/transparent"/>
 
         <ImageView
@@ -49,7 +49,8 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/btn_publish_info"
             android:layout_marginRight="3dp"
-            android:src="@drawable/vertical_bar" />
+            android:src="@drawable/vertical_bar"
+            android:visibility="invisible" />
         
          <Button
             android:id="@+id/btn_choose_all"
@@ -61,7 +62,8 @@
             android:text="全选" 
             android:textSize="@dimen/nav_textsize_16"
             android:background="@color/transparent"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:visibility="invisible"/>
     </RelativeLayout>
     
     <RelativeLayout
@@ -74,11 +76,10 @@
 
         <ImageView
             android:id="@+id/iv_books_image"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"            
-            android:src="@drawable/thinking_in_java"
             android:layout_marginRight="5dp" />
 
         <TextView
@@ -130,11 +131,14 @@
     </RelativeLayout>
     
     <ListView 
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:id="@+id/lv_library_collection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:choiceMode="singleChoice"
-        android:dividerHeight="3dp">
+        android:dividerHeight="2dp">
         
     </ListView>
 

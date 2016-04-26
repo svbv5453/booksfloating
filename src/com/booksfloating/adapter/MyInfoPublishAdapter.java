@@ -3,6 +3,7 @@ package com.booksfloating.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.booksfloating.domain.MyInfoPublishBookBean;
+import com.booksfloating.util.ImageLoader;
+import com.booksfloating.util.ImageManager;
 import com.booksfloating.util.LoaderImageUseVelloy;
+import com.booksfloating.util.ImageLoader.RequestCallback;
 import com.xd.booksfloating.R;
 
 public class MyInfoPublishAdapter extends BaseAdapter {
@@ -19,14 +23,12 @@ public class MyInfoPublishAdapter extends BaseAdapter {
 	LayoutInflater mLayoutInflater;
 
 	Context myContext;
-	
 
 	public MyInfoPublishAdapter(Context context, List<MyInfoPublishBookBean> publishBookBeanList) {
 		super();
 		this.myContext = context;
 		this.publishBookBeanList = publishBookBeanList;
 		this.mLayoutInflater = LayoutInflater.from(context);
-		
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class MyInfoPublishAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder = null;
+		final ViewHolder viewHolder;
 		if(convertView == null){
 			viewHolder = new ViewHolder();
 			convertView = mLayoutInflater.inflate(R.layout.myinfo_publish_item, null);
@@ -73,6 +75,8 @@ public class MyInfoPublishAdapter extends BaseAdapter {
 		viewHolder.bookImage.setTag(url);
 		//new LoadBookImage().showImageByThread(viewHolder.bookImage, url);
 		new LoaderImageUseVelloy().LoaderImage(myContext, viewHolder.bookImage, url);
+		//ImageManager.from(myContext).displayImage(viewHolder.bookImage, url, R.drawable.default_book);
+		
 		return convertView;
 	}
 	class ViewHolder{

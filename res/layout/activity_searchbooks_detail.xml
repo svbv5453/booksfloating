@@ -63,14 +63,14 @@
  	        android:orientation="vertical"
  	        android:background="@color/light_gray">
  	        
- 	        <ListView 
+ 	        <com.booksfloating.util.ListViewCompat
  	            android:id="@+id/lv_books_list"
  	            android:layout_width="match_parent"
  	            android:layout_height="wrap_content"
  	            android:choiceMode="singleChoice"
  	            android:dividerHeight="3dp">
  	            
- 	        </ListView>
+ 	        </com.booksfloating.util.ListViewCompat>
  	    </LinearLayout>
  	    
  	    <ListView 
@@ -81,7 +81,7 @@
 	       android:layout_gravity="start"
 	       android:choiceMode="singleChoice"
 	       android:divider="@android:color/transparent"
-	       android:dividerHeight="3dp">	        
+	       android:dividerHeight="2dp">	        
  	    </ListView>
 	</android.support.v4.widget.DrawerLayout>
 </LinearLayout>

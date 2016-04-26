@@ -37,6 +37,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 	private EditText et_username, et_password;
 	private Button btn_forget_psd,btn_login_now, btn_goto_register;
 	private CheckBox cb_remember_psd;
+	public static final int OK = 0,SERVER_ERROR = -1, NETWORK_ERROR = -2, NULL_ERROR = -3,USER_ERROR = -4;
 	//等待的对话框
 	private Dialog dialog = null;
 	Intent intent = null;
@@ -94,19 +95,18 @@ public class LoginActivity extends Activity implements OnClickListener{
 		public void handleMessage(Message msg)
 		{
 			super.handleMessage(msg);
+			dismissLoadingDialog();
 			switch (msg.what) {
-			case 0:
-				if(jsonStr != null)
-				{
-					dismissLoadingDialog();
-					parseReturnJson(jsonStr);
-				}
-				else {
-					dismissLoadingDialog();
-					DialogFactory.AlertDialog(LoginActivity.this, "错误提示", "服务器错误，登录失败！");				
-				}
+			case OK:
 				break;
-
+			case SERVER_ERROR:
+				DialogFactory.AlertDialog(LoginActivity.this, "错误提示", "服务器错误，登录失败！");								
+				break;
+			case NULL_ERROR:
+				DialogFactory.AlertDialog(LoginActivity.this, "登录提示", "账号或密码不能为空！");
+				break;
+			case NETWORK_ERROR:
+				Toast.makeText(LoginActivity.this, "网络未连接", Toast.LENGTH_SHORT).show();
 			default:
 				break;
 			}			
@@ -116,28 +116,33 @@ public class LoginActivity extends Activity implements OnClickListener{
 	private void loginSubmit(){
 		final String account = et_username.getText().toString().trim();
 		final String password = et_password.getText().toString().trim();
-		System.out.println("account: "+account);
-		if(account.length()== 0 || password.length() == 0)
-		{
-			DialogFactory.AlertDialog(LoginActivity.this, "登录提示", "账号或密码不能为空！");
-		}
-		else{
-			}
-			showLoadingDialog();
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					PostParameter[] parameters = new PostParameter[3];
+		final PostParameter[] parameters = new PostParameter[3];
+		showLoadingDialog();
+		new Thread(new Runnable() {		
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if(account.length()== 0 || password.length() == 0)
+				{					
+					handler.sendEmptyMessage(NULL_ERROR);
+				}
+				else{
 					parameters[0] = new PostParameter("account", account);
 					parameters[1] = new PostParameter("password", password);
 					parameters[2] = new PostParameter("login_method", "1");				
 					jsonStr = HttpUtil.httpRequest(HttpUtil.USER_LOGIN, parameters, HttpUtil.POST);
+					if(jsonStr != null)
+					{						
+						parseReturnJson(jsonStr);
+						handler.sendEmptyMessage(OK);
+					}
+					else {
+						handler.sendEmptyMessage(SERVER_ERROR);
+					}
 					
-					handler.sendEmptyMessage(0);
-				}
-			}).start();			
+				}								
+			}
+		}).start();			
 			
 		}
 	

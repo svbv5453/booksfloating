@@ -12,6 +12,25 @@
      android:background="@color/theme_blue"
      android:orientation="horizontal">
     
+     <Button 
+         android:id="@+id/btn_filter"
+         android:layout_width="20dp"
+         android:layout_height="25dp"
+         android:background="@drawable/filter_bg"
+         android:layout_marginTop="8dp"
+         android:layout_marginLeft="@dimen/nav_marginLeft_10"/>
+     
+     <Button 
+         android:id="@+id/btn_filter_too"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:background="@color/transparent"
+         android:text="@string/filter"
+         android:textColor="@color/white"
+         android:layout_marginTop="3dp"
+         android:layout_toRightOf="@+id/btn_filter"
+         android:layout_marginLeft="@dimen/nav_marginLeft_10"/>
+     
      <TextView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
@@ -39,7 +58,7 @@
      
 	 </RelativeLayout>
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@drawable/search_box">
@@ -74,15 +93,39 @@
 
         </EditText>
 
-    </RelativeLayout>
-    
-    <ListView 
-        android:id="@+id/lv_info_notice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:choiceMode="singleChoice"
-        android:dividerHeight="3dp"
+    </RelativeLayout>-->
+    <android.support.v4.widget.DrawerLayout
+ 	    android:id="@+id/drawer_layout"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent">
      
-        ></ListView>
+ 	    <LinearLayout
+ 	        android:id="@+id/ll_notice_list"
+ 	        android:layout_width="match_parent"
+ 	        android:layout_height="match_parent"
+ 	        android:orientation="vertical"
+ 	        android:background="@color/light_gray">
+ 	        
+ 	         <com.booksfloating.util.ListViewCompat
+		        android:id="@+id/lv_info_notice"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:choiceMode="singleChoice"
+		        android:dividerHeight="2dp">
+        	</com.booksfloating.util.ListViewCompat>
+ 	       
+ 	    </LinearLayout>
+ 	    
+ 	    <ListView 
+	       android:id="@+id/lv_left_drawer"
+	       android:background="@color/theme_blue"
+	       android:layout_width="200dp"
+	       android:layout_height="match_parent"
+	       android:layout_gravity="start"
+	       android:choiceMode="singleChoice"
+	       android:divider="@android:color/transparent"
+	       android:dividerHeight="2dp">	        
+ 	    </ListView>
+	</android.support.v4.widget.DrawerLayout>
 	 
 </LinearLayout>
