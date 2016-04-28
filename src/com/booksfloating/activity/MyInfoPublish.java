@@ -25,6 +25,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.booksfloating.adapter.MyInfoPublishAdapter;
 import com.booksfloating.domain.MyInfoPublishBookBean;
 import com.booksfloating.util.ACache;
+import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
 
@@ -38,6 +39,7 @@ public class MyInfoPublish extends Activity{
 	
 	private ListView myInfoBookPublishListView = null;
 	private Button btn_myinfo_search_book = null;
+	private Button btn_back = null;
 	private List<MyInfoPublishBookBean> myPublishBookBeanList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,19 @@ public class MyInfoPublish extends Activity{
 		Intent intent =getIntent();
 		myInfoBookPublishListView= (ListView)findViewById(R.id.lv_my_info_book_publish);
 		btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
+		btn_back = (Button)findViewById(R.id.btn_back);
+		/**
+		 * 有的问题，过渡不流畅
+		 */
+		btn_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intentBack = new Intent(MyInfoPublish.this, MyInfoFragment.class);
+				startActivity(intentBack);
+				
+			}
+		});
 		btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -59,6 +74,8 @@ public class MyInfoPublish extends Activity{
 			}
 		});
 		loadData(this, urlTest);
+		//loadData(this, HttpUtil.MY_PUBLISH);
+		
 		
 		
 	}
@@ -124,15 +141,15 @@ public class MyInfoPublish extends Activity{
 		try {
 			//JSONObject jsonObject = new JSONObject(jsonData);
 			if(jsonObject.getString("status").equals("1")){
-				/*JSONArray jsonArray = jsonObject.getJSONArray("booklist");
+				/*JSONArray jsonArray = jsonObject.getJSONArray("message");
 				for(int i = 0; i<jsonArray.length(); i++){
 					jsonObject = jsonArray.getJSONObject(i);
 					MyInfoPublishBookBean publishBookBean = new MyInfoPublishBookBean();
 					publishBookBean.bookName = jsonObject.getString("book");
 					publishBookBean.bookAuthor = jsonObject.getString("author");
 					publishBookBean.bookLocation = jsonObject.getString("university");
-					publishBookBean.bookPublicshTime = jsonObject.getString("publishTime");
-					publishBookBean.remark = jsonObject.getString("remark");
+					publishBookBean.bookPublicshTime = jsonObject.getString("publish_time");
+					publishBookBean.bookRemark = jsonObject.getString("remarks");
 					publishBookBean.bookIconUrl =jsonObject.getString("picture");
 					myPublishBookBeanList.add(publishBookBean);
 					

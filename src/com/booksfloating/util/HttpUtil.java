@@ -34,6 +34,20 @@ public class HttpUtil {
 	public static final String PUBLISH_INFO = Constants.SERVER_IP+"/publish";
 	public static final String BROWSE_BOOK = Constants.SERVER_IP+"/browse";
 	
+	/**
+	 * @sunheng_add;
+	 */
+	
+	
+	public static final String BOOK_RECOMMEND = Constants.SERVER_IP + "/book_recommend";
+	public static final String CHANGE_PASSWORD = Constants.SERVER_IP + "/change_password";
+	public static final String FEEDBACK = Constants.SERVER_IP + "/feedback";
+	public static final String VERSION_CHECK = Constants.SERVER_IP + "/version_check";
+	public static final String ABOUT_US = Constants.SERVER_IP + "/about_us";
+	public static final String MY_PUBLISH = Constants.SERVER_IP + "/my_publish?token=8499";
+	public static final String BORROW_ORDER = Constants.SERVER_IP + "/borrow_order?token=8499";
+	public static final String LEND_ORDER = Constants.SERVER_IP + "/lend_order?token=2605";
+	
 	public static String getJsonData(final String urlString) {
 		
 				try {

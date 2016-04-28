@@ -41,6 +41,7 @@
             android:id="@+id/et_myinfo_set_reset_newPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:password="true"
             android:layout_weight="3"/>
         
     </LinearLayout>
@@ -59,6 +60,7 @@
             android:id="@+id/et_myinfo_set_reset_confirmPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:password="true"
             android:layout_weight="3"/>
         
     </LinearLayout>

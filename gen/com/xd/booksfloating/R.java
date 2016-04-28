@@ -117,9 +117,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int wall=0x7f02003f;
     }
     public static final class id {
-        public static final int action_integral_rule=0x7f0b008a;
+        public static final int action_integral_rule=0x7f0b008c;
         public static final int actv_email=0x7f0b0031;
-        public static final int arrow=0x7f0b0089;
+        public static final int arrow=0x7f0b008b;
         public static final int back=0x7f0b000b;
         public static final int books_recommend_list=0x7f0b0043;
         public static final int btn_back=0x7f0b0000;
@@ -140,19 +140,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btn_my_info_remind=0x7f0b0055;
         public static final int btn_my_info_search_book=0x7f0b0068;
         public static final int btn_my_info_set=0x7f0b0057;
-        public static final int btn_my_info_set_about=0x7f0b0080;
-        public static final int btn_my_info_set_feedback=0x7f0b007e;
-        public static final int btn_my_info_set_reset_password=0x7f0b007d;
-        public static final int btn_my_info_set_version_check=0x7f0b007f;
+        public static final int btn_my_info_set_about=0x7f0b0081;
+        public static final int btn_my_info_set_feedback=0x7f0b007f;
+        public static final int btn_my_info_set_reset_password=0x7f0b007e;
+        public static final int btn_my_info_set_version_check=0x7f0b0080;
         public static final int btn_myinfo_integral_rule=0x7f0b0062;
-        public static final int btn_myinfo_set_feedback=0x7f0b007c;
-        public static final int btn_myinfo_set_reset_confirm=0x7f0b0084;
+        public static final int btn_myinfo_set_feedback=0x7f0b007d;
+        public static final int btn_myinfo_set_reset_confirm=0x7f0b0085;
         public static final int btn_publish_info=0x7f0b0002;
         public static final int btn_register_now=0x7f0b0033;
         public static final int btn_search=0x7f0b003a;
         public static final int btn_search_books=0x7f0b0038;
         public static final int btn_sure=0x7f0b0035;
         public static final int btn_suretoborrow=0x7f0b0019;
+        public static final int btn_version_update_=0x7f0b0086;
         public static final int cb_choose=0x7f0b0046;
         public static final int cb_remember_psd=0x7f0b0026;
         public static final int dp_expect_borrow_time=0x7f0b0015;
@@ -161,10 +162,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int et_confirmpsd=0x7f0b0032;
         public static final int et_my_info_search_order=0x7f0b0069;
         public static final int et_my_info_search_publish=0x7f0b006d;
-        public static final int et_myinfo_set_feedback=0x7f0b007b;
-        public static final int et_myinfo_set_reset_confirmPassword=0x7f0b0083;
-        public static final int et_myinfo_set_reset_newPassword=0x7f0b0082;
-        public static final int et_myinfo_set_reset_oldPassword=0x7f0b0081;
+        public static final int et_myinfo_set_feedback=0x7f0b007c;
+        public static final int et_myinfo_set_reset_confirmPassword=0x7f0b0084;
+        public static final int et_myinfo_set_reset_newPassword=0x7f0b0083;
+        public static final int et_myinfo_set_reset_oldPassword=0x7f0b0082;
         public static final int et_password=0x7f0b0024;
         public static final int et_phonenum=0x7f0b0030;
         public static final int et_remark=0x7f0b0034;
@@ -180,8 +181,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int iv_my_info_image=0x7f0b004f;
         public static final int iv_my_info_publish_book_image=0x7f0b006f;
         public static final int iv_my_info_remind_book_image=0x7f0b0075;
-        public static final int lastUpdate=0x7f0b0087;
-        public static final int layout=0x7f0b0085;
+        public static final int lastUpdate=0x7f0b0089;
+        public static final int layout=0x7f0b0087;
         public static final int ll_books_list=0x7f0b003b;
         public static final int ll_notice_list=0x7f0b001e;
         public static final int loadFull=0x7f0b0049;
@@ -202,7 +203,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int noData=0x7f0b004a;
         public static final int pb_loading=0x7f0b004d;
         public static final int pb_myinfo_crditscore=0x7f0b0063;
-        public static final int refreshing=0x7f0b0088;
+        public static final int refreshing=0x7f0b008a;
         public static final int rg_main_activity=0x7f0b0029;
         public static final int sh_book_author=0x7f0b0040;
         public static final int sh_book_image=0x7f0b003d;
@@ -211,7 +212,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int spinner_schools=0x7f0b0039;
         public static final int textView1=0x7f0b0001;
         public static final int textView2=0x7f0b0016;
-        public static final int tip=0x7f0b0086;
+        public static final int tip=0x7f0b0088;
+        public static final int tv_about_us=0x7f0b007b;
         public static final int tv_books_author=0x7f0b0007;
         public static final int tv_books_publish_time=0x7f0b0009;
         public static final int tv_books_publisher=0x7f0b0008;

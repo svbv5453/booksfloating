@@ -3,7 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-     <include layout="@layout/nav_public_layout"/>
+     <!-- <include layout="@layout/nav_public_layout"/> -->
+       <!-- 导航栏 -->  
+     <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_bar"
+    android:layout_gravity="center"
+    android:background="@color/theme_blue"
+    android:orientation="horizontal" >
+    
+   
+    
+     <Button 
+         android:id="@+id/btn_back"
+         style="@style/navBackButtonStyle"/>
+     
+     <TextView 
+         style="@style/navTextStyle"
+         android:text="@string/btn_my_info_publish"
+        />
+	 
+
+   </LinearLayout>
     
 	 <RelativeLayout
         android:layout_width="match_parent"

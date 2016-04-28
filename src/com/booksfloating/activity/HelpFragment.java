@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.booksfloating.adapter.MyInfoOrderAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
+import com.booksfloating.domain.MyInfoBookDetailBean;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
 import com.xd.booksfloating.R;
@@ -53,6 +54,11 @@ public class HelpFragment extends Fragment {
 			}
 		});*/
 		loadData(getActivity(), urlTest);
+		/**
+		 * 实际方法，如同askFragment
+		 */
+		//loadData(getActivity(), HttpUtil.LEND_ORDER);
+		
 		myInfoOrderListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -69,9 +75,16 @@ public class HelpFragment extends Fragment {
 		return view;
 	}
 	private void IntentToActivity(int position) {
+		MyInfoBookDetailBean bookOrder = new MyInfoBookDetailBean();
 		Intent intent = new Intent(getActivity(), MyInfoOrderHelpDetailActivity.class);
 		intent.putExtra("position", position);
+		Bundle mBundle = new Bundle(); 
+		mBundle.putParcelable("lendOrder", bookOrder);
+		intent.putExtras(mBundle);
+		
 		startActivity(intent);
+		
+
 		
 	}
 	public void loadData(Context context, String url){
@@ -166,5 +179,50 @@ public class HelpFragment extends Fragment {
 		return booksBeanList;
 		
 	}
+	/**
+	 * 实际解析
+	 * @param jsonData
+	 * @return
+	 */
+	/*public List<MyInfoBookDetailBean> parseJsonData(String jsonData) {
+		
+		booksOrderList = new ArrayList<MyInfoBookDetailBean>();
+		try {
+			
+			JSONObject jsonObject = new JSONObject(jsonData);
+			if(jsonObject.getString("status").equals("1")){
+				
+				//预留解析
+				
+				JSONArray jsonArray = jsonObject.getJSONArray("message");
+				for(int i = 0; i < jsonArray.length(); i++){
+					jsonObject = jsonArray.getJSONObject(i);
+					
+					
+					String bookName = jsonObject.getString("book");
+					String bookAuthor = jsonObject.getString("author");
+					String bookLocation = Constants.schoolIDtoNameMap.get(Integer.parseInt(jsonObject.getString("university")));
+					String bookPublicshTime = jsonObject.getString("lend_time");
+					String lenderName = jsonObject.getString("lender");
+					String lenderUniversity = Constants.schoolIDtoNameMap.get(Integer.parseInt(jsonObject.getString("lender_university")));
+					String borrowTime = jsonObject.getString("lend_time");
+					String returnTime = jsonObject.getString("return_time");
+					String phoneNumber = jsonObject.getString("phone");
+					
+					MyInfoBookDetailBean bookOrder = new MyInfoBookDetailBean(bookName, bookAuthor, bookLocation, lenderName, lenderUniversity, borrowTime, bookPublicshTime, returnTime, phoneNumber);
+					booksOrderList.add(bookOrder);
+					
+					
+				}
+				
+				
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return booksOrderList;
+		
+	}*/
 
 }

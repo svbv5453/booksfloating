@@ -23,6 +23,7 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 	private Fragment currentFragment;
 	private FragmentManager fragmentManage;
 	private Button btn_myinfo_search_book = null;
+	private Button btn_back = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,6 +37,7 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 		fragmentManage = getFragmentManager();
 		initView();
 		initTab();
+		//btn_back = (Button)findViewById(R.id.back);
 		 btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
 			btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
 				
