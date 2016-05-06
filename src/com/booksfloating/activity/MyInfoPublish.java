@@ -52,16 +52,15 @@ public class MyInfoPublish extends Activity{
 		Intent intent =getIntent();
 		myInfoBookPublishListView= (ListView)findViewById(R.id.lv_my_info_book_publish);
 		btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
-		btn_back = (Button)findViewById(R.id.btn_back);
-		/**
-		 * 有的问题，过渡不流畅
-		 */
+		btn_back = (Button)findViewById(R.id.back);
+		
 		btn_back.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intentBack = new Intent(MyInfoPublish.this, MyInfoFragment.class);
-				startActivity(intentBack);
+				/*Intent intentBack = new Intent(MyInfoPublish.this, MyInfoFragment.class);
+				startActivity(intentBack);*/
+				finish();
 				
 			}
 		});

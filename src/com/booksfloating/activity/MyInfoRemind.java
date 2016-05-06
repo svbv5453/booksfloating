@@ -25,7 +25,7 @@ public class MyInfoRemind extends Activity{
 			public void onClick(View v) {
 				/*Intent intent = new Intent(MyInfoRemind.this, MyInfoFragment.class);
 				startActivity(intent);*/
-				
+				finish();
 			}
 		});
 	}

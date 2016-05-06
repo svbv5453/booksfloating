@@ -37,7 +37,17 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 		fragmentManage = getFragmentManager();
 		initView();
 		initTab();
-		//btn_back = (Button)findViewById(R.id.back);
+		btn_back = (Button)findViewById(R.id.back);
+		btn_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				/*Intent intentBack = new Intent(MyInfoPublish.this, MyInfoFragment.class);
+				startActivity(intentBack);*/
+				finish();
+				
+			}
+		});
 		 btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
 			btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
 				

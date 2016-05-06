@@ -8,6 +8,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +26,27 @@ import com.xd.booksfloating.R;
 public class MyInfoSetAbout extends Activity{
 
 	private TextView tv_about_us = null;
+	private Button btn_back = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.myinfo_set_about_layout);
 		tv_about_us = (TextView) findViewById(R.id.tv_about_us);
+		btn_back = (Button)findViewById(R.id.back);
+		
+		btn_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				/*Intent intentBack = new Intent(MyInfoPublish.this, MyInfoFragment.class);
+				startActivity(intentBack);*/
+				finish();
+				
+			}
+		});
 		loadData(MyInfoSetAbout.this, HttpUtil.ABOUT_US);
+		
 		
 		//getActionBar().setTitle("关于");
 	}

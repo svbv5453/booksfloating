@@ -24,6 +24,7 @@ public class MyInfoSetResetPassword extends Activity{
 	private EditText oldPassowrd = null;
 	private EditText newPassword = null;
 	private EditText confimPassword = null;
+	private Button btn_back = null;
 	public static final int OK = 0,SERVER_ERROR = -1, NETWORK_ERROR = -2, NULL_ERROR = -3,OLDPASSWORD_ERROR = -4,PASSWORD_ERROR = -5;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +38,23 @@ public class MyInfoSetResetPassword extends Activity{
 		oldPassowrd = (EditText)findViewById(R.id.et_myinfo_set_reset_oldPassword);
 		newPassword = (EditText)findViewById(R.id.et_myinfo_set_reset_newPassword);
 		confimPassword = (EditText)findViewById(R.id.et_myinfo_set_reset_confirmPassword);
+		btn_back = (Button)findViewById(R.id.back);
+		
+		btn_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				/*Intent intentBack = new Intent(MyInfoPublish.this, MyInfoFragment.class);
+				startActivity(intentBack);*/
+				finish();
+				
+			}
+		});
 		btn_confim.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				changePassword();
-				
-				
-				
-				
-				
 				
 				
 			}

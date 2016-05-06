@@ -42,6 +42,7 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 	private EditText et_stuid,et_schoolname,et_phonenum,et_emailadderss,et_username,et_password,et_confirmpsd;
 	private AutoCompleteTextView actv_email;
 	private Button btn_register_now;
+	private Button btn_back = null;
 	private View mProgressView;
 	private View mLoginFormView;
 	private int schoolNum;
@@ -68,6 +69,8 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 		et_stuid = (EditText)findViewById(R.id.et_stuid);
 		et_username = (EditText)findViewById(R.id.et_username);
 		btn_register_now = (Button)findViewById(R.id.btn_register_now);
+		btn_back = (Button) findViewById(R.id.back);
+		btn_back.setOnClickListener(this);
 		btn_register_now.setOnClickListener(this);
 	}
 	
@@ -274,6 +277,9 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 			{
 				registerSubmit();
 			}
+			break;
+		case R.id.back:
+			finish();
 			break;
 
 		default:

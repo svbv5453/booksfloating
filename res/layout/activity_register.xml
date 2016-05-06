@@ -13,11 +13,7 @@
      
      <Button 
          android:id="@+id/back"
-         android:layout_width="20dp"
-         android:layout_height="20dp"
-         android:background="@drawable/back"
-         android:layout_marginTop="@dimen/nav_marginTop_10"
-         android:layout_marginLeft="@dimen/nav_marginLeft_10"/>
+         style="@style/navBackButtonStyle"/>
      
      <TextView 
          android:layout_width="wrap_content"

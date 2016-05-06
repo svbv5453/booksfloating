@@ -49,6 +49,7 @@ public class DrawerLayoutAdapter extends BaseAdapter{
 			convertView = inflater.inflate(R.layout.drawer_list_item, null);
 			tv_drawer_item = (TextView)convertView.findViewById(R.id.tv_drawer_item);
 		}
+	
 		tv_drawer_item.setText(str[position]);
 		return convertView;
 	}

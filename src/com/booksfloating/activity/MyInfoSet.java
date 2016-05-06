@@ -26,6 +26,7 @@ public class MyInfoSet extends Activity implements OnClickListener{
 	private Button btn_feedback = null;
 	private Button btn_version_check = null;
 	private Button btn_about = null;
+	private Button btn_back = null;
 	private final static int SHOW_MESSAGE = 0;
 	private final static int SHOW_ERROR = -1;
 	
@@ -45,6 +46,16 @@ public class MyInfoSet extends Activity implements OnClickListener{
 		btn_feedback.setOnClickListener(this);
 		btn_version_check.setOnClickListener(this);
 		btn_about.setOnClickListener(this);
+		btn_back = (Button)findViewById(R.id.back);
+		btn_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				/*Intent intent = new Intent(MyInfoRemind.this, MyInfoFragment.class);
+				startActivity(intent);*/
+				finish();
+			}
+		});
 		
 	}
 	@Override

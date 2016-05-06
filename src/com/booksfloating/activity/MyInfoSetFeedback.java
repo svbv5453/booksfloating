@@ -21,6 +21,7 @@ import com.xd.connect.PostParameter;
 public class MyInfoSetFeedback extends Activity{
 	private EditText et_feedback = null;
 	private Button btn_feedback = null;
+	private Button btn_back = null;
 	private static final int OK = 0,SERVER_ERROR = -1, NETWORK_ERROR = -2, NULL_ERROR = -3,OLDPASSWORD_ERROR = -4,PASSWORD_ERROR = -5;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,18 @@ public class MyInfoSetFeedback extends Activity{
 		
 		et_feedback = (EditText) findViewById(R.id.et_myinfo_set_feedback);
 		btn_feedback = (Button) findViewById(R.id.btn_myinfo_set_feedback);
+		btn_back = (Button)findViewById(R.id.back);
+		
+		btn_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				/*Intent intentBack = new Intent(MyInfoPublish.this, MyInfoFragment.class);
+				startActivity(intentBack);*/
+				finish();
+				
+			}
+		});
 		btn_feedback.setOnClickListener(new OnClickListener() {
 			
 			@Override

@@ -1,20 +1,16 @@
 package com.booksfloating.activity;
 
-import java.io.InputStream;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.booksfloating.globalvar.Constants;
-import com.booksfloating.util.HttpUtil;
-import com.xd.booksfloating.R;
-import com.xd.connect.PostParameter;
-import com.xd.dialog.DialogFactory;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.opengl.ETC1Util;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,8 +18,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.booklsfloating.activity.searchbooks.SearchBooksFragment;
+import com.booksfloating.util.HttpUtil;
+import com.xd.booksfloating.R;
+import com.xd.connect.PostParameter;
+import com.xd.dialog.DialogFactory;
 
 /**
  * 登录Activity
@@ -36,18 +40,28 @@ import android.widget.Toast;
 public class LoginActivity extends Activity implements OnClickListener{
 	private EditText et_username, et_password;
 	private Button btn_forget_psd,btn_login_now, btn_goto_register;
+	private Button btn_back = null;
 	private CheckBox cb_remember_psd;
 	public static final int OK = 0,SERVER_ERROR = -1, NETWORK_ERROR = -2, NULL_ERROR = -3,USER_ERROR = -4;
 	//等待的对话框
 	private Dialog dialog = null;
 	Intent intent = null;
 	private String jsonStr;
+	private SharedPreferences sp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_main);
+		sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 		initView();
+		cb_remember_psd.setChecked(true);
+		if(sp.getBoolean("ISCHECKED", false)){
+			cb_remember_psd.setChecked(true);
+		}else{
+			et_username.setText(sp.getString("username", null));
+			et_password.setText(sp.getString("password", null));
+		}
 	}
 	
 	private void initView()
@@ -58,12 +72,27 @@ public class LoginActivity extends Activity implements OnClickListener{
 		btn_login_now = (Button)findViewById(R.id.btn_login_now);
 		cb_remember_psd = (CheckBox)findViewById(R.id.cb_remember_psd);
 		btn_goto_register = (Button)findViewById(R.id.btn_goto_register);
+		btn_back = (Button) findViewById(R.id.back);
+		btn_back.setOnClickListener(this);
 				
 		btn_forget_psd.setOnClickListener(this);
 		//设置了登录按钮（具体的主题）设置监听这个操作（抽象主题中提供的操作）
 		btn_login_now.setOnClickListener(this);
-		cb_remember_psd.setOnClickListener(this);
 		btn_goto_register.setOnClickListener(this);
+		cb_remember_psd.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				
+				if(cb_remember_psd.isChecked()){
+					sp.edit().putBoolean("ISCHECKED", true).commit();
+				}else{
+					sp.edit().putBoolean("ISCHECKED", false).commit();
+				}
+				
+			}
+		});
+		
 	}
 
 	//观察者中的操作
@@ -78,13 +107,15 @@ public class LoginActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.btn_login_now:
 			loginSubmit();
+			
 			break;
-		case R.id.cb_remember_psd:
-			break;
+		
 		case R.id.btn_goto_register:
 			intent = new Intent(LoginActivity.this, RegisterActivity.class);
 			startActivity(intent);
 			//this.finish();
+		case R.id.back:
+			finish();
 		default:
 			break;
 		}
@@ -98,6 +129,14 @@ public class LoginActivity extends Activity implements OnClickListener{
 			dismissLoadingDialog();
 			switch (msg.what) {
 			case OK:
+				if(cb_remember_psd.isChecked()){
+					Editor editor = sp.edit();
+					editor.putString("username", et_username.getText().toString());
+					editor.putString("password", et_password.getText().toString());
+					editor.commit();
+				}
+				intent = new Intent(LoginActivity.this, SearchBooksFragment.class);
+				startActivity(intent);
 				break;
 			case SERVER_ERROR:
 				DialogFactory.AlertDialog(LoginActivity.this, "错误提示", "服务器错误，登录失败！");								

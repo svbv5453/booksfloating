@@ -2,11 +2,28 @@ package com.booklsfloating.activity.searchbooks;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
-import org.apache.http.protocol.HTTP;
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
+import android.widget.Toast;
 
 import com.booksfloating.adapter.DrawerLayoutAdapter;
 import com.booksfloating.adapter.SearchBooksDetailAdapter;
@@ -20,32 +37,13 @@ import com.xd.booksfloating.R;
 import com.xd.connect.PostParameter;
 import com.xd.dialog.DialogFactory;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
-
 public class SearchBooksDetailActivity extends Activity implements OnClickListener,OnItemClickListener,
 OnRefreshListener,OnLoadListener{
 	private ListView lv_left_drawer;
 	private ListViewCompat lv_books_list;
-	private Button btn_filter, btn_search, btn_filter_too;
+	private Button btn_filter, btn_search, btn_search_1, btn_filter_too;
+	private EditText et_search_sh = null;
+	private SearchView searchView = null;
 	private SearchBooksDetailAdapter adapter;
 	private DrawerLayout drawerLayout;
 	private String[] schoolArray;
@@ -70,11 +68,37 @@ OnRefreshListener,OnLoadListener{
 		drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		schoolArray = getResources().getStringArray(R.array.spinner_item);
+		/**
+		 * 孙恒添加搜索按钮
+		 * start
+		 */
+		btn_search = (Button)findViewById(R.id.btn_search);
+		btn_search_1 = (Button)findViewById(R.id.btn_search_1);
+		btn_search.setOnClickListener(this);
+		btn_search_1.setOnClickListener(this);
+		et_search_sh = (EditText)findViewById(R.id.et_search_sh);
+		/*searchView = (SearchView)findViewById(R.id.search_view);
+		searchView.setOnQueryTextListener(new OnQueryTextListener() {
+			
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				System.out.println(query);
+				return true;
+			}
+			
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				System.out.println(newText);
+				return true;
+			}
+		});*/
 		
+		//end
 		lv_left_drawer = (ListView)findViewById(R.id.lv_left_drawer);
 		//lv_left_drawer.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, schoolArray));
 		lv_left_drawer.setAdapter(new DrawerLayoutAdapter(this, schoolArray));
 		lv_left_drawer.setOnItemClickListener(new DrawerItemClickListener());
+		
 			
 		btn_filter = (Button)findViewById(R.id.btn_filter);
 		btn_filter.setOnClickListener(this);
@@ -257,6 +281,20 @@ OnRefreshListener,OnLoadListener{
 			}
 			
 			break;
+			/**
+			 * sunheng_add
+			 */
+		case R.id.btn_search:
+			et_search_sh.setVisibility(View.VISIBLE);
+			btn_filter.setVisibility(View.INVISIBLE);
+			btn_filter_too.setVisibility(View.INVISIBLE);
+			btn_search.setVisibility(View.INVISIBLE);
+			btn_search_1.setVisibility(View.VISIBLE);
+		case R.id.btn_search_1:
+			searchKeyword = et_search_sh.getText().toString();
+			universityCode = 0;
+			refreshFromServer(0);
+			Toast.makeText(SearchBooksDetailActivity.this, "搜索测试", Toast.LENGTH_SHORT).show();
 
 		default:
 			break;

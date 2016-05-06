@@ -10,12 +10,8 @@
      android:background="@color/theme_blue">
      
      <Button 
-         android:id="@+id/btn_back"
-         android:layout_width="20dp"
-         android:layout_height="20dp"
-         android:background="@drawable/back"
-         android:layout_marginTop="@dimen/nav_marginTop_10"
-         android:layout_marginLeft="@dimen/nav_marginLeft_10"/>
+         android:id="@+id/back"
+         style="@style/navBackButtonStyle"/>
      
      <TextView
          android:layout_width="wrap_content"
@@ -132,6 +128,7 @@
           android:id="@+id/cb_remember_psd"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          
           android:text="@string/remember_password" />
 
    </LinearLayout>
