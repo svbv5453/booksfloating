@@ -10,7 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="该版本是最新版本"/>
+        android:gravity="center"
+        android:text="已有新版本"/>
+    <Button 
+        android:id="@+id/btn_version_update_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="立即更新"/>
     
 
 </LinearLayout>

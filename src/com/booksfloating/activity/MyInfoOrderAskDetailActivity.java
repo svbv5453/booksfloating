@@ -24,7 +24,7 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 	private TextView phoneNumber = null;
 	private TextView university = null;
 	private MyInfoBookDetailBean bookDetailBean;
-	
+	private MyInfoBookDetailBean bookOrder;
 	private static String urlTest = "http://www.imooc.com/api/teacher?type=4&num=30";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,11 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 		
 		//getActionBar().setTitle("订单详情");
 		
-		Intent intent = getIntent();
+		bookOrder = getIntent().getParcelableExtra("borrowOrder");
+		/**
+		 * 通过使用传递对象，则不需要进行向服务器请求数据了
+		 */
+		//showData();
 		orderNumber = (TextView) findViewById(R.id.tv_myinfo_ask_orderNumber);
 		orderDate = (TextView) findViewById(R.id.tv_myinfo_ask_date);
 		university = (TextView) findViewById(R.id.tv_myinfo_ask_university);
@@ -42,10 +46,21 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 		borrowDate = (TextView) findViewById(R.id.tv_myinfo_ask_borrowDate);
 		returnDate = (TextView) findViewById(R.id.tv_myinfo_ask_returnDate);
 		phoneNumber = (TextView) findViewById(R.id.tv_myinfo_ask_phoneNumber);
+		
 		MyInfoOrderDetailAsyncTask orderDetailAsyncTask = new MyInfoOrderDetailAsyncTask();
 		orderDetailAsyncTask.execute(urlTest);
 	}
 		
+		private void showData() {
+		// TODO Auto-generated method stub
+			orderMessage.setText("昵称为" + bookOrder.getLenderName() + "的用户已接受您关于\"" 
+			+ bookOrder.getBookName() + ", " + bookOrder.getBookAuthor() + ", " + bookOrder.getBookLocation() + ",的求助 ");
+				borrowDate.setText("借书日: " + bookOrder.getBorrowTime());
+				returnDate.setText("还书日: " + bookOrder.getReturnTime());
+				university.setText("他所在的学校为: " + bookOrder.getLenderUniversity());
+				phoneNumber.setText("他的手机号为: " + bookOrder.getPhoneNumber());
+	}
+
 		class MyInfoOrderDetailAsyncTask extends AsyncTask<String, Void, MyInfoBookDetailBean>{
 
 			@Override

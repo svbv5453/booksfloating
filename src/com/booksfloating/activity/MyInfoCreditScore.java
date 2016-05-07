@@ -16,6 +16,7 @@ import com.xd.booksfloating.R;
 public class MyInfoCreditScore extends Activity{
 	
 	private Button btn_integral_rule = null;
+	private Button btn_back = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -29,6 +30,16 @@ public class MyInfoCreditScore extends Activity{
 				Intent intent = new Intent(MyInfoCreditScore.this, MyInfoIntegralRule.class);
 				startActivity(intent);
 				
+			}
+		});
+		btn_back = (Button)findViewById(R.id.back);
+		btn_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				/*Intent intent = new Intent(MyInfoRemind.this, MyInfoFragment.class);
+				startActivity(intent);*/
+				finish();
 			}
 		});
 	}

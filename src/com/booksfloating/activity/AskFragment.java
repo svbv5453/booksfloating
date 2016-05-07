@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.booksfloating.adapter.MyInfoOrderAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
+import com.booksfloating.domain.MyInfoBookDetailBean;
+import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
 import com.xd.booksfloating.R;
@@ -32,6 +34,7 @@ import com.xd.booksfloating.R;
 public class AskFragment extends Fragment {
 	
 	private List<BooksRecommendBean> booksBeanList;
+	private List<MyInfoBookDetailBean> booksOrderList;
 
 	private ListView myInfoOrderListView = null;
 	//private Button btn_myinfo_search_book = null;
@@ -53,6 +56,11 @@ public class AskFragment extends Fragment {
 			}
 		});*/
 		loadData(getActivity(), urlTest);
+		/**
+		 * 实际方法，
+		 */
+		//loadData(getActivity(), HttpUtil.BORROW_ORDER);
+		
 		myInfoOrderListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -71,8 +79,14 @@ public class AskFragment extends Fragment {
 	
 	
 	private void IntentToActivity(int position) {
+		MyInfoBookDetailBean bookOrder = new MyInfoBookDetailBean();
+		
 		Intent intent = new Intent(getActivity(), MyInfoOrderAskDetailActivity.class);
 		intent.putExtra("position", position);
+		Bundle mBundle = new Bundle();
+		mBundle.putParcelable("borrowOrder", bookOrder);
+		intent.putExtras(mBundle);
+		
 		startActivity(intent);
 		
 	}
@@ -133,27 +147,19 @@ public class AskFragment extends Fragment {
 		}
 		
 	}
+	/**
+	 * 测试解析
+	 * @param jsonData
+	 * @return
+	 */
 	public List<BooksRecommendBean> parseJsonData(String jsonData) {
 		booksBeanList = new ArrayList<BooksRecommendBean>();
+		booksOrderList = new ArrayList<MyInfoBookDetailBean>();
 		try {
 			
 			JSONObject jsonObject = new JSONObject(jsonData);
 			if(jsonObject.getString("status").equals("1")){
-				//预留解析
-				/*
-				JSONArray jsonArray = jsonObject.getJSONArray("bookList");
-				for(int i = 0; i < jsonArray.length(); i++){
-					jsonObject = jsonArray.getJSONObject(i);
-					BooksRecommendBean booksRecommendBean = new BooksRecommendBean();
-					booksRecommendBean.bookName = jsonObject.getString("book");
-					booksRecommendBean.bookAuthor = jsonObject.getString("author");
-					booksRecommendBean.bookLocation = jsonObject.getString("university");
-					booksRecommendBean.bookPublicshTime = jsonObject.getString("publishTime");
-					
-					booksBeanList.add(booksRecommendBean);
-					
-					
-				}*/
+				
 				JSONArray jsonArray = jsonObject.getJSONArray("data");
 				for(int i = 0; i < jsonArray.length(); i++){
 					jsonObject = jsonArray.getJSONObject(i);
@@ -172,5 +178,50 @@ public class AskFragment extends Fragment {
 		return booksBeanList;
 		
 	}
+	/**
+	 * 实际解析
+	 * @param jsonData
+	 * @return
+	 */
+	/*public List<MyInfoBookDetailBean> parseJsonData(String jsonData) {
+		
+		booksOrderList = new ArrayList<MyInfoBookDetailBean>();
+		try {
+			
+			JSONObject jsonObject = new JSONObject(jsonData);
+			if(jsonObject.getString("status").equals("1")){
+				
+				//预留解析
+				
+				JSONArray jsonArray = jsonObject.getJSONArray("message");
+				for(int i = 0; i < jsonArray.length(); i++){
+					jsonObject = jsonArray.getJSONObject(i);
+					
+					
+					String bookName = jsonObject.getString("book");
+					String bookAuthor = jsonObject.getString("author");
+					String bookLocation = Constants.schoolIDtoNameMap.get(Integer.parseInt(jsonObject.getString("university")));
+					String bookPublicshTime = jsonObject.getString("lend_time");
+					String lenderName = jsonObject.getString("lender");
+					String lenderUniversity = Constants.schoolIDtoNameMap.get(Integer.parseInt(jsonObject.getString("lender_university")));
+					String borrowTime = jsonObject.getString("lend_time");
+					String returnTime = jsonObject.getString("return_time");
+					String phoneNumber = jsonObject.getString("phone");
+					
+					MyInfoBookDetailBean bookOrder = new MyInfoBookDetailBean(bookName, bookAuthor, bookLocation, lenderName, lenderUniversity, borrowTime, bookPublicshTime, returnTime, phoneNumber);
+					booksOrderList.add(bookOrder);
+					
+					
+				}
+				
+				
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return booksOrderList;
+		
+	}*/
 
 }

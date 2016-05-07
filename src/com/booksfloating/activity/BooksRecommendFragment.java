@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -28,6 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.booksfloating.adapter.BookRecommendAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.util.ACache;
+import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
 
@@ -64,10 +64,11 @@ public class BooksRecommendFragment extends Fragment{
 		
 		loadData(getActivity(), urltest);
 
-		/*BooksRecommendAsyncTask booksRecommendAsyncTask = new BooksRecommendAsyncTask();
-		booksRecommendAsyncTask.execute(urltest);
-		*/
-		//loadData(getActivity(), urltest);
+		/**
+		 *实际方法
+		 */
+		
+		//loadData(getActivity(), HttpUtil.BOOK_RECOMMEND);
 
 		
 		return view;
@@ -141,7 +142,7 @@ public class BooksRecommendFragment extends Fragment{
 			//JSONObject jsonObject = new JSONObject(jsonData);
 			if(jsonObject.getString("status").equals("1")){
 				
-				/*JSONArray jsonArray = jsonObject.getJSONArray("bookList");
+				/*JSONArray jsonArray = jsonObject.getJSONArray("book_list");
 				for(int i = 0; i < jsonArray.length(); i++){
 					jsonObject = jsonArray.getJSONObject(i);
 					BooksRecommendBean booksRecommendBean = new BooksRecommendBean();
