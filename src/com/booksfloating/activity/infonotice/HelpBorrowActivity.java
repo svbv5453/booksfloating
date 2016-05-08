@@ -1,5 +1,7 @@
 package com.booksfloating.activity.infonotice;
 
+import java.util.Calendar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,9 +12,11 @@ import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.xd.booksfloating.R;
 import com.xd.connect.PostParameter;
+import com.xd.dialog.DialogFactory;
 
 import android.R.integer;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -40,51 +44,78 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 		dp_expect_borrow_time = (DatePicker)findViewById(R.id.dp_expect_borrow_time);		
 		dp_expect_return_time = (DatePicker)findViewById(R.id.dp_expect_return_time);
 		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {  
+			dp_expect_borrow_time.setCalendarViewShown(false);  
+			dp_expect_return_time.setCalendarViewShown(false);
+	    }  
+		else {
+			dp_expect_borrow_time.setCalendarViewShown(true);
+			dp_expect_return_time.setCalendarViewShown(true);
+		}
+
 		btn_suretoborrow = (Button)findViewById(R.id.btn_suretoborrow);
 		btn_suretoborrow.setOnClickListener(this);
 		initData();
 	}
 
-	private int year;
-	private int month;
-	private int day;
-	private StringBuffer lend_time = new StringBuffer();
-	private StringBuffer return_time = new StringBuffer();
+	private int year1;
+	private int month1;
+	private int day1;
+	private int year2;
+	private int month2;
+	private int day2;
+			
 	private void initData()
 	{
-		dp_expect_borrow_time.init(year, month, day, new OnDateChangedListener() {
+		Calendar c =Calendar.getInstance();   
+        year1 = c.get(Calendar.YEAR);   
+        month1 = c.get(Calendar.MONTH); 
+        month1++;
+        day1 = c.get(Calendar.DAY_OF_MONTH);   
+        tv_expect_borrow_time.setText(year1+"-"+month1+"-"+day1);       
+
+		dp_expect_borrow_time.init(year1, month1, day1, new OnDateChangedListener() {
 			
 			public void onDateChanged(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
 				// TODO Auto-generated method stub
-				HelpBorrowActivity.this.year = year;
-				month = monthOfYear;
-				day = dayOfMonth;
-				lend_time.append(HelpBorrowActivity.this.year);
-				lend_time.append("-");
-				lend_time.append(month);
-				lend_time.append("-");
-				lend_time.append(day);
+				year1 = year;
+				month1 = monthOfYear + 1;
+				day1 = dayOfMonth;
 				
+				StringBuffer lend_time = new StringBuffer();
+				lend_time.append(year1);
+				lend_time.append("-");
+				lend_time.append(month1);
+				lend_time.append("-");
+				lend_time.append(day1);
+								
 				tv_expect_borrow_time.setText(lend_time);
 			}
 		});
 		
-		dp_expect_return_time.init(year, month, day, new OnDateChangedListener() {
+		 year2 = c.get(Calendar.YEAR);   
+	     month2 = c.get(Calendar.MONTH);
+	     month2++;
+	     day2 = c.get(Calendar.DAY_OF_MONTH); 
+	     tv_expect_return_time.setText(year2+"-"+month2+"-"+ day2);
+	     
+		dp_expect_return_time.init(year2, month2, day2, new OnDateChangedListener() {
 			
 			@Override
 			public void onDateChanged(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
 				// TODO Auto-generated method stub
-				HelpBorrowActivity.this.year = year;
-				month = monthOfYear;
-				day = dayOfMonth;
+				year2 = year;
+				month2 = monthOfYear + 1;
+				day2 = dayOfMonth;
 				
-				return_time.append(HelpBorrowActivity.this.year);
+				StringBuffer return_time = new StringBuffer();
+				return_time.append(year2);
 				return_time.append("-");
-				return_time.append(month);
+				return_time.append(month2);
 				return_time.append("-");
-				return_time.append(day);
+				return_time.append(day2);
 				
 				tv_expect_return_time.setText(return_time);
 			}
@@ -96,8 +127,7 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 	//从booksAttr中解析得到borrowInfo
 	private BorrowInfo borrowInfo = new BorrowInfo();
 	private void submitData()
-	{
-		final PostParameter[] postParameters = new PostParameter[5];
+	{		
 		new Thread(new Runnable() {
 			
 			@Override
@@ -105,9 +135,9 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 				// TODO Auto-generated method stub
 				//这个SharePreferenceUtil是注册的时候就存好的用户基本信息
 				SharePreferenceUtil sp = new SharePreferenceUtil(HelpBorrowActivity.this, Constants.SAVE_USER);
-
-				postParameters[0] = new PostParameter("lend_time", lend_time.toString());
-				postParameters[1] = new PostParameter("return_time", return_time.toString());
+				final PostParameter[] postParameters = new PostParameter[5];
+				postParameters[0] = new PostParameter("lend_time", tv_expect_borrow_time.getText().toString());
+				postParameters[1] = new PostParameter("return_time", tv_expect_return_time.getText().toString());
 				postParameters[2] = new PostParameter("orderID", booksAttr.getOrderID());
 				postParameters[3] = new PostParameter("lender", sp.getAccount());
 				postParameters[4] = new PostParameter("token", sp.getToken());
@@ -144,7 +174,7 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case 0:
-				Toast.makeText(HelpBorrowActivity.this, "您成功帮助了一位同学！", Toast.LENGTH_SHORT).show();
+				DialogFactory.AlertDialog(HelpBorrowActivity.this, "恭喜你", "您成功帮助了一位同学！");
 				break;
 			case -1:
 				Toast.makeText(HelpBorrowActivity.this, "服务器错误，请稍后重试！", Toast.LENGTH_SHORT).show();
@@ -160,7 +190,14 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_suretoborrow:
-			submitData();
+			if (year1 > year2 || (year1 == year2 && month1 > month2) || (year1 == year2 && month1 == month2 && day1 > day2)) {
+				DialogFactory.AlertDialog(this, "提示", "还书日期不能早于借书日期！");
+			}
+			else if (year1 < year2) {
+				DialogFactory.AlertDialog(this, "提示", "同学，真的可以借这么久吗？");
+			}else {
+				submitData();
+			}			
 			break;
 
 		default:

@@ -19,7 +19,7 @@
             android:layout_height="20dp"
             android:layout_marginLeft="@dimen/nav_marginLeft_10"
             android:layout_marginTop="@dimen/nav_marginTop_10"
-            android:background="@drawable/back" />
+            android:background="@drawable/back_sh" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,26 +54,25 @@
         android:layout_height="match_parent"   
         android:layout_marginLeft="0dp" 
         android:gravity="center_vertical"    
-        android:text="2016年2月5日"
+        android:text="2016-2-5"
         android:textColor="@color/white"
         android:textSize="@dimen/nav_textsize_16"/>
 
     </LinearLayout>
 
-   
     <DatePicker
         android:id="@+id/dp_expect_borrow_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
         android:layout_gravity="center"
-        android:foregroundGravity="center" />
+        android:layout_marginTop="0dp"
+        android:calendarViewShown="false" />
 
     <!-- 预期还书时间 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp" 
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:background="@color/theme_blue" >
 
      <TextView
@@ -92,7 +91,7 @@
         android:layout_height="match_parent"   
         android:layout_marginLeft="0dp" 
         android:gravity="center_vertical"    
-        android:text="2016年4月5日"
+        android:text="2016-4-5"
         android:textColor="@color/white"
         android:textSize="@dimen/nav_textsize_16"/>
 
@@ -102,17 +101,20 @@
         android:id="@+id/dp_expect_return_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center" 
+        android:calendarViewShown="false"/>
 
     <Button
         android:id="@+id/btn_suretoborrow"
-        android:layout_width="290dp"
+        android:layout_width="match_parent"
         android:layout_height="32dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_blue"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/theme_blue"
         android:text="@string/btn_sure"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
 </LinearLayout>

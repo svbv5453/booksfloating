@@ -18,7 +18,7 @@
             android:layout_height="20dp"
             android:layout_marginLeft="@dimen/nav_marginLeft_10"
             android:layout_marginTop="@dimen/nav_marginTop_10"
-            android:background="@drawable/back" />
+            android:background="@drawable/back_sh" />
 
         <TextView
             android:id="@+id/textView1"

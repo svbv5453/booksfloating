@@ -24,7 +24,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.booklsfloating.activity.searchbooks.SearchBooksFragment;
+import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.SharePreferenceUtil;
 import com.xd.booksfloating.R;
 import com.xd.connect.PostParameter;
 import com.xd.dialog.DialogFactory;
@@ -42,7 +44,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 	private Button btn_forget_psd,btn_login_now, btn_goto_register;
 	private Button btn_back = null;
 	private CheckBox cb_remember_psd;
-	public static final int OK = 0,SERVER_ERROR = -1, NETWORK_ERROR = -2, NULL_ERROR = -3,USER_ERROR = -4;
+	
 	//等待的对话框
 	private Dialog dialog = null;
 	Intent intent = null;
@@ -53,7 +55,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_main);
-		sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+		sp = this.getSharedPreferences(Constants.SAVE_USER, Context.MODE_PRIVATE);
 		initView();
 		cb_remember_psd.setChecked(true);
 		if(sp.getBoolean("ISCHECKED", false)){
@@ -128,23 +130,22 @@ public class LoginActivity extends Activity implements OnClickListener{
 			super.handleMessage(msg);
 			dismissLoadingDialog();
 			switch (msg.what) {
-			case OK:
-				if(cb_remember_psd.isChecked()){
-					Editor editor = sp.edit();
-					editor.putString("username", et_username.getText().toString());
-					editor.putString("password", et_password.getText().toString());
-					editor.commit();
-				}
-				intent = new Intent(LoginActivity.this, SearchBooksFragment.class);
-				startActivity(intent);
+			case Constants.OK:
+				//if(cb_remember_psd.isChecked()){
+					//Editor editor = sp.edit();
+					//editor.putString("username", et_username.getText().toString());
+					//editor.putString("password", et_password.getText().toString());
+					//editor.commit();
+				//}
+				parseReturnJson(jsonStr);
 				break;
-			case SERVER_ERROR:
+			case Constants.SERVER_ERROR:
 				DialogFactory.AlertDialog(LoginActivity.this, "错误提示", "服务器错误，登录失败！");								
 				break;
-			case NULL_ERROR:
+			case Constants.NULL_ERROR:
 				DialogFactory.AlertDialog(LoginActivity.this, "登录提示", "账号或密码不能为空！");
 				break;
-			case NETWORK_ERROR:
+			case Constants.NETWORK_ERROR:
 				Toast.makeText(LoginActivity.this, "网络未连接", Toast.LENGTH_SHORT).show();
 			default:
 				break;
@@ -163,7 +164,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 				// TODO Auto-generated method stub
 				if(account.length()== 0 || password.length() == 0)
 				{					
-					handler.sendEmptyMessage(NULL_ERROR);
+					handler.sendEmptyMessage(Constants.NULL_ERROR);
 				}
 				else{
 					parameters[0] = new PostParameter("account", account);
@@ -171,12 +172,11 @@ public class LoginActivity extends Activity implements OnClickListener{
 					parameters[2] = new PostParameter("login_method", "1");				
 					jsonStr = HttpUtil.httpRequest(HttpUtil.USER_LOGIN, parameters, HttpUtil.POST);
 					if(jsonStr != null)
-					{						
-						parseReturnJson(jsonStr);
-						handler.sendEmptyMessage(OK);
+					{												
+						handler.sendEmptyMessage(Constants.OK);
 					}
 					else {
-						handler.sendEmptyMessage(SERVER_ERROR);
+						handler.sendEmptyMessage(Constants.SERVER_ERROR);
 					}
 					
 				}								
@@ -193,13 +193,20 @@ public class LoginActivity extends Activity implements OnClickListener{
 			String token = jsonObj.optString("token");
 			if(status.equals("1"))
 			{
+				SharePreferenceUtil sp = new SharePreferenceUtil(LoginActivity.this, Constants.SAVE_USER);
+				sp.setToken(token);
+				
+				Constants.isLogin = true;
+				
 				Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
 				System.out.println("用户登录成功");
 			}
 			else if (status.equals("-1")) {
+				DialogFactory.AlertDialog(LoginActivity.this, "提示", "该账户不存在！");
 				System.out.println("该账户不存在");
 			}
 			else if (status.equals("-2")) {
+				DialogFactory.AlertDialog(LoginActivity.this, "提示", "密码错误！");
 				System.out.println("密码错误");
 			}
 		} catch (JSONException e) {

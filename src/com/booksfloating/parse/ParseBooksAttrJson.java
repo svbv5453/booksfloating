@@ -80,6 +80,7 @@ public class ParseBooksAttrJson {
 					booksAttr.setBookAuthor(object.optString("author"));
 					booksAttr.setBookPublisher(object.optString("publisher"));
 					booksAttr.setPublishDate(object.optString("date"));
+					booksAttr.setBookImageUrl(object.optString("picture"));
 					
 					JSONArray universityArray = object.optJSONArray("university");
 					for (int j = 0; j < universityArray.length(); j++) {
@@ -91,8 +92,7 @@ public class ParseBooksAttrJson {
 						borrowInfoList.add(borrowInfo);
 					}
 					booksAttr.setCanBorrowSchoolList(strList);
-					booksAttr.setBorrowInfoList(borrowInfoList);
-					booksAttr.setBookImageUrl(object.optString("picture"));
+					booksAttr.setBorrowInfoList(borrowInfoList);					
 					booksAttrsList.add(booksAttr);
 				}
 				

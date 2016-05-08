@@ -51,10 +51,12 @@ public class BorrowBooksDetailInfoActivity extends Activity implements OnClickLi
 		tv_books_author = (TextView)findViewById(R.id.tv_books_author);
 		tv_books_publisher = (TextView)findViewById(R.id.tv_books_publisher);
 		tv_books_publish_time = (TextView)findViewById(R.id.tv_books_publish_time);
+		
 		tv_books_title.setText(booksAttr.getBookTitle());
 		tv_books_author.setText(booksAttr.getBookAuthor());
 		tv_books_publisher.setText(booksAttr.getBookPublisher());
 		tv_books_publish_time.setText(booksAttr.getPublishDate());
+		System.out.println("booksAttr.getPublishDate():"+booksAttr.getPublishDate());
 		
 		iv_books_image = (ImageView)findViewById(R.id.iv_books_image);
 		if(booksAttr.getBookImageUrl() != null)

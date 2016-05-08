@@ -39,7 +39,7 @@ import android.widget.Toast;
 public class BooksInfoActivity extends Activity implements OnClickListener{
 	private Button btn_back, btn_gotohelp;
 	private ImageView iv_books_image;
-	private TextView tv_books_title, tv_books_author, tv_books_publisher,tv_books_publish_time;
+	private TextView tv_books_title, tv_books_author, tv_books_publisher,tv_books_publish_date;
 	private TextView tv_info_publish_time, tv_library_location, tv_reference_number, tv_whether_borrow, tv_remarks;
 	private BooksAttr booksAttr;
 	private BorrowInfo borrowInfo;
@@ -67,8 +67,9 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 		tv_books_author.setText(booksAttr.getBookAuthor());
 		tv_books_publisher = (TextView)findViewById(R.id.tv_books_publisher);
 		tv_books_publisher.setText(booksAttr.getBookPublisher());
-		tv_books_publish_time = (TextView)findViewById(R.id.tv_books_publish_time);
-		tv_books_publish_time.setText(booksAttr.getPublishDate());
+		tv_books_publish_date = (TextView)findViewById(R.id.tv_books_publish_date);
+		tv_books_publish_date.setText(booksAttr.getPublishDate());
+		
 		iv_books_image = (ImageView)findViewById(R.id.iv_books_image);
 		if (booksAttr.getBookImageUrl() != null) {
 			ImageManager.from(this).displayImage(iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
@@ -78,6 +79,7 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 		
 		tv_info_publish_time = (TextView)findViewById(R.id.tv_info_publish_time);
 		tv_info_publish_time.setText(booksAttr.getNoticePublishTime());
+		
 		tv_library_location = (TextView)findViewById(R.id.tv_library_location);
 		tv_library_location.setText(borrowInfo.borrowLoc);
 		tv_reference_number = (TextView)findViewById(R.id.tv_reference_number);
@@ -94,11 +96,11 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_back:
-			
+			this.finish();
 			break;
 		case R.id.btn_gotohelp:
 			Intent intent = new Intent();
-			intent.setClass(this, HelpBorrowActivity.class);
+			intent.setClass(BooksInfoActivity.this, HelpBorrowActivity.class);
 			startActivity(intent);
 			break;
 		default:
@@ -120,6 +122,7 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 				// TODO Auto-generated method stub				
 				postParameters[0] = new PostParameter("index", borrowInfo.borrowIndex);
 				postParameters[1] = new PostParameter("university", borrowInfo.borrowLoc);
+				System.out.println("borrowInfo.borrowLoc:"+borrowInfo.borrowLoc);
 				jsonString = HttpUtil.httpRequest(HttpUtil.UPDATE_BOOKINFO, postParameters, HttpUtil.POST);
 				if(jsonString == null)
 				{
@@ -188,6 +191,7 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 	private void dismissLoadingDialog() {
 		if (dialog != null) {
 			dialog.dismiss();
+			dialog = null;
 		}
 	}
 

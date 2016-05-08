@@ -1,18 +1,19 @@
 
-    <resources>
-        <color name="light_gray">#EFEFEF</color>
-        <color name="black">#000000</color>
-        <color name="theme_blue">#5B9BD5</color>
-        <color name="white">#FFFFFF</color>
-        <color name="transparent">#00000000</color>
-        <color name="gray">#939393</color>
-        <color name="orange">#FF7D00</color>
-        <color name="sh_blue">#0099ff</color>
-        <color name="sh_black">#330033</color>
+<resources>
+    <color name="light_gray">#EFEFEF</color>
+    <color name="black">#000000</color>
+    <color name="theme_blue">#5B9BD5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray">#939393</color>
+    <color name="orange">#FF7D00</color>
+    <color name="sh_blue">#0099ff</color>
+    <color name="sh_black">#330033</color>
 
-        <color name="sh_orange">#ff6600</color>
+    <color name="sh_orange">#ff6600</color>
 
-        <color name="lwy_transparent_background">#00111111</color>
-        <color name="red">#FF0000</color>
-
-    </resources>
+    <color name="lwy_transparent_background">#00111111</color>
+    <color name="red">#FF0000</color>
+	<color name="listView_item_color_nor">#ffdedede</color>
+	<color name="listview_selected_color">#b4f7ff</color>
+</resources>
