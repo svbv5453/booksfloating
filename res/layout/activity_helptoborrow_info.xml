@@ -15,8 +15,8 @@
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="@dimen/nav_marginLeft_10"
             android:layout_marginTop="@dimen/nav_marginTop_10"
             android:background="@drawable/back_sh" />
@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/nav_marginTop_10"
             android:text="@string/helptoborrow_info"
             android:textColor="@color/white"
-            android:textSize="@dimen/nav_textsize_16" />
+            android:textSize="@dimen/nav_textsize_20" />
     </LinearLayout>
     
 	<!-- 预期帮借时间 -->
@@ -107,7 +107,7 @@
     <Button
         android:id="@+id/btn_suretoborrow"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="0dp"
         android:layout_marginLeft="5dp"

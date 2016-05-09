@@ -40,11 +40,15 @@ public class ParseBooksAttrJson {
 					booksAttr.setBookTitle(tempObject.optString("book"));
 					booksAttr.setBookImageUrl(tempObject.optString("picture"));
 					booksAttr.setOrderID(tempObject.optString("orderID"));
-					booksAttr.setPublishDate(tempObject.optString("publish_time"));
-					booksAttr.setRemark(tempObject.optString("remark"));
+					booksAttr.setNoticePublishTime(tempObject.optString("publish_time"));
+					booksAttr.setRemark(tempObject.optString("remarks"));
+					booksAttr.setBookPublisher(tempObject.optString("publisher"));
+					booksAttr.setPublishDate(tempObject.optString("publishdate"));
 					borrowInfo.borrowIndex = tempObject.optString("index");
 					String university = tempObject.optString("university");
-					borrowInfo.borrowLoc = Constants.schoolIDtoNameMap.get(Integer.parseInt(university));
+					//borrowInfo.borrowLoc = Constants.schoolIDtoNameMap.get(Integer.parseInt(university));
+					borrowInfo.borrowLoc = university;
+					booksAttr.setBorrowSchool(borrowInfo.borrowLoc);
 					booksAttr.setBorrowInfo(borrowInfo);
 					booksAttrsList.add(booksAttr);
 				}

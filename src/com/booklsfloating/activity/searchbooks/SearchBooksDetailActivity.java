@@ -58,8 +58,7 @@ OnRefreshListener,OnLoadListener{
 	private String[] schoolArray;
 	private String filterSchool;
 	private String searchKeyword;
-	private int universityCode;
-	private String unviersity;
+	private String university;
 	//向服务器发送请求的次数，刚启动为第一次
 	private int requestTime = 1;
 	
@@ -71,10 +70,11 @@ OnRefreshListener,OnLoadListener{
 		
 		Intent intent = getIntent();
 		searchKeyword = intent.getStringExtra("intent_keyword");
-		universityCode = intent.getIntExtra("intent_universitycode", 0);
-		unviersity = Constants.schoolIDtoNameMap.get(universityCode);
+		//universityCode = intent.getIntExtra("intent_universitycode", 0);
+		university = intent.getStringExtra("intent_university");
+		
 		System.out.println("intent_keyword:"+searchKeyword);
-		System.out.println("intent_universitycode:"+universityCode);
+		System.out.println("intent_university:"+university);
 		
 		drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -92,14 +92,13 @@ OnRefreshListener,OnLoadListener{
 				// TODO Auto-generated method stub
 				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 					if (!searchKeyword.equals(et_search_sh.getText().toString().trim())) {
-						showLoadingDialog();
 						booksAttrsList.clear();
 						searchKeyword = et_search_sh.getText().toString();
 						et_search_sh.setText("");
 						refreshFromServer(Constants.SEARCH_KEYWORD);
 						
 						System.out.println("searchkeyword-------》 "+searchKeyword);
-						System.out.println("universityCode----》 "+universityCode);
+						System.out.println("university----》 "+university);
 					}
 					
 					return true;
@@ -166,7 +165,7 @@ OnRefreshListener,OnLoadListener{
 			else {
 				drawerLayout.openDrawer(Gravity.LEFT);
 			}
-			if(filterSchool.equals(unviersity))
+			if(filterSchool.equals(university))
 			{
 				//啥也不干
 			}
@@ -192,8 +191,7 @@ OnRefreshListener,OnLoadListener{
 				
 				if (booksAttrsList.size() == 0) {
 					requestTime = 1;
-					universityCode = Constants.schoolNameMap.get(filterSchool);
-					showLoadingDialog();
+					university = filterSchool;
 					refreshFromServer(ListViewCompat.REFRESH);
 				}
 			}
@@ -214,7 +212,7 @@ OnRefreshListener,OnLoadListener{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			dismissLoadingDialog();
+			dismissLoadingDialog();	
 			lv_books_list.onRefreshComplete();
 			lv_books_list.onLoadComplete();
 			
@@ -232,10 +230,11 @@ OnRefreshListener,OnLoadListener{
 					booksAttrsList.addAll(newList);
 					//刷新适配器
 					adapter.notifyDataSetChanged();
-					requestTime = 1;
+					requestTime = 1;					
 				}else {
 					Toast.makeText(SearchBooksDetailActivity.this, "无数据返回！", Toast.LENGTH_SHORT).show();
-				}				
+				}	
+				
 				break;
 			case ListViewCompat.REFRESH:
 				newList.clear();
@@ -248,9 +247,9 @@ OnRefreshListener,OnLoadListener{
 					adapter.notifyDataSetChanged();
 					requestTime = 1;
 				}else {
-					Toast.makeText(SearchBooksDetailActivity.this, "无数据返回！", Toast.LENGTH_SHORT).show();
-					
-				}												
+					Toast.makeText(SearchBooksDetailActivity.this, "无数据返回！", Toast.LENGTH_SHORT).show();					
+				}
+				
 				break;
 			case ListViewCompat.LOAD:
 				newList.clear();
@@ -277,7 +276,7 @@ OnRefreshListener,OnLoadListener{
 		
 	private void refreshFromServer(final int what)
 	{
-		//showLoadingDialog();		
+		showLoadingDialog();		
 		final PostParameter[] postParameters = new PostParameter[3];
 		new Thread(new Runnable() {		
 			
@@ -287,12 +286,12 @@ OnRefreshListener,OnLoadListener{
 				//第一次请求
 				if (requestTime == 1) {
 					postParameters[0] = new PostParameter("keyword", searchKeyword);
-					postParameters[1] = new PostParameter("university", Integer.toString(universityCode));
+					postParameters[1] = new PostParameter("university", university);
 					postParameters[2] = new PostParameter("page", Integer.toString(requestTime));
 				}
 				else{
 					postParameters[0] = new PostParameter("keyword", searchKeyword);
-					postParameters[1] = new PostParameter("university", Integer.toString(universityCode));
+					postParameters[1] = new PostParameter("university", university);
 					postParameters[2] = new PostParameter("page", Integer.toString(requestTime));
 				}
 				jsonString = HttpUtil.httpRequest(HttpUtil.USER_SEARCHBOOKS, postParameters, HttpUtil.POST);
@@ -334,8 +333,7 @@ OnRefreshListener,OnLoadListener{
 			}else if (et_search_sh.getVisibility() == View.VISIBLE) {
 				et_search_sh.setText("");
 			}
-			
-			Toast.makeText(SearchBooksDetailActivity.this, "搜索测试", Toast.LENGTH_SHORT).show();
+
 			break;
 			
 		default:

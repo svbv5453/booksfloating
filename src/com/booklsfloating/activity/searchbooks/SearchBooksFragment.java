@@ -27,7 +27,7 @@ public class SearchBooksFragment extends Fragment implements OnClickListener,OnI
 	private Button btn_login,btn_search_books;
 	private EditText et_search_books;
 	private Intent intent = null;
-	private int universityCode = 0;
+	private String university = "所有学校";
 	private String[] items;
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -71,7 +71,7 @@ public class SearchBooksFragment extends Fragment implements OnClickListener,OnI
 				String keyword = et_search_books.getText().toString();
 				intent = new Intent(getActivity(),SearchBooksDetailActivity.class);
 				intent.putExtra("intent_keyword", keyword);
-				intent.putExtra("intent_universitycode", universityCode);
+				intent.putExtra("intent_university", university);
 				getActivity().startActivity(intent);
 			}
 			else {
@@ -88,8 +88,8 @@ public class SearchBooksFragment extends Fragment implements OnClickListener,OnI
 		// TODO Auto-generated method stub
 		String univ = items[position];
 		
-		universityCode = Constants.schoolNameMap.get(univ);
-		System.out.println("选择的学校："+universityCode);
+		university = univ;
+		System.out.println("选择的学校："+university);
 	}
 
 	@Override

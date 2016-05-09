@@ -137,7 +137,7 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 			et_schoolname.setError("学校名称不能为空！");
 			focusView = et_schoolname;
 			cancel = true;
-		}else if((schoolNum = convertSchoolAddress(schoolName)) == 0){
+		}else if(convertSchoolAddress(schoolName).equals("")){
 			et_schoolname.setError("请按照提示正确填写学校名称和校区");
 			focusView = et_schoolname;
 			cancel = true;
@@ -202,72 +202,88 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 		return m.matches();
 	}
 	
-	private int convertSchoolAddress(String schoolName){
-		int schoolKey = 0;
+	private String convertSchoolAddress(String schoolName){
+		String school = "";
 		if(schoolName.contains("西安电子科技大学"))
 		{
 			if (schoolName.contains("老校区")||schoolName.contains("北校区")||schoolName.contains("雁塔校区")) {
-				schoolKey = Constants.schoolNameMap.get("西安电子科技大学雁塔校区");
+				//schoolKey = Constants.schoolNameMap.get("西安电子科技大学雁塔校区");
+				school = "西安电子科技大学雁塔校区";
 			}else {
-				schoolKey = Constants.schoolNameMap.get("西安电子科技大学长安校区");
+				//schoolKey = Constants.schoolNameMap.get("西安电子科技大学长安校区");
+				school = "西安电子科技大学长安校区";
 			}
 		}
 		else if (schoolName.contains("西北工业大学")) {
 			if (schoolName.contains("老校区")||schoolName.contains("北校区")||schoolName.contains("友谊校区")) {
-				schoolKey = Constants.schoolNameMap.get("西北工业大学友谊校区");
+				//schoolKey = Constants.schoolNameMap.get("西北工业大学友谊校区");
+				school = "西北工业大学友谊校区";
 			}
 			else{
-				schoolKey = Constants.schoolNameMap.get("西北工业大学长安校区");
+				//schoolKey = Constants.schoolNameMap.get("西北工业大学长安校区");
+				school = "西北工业大学长安校区";
 			}
 		}
 		else if (schoolName.contains("西安交通大学")) {
 			if (schoolName.contains("老校区")||schoolName.contains("兴庆校区")) {
-				schoolKey = Constants.schoolNameMap.get("西安交通大学兴庆校区");
+				//schoolKey = Constants.schoolNameMap.get("西安交通大学兴庆校区");
+				school = "西安交通大学兴庆校区";
 			}
 			else if(schoolName.contains("雁塔校区")){
-				schoolKey = Constants.schoolNameMap.get("西安交通大学雁塔校区");
+				//schoolKey = Constants.schoolNameMap.get("西安交通大学雁塔校区");
+				school = "西安交通大学雁塔校区";
 			}
 			else{
-				schoolKey = Constants.schoolNameMap.get("西安交通大学曲江校区");
+				//schoolKey = Constants.schoolNameMap.get("西安交通大学曲江校区");
 			}
 		}
 		else if (schoolName.contains("陕西师范大学")) {
 			if (schoolName.contains("老校区")||schoolName.contains("北校区")||schoolName.contains("雁塔校区")) {
-				schoolKey = Constants.schoolNameMap.get("陕西师范大学雁塔校区");
+				//schoolKey = Constants.schoolNameMap.get("陕西师范大学雁塔校区");
+				school = "陕西师范大学雁塔校区";
 			}
 			else{
-				schoolKey = Constants.schoolNameMap.get("陕西师范大学长安校区");
+				//schoolKey = Constants.schoolNameMap.get("陕西师范大学长安校区");
+				school = "陕西师范大学长安校区";
 			}
 		}
 		else if (schoolName.contains("长安大学")) {
 			if (schoolName.contains("雁塔校区")) {
-				schoolKey = Constants.schoolNameMap.get("长安大学雁塔校区");
+				//schoolKey = Constants.schoolNameMap.get("长安大学雁塔校区");
+				school = "长安大学雁塔校区";
 			}
 			else{
-				schoolKey = Constants.schoolNameMap.get("长安大学渭水校区");
+				//schoolKey = Constants.schoolNameMap.get("长安大学渭水校区");
+				school = "长安大学渭水校区";
 			}
 		}
 		else if (schoolName.contains("西安工业大学")) {
 			if (schoolName.contains("金花校区")) {
-				schoolKey = Constants.schoolNameMap.get("西安工业大学金花校区");
+				//schoolKey = Constants.schoolNameMap.get("西安工业大学金花校区");
+				school = "西安工业大学金花校区";
+				
 			}
 			else if(schoolName.contains("未央校区")){
-				schoolKey = Constants.schoolNameMap.get("西安工业大学未央校区");
+				//schoolKey = Constants.schoolNameMap.get("西安工业大学未央校区");
+				school = "西安工业大学未央校区";
 			}
 			else{
-				schoolKey = Constants.schoolNameMap.get("西安工业大学洪庆校区");
+				//schoolKey = Constants.schoolNameMap.get("西安工业大学洪庆校区");
+				school = "西安工业大学洪庆校区";
 			}
 		}
 		else if(schoolName.contains("西安工程大学"))
 		{
-			schoolKey = Constants.schoolNameMap.get("西安工程大学金花校区");
+			//schoolKey = Constants.schoolNameMap.get("西安工程大学金花校区");
+			school = "西安工程大学金花校区";
 		}
 		else if(schoolName.contains("西安科技大学"))
 		{
-			schoolKey = Constants.schoolNameMap.get("西安科技大学雁塔校区");
+			school = "西安科技大学雁塔校区";
+			//schoolKey = Constants.schoolNameMap.get("西安科技大学雁塔校区");
 		}
 		
-		return schoolKey;
+		return school;
 	}
 	@Override
 	public void onClick(View v) {
@@ -308,8 +324,8 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 				result = parseReturnJson(jsonStr);
 				if (result == 1) {
 					SharePreferenceUtil sp = new SharePreferenceUtil(RegisterActivity.this, Constants.SAVE_USER);
-					sp.setAccount(et_username.getText().toString());
-					sp.setPassword(et_password.getText().toString());
+					sp.setAccount(et_username.getText().toString().trim());
+					sp.setPassword(et_password.getText().toString().trim());
 					
 					Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
 					System.out.println("用户注册成功");
@@ -353,17 +369,13 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				if(schoolNum == 0)
-				{
-					schoolNum = convertSchoolAddress(et_schoolname.getText().toString());
-				}
-				
-				parameters[0] = new PostParameter("student_number", et_stuid.getText().toString());
-				parameters[1] = new PostParameter("university", Integer.toString(schoolNum));
-				parameters[2] = new PostParameter("phone", et_phonenum.getText().toString());
-				parameters[3] = new PostParameter("email", actv_email.getText().toString());
-				parameters[4] = new PostParameter("username", et_username.getText().toString());
-				parameters[5] = new PostParameter("password", et_password.getText().toString());
+
+				parameters[0] = new PostParameter("student_number", et_stuid.getText().toString().trim());
+				parameters[1] = new PostParameter("university", convertSchoolAddress(et_schoolname.getText().toString().trim()));
+				parameters[2] = new PostParameter("phone", et_phonenum.getText().toString().trim());
+				parameters[3] = new PostParameter("email", actv_email.getText().toString().trim());
+				parameters[4] = new PostParameter("username", et_username.getText().toString().trim());
+				parameters[5] = new PostParameter("password", et_password.getText().toString().trim());
 				
 				jsonStr = HttpUtil.httpRequest(HttpUtil.USER_REGISTER, parameters, HttpUtil.POST);
 				if(jsonStr != null)
@@ -418,6 +430,7 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 	private void dismissLoadingDialog() {
 		if (dialog != null) {
 			dialog.dismiss();
+			dialog = null;
 		}
 	}
 }

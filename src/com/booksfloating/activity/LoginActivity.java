@@ -14,6 +14,7 @@ import android.opengl.ETC1Util;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -58,11 +59,11 @@ public class LoginActivity extends Activity implements OnClickListener{
 		sp = this.getSharedPreferences(Constants.SAVE_USER, Context.MODE_PRIVATE);
 		initView();
 		cb_remember_psd.setChecked(true);
-		if(sp.getBoolean("ISCHECKED", false)){
-			cb_remember_psd.setChecked(true);
-		}else{
-			et_username.setText(sp.getString("username", null));
+		if(sp.getBoolean("ISCHECKED", false)){			
+			et_username.setText(sp.getString("account", null));
 			et_password.setText(sp.getString("password", null));
+		}else{
+			cb_remember_psd.setChecked(false);
 		}
 	}
 	
@@ -131,12 +132,6 @@ public class LoginActivity extends Activity implements OnClickListener{
 			dismissLoadingDialog();
 			switch (msg.what) {
 			case Constants.OK:
-				//if(cb_remember_psd.isChecked()){
-					//Editor editor = sp.edit();
-					//editor.putString("username", et_username.getText().toString());
-					//editor.putString("password", et_password.getText().toString());
-					//editor.commit();
-				//}
 				parseReturnJson(jsonStr);
 				break;
 			case Constants.SERVER_ERROR:
@@ -147,6 +142,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 				break;
 			case Constants.NETWORK_ERROR:
 				Toast.makeText(LoginActivity.this, "网络未连接", Toast.LENGTH_SHORT).show();
+				break;
 			default:
 				break;
 			}			
@@ -156,7 +152,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 	private void loginSubmit(){
 		final String account = et_username.getText().toString().trim();
 		final String password = et_password.getText().toString().trim();
-		final PostParameter[] parameters = new PostParameter[3];
+		
 		showLoadingDialog();
 		new Thread(new Runnable() {		
 			@Override
@@ -167,6 +163,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 					handler.sendEmptyMessage(Constants.NULL_ERROR);
 				}
 				else{
+					final PostParameter[] parameters = new PostParameter[3];
 					parameters[0] = new PostParameter("account", account);
 					parameters[1] = new PostParameter("password", password);
 					parameters[2] = new PostParameter("login_method", "1");				
@@ -195,11 +192,15 @@ public class LoginActivity extends Activity implements OnClickListener{
 			{
 				SharePreferenceUtil sp = new SharePreferenceUtil(LoginActivity.this, Constants.SAVE_USER);
 				sp.setToken(token);
+				sp.setAccount(et_username.getText().toString().trim());
+				sp.setPassword(et_password.getText().toString().trim());
 				
 				Constants.isLogin = true;
 				
 				Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
 				System.out.println("用户登录成功");
+				SystemClock.sleep(Toast.LENGTH_SHORT);
+				finish();
 			}
 			else if (status.equals("-1")) {
 				DialogFactory.AlertDialog(LoginActivity.this, "提示", "该账户不存在！");

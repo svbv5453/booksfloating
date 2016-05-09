@@ -29,14 +29,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class HelpBorrowActivity extends Activity implements OnClickListener{
-	private Button btn_suretoborrow;
+	private Button btn_suretoborrow, btn_back;
 	private TextView tv_expect_borrow_time, tv_expect_return_time;
 	private DatePicker dp_expect_borrow_time, dp_expect_return_time;
+	//上一个activity传过来的信息
+	private BooksAttr booksAttr = new BooksAttr();
+	//从booksAttr中解析得到borrowInfo
+	private BorrowInfo borrowInfo = new BorrowInfo();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_helptoborrow_info);
+		booksAttr = (BooksAttr)getIntent().getSerializableExtra("intent_booksAttr");
+		borrowInfo = booksAttr.getBorrowInfo();
+		
+		btn_back = (Button)findViewById(R.id.btn_back);
+		btn_back.setOnClickListener(this);
 		
 		tv_expect_borrow_time = (TextView)findViewById(R.id.tv_expect_borrow_time);
 		tv_expect_return_time = (TextView)findViewById(R.id.tv_expect_return_time);
@@ -70,7 +80,6 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 		Calendar c =Calendar.getInstance();   
         year1 = c.get(Calendar.YEAR);   
         month1 = c.get(Calendar.MONTH); 
-        month1++;
         day1 = c.get(Calendar.DAY_OF_MONTH);   
         tv_expect_borrow_time.setText(year1+"-"+month1+"-"+day1);       
 
@@ -96,7 +105,6 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 		
 		 year2 = c.get(Calendar.YEAR);   
 	     month2 = c.get(Calendar.MONTH);
-	     month2++;
 	     day2 = c.get(Calendar.DAY_OF_MONTH); 
 	     tv_expect_return_time.setText(year2+"-"+month2+"-"+ day2);
 	     
@@ -121,11 +129,7 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 			}
 		});
 	}
-	
-	//上一个activity传过来的信息
-	private BooksAttr booksAttr = new BooksAttr();
-	//从booksAttr中解析得到borrowInfo
-	private BorrowInfo borrowInfo = new BorrowInfo();
+			
 	private void submitData()
 	{		
 		new Thread(new Runnable() {
@@ -154,7 +158,7 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 							handler.sendEmptyMessage(0);
 						}
 						else {
-							handler.sendEmptyMessage(-1);
+							handler.sendEmptyMessage(-2);
 						}
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -179,6 +183,9 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 			case -1:
 				Toast.makeText(HelpBorrowActivity.this, "服务器错误，请稍后重试！", Toast.LENGTH_SHORT).show();
 				break;
+			case -2:
+				Toast.makeText(HelpBorrowActivity.this, "帮忙失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+				break;
 			default:
 				break;
 			}
@@ -199,7 +206,11 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 				submitData();
 			}			
 			break;
-
+		
+		case R.id.btn_back:
+			finish();
+			break;
+			
 		default:
 			break;
 		}
