@@ -50,7 +50,9 @@ public class DrawerLayoutAdapter extends BaseAdapter{
 			tv_drawer_item = (TextView)convertView.findViewById(R.id.tv_drawer_item);
 		}
 	
-		tv_drawer_item.setText(str[position]);
+		if (tv_drawer_item != null) {
+			tv_drawer_item.setText(str[position]);
+		}		
 		return convertView;
 	}
 

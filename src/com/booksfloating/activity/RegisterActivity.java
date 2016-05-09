@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.SharePreferenceUtil;
 import com.xd.booksfloating.R;
 import com.xd.connect.PostParameter;
 import com.xd.dialog.DialogFactory;
@@ -306,6 +307,10 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 				//解析json数据，判断是否注册成功
 				result = parseReturnJson(jsonStr);
 				if (result == 1) {
+					SharePreferenceUtil sp = new SharePreferenceUtil(RegisterActivity.this, Constants.SAVE_USER);
+					sp.setAccount(et_username.getText().toString());
+					sp.setPassword(et_password.getText().toString());
+					
 					Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
 					System.out.println("用户注册成功");
 				}else if(result == -1){

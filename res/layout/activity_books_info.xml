@@ -13,12 +13,12 @@
         android:background="@color/theme_blue" >
 
         <Button
-            android:id="@+id/back"
+            android:id="@+id/btn_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="@dimen/nav_marginLeft_10"
             android:layout_marginTop="@dimen/nav_marginTop_10"
-            android:background="@drawable/back" />
+            android:background="@drawable/back_sh" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
             android:textColor="@color/gray"/>
 
         <TextView
-            android:id="@+id/tv_books_publish_time"
+            android:id="@+id/tv_books_publish_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_books_publisher"
@@ -226,11 +226,12 @@
     
      <Button
        android:id="@+id/btn_gotohelp"
-       android:layout_width="300dp"
-       android:layout_height="32dp"
-       android:layout_marginLeft="10dp"
-       android:layout_marginTop="40dp"
-       android:background="@drawable/button_blue"
+       android:layout_width="match_parent"
+       android:layout_height="40dp"
+       android:layout_marginLeft="5dp"
+       android:layout_marginRight="5dp"
+       android:layout_marginTop="30dp"
+       android:background="@color/theme_blue"
        android:text="去帮忙"
        android:textColor="@color/white"
        android:textSize="16sp" />

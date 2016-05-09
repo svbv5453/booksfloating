@@ -10,24 +10,33 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.booksfloating.adapter.DrawerLayoutAdapter;
 import com.booksfloating.adapter.SearchBooksDetailAdapter;
 import com.booksfloating.attr.BooksAttr;
+import com.booksfloating.globalvar.Constants;
 import com.booksfloating.parse.ParseBooksAttrJson;
 import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.ListViewCompat;
@@ -50,6 +59,7 @@ OnRefreshListener,OnLoadListener{
 	private String filterSchool;
 	private String searchKeyword;
 	private int universityCode;
+	private String unviersity;
 	//向服务器发送请求的次数，刚启动为第一次
 	private int requestTime = 1;
 	
@@ -62,38 +72,42 @@ OnRefreshListener,OnLoadListener{
 		Intent intent = getIntent();
 		searchKeyword = intent.getStringExtra("intent_keyword");
 		universityCode = intent.getIntExtra("intent_universitycode", 0);
+		unviersity = Constants.schoolIDtoNameMap.get(universityCode);
 		System.out.println("intent_keyword:"+searchKeyword);
 		System.out.println("intent_universitycode:"+universityCode);
 		
 		drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 		drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		schoolArray = getResources().getStringArray(R.array.spinner_item);
-		/**
-		 * 孙恒添加搜索按钮
-		 * start
-		 */
+
 		btn_search = (Button)findViewById(R.id.btn_search);
-		btn_search_1 = (Button)findViewById(R.id.btn_search_1);
 		btn_search.setOnClickListener(this);
-		btn_search_1.setOnClickListener(this);
 		et_search_sh = (EditText)findViewById(R.id.et_search_sh);
-		/*searchView = (SearchView)findViewById(R.id.search_view);
-		searchView.setOnQueryTextListener(new OnQueryTextListener() {
+		et_search_sh.setImeOptions(EditorInfo.IME_ACTION_SEARCH);  
+		et_search_sh.setInputType(EditorInfo.TYPE_CLASS_TEXT);  
+		et_search_sh.setSingleLine(true); 
+		et_search_sh.setOnEditorActionListener(new OnEditorActionListener() {
 			
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				System.out.println(query);
-				return true;
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				// TODO Auto-generated method stub
+				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+					if (!searchKeyword.equals(et_search_sh.getText().toString().trim())) {
+						showLoadingDialog();
+						booksAttrsList.clear();
+						searchKeyword = et_search_sh.getText().toString();
+						et_search_sh.setText("");
+						refreshFromServer(Constants.SEARCH_KEYWORD);
+						
+						System.out.println("searchkeyword-------》 "+searchKeyword);
+						System.out.println("universityCode----》 "+universityCode);
+					}
+					
+					return true;
+				}
+				return false;
 			}
-			
-			@Override
-			public boolean onQueryTextChange(String newText) {
-				System.out.println(newText);
-				return true;
-			}
-		});*/
-		
-		//end
+		});
+
 		lv_left_drawer = (ListView)findViewById(R.id.lv_left_drawer);
 		//lv_left_drawer.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, schoolArray));
 		lv_left_drawer.setAdapter(new DrawerLayoutAdapter(this, schoolArray));
@@ -143,18 +157,21 @@ OnRefreshListener,OnLoadListener{
 				long id) {
 			// TODO Auto-generated method stub
 			//根据用户选择的item，设置筛选条件
-			filterSchool  = schoolArray[position-1];
+			filterSchool  = schoolArray[position];
+			
+			System.out.println("position "+position);
+			System.out.println("filterSchool"+filterSchool);
 			if(drawerLayout.isDrawerOpen(Gravity.LEFT))
 				drawerLayout.closeDrawer(Gravity.LEFT);
 			else {
 				drawerLayout.openDrawer(Gravity.LEFT);
 			}
-			if(filterSchool.equals("所有学校"))
+			if(filterSchool.equals(unviersity))
 			{
 				//啥也不干
 			}
 			else{
-				Log.i("filterSchool :", filterSchool);
+				System.out.println("filterSchool"+filterSchool);
 				//根据筛选条件设置主页面的list
 				newList.clear();
 				BooksAttr booksAttr = new BooksAttr();
@@ -172,6 +189,13 @@ OnRefreshListener,OnLoadListener{
 				}
 				booksAttrsList.clear();
 				booksAttrsList.addAll(newList);
+				
+				if (booksAttrsList.size() == 0) {
+					requestTime = 1;
+					universityCode = Constants.schoolNameMap.get(filterSchool);
+					showLoadingDialog();
+					refreshFromServer(ListViewCompat.REFRESH);
+				}
 			}
 		}
 		
@@ -191,38 +215,57 @@ OnRefreshListener,OnLoadListener{
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			dismissLoadingDialog();
-			switch (msg.what) {
-			//解析成功返回0，否则返回-1
-			case ListViewCompat.REFRESH:
+			lv_books_list.onRefreshComplete();
+			lv_books_list.onLoadComplete();
+			
+			switch (msg.what) {				
+			case Constants.SEARCH_KEYWORD:
+				et_search_sh.setVisibility(View.GONE);
+				btn_filter.setVisibility(View.VISIBLE);
+				btn_filter_too.setVisibility(View.VISIBLE);
+				
 				newList.clear();
 				//解析返回的数据
 				newList = pJson.parseBookList(jsonString);
-				if (newList != null || newList.size() != 0) {
+				if (newList != null && newList.size() != 0) {
 					booksAttrsList.clear();			
 					booksAttrsList.addAll(newList);
 					//刷新适配器
 					adapter.notifyDataSetChanged();
-					lv_books_list.onRefreshComplete();
 					requestTime = 1;
 				}else {
 					Toast.makeText(SearchBooksDetailActivity.this, "无数据返回！", Toast.LENGTH_SHORT).show();
+				}				
+				break;
+			case ListViewCompat.REFRESH:
+				newList.clear();
+				//解析返回的数据
+				newList = pJson.parseBookList(jsonString);
+				if (newList != null && newList.size() != 0) {
+					booksAttrsList.clear();			
+					booksAttrsList.addAll(newList);
+					//刷新适配器
+					adapter.notifyDataSetChanged();
+					requestTime = 1;
+				}else {
+					Toast.makeText(SearchBooksDetailActivity.this, "无数据返回！", Toast.LENGTH_SHORT).show();
+					
 				}												
 				break;
 			case ListViewCompat.LOAD:
 				newList.clear();
 				//解析返回的数据
 				newList = pJson.parseBookList(jsonString);
-				if (newList != null || newList.size() != 0) {		
+				if (newList != null && newList.size() != 0) {		
 					booksAttrsList.addAll(newList);
 					//刷新适配器
 					adapter.notifyDataSetChanged();
-					lv_books_list.onLoadComplete();
 					requestTime++;
 				}else {
 					Toast.makeText(SearchBooksDetailActivity.this, "已经到底啦！", Toast.LENGTH_SHORT).show();
 				}
 				break;
-			case -1:
+			case Constants.SERVER_ERROR:
 				Toast.makeText(SearchBooksDetailActivity.this, "服务器错误，请重试！", Toast.LENGTH_SHORT).show();				
 				break;
 			default:
@@ -234,7 +277,7 @@ OnRefreshListener,OnLoadListener{
 		
 	private void refreshFromServer(final int what)
 	{
-		showLoadingDialog();		
+		//showLoadingDialog();		
 		final PostParameter[] postParameters = new PostParameter[3];
 		new Thread(new Runnable() {		
 			
@@ -268,6 +311,7 @@ OnRefreshListener,OnLoadListener{
 	
 
 	private int count = 0;
+	private boolean flag = false;//判断搜索的关键字是否改变
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -281,21 +325,19 @@ OnRefreshListener,OnLoadListener{
 			}
 			
 			break;
-			/**
-			 * sunheng_add
-			 */
-		case R.id.btn_search:
-			et_search_sh.setVisibility(View.VISIBLE);
-			btn_filter.setVisibility(View.INVISIBLE);
-			btn_filter_too.setVisibility(View.INVISIBLE);
-			btn_search.setVisibility(View.INVISIBLE);
-			btn_search_1.setVisibility(View.VISIBLE);
-		case R.id.btn_search_1:
-			searchKeyword = et_search_sh.getText().toString();
-			universityCode = 0;
-			refreshFromServer(0);
-			Toast.makeText(SearchBooksDetailActivity.this, "搜索测试", Toast.LENGTH_SHORT).show();
 
+		case R.id.btn_search:						
+			if (et_search_sh.getVisibility() == View.GONE) {
+				et_search_sh.setVisibility(View.VISIBLE);
+				btn_filter.setVisibility(View.GONE);
+				btn_filter_too.setVisibility(View.GONE);
+			}else if (et_search_sh.getVisibility() == View.VISIBLE) {
+				et_search_sh.setText("");
+			}
+			
+			Toast.makeText(SearchBooksDetailActivity.this, "搜索测试", Toast.LENGTH_SHORT).show();
+			break;
+			
 		default:
 			break;
 		}
@@ -327,6 +369,7 @@ OnRefreshListener,OnLoadListener{
 	private void dismissLoadingDialog() {
 		if (dialog != null) {
 			dialog.dismiss();
+			dialog = null;
 		}
 	}
 

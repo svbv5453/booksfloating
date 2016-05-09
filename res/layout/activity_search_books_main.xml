@@ -35,7 +35,7 @@
          android:background="@color/transparent"
          android:text="@string/login_now"
          android:textColor="@color/white"
-         android:textSize="@dimen/nav_textsize_18" />
+         android:textSize="@dimen/nav_textsize_20" />
      
 	 </RelativeLayout>
 	 
@@ -63,11 +63,12 @@
            android:layout_height="match_parent"
            android:layout_marginLeft="@dimen/input_box_marginLeft_5"
            android:layout_weight="0.1"
+           android:background="@color/transparent"
            android:ems="10" />
      
        <Button
            android:id="@+id/btn_search_books"
-           android:layout_width="40dp"
+           android:layout_width="60dp"
            android:layout_height="match_parent"
            android:background="@color/theme_blue"
            android:text="@string/search_books"

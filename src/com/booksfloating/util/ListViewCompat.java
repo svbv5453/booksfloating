@@ -35,7 +35,11 @@ public class ListViewCompat extends ListView  implements OnScrollListener{
  	private static final int RELEASE = 2;
  	private static final int REFRESHING = 3;
  	private int state;
-
+ 	
+ 	//定义footer的两种状态
+ 	public static final int FOOTER_NONE = 0;
+ 	public static final int FOOTER_PULL = 1;
+ 	
  	private LayoutInflater inflater;
  	private View header;
  	private View footer;
@@ -95,7 +99,7 @@ public class ListViewCompat extends ListView  implements OnScrollListener{
         }
     }*/
 
-    private int posX1, posY1, posX2, posY2;
+    /*private int posX1, posY1, posX2, posY2;
     public boolean onTouch(MotionEvent event) {
         switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN: {
@@ -136,8 +140,50 @@ public class ListViewCompat extends ListView  implements OnScrollListener{
 
        /*if (mFocusedItemView != null) {
             mFocusedItemView.onRequireTouchEvent(event);
-        }*/
+        }
         return true;
+    }*/
+    
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN: {
+            int x = (int) event.getX();
+            int y = (int) event.getY();
+            int position = pointToPosition(x, y);
+            Log.e(TAG, "postion=" + position);
+            //if (position != INVALID_POSITION) {
+                //MessageItem data = (MessageItem) getItemAtPosition(position);
+                //mFocusedItemView = data.slideView;
+                //Log.e(TAG, "FocusedItemView=" + mFocusedItemView);
+           // }
+            if (firstVisibleItem == 0) {
+ 				isRecorded = true;
+ 				startY = (int) event.getY();
+ 			}
+        }
+        break;
+        case MotionEvent.ACTION_CANCEL:
+        	break;
+ 		case MotionEvent.ACTION_UP:
+ 			if (state == PULL) {
+ 				state = NONE;
+ 				refreshHeaderViewByState();
+ 			} else if (state == RELEASE) {
+ 				state = REFRESHING;
+ 				refreshHeaderViewByState();
+ 				onRefresh();
+ 			}
+ 			isRecorded = false;
+ 			break;
+ 		case MotionEvent.ACTION_MOVE:
+ 			whenMove(event);
+ 			break;
+        default:
+            break;
+        }
+
+        return super.onTouchEvent(event);
     }
     
  // 下拉刷新监听
@@ -238,6 +284,7 @@ public class ListViewCompat extends ListView  implements OnScrollListener{
  	// 用于加载更多结束后的回调
  	public void onLoadComplete() {
  		isLoading = false;
+ 		loadFooterViewByState(FOOTER_NONE);
  	}
 
  	@Override
@@ -350,13 +397,26 @@ public class ListViewCompat extends ListView  implements OnScrollListener{
 
  	}
 
+ 	private void loadFooterViewByState(int footerState){
+ 		switch (footerState) {
+		case FOOTER_NONE:
+			loading.setVisibility(View.GONE);
+			more.setVisibility(View.GONE);
+			break;
+		case FOOTER_PULL:
+			loading.setVisibility(View.VISIBLE);
+			more.setVisibility(View.VISIBLE);
+		default:
+			break;
+		}
+ 	}
  	// 根据当前状态，调整header
  	private void refreshHeaderViewByState() {
  		switch (state) {
  		case NONE:
  			topPadding(-headerContentHeight);
  			tip.setText(R.string.pull_to_refresh);
- 			refreshing.setVisibility(View.GONE);
+ 			refreshing.setVisibility(View.INVISIBLE);
  			arrow.clearAnimation();
  			arrow.setImageResource(R.drawable.default_ptr_rotate);
  			break;

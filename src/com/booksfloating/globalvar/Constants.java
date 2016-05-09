@@ -8,8 +8,11 @@ public class Constants {
 
 	//设备类型
 	public static final String DEVICE_TYPE = "Android";
+	public static boolean isLogin = false;
+	public static final int OK = 0,SERVER_ERROR = -1, NETWORK_ERROR = -2, NULL_ERROR = -3,USER_ERROR = -4;
+	public static final int SEARCH_KEYWORD = 5;
 	
-	public static final String SERVER_IP = "http://10.170.21.149:8080/booksfloating";// 服务器ip（这里是随便写的一个地址）
+	public static final String SERVER_IP = "http://10.170.56.249:8080/booksfloating";// 服务器ip（这里是随便写的一个地址）
 	public static final int SERVER_PORT = 8080;// 服务器端口
 
 	public static final int REGISTER_FAIL = 0;//注册失败

@@ -26,6 +26,7 @@
          android:background="@color/transparent"
          android:text="@string/filter"
          android:textColor="@color/white"
+         android:textSize="20sp"
          android:layout_marginTop="3dp"
          android:layout_toRightOf="@+id/btn_filter"
          android:layout_marginLeft="@dimen/nav_marginLeft_10"/>
@@ -47,13 +48,11 @@
       <EditText 
          android:id="@+id/et_search_sh"
          android:layout_width="300dp"
-         android:layout_height="wrap_content"
-         
+         android:layout_height="wrap_content"        
          android:textColor="@color/white"
-         android:textSize="@dimen/nav_textsize_20"
-         
-         
+         android:textSize="@dimen/nav_textsize_20"                 
          android:layout_marginLeft="@dimen/nav_marginLeft_13"
+         android:imeOptions="actionSearch"
          android:visibility="gone"/>
 
      <Button
@@ -64,17 +63,7 @@
          android:layout_centerVertical="true"
          android:background="@drawable/search" 
          android:layout_marginRight="5dp"/>
-     <Button
-         android:id="@+id/btn_search_1"
-         android:layout_width="30dp"
-         android:layout_height="25dp"
-        
-         android:layout_alignParentRight="true"
-         android:layout_centerVertical="true"
-         android:background="@drawable/search" 
-         android:layout_marginRight="5dp"
-         android:visibility="gone"/>
-
+     
 	 </RelativeLayout>
 	 
  	<android.support.v4.widget.DrawerLayout

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.booksfloating.adapter.FragmentAdapter;
 import com.booksfloating.adapter.MainPagerAdapter;
+import com.booksfloating.globalvar.Constants;
+import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.widget.MyRadioButton;
 import com.xd.booksfloating.R;
 
@@ -37,6 +39,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initViewPager();
+		SharePreferenceUtil sp = new SharePreferenceUtil(this, Constants.SAVE_USER);
+		if(sp.getToken() != null && sp.getToken().length() > 0)
+		{
+			Constants.isLogin = true;
+			System.out.println("用户已登录！token 为"+sp.getToken());
+		}
 	}
 	
 	private void initViewPager()
