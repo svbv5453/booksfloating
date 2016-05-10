@@ -19,14 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.booksfloating.adapter.MyInfoOrderAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.domain.MyInfoBookDetailBean;
-import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
 import com.xd.booksfloating.R;

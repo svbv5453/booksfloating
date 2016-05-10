@@ -3,16 +3,11 @@ package com.booksfloating.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.booksfloating.adapter.SearchBooksDetailAdapter.ViewHolder;
 import com.booksfloating.attr.BooksAttr;
-import com.booksfloating.util.ImageLoader;
 import com.booksfloating.util.ImageManager;
-import com.booksfloating.util.LoaderImageUseVelloy;
-import com.booksfloating.util.ImageLoader.RequestCallback;
 import com.xd.booksfloating.R;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

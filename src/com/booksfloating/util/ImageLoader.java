@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
@@ -18,10 +17,11 @@ public class ImageLoader {
 		imageMap = new HashMap<String, SoftReference<Drawable>>();
 	}
 
-	@SuppressLint("HandlerLeak")
+	
 	public void loadDrawable(final String imageUrl,
 			final RequestCallback imageCallback) {
 		final Handler handler = new Handler() {
+			@Override
 			public void handleMessage(Message message) {
 				imageCallback.imageLoaded((Drawable) message.obj, imageUrl);
 			}

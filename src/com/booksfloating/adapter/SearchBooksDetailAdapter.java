@@ -4,18 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.booksfloating.attr.BooksAttr;
-import com.booksfloating.globalvar.Constants;
-import com.booksfloating.util.ImageLoader;
-import com.booksfloating.util.ImageLoader.RequestCallback;
 import com.booksfloating.util.ImageManager;
-import com.booksfloating.util.LoadBookImage;
-import com.booksfloating.util.LoaderImageUseVelloy;
 import com.xd.booksfloating.R;
 
-import android.R.interpolator;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

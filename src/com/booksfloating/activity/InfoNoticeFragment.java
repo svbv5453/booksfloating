@@ -3,7 +3,6 @@ package com.booksfloating.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.booklsfloating.activity.searchbooks.SearchBooksDetailActivity;
 import com.booksfloating.activity.infonotice.BooksInfoActivity;
 import com.booksfloating.adapter.DrawerLayoutAdapter;
 import com.booksfloating.adapter.InfoNoticeAdapter;
@@ -27,7 +26,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;

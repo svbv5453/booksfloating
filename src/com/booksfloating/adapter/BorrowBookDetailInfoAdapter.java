@@ -7,10 +7,8 @@ import com.booksfloating.attr.BooksAttr.BorrowInfo;
 import com.xd.booksfloating.R;
 
 import android.content.Context;
-import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -75,6 +73,7 @@ public class BorrowBookDetailInfoAdapter extends BaseAdapter{
 		
 		viewHolder.cb_choose.setOnClickListener(new View.OnClickListener() {
 			
+			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (isSelected.get(position)) {

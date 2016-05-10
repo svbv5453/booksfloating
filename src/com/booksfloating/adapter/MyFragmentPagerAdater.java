@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.booklsfloating.activity.searchbooks.SearchBooksFragment;
 import com.booksfloating.activity.BooksRecommendFragment;
 import com.booksfloating.activity.InfoNoticeFragment;
-import com.booksfloating.activity.MainActivity;
 import com.booksfloating.activity.MyInfoFragment;
 
 public class MyFragmentPagerAdater extends FragmentPagerAdapter{

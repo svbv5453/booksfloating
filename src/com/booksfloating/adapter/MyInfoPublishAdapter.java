@@ -3,7 +3,6 @@ package com.booksfloating.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.booksfloating.domain.MyInfoPublishBookBean;
-import com.booksfloating.util.ImageLoader;
-import com.booksfloating.util.ImageManager;
 import com.booksfloating.util.LoaderImageUseVelloy;
-import com.booksfloating.util.ImageLoader.RequestCallback;
 import com.xd.booksfloating.R;
 
 public class MyInfoPublishAdapter extends BaseAdapter {

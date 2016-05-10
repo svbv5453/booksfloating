@@ -10,13 +10,21 @@
     
     <EditText 
         android:id="@+id/et_myinfo_set_feedback"
-        android:layout_width="300dp"
+        
+        
+        
+        android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:inputType="textMultiLine"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_gravity="center"
-        android:hint="@string/feedback_problem"
+        android:layout_marginTop="@dimen/nav_marginTop_10"
         android:gravity="center_vertical|top"
-        android:singleLine="false">
+        android:hint="@string/feedback_problem"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textSize="@dimen/nav_textsize_16"
+        android:background="@drawable/textview_bg">
         <requestFocus />
     </EditText>
     	

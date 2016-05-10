@@ -27,7 +27,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.booksfloating.adapter.BookRecommendAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.util.ACache;
-import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
 

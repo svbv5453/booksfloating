@@ -1,9 +1,5 @@
 package com.xd.connect;
 
-import java.util.List;
-
-import com.booksfloating.attr.BooksAttr.BorrowInfo;
-
 /**
  * HTTP请求中的参数
  * @author liuwenyuan

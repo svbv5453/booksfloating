@@ -84,6 +84,7 @@ public class MyInfoSet extends Activity implements OnClickListener{
 		}
 	}
 	public Handler handler = new Handler(){
+		@Override
 		public void handleMessage(Message msg) {
 			switch(msg.what){
 			case SHOW_MESSAGE:

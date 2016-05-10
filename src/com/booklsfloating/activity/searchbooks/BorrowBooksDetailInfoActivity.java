@@ -5,15 +5,11 @@ import java.util.ArrayList;
 import com.booksfloating.adapter.BorrowBookDetailInfoAdapter;
 import com.booksfloating.attr.BooksAttr;
 import com.booksfloating.attr.BooksAttr.BorrowInfo;
-import com.booksfloating.util.ImageLoader;
 import com.booksfloating.util.ImageManager;
-import com.booksfloating.util.LoaderImageUseVelloy;
-import com.booksfloating.util.ImageLoader.RequestCallback;
 import com.xd.booksfloating.R;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;

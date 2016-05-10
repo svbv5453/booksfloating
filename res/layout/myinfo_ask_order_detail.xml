@@ -2,69 +2,231 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
+    android:background="@color/light_gray"
     android:orientation="vertical" >
       <!-- 导航栏 -->  
      <include layout="@layout/nav_order_detail_layout"/>
 	 <LinearLayout 
 	     android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
-	     android:layout_margin="15dp"
-	     android:orientation="vertical">
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="25dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="订单号 : "
+        android:textSize="@dimen/nav_textsize_16"/>
 	     <TextView 
         android:id="@+id/tv_myinfo_ask_orderNumber"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="订单号 : 100001111"/>
-    <TextView 
+        android:text="100001111"
+        android:textSize="@dimen/nav_textsize_16"/>
+	  </LinearLayout>
+	  <LinearLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="25dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="时间: "
+        android:textSize="@dimen/nav_textsize_16"/>
+	     <TextView 
         android:id="@+id/tv_myinfo_ask_date"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="时间: 2016年2月1日15时11分"/>
-    <TextView 
-        android:id="@+id/tv_myinfo_ask_message"
-        android:layout_width="match_parent"
+        android:textSize="@dimen/nav_textsize_16"
+        android:text="2016年2月1日15时11分"/>
+	  </LinearLayout>
+	  <LinearLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="25dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="昵称为小李飞刀的用户已接受您关于“thinking in java，（美）埃克尔，西安电子科技大学北馆”的求助"/>
-    <TextView 
+        android:text="帮助者昵称： "
+        android:textSize="@dimen/nav_textsize_16"/>
+	     <TextView 
+        android:id="@+id/tv_myinfo_ask_helper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/nav_textsize_16"
+        android:textColor="@color/sh_danblue"
+        android:text="小李飞刀"/> 
+        
+	  </LinearLayout>
+	  <LinearLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="10dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="书名： "
+        android:textSize="@dimen/nav_textsize_16"/>
+	     <TextView 
+        android:id="@+id/tv_myinfo_ask_book_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/nav_textsize_16"
+        android:textColor="@color/sh_danblue"
+        android:text="thinking in java"/> 
+        
+	  </LinearLayout>
+    <LinearLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="10dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="作者： "
+        android:textSize="@dimen/nav_textsize_16"/>
+	     <TextView 
+        android:id="@+id/tv_myinfo_ask_book_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/nav_textsize_16"
+        android:textColor="@color/sh_danblue"
+        android:text="（美）埃克尔"/> 
+        
+	  </LinearLayout>
+	  <LinearLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="10dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="馆藏： "
+        android:textSize="@dimen/nav_textsize_16"/>
+	     <TextView 
+        android:id="@+id/tv_myinfo_ask_book_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/nav_textsize_16"
+        android:textColor="@color/sh_danblue"
+        android:text="西安电子科技大学北馆"/> 
+        
+	  </LinearLayout>
+	  <LinearLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="25dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="借书日 :  "
+        android:textSize="@dimen/nav_textsize_16"/>
+	     <TextView 
         android:id="@+id/tv_myinfo_ask_borrowDate"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="借书日 : 2016年2月2日"
-        />
-    <TextView 
+        android:textSize="@dimen/nav_textsize_16"
+        android:textColor="@color/sh_danblue"
+        android:text="2016年2月2日"/> 
+        
+	  </LinearLayout>
+  
+    <LinearLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="10dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="还书日 :  "
+        android:textSize="@dimen/nav_textsize_16"/>
+	     <TextView 
         android:id="@+id/tv_myinfo_ask_returnDate"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="还书日 : 2016年4月2日"
-        />
-    
-    <TextView 
+        android:textSize="@dimen/nav_textsize_16"
+        android:textColor="@color/sh_danblue"
+        android:text="2016年4月2日"/> 
+        
+	  </LinearLayout>
+  
+    <LinearLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="25dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="他所在的学校:"
+        android:textSize="@dimen/nav_textsize_16"/>
+	     <TextView 
         android:id="@+id/tv_myinfo_ask_university"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="他所在的学校: 西安电子科技大学"/>
-    <TextView 
+        android:textSize="@dimen/nav_textsize_16"
+        android:textColor="@color/sh_danblue"
+        android:text="西安电子科技大学"/> 
+        
+	  </LinearLayout>
+	  <LinearLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="25dp"
+	     android:orientation="horizontal">
+	     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="他的手机号: "
+        android:textSize="@dimen/nav_textsize_16"/>
+	     <TextView 
         android:id="@+id/tv_myinfo_ask_phoneNumber"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="他的手机号: 18711112222"
-        />
+        android:textSize="@dimen/nav_textsize_16"
+        android:textColor="@color/sh_danblue"
+        android:text="18711112222"/> 
+        
+	  </LinearLayout>
+    
+    
+    
     <TextView 
         android:id="@+id/tv_myinfo_ask_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
+        android:layout_marginLeft="15dp"
+	     android:layout_marginRight="15dp"
+	     android:layout_marginTop="25dp"
         android:text="您可与他线下联系！"
         />
-	 </LinearLayout>
+	 
     
     
 

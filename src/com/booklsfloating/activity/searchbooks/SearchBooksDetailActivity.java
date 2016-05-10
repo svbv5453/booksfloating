@@ -1,6 +1,5 @@
 package com.booklsfloating.activity.searchbooks;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -29,7 +24,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
@@ -84,10 +78,11 @@ OnRefreshListener,OnLoadListener{
 		btn_search.setOnClickListener(this);
 		et_search_sh = (EditText)findViewById(R.id.et_search_sh);
 		et_search_sh.setImeOptions(EditorInfo.IME_ACTION_SEARCH);  
-		et_search_sh.setInputType(EditorInfo.TYPE_CLASS_TEXT);  
+		et_search_sh.setInputType(InputType.TYPE_CLASS_TEXT);  
 		et_search_sh.setSingleLine(true); 
 		et_search_sh.setOnEditorActionListener(new OnEditorActionListener() {
 			
+			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				// TODO Auto-generated method stub
 				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -350,7 +345,7 @@ OnRefreshListener,OnLoadListener{
 		//长按某一项跳转到另一个页面
 		Intent intent = new Intent();
 		intent.setClass(this, BorrowBooksDetailInfoActivity.class);
-		intent.putExtra("intent_booksAttr", (Serializable)booksAttrsList.get(position-1));
+		intent.putExtra("intent_booksAttr", booksAttrsList.get(position-1));
 		startActivity(intent);
 	}
 	

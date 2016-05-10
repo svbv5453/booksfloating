@@ -1,10 +1,5 @@
 package com.booksfloating.domain;
 
-import java.util.Date;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
 
 
 public class MyInfoPublishBookBean {

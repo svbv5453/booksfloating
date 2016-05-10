@@ -40,7 +40,7 @@
     <string name="btn_my_info_set_reset_confirm">确认</string>
     <string name="feedback_problem">请输入您对图书漂流app的建议！</string>
     <string name="about_title">图书漂流app</string>
-    <string name="about_content">该款app致力于解决高校间的图书互借问题，方便广大学子的学习交流，同时有助于提高高校图书资源的利用率</string>
+    <string name="about_content">"      该款app致力于解决高校间的图书互借问题，方便广大学子的学习交流，同时有助于提高高校图书资源的利用率."</string>
     <string name="integral_rule">积分规则</string>
     <string name="common_user">普通用户: 一个月可借一本书</string>
     <string name="sliver_user">银牌用户: 一个月可借三本书</string>

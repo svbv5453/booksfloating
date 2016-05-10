@@ -2,14 +2,11 @@ package com.booklsfloating.activity.searchbooks;
 
 import java.util.ArrayList;
 
-import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.booksfloating.activity.InfoNoticeFragment;
 import com.booksfloating.activity.LoginActivity;
 import com.booksfloating.activity.MainActivity;
-import com.booksfloating.activity.infonotice.HelpBorrowActivity;
 import com.booksfloating.attr.BooksAttr;
 import com.booksfloating.attr.BooksAttr.BorrowInfo;
 import com.booksfloating.globalvar.Constants;

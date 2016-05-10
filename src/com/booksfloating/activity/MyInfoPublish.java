@@ -15,6 +15,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,7 +26,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.booksfloating.adapter.MyInfoPublishAdapter;
 import com.booksfloating.domain.MyInfoPublishBookBean;
 import com.booksfloating.util.ACache;
-import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
 
@@ -40,6 +40,7 @@ public class MyInfoPublish extends Activity{
 	private ListView myInfoBookPublishListView = null;
 	private Button btn_myinfo_search_book = null;
 	private Button btn_back = null;
+	private EditText et_search = null;	
 	private List<MyInfoPublishBookBean> myPublishBookBeanList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class MyInfoPublish extends Activity{
 		myInfoBookPublishListView= (ListView)findViewById(R.id.lv_my_info_book_publish);
 		btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
 		btn_back = (Button)findViewById(R.id.back);
+		et_search = (EditText) findViewById(R.id.et_my_info_search_publish);
 		
 		btn_back.setOnClickListener(new View.OnClickListener() {
 			

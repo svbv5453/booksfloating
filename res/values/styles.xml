@@ -53,9 +53,43 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/nav_textsize_16</item>
+        <item name="android:textSize">@dimen/nav_textsize_20</item>
         <item name="android:layout_marginTop">@dimen/nav_marginTop_10</item>
         <item name="android:layout_marginLeft">@dimen/nav_marginLeft_10</item>
+   </style>
+   <!-- 设置按钮 -->
+   <style name="setButton">
+       <item name="android:layout_width">match_parent</item>
+       <item name="android:layout_height">wrap_content</item>
+       <item name="android:layout_marginLeft">@dimen/nav_marginLeft_10</item>
+       <item name="android:layout_marginRight">@dimen/nav_marginLeft_10</item>
+       <item name="android:layout_marginTop">@dimen/nav_marginTop_10</item>
+       <item name="android:background">@color/white</item>
+       <item name="android:gravity">center</item>
+       <item name="android:textSize">@dimen/nav_textsize_16</item>
+       
+   </style>
+   <!-- myinfo按钮 -->
+   <style name = "myinfoButton">
+       <item name="android:layout_width">match_parent</item>
+       <item name="android:layout_height">40dp</item>
+       <item name="android:textSize">@dimen/nav_textsize_16</item>
+       <item name="android:background">@color/white</item>
+       <item name="android:gravity">center</item>
+       <item name="android:layout_marginLeft">@dimen/nav_marginLeft_10</item>
+       <item name="android:layout_marginRight">@dimen/nav_marginLeft_10</item>
+       <item name="android:layout_marginTop">5dp</item>
+   </style>
+   <!-- 积分规则文本格式 -->
+   <style name="scoreText">
+       <item name="android:layout_width">match_parent</item>
+       <item name="android:layout_height">wrap_content</item>
+       <item name="android:textSize">@dimen/nav_textsize_16</item>
+       
+       
+       <item name="android:layout_marginLeft">20dp</item>
+       <item name="android:layout_marginRight">20dp</item>
+       <item name="android:layout_marginTop">20dp</item>
    </style>
     
      <style name="dialog" parent="@android:style/Theme.Dialog">

@@ -60,6 +60,7 @@ public class DiskLruCache {
 	 */
 	private static final FilenameFilter cacheFileFilter = new FilenameFilter() {
 		 
+		@Override
 		public boolean accept(File dir, String filename) {
 			return filename.startsWith(CACHE_FILENAME_PREFIX);
 		}

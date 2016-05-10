@@ -13,7 +13,6 @@ import java.net.URLEncoder;
 
 import android.util.Log;
 
-import com.booksfloating.activity.LoginActivity;
 import com.booksfloating.globalvar.Constants;
 import com.xd.connect.PostParameter;
 

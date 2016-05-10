@@ -59,6 +59,7 @@ public class MyInfoSetFeedback extends Activity{
 	}
 public Handler handler = new Handler(){
 		
+		@Override
 		public void handleMessage(Message msg) {
 			switch(msg.what){
 			case OK:

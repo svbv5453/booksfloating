@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
+    android:background="@color/light_gray"
     android:orientation="vertical" >
      <!-- 导航栏 -->  
      <RelativeLayout 
@@ -32,43 +32,149 @@
 	         android:gravity="center"
 	         android:text="@string/btn_my_info_integral_rule"
 	         android:textColor="@color/white"
-	         android:textSize="@dimen/nav_textsize_16"
+	         android:textSize="@dimen/nav_textsize_18"
 	         />
      </RelativeLayout>
     
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/creditscore"
+            android:text="1"
+            android:gravity="center"
+            android:textSize="@dimen/nav_textsize_16"/>
+        <TextView 
+	        android:layout_width="match_parent"
+	        android:layout_height="30dp"
+	        android:textSize="16sp"
+	        android:background="@color/white"
+	        android:gravity="center"
+	        android:text="@string/common_user"/>
+    </LinearLayout>
     
-    <TextView 
+    <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_margin="10dp"
-        android:text="@string/common_user"/>
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/creditscore"
+            android:text="2"
+            android:gravity="center"
+            android:textSize="@dimen/nav_textsize_16"/>
+        <TextView 
+	        android:layout_width="match_parent"
+	        android:layout_height="30dp"
+	        android:textSize="16sp"
+	        android:background="@color/white"
+	        android:gravity="center"
+	        android:text="@string/sliver_user"/>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/creditscore"
+            android:text="3"
+            android:gravity="center"
+            android:textSize="@dimen/nav_textsize_16"/>
+        <TextView 
+	        android:layout_width="match_parent"
+	        android:layout_height="30dp"
+	        android:textSize="16sp"
+	        android:background="@color/white"
+	        android:gravity="center"
+	        android:text="@string/gold_user"/>
+    </LinearLayout>
     
-    <TextView 
+    <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         android:textSize="20sp"
-        android:layout_margin="10dp"
-        android:text="@string/sliver_user"/>
-    <TextView 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         android:textSize="20sp"
-        android:layout_margin="10dp"
-        android:text="@string/gold_user"/>
-    <ProgressBar 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/creditscore"
+            android:text="1"
+            android:gravity="center"
+            android:textSize="@dimen/nav_textsize_16"/>
+        <ProgressBar 
         android:id="@+id/pb_myinfo_crditscore"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:progressDrawable="@drawable/prgressbar"
         android:max="100"
+        android:progress="5"
         style="@android:style/Widget.ProgressBar.Horizontal"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/creditscore"
+            android:text="2"
+            android:gravity="center"
+            android:textSize="@dimen/nav_textsize_16"/>
+        <ProgressBar 
+        android:id="@+id/pb_myinfo_crditscore2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:progressDrawable="@drawable/prgressbar"
+        android:max="100"
+        
+        style="@android:style/Widget.ProgressBar.Horizontal"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/creditscore"
+            android:text="3"
+            android:gravity="center"
+            android:textSize="@dimen/nav_textsize_16"/>
+    </LinearLayout>
     
-    <TextView 
+    <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         android:textSize="20sp"
-        android:layout_margin="10dp"
-        android:text="当前: 完成注册，积5分"/>
+        android:orientation="horizontal"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="25dp">
+        <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:textSize="16sp"
+        
+        android:text="当前积分:"/>
+        <TextView 
+         android:id="@+id/current_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+         android:textSize="16sp"
+        
+        android:text="5"/>
+    </LinearLayout>
+    
+    
 
 </LinearLayout>

@@ -1,9 +1,7 @@
 package com.booksfloating.activity;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -298,6 +296,7 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 	private String jsonStr;
 	private Handler handler = new Handler()
 	{
+		@Override
 		public void handleMessage(Message msg)
 		{
 			super.handleMessage(msg);

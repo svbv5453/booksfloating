@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
@@ -220,15 +221,15 @@ public class ListViewCompat extends ListView  implements OnScrollListener{
 
  		// 设置箭头特效
  		animation = new RotateAnimation(0, -180,
- 				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
- 				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+ 				Animation.RELATIVE_TO_SELF, 0.5f,
+ 				Animation.RELATIVE_TO_SELF, 0.5f);
  		animation.setInterpolator(new LinearInterpolator());
  		animation.setDuration(100);
  		animation.setFillAfter(true);
 
  		reverseAnimation = new RotateAnimation(-180, 0,
- 				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
- 				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+ 				Animation.RELATIVE_TO_SELF, 0.5f,
+ 				Animation.RELATIVE_TO_SELF, 0.5f);
  		reverseAnimation.setInterpolator(new LinearInterpolator());
  		reverseAnimation.setDuration(100);
  		reverseAnimation.setFillAfter(true);
