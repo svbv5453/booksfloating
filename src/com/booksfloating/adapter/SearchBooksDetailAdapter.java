@@ -81,7 +81,7 @@ public class SearchBooksDetailAdapter extends BaseAdapter{
 		viewHolder.tv_books_title.setText(booksAttr.getBookTitle());
 		viewHolder.tv_books_author.setText(booksAttr.getBookAuthor());
 		StringBuffer borrowLibrary = new StringBuffer();
-		
+
 		if(booksAttr.getCanBorrowSchoolList().size() == 1)
 		{	
 			//Integer temp = Integer.parseInt(booksAttr.getCanBorrowSchoolList().get(0));
@@ -98,7 +98,7 @@ public class SearchBooksDetailAdapter extends BaseAdapter{
 			borrowLibrary.deleteCharAt(borrowLibrary.length()-1);
 		}
 		
-		viewHolder.tv_borrow_library.setText(borrowLibrary.toString());
+		viewHolder.tv_borrow_library.setText("可借馆藏:"+borrowLibrary.toString());
 		
 		return convertView;
 	}

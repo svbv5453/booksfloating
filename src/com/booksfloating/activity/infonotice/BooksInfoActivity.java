@@ -62,9 +62,9 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 		tv_books_author = (TextView)findViewById(R.id.tv_books_author);
 		tv_books_author.setText(booksAttr.getBookAuthor());
 		tv_books_publisher = (TextView)findViewById(R.id.tv_books_publisher);
-		tv_books_publisher.setText(booksAttr.getBookPublisher());
+		tv_books_publisher.setText("出版社："+booksAttr.getBookPublisher());
 		tv_books_publish_date = (TextView)findViewById(R.id.tv_books_publish_date);
-		tv_books_publish_date.setText(booksAttr.getPublishDate());
+		tv_books_publish_date.setText("出版时间："+booksAttr.getPublishDate());
 		
 		iv_books_image = (ImageView)findViewById(R.id.iv_books_image);
 		if (booksAttr.getBookImageUrl() != null) {
@@ -83,7 +83,7 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 		tv_remarks = (TextView)findViewById(R.id.tv_remarks);
 		tv_remarks.setText(booksAttr.getRemark());
 		tv_whether_borrow = (TextView)findViewById(R.id.tv_whether_borrow);
-		//tv_whether_borrow.setText(borrowInfo.libraryTotalBooksNum +"/"+borrowInfo.canBorrowBooksNum);
+		tv_whether_borrow.setText(borrowInfo.libraryTotalBooksNum +"/"+borrowInfo.canBorrowBooksNum);
 		refreshFromServer();
 	}
 	
@@ -97,6 +97,7 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 		case R.id.btn_gotohelp:
 			Intent intent = new Intent();
 			intent.setClass(BooksInfoActivity.this, HelpBorrowActivity.class);
+			intent.putExtra("intent_booksAttr", booksAttr);
 			startActivity(intent);
 			break;
 		default:
@@ -120,6 +121,7 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 				postParameters[1] = new PostParameter("university", borrowInfo.borrowLoc);
 				System.out.println("borrowInfo.borrowLoc:"+borrowInfo.borrowLoc);
 				jsonString = HttpUtil.httpRequest(HttpUtil.UPDATE_BOOKINFO, postParameters, HttpUtil.POST);
+				System.out.println("jsonString"+jsonString);
 				if(jsonString == null)
 				{
 					handler.sendEmptyMessage(-1);
@@ -157,6 +159,10 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 			dismissLoadingDialog();
 			switch (msg.what) {
 			case 0:
+				borrowInfo.libraryTotalBooksNum = total;
+				borrowInfo.canBorrowBooksNum = available;
+				tv_whether_borrow.setText(borrowInfo.libraryTotalBooksNum +"/"+borrowInfo.canBorrowBooksNum);
+				
 				if(available == 0)
 				{
 					btn_gotohelp.setEnabled(false);

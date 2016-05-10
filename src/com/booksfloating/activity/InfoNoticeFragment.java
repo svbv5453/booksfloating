@@ -46,8 +46,8 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 	private DrawerLayout drawerLayout;
 	private ListView lv_left_drawer;
 	private String[] schoolArray;
-	private String filterSchool;
-	private int universityCode = 0;//初始值为0表示所有学校
+	private String filterSchool = "所有学校";
+	private String university = "所有学校";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -100,7 +100,7 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 			else {
 				drawerLayout.openDrawer(Gravity.LEFT);
 			}
-			if(filterSchool.equals(Constants.schoolIDtoNameMap.get(0)))
+			if(filterSchool.equals("所有学校"))
 			{
 				//啥也不干
 			}
@@ -112,12 +112,11 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 				List<String> tempList = new ArrayList<String>();
 				for (int i = 0; i < booksAttrsList.size(); i++) {
 					booksAttr = booksAttrsList.get(i);
-					if(booksAttr.getCanBorrowSchoolList().contains(filterSchool))
+					if(booksAttr.getBorrowSchool().contains(filterSchool))
 					{
 						//把原来的canBorrowSchoolList修改为只含有这个指定学校的List
 						tempList.clear();
 						tempList.add(filterSchool);
-						booksAttr.setCanBorrowSchoolList(tempList);
 						newList.add(booksAttr);
 					}
 				}
@@ -126,7 +125,7 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 				
 				if (booksAttrsList.size() == 0) {
 					requestTime = 1;
-					universityCode = Constants.schoolNameMap.get(filterSchool);
+					
 					showLoadingDialog();
 					requestFromServer(ListViewCompat.REFRESH);
 				}
@@ -160,10 +159,10 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 				PostParameter[] postParameters = new PostParameter[2];
 				if(requestTime == 1)
 				{
-					postParameters[0] = new PostParameter("university", Integer.toString(universityCode));
+					postParameters[0] = new PostParameter("university", filterSchool);
 					postParameters[1] = new PostParameter("page", Integer.toString(1));
 				}else {
-					postParameters[0] = new PostParameter("university", Integer.toString(universityCode));
+					postParameters[0] = new PostParameter("university", filterSchool);
 					postParameters[1] = new PostParameter("page", Integer.toString(requestTime));
 				}
 				String json = null;
@@ -199,6 +198,7 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 				{
 					booksAttrsList.clear();
 					booksAttrsList.addAll(newList);
+					System.out.println("booksAttrsList.size():"+booksAttrsList.size());
 					//刷新适配器
 					adapter.notifyDataSetChanged();
 				}else {

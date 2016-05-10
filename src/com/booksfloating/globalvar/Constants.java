@@ -23,8 +23,8 @@ public class Constants {
 	//默认图片
 	public final static String DEFAULT_BOOK_IMAGE= "default_book.png";
 	
-	public final static HashMap<String,Integer> schoolNameMap = new HashMap<String,Integer>();
-	static{
+	//public final static HashMap<String,Integer> schoolNameMap = new HashMap<String,Integer>();
+	/*static{
 		schoolNameMap.put("西安电子科技大学", 1);
 		schoolNameMap.put("西安电子科技大学雁塔校区", 101);
 		schoolNameMap.put("西安电子科技大学长安校区", 102);
@@ -50,9 +50,9 @@ public class Constants {
 		schoolNameMap.put("西安科技大学", 8);
 		schoolNameMap.put("西安科技大学雁塔校区", 801);
 		schoolNameMap.put("所有学校", 0);
-	}
-	public final static HashMap<Integer,String> schoolIDtoNameMap = new HashMap<Integer,String>();
-	static{
+	}*/
+	//public final static HashMap<Integer,String> schoolIDtoNameMap = new HashMap<Integer,String>();
+	/*static{
 		schoolIDtoNameMap.put(1,"西安电子科技大学");
 		schoolIDtoNameMap.put(101,"西安电子科技大学雁塔校区");
 		schoolIDtoNameMap.put(102,"西安电子科技大学长安校区");
@@ -78,7 +78,7 @@ public class Constants {
 		schoolIDtoNameMap.put(8,"西安科技大学");
 		schoolIDtoNameMap.put(801,"西安科技大学雁塔校区");
 		schoolIDtoNameMap.put(0,"所有学校");
-	}
+	}*/
 	/*编号	学校名称
 	1        西安电子科技大学
 	101	西安电子科技大学雁塔校区

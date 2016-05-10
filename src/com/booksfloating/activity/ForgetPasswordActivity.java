@@ -6,6 +6,8 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +30,7 @@ public class ForgetPasswordActivity extends Activity implements OnClickListener{
 	private EditText et_verify;
 	private Button btn_sure;
 	private LinearLayout ll_verify;
+	private static final int VERIFY = 1,SEND_EMAIL = 2;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +45,12 @@ public class ForgetPasswordActivity extends Activity implements OnClickListener{
 		btn_send_email = (Button) findViewById(R.id.btn_send_email);
 		btn_send_email.setOnClickListener(this);
 		
-	}
-
-	protected String sendEmail(Context context, String email) {
-		// TODO Auto-generated method stub
-		PostParameter[] postParameter = new PostParameter[2];
-		SharePreferenceUtil sp = new SharePreferenceUtil(context, Constants.SAVE_USER);
-		postParameter[0] = new PostParameter("email", email);
-		postParameter[1] = new PostParameter("username", sp.getAccount());
-		String jsonString = HttpUtil.httpRequest(HttpUtil.FORGET_PASSWORD, postParameter, HttpUtil.POST);
-		return jsonString;
-	}
+		btn_sure = (Button)findViewById(R.id.btn_sure);
+		btn_sure.setOnClickListener(this);
+		
+		et_verify = (EditText)findViewById(R.id.et_verify);
+		
+	}	
 
 	@Override
 	public void onClick(View v) {
@@ -70,29 +68,27 @@ public class ForgetPasswordActivity extends Activity implements OnClickListener{
 			}else if(! email.contains("@")){
 				Toast.makeText(ForgetPasswordActivity.this, "邮箱地址不正确", Toast.LENGTH_SHORT).show();
 			}else{
-				String jsonString = sendEmail(ForgetPasswordActivity.this, email);
-				if (jsonString != null) {
-					try {
-						JSONObject object = new JSONObject(jsonString);
-						String status = object.optString("status");
-						if (status.equals("1")) {
-							DialogFactory.AlertDialog(ForgetPasswordActivity.this, "提示", "邮件已发送成功，请到您的邮箱中获取验证码！");
-							ll_verify.setVisibility(View.VISIBLE);
-						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}					
-				}
-				else {
-					Toast.makeText(ForgetPasswordActivity.this, "邮件发送失败！", Toast.LENGTH_SHORT).show();
-				}
+				sendEmail(email);									
 			}
 			break;
 			
-		case R.id.btn_sure:
-			String jsonString = sendVerifyCode();
-			if (jsonString != null) {
+		case R.id.btn_sure:			
+			sendVerifyCode();										
+			break;
+		default:
+			break;
+		}
+	}
+
+	private Handler handler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			switch(msg.what){
+			case VERIFY:
+				String jsonString = (String) msg.obj;
 				try {
 					JSONObject object = new JSONObject(jsonString);
 					String status = object.optString("status");
@@ -103,29 +99,84 @@ public class ForgetPasswordActivity extends Activity implements OnClickListener{
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}							
+				}		
+				break;
+				
+			case SEND_EMAIL:
+				String json = (String) msg.obj;
+				try {
+					JSONObject object = new JSONObject(json);
+					String status = object.optString("status");
+					if (status.equals("1")) {
+						DialogFactory.AlertDialog(ForgetPasswordActivity.this, "提示", "邮件已发送成功，请到您的邮箱中获取验证码！");
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+				
+			case Constants.SERVER_ERROR:
+				Toast.makeText(ForgetPasswordActivity.this, "验证失败，请重试！", Toast.LENGTH_SHORT).show();
+				break;
+			case Constants.NULL_ERROR:
+				Toast.makeText(ForgetPasswordActivity.this, "邮件发送失败，请重试！", Toast.LENGTH_SHORT).show();
+				break;
 			}
-			else {
-				Toast.makeText(ForgetPasswordActivity.this, "服务器错误，请重试！", Toast.LENGTH_SHORT).show();
+		}
+		
+	};
+	
+	private void sendEmail(final String email) {
+		// TODO Auto-generated method stub
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				PostParameter[] postParameter = new PostParameter[2];
+				SharePreferenceUtil sp = new SharePreferenceUtil(ForgetPasswordActivity.this, Constants.SAVE_USER);
+				postParameter[0] = new PostParameter("email", email);
+				postParameter[1] = new PostParameter("username", sp.getAccount());
+				String jsonString = HttpUtil.httpRequest(HttpUtil.FORGET_PASSWORD, postParameter, HttpUtil.POST);
+				if (jsonString == null) {
+					handler.sendEmptyMessage(Constants.NULL_ERROR);
+				}else {
+					Message msg = new Message();
+					msg.obj = jsonString;
+					msg.what = SEND_EMAIL;
+					handler.sendMessage(msg);
+				}
 			}
-			break;
-		default:
-			break;
-		}
-	}
-	
-	private String sendVerifyCode()
-	{
-		String json = null;
-		if (et_verify.getText().toString().trim().length() > 0) {
-			PostParameter[] postParameter = new PostParameter[2];
-			SharePreferenceUtil sp = new SharePreferenceUtil(ForgetPasswordActivity.this, Constants.SAVE_USER);
-			postParameter[0] = new PostParameter("cookie",et_verify.getText().toString().trim());
-			postParameter[1] = new PostParameter("username", sp.getAccount());
-			json = HttpUtil.httpRequest(HttpUtil.VERIFY_COOKIE, postParameter, HttpUtil.POST);
-		}
-		return json;
-	}
-	
+		}).start();
 
+	}
+	
+	private void sendVerifyCode()
+	{
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				String json = null;
+				if (et_verify.getText().toString().trim().length() > 0) {
+					PostParameter[] postParameter = new PostParameter[2];
+					SharePreferenceUtil sp = new SharePreferenceUtil(ForgetPasswordActivity.this, Constants.SAVE_USER);					
+					postParameter[0] = new PostParameter("username", sp.getAccount());
+					postParameter[1] = new PostParameter("code",et_verify.getText().toString().trim());
+					json = HttpUtil.httpRequest(HttpUtil.GET_PASSWORD, postParameter, HttpUtil.POST);
+					if (json == null) {
+						handler.sendEmptyMessage(Constants.SERVER_ERROR);
+					}else {
+						Message msg = new Message();
+						msg.obj = json;
+						msg.what = VERIFY;
+						handler.sendMessage(msg);
+					}
+				}
+			}
+		}).start();
+		
+	}	
 }
