@@ -67,7 +67,7 @@ public class InfoNoticeAdapter extends BaseAdapter{
 			viewHolder.tv_books_title = (TextView)convertView.findViewById(R.id.tv_books_title);
 			viewHolder.tv_books_author = (TextView)convertView.findViewById(R.id.tv_books_author);
 			viewHolder.tv_borrow_library = (TextView)convertView.findViewById(R.id.tv_borrow_library);
-			viewHolder.tv_books_publish_time = (TextView)convertView.findViewById(R.id.tv_books_publish_time);
+			viewHolder.tv_notice_publish_time = (TextView)convertView.findViewById(R.id.tv_notice_publish_time);
 			viewHolder.tv_remark = (TextView)convertView.findViewById(R.id.tv_remark);
 			convertView.setTag(viewHolder);
 		}else{
@@ -85,9 +85,9 @@ public class InfoNoticeAdapter extends BaseAdapter{
 		
 		viewHolder.tv_books_title.setText(booksAttr.getBookTitle());
 		viewHolder.tv_books_author.setText(booksAttr.getBookAuthor());
-		viewHolder.tv_books_publish_time.setText(booksAttr.getNoticePublishTime());
-		viewHolder.tv_borrow_library.setText(booksAttr.getBorrowSchool());
-		viewHolder.tv_remark.setText(booksAttr.getRemark());
+		viewHolder.tv_notice_publish_time.setText("发布时间："+booksAttr.getNoticePublishTime());
+		viewHolder.tv_borrow_library.setText("可借馆藏："+booksAttr.getBorrowSchool());
+		viewHolder.tv_remark.setText("备注："+booksAttr.getRemark());
 		
 		return convertView;
 	}
@@ -97,7 +97,7 @@ public class InfoNoticeAdapter extends BaseAdapter{
 		public TextView tv_books_title;
 		public TextView tv_books_author;
 		public TextView tv_borrow_library;
-		public TextView tv_books_publish_time;
+		public TextView tv_notice_publish_time;
 		public TextView tv_remark;
 	}
 

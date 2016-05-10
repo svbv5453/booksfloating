@@ -32,7 +32,7 @@ public class HttpUtil {
 	public static final String HELP_BORROW = Constants.SERVER_IP+"/help";
 	public static final String PUBLISH_INFO = Constants.SERVER_IP+"/publish";
 	public static final String BROWSE_BOOK = Constants.SERVER_IP+"/browse";
-	public static final String VERIFY_COOKIE = Constants.SERVER_IP+"/verify_cookie";
+	public static final String GET_PASSWORD = Constants.SERVER_IP+"/get_password";
 	
 	/**
 	 * @sunheng_add;
