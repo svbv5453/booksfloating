@@ -326,6 +326,9 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 					sp.setAccount(et_username.getText().toString().trim());
 					sp.setPassword(et_password.getText().toString().trim());
 					
+					sp.setUserUniversity(et_schoolname.getText().toString().trim());
+					
+					
 					Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
 					System.out.println("用户注册成功");
 				}else if(result == -1){

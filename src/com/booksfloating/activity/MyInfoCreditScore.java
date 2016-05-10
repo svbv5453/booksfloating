@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.xd.booksfloating.R;
 
@@ -17,12 +19,19 @@ public class MyInfoCreditScore extends Activity{
 	
 	private Button btn_integral_rule = null;
 	private Button btn_back = null;
+	private ProgressBar progressBar1 = null;
+	private ProgressBar progressBar2 = null;
+	private TextView tv_currentScore = null;	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.myinfo_creditscore_layout);
 		btn_integral_rule = (Button) findViewById(R.id.btn_myinfo_integral_rule);
+		progressBar1 = (ProgressBar) findViewById(R.id.pb_myinfo_crditscore);
+		progressBar2 = (ProgressBar) findViewById(R.id.pb_myinfo_crditscore2);
+		tv_currentScore = (TextView) findViewById(R.id.current_score);
+		
 		btn_integral_rule.setOnClickListener(new OnClickListener() {
 			
 			@Override

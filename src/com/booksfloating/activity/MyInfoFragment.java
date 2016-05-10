@@ -59,6 +59,7 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 		btn_my_info_exit.setOnClickListener(this);
 		SharePreferenceUtil sp = new SharePreferenceUtil(getActivity(), Constants.SAVE_USER);
 		tv_user.setText(sp.getAccount());
+		tv_user_school.setText(sp.getUserUniversity());
 		tv_user_ranking.setText("1");
 		
 		

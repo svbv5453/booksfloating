@@ -104,54 +104,67 @@
 	        android:gravity="center"
 	        android:text="@string/gold_user"/>
     </LinearLayout>
-    
-    <LinearLayout 
-        android:layout_width="match_parent"
+    <RelativeLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="30dp">
         <TextView 
+            android:id="@+id/fuzhu_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/creditscore"
             android:text="1"
             android:gravity="center"
+            android:layout_alignParentLeft="true"
             android:textSize="@dimen/nav_textsize_16"/>
-        <ProgressBar 
-        android:id="@+id/pb_myinfo_crditscore"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:progressDrawable="@drawable/prgressbar"
-        android:max="100"
-        android:progress="5"
-        style="@android:style/Widget.ProgressBar.Horizontal"/>
         <TextView 
+            android:id="@+id/fuzhu_tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/creditscore"
             android:text="2"
             android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:textSize="@dimen/nav_textsize_16"/>
-        <ProgressBar 
-        android:id="@+id/pb_myinfo_crditscore2"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:progressDrawable="@drawable/prgressbar"
-        android:max="100"
-        
-        style="@android:style/Widget.ProgressBar.Horizontal"/>
         <TextView 
+            android:id="@+id/fuzhu_tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/creditscore"
             android:text="3"
             android:gravity="center"
+            android:layout_alignParentRight="true"
             android:textSize="@dimen/nav_textsize_16"/>
-    </LinearLayout>
+        <ProgressBar 
+        android:id="@+id/pb_myinfo_crditscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/fuzhu_tv1"
+        android:layout_toLeftOf="@id/fuzhu_tv2"
+        android:layout_gravity="center"
+        android:layout_marginTop="7.5dp"
+        android:progressDrawable="@drawable/prgressbar"
+        
+        android:max="100"
+        android:progress="5"
+        style="@android:style/Widget.ProgressBar.Horizontal"/>
+       
+        <ProgressBar 
+        android:id="@+id/pb_myinfo_crditscore2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="7.5dp"
+        android:progressDrawable="@drawable/prgressbar"
+        android:layout_toLeftOf="@id/fuzhu_tv3"
+        android:layout_toRightOf="@id/fuzhu_tv2"
+        android:max="100"
+        
+        style="@android:style/Widget.ProgressBar.Horizontal"/>
+        
+    </RelativeLayout>
+   
     
     <LinearLayout 
         android:layout_width="match_parent"
