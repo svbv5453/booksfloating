@@ -54,6 +54,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/nav_textsize_20</item>
+        <item name="android:gravity">center</item>
         <item name="android:layout_marginTop">@dimen/nav_marginTop_10</item>
         <item name="android:layout_marginLeft">@dimen/nav_marginLeft_10</item>
    </style>

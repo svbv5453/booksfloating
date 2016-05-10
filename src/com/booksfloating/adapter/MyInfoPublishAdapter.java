@@ -3,6 +3,7 @@ package com.booksfloating.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,11 +67,20 @@ public class MyInfoPublishAdapter extends BaseAdapter {
 		//时间问题
 		//viewHolder.publishTime.setText(publishBookBeanList.get(position).bookPublicshTime);//后面添加
 		viewHolder.bookRemark.setText(publishBookBeanList.get(position).bookRemark);
-		viewHolder.bookImage.setImageResource(android.R.id.icon);
+		//viewHolder.bookImage.setImageResource(android.R.id.icon);
 		String url = publishBookBeanList.get(position).bookIconUrl;
-		viewHolder.bookImage.setTag(url);
+		System.out.println("图片地址" + url);
+		if(url == null){
+			viewHolder.bookImage.setImageDrawable(myContext.getResources().getDrawable(R.drawable.default_book));
+			
+		}else{
+			
+			/*viewHolder.bookImage.setTag(url);
+			new LoaderImageUseVelloy().LoaderImage(myContext, viewHolder.bookImage, url);*/
+		}
+		
 		//new LoadBookImage().showImageByThread(viewHolder.bookImage, url);
-		new LoaderImageUseVelloy().LoaderImage(myContext, viewHolder.bookImage, url);
+		
 		//ImageManager.from(myContext).displayImage(viewHolder.bookImage, url, R.drawable.default_book);
 		
 		return convertView;

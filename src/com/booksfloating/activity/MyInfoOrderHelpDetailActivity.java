@@ -36,7 +36,8 @@ public class MyInfoOrderHelpDetailActivity extends FragmentActivity{
 		
 		//getActionBar().setTitle("订单详情");
 		
-		bookOrder = getIntent().getParcelableExtra("lendOrder");
+		//bookOrder = getIntent().getParcelableExtra("lendOrder");
+		bookOrder = (MyInfoBookDetailBean) getIntent().getExtras().getSerializable("lendOrder");
 		helper = (TextView) findViewById(R.id.tv_myinfo_ask_helper);
 		bookName = (TextView) findViewById(R.id.tv_myinfo_ask_book_name);
 		author = (TextView) findViewById(R.id.tv_myinfo_ask_book_author);

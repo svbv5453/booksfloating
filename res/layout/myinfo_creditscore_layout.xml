@@ -20,6 +20,7 @@
 	     <TextView 
 	         style="@style/navTextStyle"
 	         android:layout_toRightOf="@id/back"
+	         
 	         android:text="@string/btn_my_info_creditScore"
 	        />
 	     <Button 
@@ -28,7 +29,7 @@
 	         android:layout_height="wrap_content"
 	         android:layout_alignParentRight="true"
 	         android:background="@color/transparent"
-	         android:padding="10dp"
+	         android:layout_marginRight="5dp"
 	         android:gravity="center"
 	         android:text="@string/btn_my_info_integral_rule"
 	         android:textColor="@color/white"

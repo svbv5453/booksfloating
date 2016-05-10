@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.TextView;
@@ -35,7 +36,9 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 		
 		//getActionBar().setTitle("订单详情");
 		
-		bookOrder = getIntent().getParcelableExtra("borrowOrder");
+		bookOrder = (MyInfoBookDetailBean) getIntent().getExtras().getSerializable("borrowOrder");
+		
+		
 		/**
 		 * 通过使用传递对象，则不需要进行向服务器请求数据了
 		 */

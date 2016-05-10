@@ -88,7 +88,7 @@ public class MyInfoSetAbout extends Activity{
 		}else{
 			String data = ACache.get(context).getAsString("about_us");
 			showData(data);
-			Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			
 		}
 		

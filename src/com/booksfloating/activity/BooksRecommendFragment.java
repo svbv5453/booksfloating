@@ -27,6 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.booksfloating.adapter.BookRecommendAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.util.ACache;
+import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
 
@@ -61,13 +62,13 @@ public class BooksRecommendFragment extends Fragment{
 		booksRecommendList = (ListView) view.findViewById(R.id.books_recommend_list);
 
 		
-		loadData(getActivity(), urltest);
+		//loadData(getActivity(), urltest);
 
 		/**
 		 *实际方法
 		 */
 		
-		//loadData(getActivity(), HttpUtil.BOOK_RECOMMEND);
+		loadData(getActivity(), HttpUtil.BOOK_RECOMMEND);
 
 		
 		return view;
@@ -115,6 +116,7 @@ public class BooksRecommendFragment extends Fragment{
 
 			@Override
 			public void onResponse(JSONObject response) {
+				System.out.println(response.toString());
 				ACache.get(context).put("bookRecommend", response);
 				showListData(context, response);
 			}
@@ -141,7 +143,7 @@ public class BooksRecommendFragment extends Fragment{
 			//JSONObject jsonObject = new JSONObject(jsonData);
 			if(jsonObject.getString("status").equals("1")){
 				
-				/*JSONArray jsonArray = jsonObject.getJSONArray("book_list");
+				JSONArray jsonArray = jsonObject.getJSONArray("booklist");
 				for(int i = 0; i < jsonArray.length(); i++){
 					jsonObject = jsonArray.getJSONObject(i);
 					BooksRecommendBean booksRecommendBean = new BooksRecommendBean();
@@ -152,21 +154,21 @@ public class BooksRecommendFragment extends Fragment{
 					booksBeanList.add(booksRecommendBean);
 					
 					
-				}*/
-				JSONArray jsonArray = jsonObject.getJSONArray("data");
+				}
+				/*JSONArray jsonArray = jsonObject.getJSONArray("data");
 				for(int i = 0; i < jsonArray.length(); i++){
 					jsonObject = jsonArray.getJSONObject(i);
 					BooksRecommendBean booksRecommendBean = new BooksRecommendBean();
 					booksRecommendBean.bookName = jsonObject.getString("name");
 					booksRecommendBean.bookAuthor = jsonObject.getString("description");
 					booksRecommendBean.bookImageUrl = jsonObject.getString("picSmall");
-					/*if(jsonArray.length() <= 2){
+					if(jsonArray.length() <= 2){
 						booksRecommendBean.bookRanking = "No."+ (i+1);
-					}*/
+					}
 					
 					booksBeanList.add(booksRecommendBean);
 					
-				}
+				}*/
 				
 			}
 		} catch (JSONException e) {

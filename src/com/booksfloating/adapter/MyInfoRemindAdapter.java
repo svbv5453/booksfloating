@@ -18,10 +18,12 @@ public class MyInfoRemindAdapter extends BaseAdapter {
 	List<MyInfoPublishBookBean> publishBookBeanList;
 	LayoutInflater mLayoutInflater;
 
+	Context mContext;
 	
 
 	public MyInfoRemindAdapter(Context context, List<MyInfoPublishBookBean> publishBookBeanList) {
 		super();
+		this.mContext = context;
 		this.publishBookBeanList = publishBookBeanList;
 		this.mLayoutInflater = LayoutInflater.from(context);
 		
@@ -63,13 +65,11 @@ public class MyInfoRemindAdapter extends BaseAdapter {
 		viewHolder.bookName.setText(publishBookBeanList.get(position).bookName);
 		viewHolder.bookAuthor.setText(publishBookBeanList.get(position).bookAuthor);
 		viewHolder.bookLocation.setText(publishBookBeanList.get(position).bookLocation);
-		//时间问题
-		//viewHolder.publishTime.setText(publishBookBeanList.get(position).bookPublicshTime);//后面添加
 		viewHolder.expirationTime.setText(publishBookBeanList.get(position).bookExpirationTime);
-		viewHolder.bookImage.setImageResource(android.R.id.icon);
-		String url = publishBookBeanList.get(position).bookIconUrl;
-		viewHolder.bookImage.setTag(url);
-		new LoadBookImage().showImageByThread(viewHolder.bookImage, url);
+		viewHolder.bookImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.default_book));
+		/*String url = publishBookBeanList.get(position).bookIconUrl;
+		viewHolder.bookImage.setTag(url);*/
+		
 		return convertView;
 	}
 	class ViewHolder{

@@ -10,7 +10,9 @@
             android:id="@+id/iv_my_info_publish_book_image"
             android:layout_width="64dp"
             android:layout_height="91dp"
-            android:src="@drawable/think_in_java"/>
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/default_book"/>
         <LinearLayout 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

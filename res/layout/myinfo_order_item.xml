@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    
     android:background="@color/white"
      >
      <ImageView
@@ -23,12 +24,17 @@
         android:id="@+id/tv_myinfo_order_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="@dimen/nav_textsize_16"
         android:text="时间: 2016年2月1日15时11分"/>
     <TextView 
         android:id="@+id/tv_myinfo_order_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/sh_blue"
+        android:lineSpacingMultiplier="1.2"
+        android:layout_marginTop="2dp"
+        android:textSize="@dimen/nav_textsize_16"
         android:text="关于'think in java, (美) 埃克尔，西安电子科技大学南馆'的求助"/>
     </LinearLayout>
   

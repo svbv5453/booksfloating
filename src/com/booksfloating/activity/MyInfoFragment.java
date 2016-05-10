@@ -1,7 +1,5 @@
 package com.booksfloating.activity;
 
-import com.xd.booksfloating.R;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +10,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.booksfloating.globalvar.Constants;
+import com.booksfloating.util.SharePreferenceUtil;
+import com.xd.booksfloating.R;
 /**
  * 
  * @author shenhen
@@ -27,6 +31,10 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 	private Button btn_my_info_set = null;
 	private Button btn_my_info_exit = null;
 	
+	private ImageView iv_myinfo_photo = null;
+	private TextView tv_user = null;
+	private TextView tv_user_school = null;
+	private TextView tv_user_ranking = null;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -38,12 +46,21 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 		btn_my_info_set = (Button) view.findViewById(R.id.btn_my_info_set);
 		btn_my_info_exit = (Button) view.findViewById(R.id.btn_my_info_exit);
 		
+		iv_myinfo_photo = (ImageView) view.findViewById(R.id.iv_my_info_image);
+		tv_user = (TextView) view.findViewById(R.id.tv_my_info_name);
+		tv_user_school = (TextView) view.findViewById(R.id.tv_my_info_university);
+		tv_user_ranking = (TextView) view.findViewById(R.id.tv_my_info_creditRating);
+		
 		btn_my_info_public.setOnClickListener(this);
 		btn_my_info_order.setOnClickListener(this);
 		btn_my_info_remind.setOnClickListener(this);
 		btn_my_info_creditScore.setOnClickListener(this);
 		btn_my_info_set.setOnClickListener(this);
 		btn_my_info_exit.setOnClickListener(this);
+		SharePreferenceUtil sp = new SharePreferenceUtil(getActivity(), Constants.SAVE_USER);
+		tv_user.setText(sp.getAccount());
+		tv_user_ranking.setText("1");
+		
 		
 		return view;
 	}

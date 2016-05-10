@@ -14,7 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.SharePreferenceUtil;
 import com.xd.booksfloating.R;
 import com.xd.connect.PostParameter;
 
@@ -25,6 +27,7 @@ public class MyInfoSetResetPassword extends Activity{
 	private EditText newPassword = null;
 	private EditText confimPassword = null;
 	private Button btn_back = null;
+	SharePreferenceUtil sp;
 	public static final int OK = 0,SERVER_ERROR = -1, NETWORK_ERROR = -2, NULL_ERROR = -3,OLDPASSWORD_ERROR = -4,PASSWORD_ERROR = -5;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,8 @@ public class MyInfoSetResetPassword extends Activity{
 				
 			}
 		});
+		sp = new SharePreferenceUtil(MyInfoSetResetPassword.this, Constants.SAVE_USER);
+		
 		btn_confim.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -105,7 +110,8 @@ public class MyInfoSetResetPassword extends Activity{
 				}else if(!newPasswordString.equals(confimPasswordString)){
 					handler.sendEmptyMessage(PASSWORD_ERROR);
 				}else{
-					parameters[0] = new PostParameter("token", "2605");
+					
+					parameters[0] = new PostParameter("token", sp.getToken());
 					parameters[1] = new PostParameter("old_password", oldPasswrodString);
 					parameters[2] = new PostParameter("new_password", confimPasswordString);
 					String responseJson = HttpUtil.httpRequest(HttpUtil.CHANGE_PASSWORD, parameters, HttpUtil.POST);
