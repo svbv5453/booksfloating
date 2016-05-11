@@ -14,7 +14,7 @@
             android:layout_marginTop="5dp"
             android:text="Thinking in Java 4th"
             android:textColor="@color/black"
-            android:textSize="@dimen/nav_textsize_16" />
+            android:textSize="@dimen/nav_textsize_18" />
 
         <TextView
             android:id="@+id/tv_books_author"
@@ -26,7 +26,7 @@
             android:layout_marginTop="3dp"
             android:text="作者：（美）埃克尔" 
             android:textColor="@color/gray"
-            android:textSize="@dimen/nav_textsize_13"/>
+            android:textSize="@dimen/nav_textsize_16"/>
 
         <TextView
             android:id="@+id/tv_borrow_library"
@@ -38,7 +38,7 @@
             android:layout_marginTop="3dp"
             android:text="可借馆藏：西安电子科技大学北馆" 
             android:textColor="@color/theme_blue"
-            android:textSize="@dimen/nav_textsize_13"/>
+            android:textSize="@dimen/nav_textsize_16"/>
         
         <TextView 
             android:id="@+id/tv_notice_publish_time"
@@ -48,9 +48,9 @@
             android:layout_toRightOf="@+id/iv_books_image"
             android:layout_alignParentRight="true"
             android:layout_marginTop="3dp"
-            android:text="发布时间：2016年2月10日15时00分"
+            android:text="发布时间：2016-2-10 15:00"
             android:textColor="@color/theme_blue" 
-            android:textSize="@dimen/nav_textsize_13"/>
+            android:textSize="@dimen/nav_textsize_16"/>
 
         <TextView
             android:id="@+id/tv_remark"
@@ -62,7 +62,7 @@
             android:layout_marginTop="3dp"
             android:text="备注：希望好心人尽快帮我借到"
             android:textColor="@color/theme_blue" 
-            android:textSize="@dimen/nav_textsize_13"/>
+            android:textSize="@dimen/nav_textsize_16"/>
 
         <ImageView
             android:id="@+id/iv_books_image"

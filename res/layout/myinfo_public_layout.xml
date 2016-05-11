@@ -40,7 +40,8 @@
             
             android:layout_toLeftOf="@+id/btn_my_info_search_book"
             android:hint="书名:"
-            android:ems="10" >
+            android:ems="10" 
+            android:background="@color/transparent">
 
         </EditText>
 

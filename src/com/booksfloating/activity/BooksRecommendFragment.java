@@ -150,7 +150,7 @@ public class BooksRecommendFragment extends Fragment{
 					booksRecommendBean.bookName = jsonObject.getString("book");
 					booksRecommendBean.bookAuthor = jsonObject.getString("author");
 					booksRecommendBean.bookImageUrl = jsonObject.getString("picture");
-					booksRecommendBean.bookRanking = "No."+i;
+					booksRecommendBean.bookRanking = "No."+(i+1);
 					booksBeanList.add(booksRecommendBean);
 					
 					

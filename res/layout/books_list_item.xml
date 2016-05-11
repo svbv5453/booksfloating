@@ -23,7 +23,7 @@
         android:layout_marginTop="5dp"
         android:text="Thinking in Java 4th"
         android:textColor="@color/black"
-        android:textSize="@dimen/nav_textsize_16" />
+        android:textSize="@dimen/nav_textsize_18" />
 
     <TextView
         android:id="@+id/tv_books_author"
@@ -34,7 +34,8 @@
         android:layout_toRightOf="@+id/iv_books_image"
         android:layout_marginTop="3dp"
         android:text="作者：（美）埃克尔" 
-        android:textColor="@color/gray"/>
+        android:textColor="@color/gray"
+        android:textSize="@dimen/nav_textsize_16"/>
 
     <TextView
         android:id="@+id/tv_borrow_library"
@@ -45,6 +46,7 @@
         android:layout_below="@+id/tv_books_author"
         android:layout_marginTop="3dp"
         android:text="可借馆藏：西电、西工大..." 
-        android:textColor="@color/gray"/>
+        android:textColor="@color/gray"
+        android:textSize="@dimen/nav_textsize_16"/>
 
 </RelativeLayout>
