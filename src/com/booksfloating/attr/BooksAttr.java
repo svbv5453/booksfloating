@@ -3,8 +3,6 @@ package com.booksfloating.attr;
 import java.io.Serializable;
 import java.util.List;
 
-import android.R.integer;
-
 public class BooksAttr implements Serializable{
 
 	/**

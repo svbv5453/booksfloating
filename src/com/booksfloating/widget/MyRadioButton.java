@@ -53,7 +53,7 @@ public class MyRadioButton extends RadioButton {
 			// 消除锯齿
 			pt.setAntiAlias(true);
 			// 居中显示图片
-			int imageX = (int) (this.getWidth() - image.getWidth()) / 2;
+			int imageX = (this.getWidth() - image.getWidth()) / 2;
 
 			canvas.drawBitmap(image, imageX, 2, pt);
 			pt.setARGB(255, 255, 255, 255);

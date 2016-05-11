@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     android:orientation="vertical" >
     <TextView 
         style="@style/nav_main_style"/>
@@ -20,7 +21,11 @@
         android:id="@+id/books_recommend_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="2dp"/>
     
 
 </LinearLayout>

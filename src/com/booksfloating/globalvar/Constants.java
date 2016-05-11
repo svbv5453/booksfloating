@@ -2,8 +2,6 @@ package com.booksfloating.globalvar;
 
 import java.util.HashMap;
 
-import android.R.integer;
-
 public class Constants {
 
 	//设备类型

@@ -35,7 +35,7 @@ public class MyInfoOrderDetailFragment extends Fragment{
 		orderDate = (TextView) view.findViewById(R.id.tv_myinfo_ask_date);
 		university = (TextView) view.findViewById(R.id.tv_myinfo_ask_university);
 		
-		orderMessage = (TextView) view.findViewById(R.id.tv_myinfo_ask_message);
+		//orderMessage = (TextView) view.findViewById(R.id.tv_myinfo_ask_message);
 		borrowDate = (TextView) view.findViewById(R.id.tv_myinfo_ask_borrowDate);
 		returnDate = (TextView) view.findViewById(R.id.tv_myinfo_ask_returnDate);
 		phoneNumber = (TextView) view.findViewById(R.id.tv_myinfo_ask_phoneNumber);

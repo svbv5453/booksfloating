@@ -113,6 +113,7 @@ public class ImageManager {
 
 		mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
 
+			@Override
 			protected int sizeOf(String key, Bitmap bitmap) {
 				return bitmap.getRowBytes() * bitmap.getHeight();
 			}
@@ -322,6 +323,7 @@ public class ImageManager {
 			super(looper);
 		}
 
+		@Override
 		public void handleMessage(Message msg) {
 			if (msg == null)
 				return;
@@ -463,7 +465,7 @@ public class ImageManager {
 						Bitmap bitmap = (Bitmap) msg.obj;
 
 						// 非同一ImageView
-						if (!(imageRef.url).equals((String) imageRef.imageView.getTag())) {
+						if (!(imageRef.url).equals(imageRef.imageView.getTag())) {
 							break;
 						}
 

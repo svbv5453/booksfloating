@@ -1,9 +1,7 @@
 package com.booksfloating.activity;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -314,6 +312,7 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 	private String jsonStr;
 	private Handler handler = new Handler()
 	{
+		@Override
 		public void handleMessage(Message msg)
 		{
 			super.handleMessage(msg);
@@ -326,6 +325,9 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 					SharePreferenceUtil sp = new SharePreferenceUtil(RegisterActivity.this, Constants.SAVE_USER);
 					sp.setAccount(et_username.getText().toString().trim());
 					sp.setPassword(et_password.getText().toString().trim());
+					
+					sp.setUserUniversity(et_schoolname.getText().toString().trim());
+					
 					
 					Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
 					System.out.println("用户注册成功");

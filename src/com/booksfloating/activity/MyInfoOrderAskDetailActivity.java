@@ -4,9 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.TextView;
@@ -18,7 +18,10 @@ import com.xd.booksfloating.R;
 public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 	private TextView orderNumber = null;
 	private TextView orderDate = null;
-	private TextView orderMessage = null;
+	private TextView helper = null;
+	private TextView bookName = null;
+	private TextView author = null;
+	private TextView bookLocation = null;
 	private TextView borrowDate = null;
 	private TextView returnDate = null;
 	private TextView phoneNumber = null;
@@ -33,35 +36,44 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 		
 		//getActionBar().setTitle("订单详情");
 		
-		bookOrder = getIntent().getParcelableExtra("borrowOrder");
+		bookOrder = (MyInfoBookDetailBean) getIntent().getExtras().getSerializable("borrowOrder");
+		
+		
 		/**
 		 * 通过使用传递对象，则不需要进行向服务器请求数据了
 		 */
-		//showData();
+		helper = (TextView) findViewById(R.id.tv_myinfo_ask_helper);
+		bookName = (TextView) findViewById(R.id.tv_myinfo_ask_book_name);
+		author = (TextView) findViewById(R.id.tv_myinfo_ask_book_author);
+		bookLocation = (TextView) findViewById(R.id.tv_myinfo_ask_book_location);
 		orderNumber = (TextView) findViewById(R.id.tv_myinfo_ask_orderNumber);
 		orderDate = (TextView) findViewById(R.id.tv_myinfo_ask_date);
 		university = (TextView) findViewById(R.id.tv_myinfo_ask_university);
-		
-		orderMessage = (TextView) findViewById(R.id.tv_myinfo_ask_message);
 		borrowDate = (TextView) findViewById(R.id.tv_myinfo_ask_borrowDate);
 		returnDate = (TextView) findViewById(R.id.tv_myinfo_ask_returnDate);
 		phoneNumber = (TextView) findViewById(R.id.tv_myinfo_ask_phoneNumber);
 		
-		MyInfoOrderDetailAsyncTask orderDetailAsyncTask = new MyInfoOrderDetailAsyncTask();
-		orderDetailAsyncTask.execute(urlTest);
+		/*MyInfoOrderDetailAsyncTask orderDetailAsyncTask = new MyInfoOrderDetailAsyncTask();
+		orderDetailAsyncTask.execute(urlTest);*/
+		
+			showData();
+		
+		
 	}
 		
 		private void showData() {
 		// TODO Auto-generated method stub
-			orderMessage.setText("昵称为" + bookOrder.getLenderName() + "的用户已接受您关于\"" 
-			+ bookOrder.getBookName() + ", " + bookOrder.getBookAuthor() + ", " + bookOrder.getBookLocation() + ",的求助 ");
-				borrowDate.setText("借书日: " + bookOrder.getBorrowTime());
-				returnDate.setText("还书日: " + bookOrder.getReturnTime());
-				university.setText("他所在的学校为: " + bookOrder.getLenderUniversity());
-				phoneNumber.setText("他的手机号为: " + bookOrder.getPhoneNumber());
+			helper.setText(bookOrder.getLenderName());
+			bookName.setText(bookOrder.getBookName());
+			author.setText(bookOrder.getBookAuthor());
+			bookLocation.setText(bookOrder.getBookLocation());
+			borrowDate.setText(bookOrder.getBorrowTime());
+			returnDate.setText(bookOrder.getReturnTime());
+			university.setText(bookOrder.getLenderUniversity());
+			phoneNumber.setText( bookOrder.getPhoneNumber());
 	}
 
-		class MyInfoOrderDetailAsyncTask extends AsyncTask<String, Void, MyInfoBookDetailBean>{
+		/*class MyInfoOrderDetailAsyncTask extends AsyncTask<String, Void, MyInfoBookDetailBean>{
 
 			@Override
 			protected MyInfoBookDetailBean doInBackground(String... params) {
@@ -74,12 +86,12 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 			protected void onPostExecute(MyInfoBookDetailBean result) {
 				super.onPostExecute(result);
 				//预留返回
-				/*orderMessage.setText("昵称为" + bookDetailBean.userName + "的用户已接受您关于\"" 
+				orderMessage.setText("昵称为" + bookDetailBean.userName + "的用户已接受您关于\"" 
 				+ bookDetailBean.bookName + ", " + bookDetailBean.bookAuthor + ", " + bookDetailBean.bookLocation + ",的求助 ");
 					borrowDate.setText("借书日: " + bookDetailBean.borrowTime);
 					returnDate.setText("还书日: " + bookDetailBean.returnTime);
 					university.setText("他所在的学校为: " + bookDetailBean.userUniversity);
-					phoneNumber.setText("他的手机号为: " + bookDetailBean.phoneNumber);*/
+					phoneNumber.setText("他的手机号为: " + bookDetailBean.phoneNumber);
 					
 					borrowDate.setText("求助订单_借书日: " + result.borrowTime);
 					returnDate.setText("求助订单_还书日: " + result.returnTime);
@@ -87,7 +99,7 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 			
 		}
 		//线程错误
-		/*HttpUtilCheck.sendHttpRequest(urlTest, new HttpCallBackListener() {
+		HttpUtilCheck.sendHttpRequest(urlTest, new HttpCallBackListener() {
 			
 			@Override
 			public void onFinish(String response) {
@@ -123,7 +135,7 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 				});
 				
 			}
-		});*/
+		});
 		
 		
 	
@@ -139,7 +151,7 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 			
 			if(jsonObject.getString("status").equals("1")){
 				//预留解析
-				/*bookDetailBean.userName = jsonObject.getString("user_name");
+				bookDetailBean.userName = jsonObject.getString("user_name");
 				bookDetailBean.bookName = jsonObject.getString("book");
 				bookDetailBean.bookAuthor = jsonObject.getString("author");
 				bookDetailBean.bookLocation = jsonObject.getString("book_location");
@@ -147,7 +159,7 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 				bookDetailBean.returnTime = jsonObject.getString("return_time");
 				bookDetailBean.userUniversity = jsonObject.getString("university");
 				bookDetailBean.phoneNumber = jsonObject.getString("phone");
-				*/
+				
 				
 				
 				
@@ -168,5 +180,5 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 		
 		
 	}
-
+*/
 }

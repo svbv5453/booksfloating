@@ -8,18 +8,14 @@ import com.booksfloating.attr.BooksAttr.BorrowInfo;
 import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.ImageLoader;
 import com.booksfloating.util.ImageManager;
-import com.booksfloating.util.LoaderImageUseVelloy;
-import com.booksfloating.util.ImageLoader.RequestCallback;
 import com.xd.booksfloating.R;
 import com.xd.booksfloating.R.color;
 import com.xd.connect.PostParameter;
 import com.xd.dialog.DialogFactory;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;

@@ -1,7 +1,5 @@
 package com.booksfloating.adapter;
 
-import java.security.PublicKey;
-
 import com.xd.booksfloating.R;
 
 import android.content.Context;

@@ -85,4 +85,13 @@ public class SharePreferenceUtil {
 	{
 		return sp.getBoolean("isAutoCheckUpdate", true);
 	}
+	//用户所在学校
+	public void setUserUniversity(String university){
+		editor.putString("university", university);
+		editor.commit();
+	}
+	public String getUserUniversity(){
+		return sp.getString("university", "");
+		
+	}
 }

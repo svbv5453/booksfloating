@@ -3,7 +3,6 @@ package com.xd.dialog;
 import com.booksfloating.util.ScreenUtil;
 import com.xd.booksfloating.R;
 
-import android.R.integer;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;

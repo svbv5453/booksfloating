@@ -3,14 +3,11 @@ package com.booksfloating.activity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.opengl.ETC1Util;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,7 +21,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.booklsfloating.activity.searchbooks.SearchBooksFragment;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.SharePreferenceUtil;
@@ -37,7 +33,7 @@ import com.xd.dialog.DialogFactory;
  * @author liuwenyuan
  *
  */
-@SuppressLint("ShowToast")
+
 //OnClickListener是一个接口，是抽象观察者，LoginActivity实现了这个接口，就变成了一个具体的观察者，
 //观察的对象就是UI对象（即主题）
 public class LoginActivity extends Activity implements OnClickListener{
@@ -126,6 +122,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 	
 	private Handler handler = new Handler()
 	{
+		@Override
 		public void handleMessage(Message msg)
 		{
 			super.handleMessage(msg);

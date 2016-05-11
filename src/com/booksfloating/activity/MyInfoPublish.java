@@ -15,6 +15,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,8 +25,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.booksfloating.adapter.MyInfoPublishAdapter;
 import com.booksfloating.domain.MyInfoPublishBookBean;
+import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
 
@@ -40,6 +43,7 @@ public class MyInfoPublish extends Activity{
 	private ListView myInfoBookPublishListView = null;
 	private Button btn_myinfo_search_book = null;
 	private Button btn_back = null;
+	private EditText et_search = null;	
 	private List<MyInfoPublishBookBean> myPublishBookBeanList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class MyInfoPublish extends Activity{
 		myInfoBookPublishListView= (ListView)findViewById(R.id.lv_my_info_book_publish);
 		btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
 		btn_back = (Button)findViewById(R.id.back);
+		et_search = (EditText) findViewById(R.id.et_my_info_search_publish);
 		
 		btn_back.setOnClickListener(new View.OnClickListener() {
 			
@@ -72,8 +77,11 @@ public class MyInfoPublish extends Activity{
 				Toast.makeText(MyInfoPublish.this, "预留搜索", Toast.LENGTH_SHORT).show();
 			}
 		});
-		loadData(this, urlTest);
-		//loadData(this, HttpUtil.MY_PUBLISH);
+		//loadData(this, urlTest);
+		SharePreferenceUtil sp = new SharePreferenceUtil(MyInfoPublish.this, Constants.SAVE_USER);
+		String url = HttpUtil.MY_PUBLISH+"?token=" + sp.getToken();
+		System.out.println(url);
+		loadData(MyInfoPublish.this, url);
 		
 		
 		
@@ -98,6 +106,7 @@ public class MyInfoPublish extends Activity{
 
 			@Override
 			public void onResponse(JSONObject response) {
+				System.out.println(response.toString());
 				ACache.get(context).put("myInfoPublish", response);
 				showListData(context, response);
 				
@@ -140,7 +149,7 @@ public class MyInfoPublish extends Activity{
 		try {
 			//JSONObject jsonObject = new JSONObject(jsonData);
 			if(jsonObject.getString("status").equals("1")){
-				/*JSONArray jsonArray = jsonObject.getJSONArray("message");
+				JSONArray jsonArray = jsonObject.getJSONArray("message");
 				for(int i = 0; i<jsonArray.length(); i++){
 					jsonObject = jsonArray.getJSONObject(i);
 					MyInfoPublishBookBean publishBookBean = new MyInfoPublishBookBean();
@@ -152,11 +161,11 @@ public class MyInfoPublish extends Activity{
 					publishBookBean.bookIconUrl =jsonObject.getString("picture");
 					myPublishBookBeanList.add(publishBookBean);
 					
-				}*/
+				}
 				
 				
 				
-				JSONArray jsonArray = jsonObject.getJSONArray("data");
+				/*JSONArray jsonArray = jsonObject.getJSONArray("data");
 				for(int i = 0; i < jsonArray.length(); i++){
 					jsonObject = jsonArray.getJSONObject(i);
 					MyInfoPublishBookBean publishBookBean = new MyInfoPublishBookBean();
@@ -166,7 +175,7 @@ public class MyInfoPublish extends Activity{
 					
 					myPublishBookBeanList.add(publishBookBean);
 					
-				}
+				}*/
 				return myPublishBookBeanList;
 				
 			}

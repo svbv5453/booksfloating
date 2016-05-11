@@ -13,8 +13,8 @@ public class MD5 {
 				byte[] md5Byte = md5.digest(str.getBytes("UTF8"));
 				StringBuffer sb = new StringBuffer();
 				for (int i = 0; i < md5Byte.length; i++) {
-					sb.append(HEX[(int) (md5Byte[i] & 0xff) / 16]);
-					sb.append(HEX[(int) (md5Byte[i] & 0xff) % 16]);
+					sb.append(HEX[(md5Byte[i] & 0xff) / 16]);
+					sb.append(HEX[(md5Byte[i] & 0xff) % 16]);
 				}
 				str = sb.toString();
 			} catch (NoSuchAlgorithmException e) {

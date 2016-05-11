@@ -9,7 +9,6 @@ import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.widget.MyRadioButton;
 import com.xd.booksfloating.R;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;

@@ -3,7 +3,6 @@ package com.booksfloating.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.booksfloating.domain.BooksRecommendBean;
-import com.booksfloating.util.ImageLoader;
-import com.booksfloating.util.ImageManager;
 import com.booksfloating.util.LoaderImageUseVelloy;
-import com.booksfloating.util.ImageLoader.RequestCallback;
 import com.xd.booksfloating.R;
 
 public class BookRecommendAdapter extends BaseAdapter{
@@ -73,7 +69,9 @@ public class BookRecommendAdapter extends BaseAdapter{
 		//setImageView(url, viewHolder.bookImage);//加载速度太慢！
 		//new LoadBookImage().showImageByThread(viewHolder.bookImage, url);没有网打不开
 		
-		new LoaderImageUseVelloy().LoaderImage(myContext, viewHolder.bookImage, url);
+			new LoaderImageUseVelloy().LoaderImage(myContext, viewHolder.bookImage, url);
+		
+		
 		//内存溢出，使用单例模式解决，context不能为Activity，必须是context.getApplicationContext()才可以
 		//ImageManager.from(myContext).displayImage(viewHolder.bookImage, url, R.drawable.default_book);
 		

@@ -14,7 +14,6 @@ import com.xd.booksfloating.R;
 import com.xd.connect.PostParameter;
 import com.xd.dialog.DialogFactory;
 
-import android.R.integer;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
@@ -85,6 +84,7 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 
 		dp_expect_borrow_time.init(year1, month1, day1, new OnDateChangedListener() {
 			
+			@Override
 			public void onDateChanged(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
 				// TODO Auto-generated method stub

@@ -23,21 +23,30 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.booksfloating.adapter.BookRecommendAdapter;
 import com.booksfloating.adapter.MyInfoOrderAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.domain.MyInfoBookDetailBean;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.SharePreferenceUtil;
+import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
 
 public class AskFragment extends Fragment {
 	
-	private List<BooksRecommendBean> booksBeanList;
+	
 	private List<MyInfoBookDetailBean> booksOrderList;
+	private MyInfoBookDetailBean bookOrder;
 
 	private ListView myInfoOrderListView = null;
 	//private Button btn_myinfo_search_book = null;
+	
 	private static String urlTest = "http://www.imooc.com/api/teacher?type=4&num=30";
 	
 	@Override
@@ -46,7 +55,7 @@ public class AskFragment extends Fragment {
 		//View view = inflater.inflate(R.layout.myinfo_order_askfragment_test, container, false);
 		View view = inflater.inflate(R.layout.myinfo_order_layout, container, false);
 		myInfoOrderListView = (ListView)view.findViewById(R.id.lv_my_info_book_order);
-	   /* btn_myinfo_search_book = (Button) view.findViewById(R.id.btn_my_info_search_book);
+	    /*btn_myinfo_search_book = (Button) view.findViewById(R.id.btn_my_info_search_book);
 		btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -55,11 +64,13 @@ public class AskFragment extends Fragment {
 				Toast.makeText(getActivity(), "预留搜索", Toast.LENGTH_SHORT).show();
 			}
 		});*/
-		loadData(getActivity(), urlTest);
+		//loadData(getActivity(), urlTest);
 		/**
 		 * 实际方法，
 		 */
-		//loadData(getActivity(), HttpUtil.BORROW_ORDER);
+		SharePreferenceUtil sp = new SharePreferenceUtil(getActivity(), Constants.SAVE_USER);
+		String url = HttpUtil.BORROW_ORDER + "?token=" + sp.getToken();
+		loadData(getActivity(), url);
 		
 		myInfoOrderListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -79,33 +90,59 @@ public class AskFragment extends Fragment {
 	
 	
 	private void IntentToActivity(int position) {
-		MyInfoBookDetailBean bookOrder = new MyInfoBookDetailBean();
+		
 		
 		Intent intent = new Intent(getActivity(), MyInfoOrderAskDetailActivity.class);
-		intent.putExtra("position", position);
-		Bundle mBundle = new Bundle();
-		mBundle.putParcelable("borrowOrder", bookOrder);
-		intent.putExtras(mBundle);
 		
+		/*Bundle mBundle = new Bundle();
+		mBundle.putParcelable("borrowOrder", booksOrderList.get(position));
+		System.out.println(booksOrderList.get(position).getLenderName());
+		intent.putExtras(mBundle);*/
+		intent.putExtra("borrowOrder", booksOrderList.get(position));
 		startActivity(intent);
 		
 	}
 	public void loadData(Context context, String url){
 		if(isNetwrokAvaliable(context)){
-			MyInfoOrderAsyncTask myInfoOrderAsyncTask = new MyInfoOrderAsyncTask();
-			myInfoOrderAsyncTask.execute(url);
+			loadListData(context, url);
 		}else {
 			
-			String response = ACache.get(context).getAsString("求助订单");
+			JSONObject response = ACache.get(context).getAsJSONObject("求助订单");
 			if(response != null){
 				Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
-				MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), parseJsonData(response));
-				myInfoOrderListView.setAdapter(adapter);
+				showListData(context, response);
 			}
 			Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			
 			
 		}
+	}
+	public void loadListData(final Context context, String url){
+		
+		RequestQueue requestQueue = SingleRequestQueue.getInstance(context);
+		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				System.out.println(response.toString());
+				ACache.get(context).put("求助订单", response);
+				showListData(context, response);
+			}
+		}, new Response.ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				
+			}
+		});
+		requestQueue.add(jsonObjectRequest);
+		
+	}
+	public void showListData(Context context, JSONObject response){
+		parseJsonData(response);
+		MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), booksOrderList);
+		myInfoOrderListView.setAdapter(adapter);
+		
 	}
 	
 	public boolean isNetwrokAvaliable(Context context){
@@ -129,66 +166,12 @@ public class AskFragment extends Fragment {
 	}
 
 
-	class MyInfoOrderAsyncTask extends AsyncTask<String, Void, List<BooksRecommendBean>>{
-
-		@Override
-		protected List<BooksRecommendBean> doInBackground(String... params) {
-			String jsonData = HttpUtil.getJsonData(params[0]);
-			ACache.get(getActivity()).put("求助订单", jsonData);
-			
-			return parseJsonData(jsonData);
-		}
-		@Override
-		protected void onPostExecute(List<BooksRecommendBean> result) {
-			super.onPostExecute(result);
-			
-			MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), result);
-			myInfoOrderListView.setAdapter(adapter);
-		}
-		
-	}
-	/**
-	 * 测试解析
-	 * @param jsonData
-	 * @return
-	 */
-	public List<BooksRecommendBean> parseJsonData(String jsonData) {
-		booksBeanList = new ArrayList<BooksRecommendBean>();
-		booksOrderList = new ArrayList<MyInfoBookDetailBean>();
-		try {
-			
-			JSONObject jsonObject = new JSONObject(jsonData);
-			if(jsonObject.getString("status").equals("1")){
-				
-				JSONArray jsonArray = jsonObject.getJSONArray("data");
-				for(int i = 0; i < jsonArray.length(); i++){
-					jsonObject = jsonArray.getJSONObject(i);
-					BooksRecommendBean booksRecommendBean = new BooksRecommendBean();
-					booksRecommendBean.bookName = jsonObject.getString("name");
-					booksRecommendBean.bookAuthor = jsonObject.getString("description");
-					booksBeanList.add(booksRecommendBean);
-					
-				}
-				
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		
-		return booksBeanList;
-		
-	}
-	/**
-	 * 实际解析
-	 * @param jsonData
-	 * @return
-	 */
-	/*public List<MyInfoBookDetailBean> parseJsonData(String jsonData) {
+	public List<MyInfoBookDetailBean> parseJsonData(JSONObject jsonObject) {
 		
 		booksOrderList = new ArrayList<MyInfoBookDetailBean>();
 		try {
 			
-			JSONObject jsonObject = new JSONObject(jsonData);
+			
 			if(jsonObject.getString("status").equals("1")){
 				
 				//预留解析
@@ -200,15 +183,23 @@ public class AskFragment extends Fragment {
 					
 					String bookName = jsonObject.getString("book");
 					String bookAuthor = jsonObject.getString("author");
-					String bookLocation = Constants.schoolIDtoNameMap.get(Integer.parseInt(jsonObject.getString("university")));
-					String bookPublicshTime = jsonObject.getString("lend_time");
+					String bookLocation = jsonObject.getString("university");
+					String bookPublicshTime = parseDate(jsonObject.getString("lend_time"));
 					String lenderName = jsonObject.getString("lender");
-					String lenderUniversity = Constants.schoolIDtoNameMap.get(Integer.parseInt(jsonObject.getString("lender_university")));
-					String borrowTime = jsonObject.getString("lend_time");
-					String returnTime = jsonObject.getString("return_time");
+					//String lenderUniversity = jsonObject.getString("lender_university");
+					String borrowTime = parseDate(jsonObject.getString("lend_time"));
+					String returnTime = parseDate(jsonObject.getString("return_time"));
 					String phoneNumber = jsonObject.getString("phone");
 					
-					MyInfoBookDetailBean bookOrder = new MyInfoBookDetailBean(bookName, bookAuthor, bookLocation, lenderName, lenderUniversity, borrowTime, bookPublicshTime, returnTime, phoneNumber);
+					bookOrder = new MyInfoBookDetailBean();
+					bookOrder.setBookAuthor(bookAuthor);
+					bookOrder.setBookLocation(bookLocation);
+					bookOrder.setBookName(bookName);
+					bookOrder.setBookPublicshTime(bookPublicshTime);
+					bookOrder.setBorrowTime(borrowTime);
+					bookOrder.setLenderName(lenderName);
+					bookOrder.setPhoneNumber(phoneNumber);
+					bookOrder.setReturnTime(returnTime);
 					booksOrderList.add(bookOrder);
 					
 					
@@ -222,6 +213,16 @@ public class AskFragment extends Fragment {
 		
 		return booksOrderList;
 		
-	}*/
+	}
+	private String parseDate(String date){
+		if(date != null){
+			//String[] dateString = date.split("-");
+			String[] dateYMD = date.split("-");
+			//String[] dateHM = dateString[1].split(":");
+			return dateYMD[0] + "年" + dateYMD[1] + "月" + dateYMD[2] + "日";
+		}
+		
+		return null;
+	}
 
 }

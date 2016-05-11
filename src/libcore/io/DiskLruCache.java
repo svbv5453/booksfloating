@@ -48,13 +48,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
-
 /**
  ******************************************************************************
  * Taken from the JB source code, can be found in:
@@ -692,7 +685,8 @@ public final class DiskLruCache implements Closeable {
     /**
      * Closes this cache. Stored values will remain on the filesystem.
      */
-    public synchronized void close() throws IOException {
+    @Override
+	public synchronized void close() throws IOException {
         if (journalWriter == null) {
             return; // already closed
         }

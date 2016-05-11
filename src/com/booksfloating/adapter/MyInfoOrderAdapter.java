@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.booksfloating.domain.BooksRecommendBean;
+import com.booksfloating.domain.MyInfoBookDetailBean;
 import com.xd.booksfloating.R;
 
 public class MyInfoOrderAdapter extends BaseAdapter {
-	List<BooksRecommendBean> booksBeanList;
+	List<MyInfoBookDetailBean> booksBeanList;
 	LayoutInflater mLayoutInflater;
 
-	public MyInfoOrderAdapter(Context context, List<BooksRecommendBean> booksBeanList) {
+	public MyInfoOrderAdapter(Context context, List<MyInfoBookDetailBean> booksBeanList) {
 		super();
 		this.booksBeanList = booksBeanList;
 		mLayoutInflater = LayoutInflater.from(context);
@@ -49,10 +49,10 @@ public class MyInfoOrderAdapter extends BaseAdapter {
 		}else{
 			viewHoder = (ViewHolder) convertView.getTag();
 		}
-		viewHoder.orderDate.setText("时间:" + booksBeanList.get(position).bookPublicshTime);
-		String bookName = booksBeanList.get(position).bookName;
-		String bookAuthor = booksBeanList.get(position).bookAuthor;
-		String bookLocation = booksBeanList.get(position).bookLocation;
+		viewHoder.orderDate.setText("时间:" + booksBeanList.get(position).getBookPublicshTime());
+		String bookName = booksBeanList.get(position).getBookName();
+		String bookAuthor = booksBeanList.get(position).getBookAuthor();
+		String bookLocation = booksBeanList.get(position).getBookLocation();
 		
 		viewHoder.orderMessage.setText("关于\"" + bookName + "," + bookAuthor + "," + bookLocation +"\"的求助" );
 		return convertView;

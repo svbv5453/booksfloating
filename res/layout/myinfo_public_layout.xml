@@ -2,29 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     android:orientation="vertical" >
      <include layout="@layout/nav_public_layout"/>
-     <!--   
-     <LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_bar"
-    android:layout_gravity="center"
-    android:background="@color/theme_blue"
-    android:orientation="horizontal" >
-    
-   
-    
-     <Button 
-         android:id="@+id/btn_back_mypublish"
-         style="@style/navBackButtonStyle"/>
      
-     <TextView 
-         style="@style/navTextStyle"
-         android:text="@string/btn_my_info_publish"
-        />
-	 
-
-   </LinearLayout> -->
+   <LinearLayout 
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       android:focusable="true"
+       android:focusableInTouchMode="true">
+       
+   </LinearLayout>
     
 	 <RelativeLayout
         android:layout_width="match_parent"
@@ -49,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
+            
             android:layout_toLeftOf="@+id/btn_my_info_search_book"
             android:hint="书名:"
             android:ems="10" >
@@ -57,33 +46,16 @@
 
     </RelativeLayout>
     
-    <!-- <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:padding="2dp"
-        android:orientation="horizontal"
-        >
-	    <EditText 
-	        android:id="@+id/et_my_info_search_publish"
-	        android:layout_width="0dp"
-	        android:layout_height="35dp"
-	        android:layout_weight="3"
-	        android:hint="@string/my_info_search_bookName"/>
-	    <Button 
-	        android:id="@+id/btn_my_info_search_book"
-	        android:layout_width="0dp"
-	        android:layout_height="35dp"
-	        android:layout_weight="1"
-	        android:background="@drawable/shape_search"
-	        android:text="@string/btn_my_info_search_book"
-	        android:gravity="center"
-	        android:textSize="15sp"
-	        android:textColor="@color/white"/>
-    </LinearLayout> -->
+   
     <ListView 
         android:id="@+id/lv_my_info_book_publish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="2dp"
         ></ListView>
 
 </LinearLayout>

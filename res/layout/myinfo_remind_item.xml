@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
+    android:background="@color/white"
     android:orientation="horizontal" >
     
      <ImageView 
@@ -21,34 +21,80 @@
                 android:id="@+id/tv_my_info_remind_book_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
+                android:layout_marginTop="5dp"
                 android:text="think in java"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 />
-            <TextView 
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView 
+                
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                
+                android:text="作者:"
+                android:textSize="16sp"
+                />
+                <TextView 
                 android:id="@+id/tv_my_info_remind_book_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="(美)埃克尔"
+                android:textSize="16sp"
+                />
+            </LinearLayout>
+             <LinearLayout 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:text="作者: (美)埃克尔"
-                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                 <TextView 
+              
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                
+                android:text="馆藏: "
+                android:textSize="16sp"
                 />
-            <TextView 
+                 <TextView 
                 android:id="@+id/tv_my_info_remind_book_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="西安电子科技大学北校区"
+                android:textSize="16sp"
+                />
+                </LinearLayout>
+                <LinearLayout 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:text="馆藏: 西安电子科技大学北校区"
-                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <TextView 
+                
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                
+                android:text="到期时间为:"
+                android:textColor="@color/red"
+                android:textSize="16sp"
                 />
-             <TextView 
+                <TextView 
                 android:id="@+id/tv_my_info_remind_expirationTime"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:text="到期时间为: 2016年4月1日"
-                android:textSize="12sp"
+                android:layout_marginLeft="5dp"
+                android:text="2016年4月1日"
+                android:textSize="16sp"
+                android:textColor="@color/red"
                 />
+                </LinearLayout>
+           
+             
            
         </LinearLayout>
     

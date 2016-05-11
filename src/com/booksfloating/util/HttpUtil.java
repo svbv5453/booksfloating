@@ -13,7 +13,6 @@ import java.net.URLEncoder;
 
 import android.util.Log;
 
-import com.booksfloating.activity.LoginActivity;
 import com.booksfloating.globalvar.Constants;
 import com.xd.connect.PostParameter;
 
@@ -45,9 +44,9 @@ public class HttpUtil {
 	public static final String FEEDBACK = Constants.SERVER_IP + "/feedback";
 	public static final String VERSION_CHECK = Constants.SERVER_IP + "/version_check";
 	public static final String ABOUT_US = Constants.SERVER_IP + "/about_us";
-	public static final String MY_PUBLISH = Constants.SERVER_IP + "/my_publish?token=8499";
-	public static final String BORROW_ORDER = Constants.SERVER_IP + "/borrow_order?token=8499";
-	public static final String LEND_ORDER = Constants.SERVER_IP + "/lend_order?token=2605";
+	public static final String MY_PUBLISH = Constants.SERVER_IP + "/my_publish";
+	public static final String BORROW_ORDER = Constants.SERVER_IP + "/borrow_order";
+	public static final String LEND_ORDER = Constants.SERVER_IP + "/lend_order";
 	public static final String FORGET_PASSWORD = Constants.SERVER_IP + "/forget_password";
 	
 	public static String getJsonData(final String urlString) {

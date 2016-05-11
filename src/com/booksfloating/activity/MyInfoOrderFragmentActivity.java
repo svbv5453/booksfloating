@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 
 	private TextView tv_ask = null;
 	private TextView tv_help = null;
+	private EditText et_search = null;
 	private Fragment askFragment = null;
 	private Fragment helpFragment;
 	private Fragment currentFragment;
@@ -66,6 +68,7 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 		
 		tv_ask = (TextView) findViewById(R.id.tv_my_info_order_ask);
 		tv_help = (TextView) findViewById(R.id.tv_my_info_order_help);
+		et_search = (EditText) findViewById(R.id.et_my_info_search_order);
 		
 		tv_ask.setOnClickListener(this);
 		tv_help.setOnClickListener(this);

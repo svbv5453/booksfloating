@@ -45,7 +45,9 @@
         <activity android:name="com.booklsfloating.activity.searchbooks.PublishInfoActivity"></activity>
         <activity android:name="com.booklsfloating.activity.searchbooks.SearchBooksDetailActivity"></activity>  
         
-        <activity android:name="com.booklsfloating.activity.infonotice.BooksInfoActivity"></activity>  
+        <activity android:name="com.booksfloating.activity.infonotice.BooksInfoActivity"></activity>
+        
+        <activity android:name="com.booksfloating.activity.infonotice.HelpBorrowActivity"></activity>  
         
          <activity 
             android:name="com.booksfloating.activity.MyInfoPublish"></activity>

@@ -46,9 +46,14 @@ public class ParseBooksAttrJson {
 					booksAttr.setPublishDate(tempObject.optString("publishdate"));
 					borrowInfo.borrowIndex = tempObject.optString("index");
 					String university = tempObject.optString("university");
+
+					
+					
+
 					//borrowInfo.borrowLoc = Constants.schoolIDtoNameMap.get(Integer.parseInt(university));
 					borrowInfo.borrowLoc = university;
 					booksAttr.setBorrowSchool(borrowInfo.borrowLoc);
+
 					booksAttr.setBorrowInfo(borrowInfo);
 					booksAttrsList.add(booksAttr);
 				}

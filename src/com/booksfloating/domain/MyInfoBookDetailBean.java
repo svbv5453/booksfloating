@@ -1,39 +1,27 @@
 package com.booksfloating.domain;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class MyInfoBookDetailBean implements Parcelable{
-	public  String bookName;
-	public String bookAuthor;
-	public String bookLocation;
-	public String lenderName;
-	public String lenderUniversity;
-	public String borrowTime;
-	public String bookPublicshTime;
-	public String returnTime;
-	public String phoneNumber;
+public class MyInfoBookDetailBean implements Serializable{
+	private String bookName;
+	private String bookAuthor;
+	private String bookLocation;
+	private String lenderName;
+	private String lenderUniversity;
+	private String borrowTime;
+	private String bookPublicshTime;
+	private String returnTime;
+	private String phoneNumber;
 	
 	
 	public MyInfoBookDetailBean() {
 		super();
 	}
 
-	public MyInfoBookDetailBean(String bookName, String bookAuthor,
-			String bookLocation, String lenderName, String lenderUniversity,
-			String borrowTime, String bookPublicshTime, String returnTime,
-			String phoneNumber) {
-		super();
-		this.bookName = bookName;
-		this.bookAuthor = bookAuthor;
-		this.bookLocation = bookLocation;
-		this.lenderName = lenderName;
-		this.lenderUniversity = lenderUniversity;
-		this.borrowTime = borrowTime;
-		this.bookPublicshTime = bookPublicshTime;
-		this.returnTime = returnTime;
-		this.phoneNumber = phoneNumber;
-	}
+	
 	
 	public String getBookName() {
 		return bookName;
@@ -89,7 +77,7 @@ public class MyInfoBookDetailBean implements Parcelable{
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	@Override
+	/*@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -133,7 +121,7 @@ public class MyInfoBookDetailBean implements Parcelable{
 		this.bookPublicshTime = source.readString();
 		this.returnTime = source.readString();
 		this.phoneNumber = source.readString();
-	}
+	}*/
 	
 
 }
