@@ -19,13 +19,12 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 
 	private TextView tv_ask = null;
 	private TextView tv_help = null;
-	
+	private EditText et_search = null;
 	private Fragment askFragment = null;
 	private Fragment helpFragment;
 	private Fragment currentFragment;
 	private FragmentManager fragmentManage;
 	private Button btn_myinfo_search_book = null;
-	private EditText et_search = null;
 	private Button btn_back = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +50,15 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 				
 			}
 		});
-		/* et_search = (EditText) findViewById(R.id.et_my_info_search_order);
-		 * btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
+		 btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
 			btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					String key = et_search.getText().toString().trim();
 					
 					Toast.makeText(MyInfoOrderFragmentActivity.this, "预留搜索", Toast.LENGTH_SHORT).show();
 				}
-			});*/
+			});
 	}
 	
 
@@ -71,7 +68,7 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 		
 		tv_ask = (TextView) findViewById(R.id.tv_my_info_order_ask);
 		tv_help = (TextView) findViewById(R.id.tv_my_info_order_help);
-		
+		et_search = (EditText) findViewById(R.id.et_my_info_search_order);
 		
 		tv_ask.setOnClickListener(this);
 		tv_help.setOnClickListener(this);

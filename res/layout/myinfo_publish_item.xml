@@ -25,21 +25,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="think in java"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 />
             <TextView 
                 android:id="@+id/tv_my_info_publish_book_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="作者: (美)埃克尔"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 />
             <TextView 
                 android:id="@+id/tv_my_info_publish_book_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="可借馆藏: 西安电子科技大学北校区"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 />
              <TextView 
                 android:id="@+id/tv_my_info_publish_time"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="发布时间: 2016年2月1日15时01分"
                 android:textColor="@color/sh_orange"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 />
             <TextView 
                 android:id="@+id/tv_my_info_publish_book_remark"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="备注: 希望好心人尽快帮我借到"
                 android:textColor="@color/sh_orange"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 />
         </LinearLayout>
     
