@@ -31,9 +31,9 @@ public class MyInfoOrderDetailFragment extends Fragment{
 			Bundle savedInstanceState) {
 		//暂时不用
 		View view = inflater.inflate(R.layout.myinfo_ask_order_detail, container, false);
-		orderNumber = (TextView) view.findViewById(R.id.tv_myinfo_ask_orderNumber);
+		//orderNumber = (TextView) view.findViewById(R.id.tv_myinfo_ask_orderNumber);
 		orderDate = (TextView) view.findViewById(R.id.tv_myinfo_ask_date);
-		university = (TextView) view.findViewById(R.id.tv_myinfo_ask_university);
+		//university = (TextView) view.findViewById(R.id.tv_myinfo_ask_university);
 		
 		//orderMessage = (TextView) view.findViewById(R.id.tv_myinfo_ask_message);
 		borrowDate = (TextView) view.findViewById(R.id.tv_myinfo_ask_borrowDate);

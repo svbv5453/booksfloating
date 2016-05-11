@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,7 +60,14 @@ public class MyInfoSetResetPassword extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				changePassword();
+				
+				if(!sp.getToken().isEmpty()){
+					changePassword();
+				}else{
+					Toast.makeText(MyInfoSetResetPassword.this, "您尚未登陆，请您登陆！", Toast.LENGTH_SHORT).show();
+				}
+				
+				
 				
 				
 			}
@@ -76,6 +84,7 @@ public class MyInfoSetResetPassword extends Activity{
 				Toast.makeText(MyInfoSetResetPassword.this, "密码修改成功", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(MyInfoSetResetPassword.this, MyInfoSet.class);
 				startActivity(intent);
+				finish();
 				break;
 			case OLDPASSWORD_ERROR:
 				Toast.makeText(MyInfoSetResetPassword.this, "原密码错误，请重写输入！", Toast.LENGTH_SHORT).show();
@@ -99,39 +108,42 @@ public class MyInfoSetResetPassword extends Activity{
 		final String oldPasswrodString = oldPassowrd.getText().toString().trim();
 		final String newPasswordString = newPassword.getText().toString().trim();
 		final String confimPasswordString = confimPassword.getText().toString().trim();
-		final PostParameter[] parameters = new PostParameter[3];
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				if(oldPasswrodString.length()== 0 || newPasswordString.length() == 0)
-				{					
-					handler.sendEmptyMessage(NULL_ERROR);
-				}else if(!newPasswordString.equals(confimPasswordString)){
-					handler.sendEmptyMessage(PASSWORD_ERROR);
-				}else{
-					
-					parameters[0] = new PostParameter("token", sp.getToken());
-					parameters[1] = new PostParameter("old_password", oldPasswrodString);
-					parameters[2] = new PostParameter("new_password", confimPasswordString);
-					String responseJson = HttpUtil.httpRequest(HttpUtil.CHANGE_PASSWORD, parameters, HttpUtil.POST);
-					if(responseJson != null){
-						if(parseResponseJson(responseJson)){
-							handler.sendEmptyMessage(OK);
-						}else{
-							handler.sendEmptyMessage(OLDPASSWORD_ERROR);
-						}
-						
-						
+		
+			final PostParameter[] parameters = new PostParameter[3];
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					if(oldPasswrodString.length()== 0 || newPasswordString.length() == 0)
+					{					
+						handler.sendEmptyMessage(NULL_ERROR);
+					}else if(!newPasswordString.equals(confimPasswordString)){
+						handler.sendEmptyMessage(PASSWORD_ERROR);
 					}else{
-						handler.sendEmptyMessage(SERVER_ERROR);
+						
+						parameters[0] = new PostParameter("token", sp.getToken());
+						parameters[1] = new PostParameter("old_password", oldPasswrodString);
+						parameters[2] = new PostParameter("new_password", confimPasswordString);
+						String responseJson = HttpUtil.httpRequest(HttpUtil.CHANGE_PASSWORD, parameters, HttpUtil.POST);
+						if(responseJson != null){
+							if(parseResponseJson(responseJson)){
+								handler.sendEmptyMessage(OK);
+							}else{
+								handler.sendEmptyMessage(OLDPASSWORD_ERROR);
+							}
+							
+							
+						}else{
+							handler.sendEmptyMessage(SERVER_ERROR);
+						}
 					}
+					
+					
 				}
-				
-				
-			}
-		}).start();
-	}
+			}).start();
+		
+		}
+		
 	public boolean parseResponseJson(String responseJson){
 		JSONObject jsonObject;
 		try {

@@ -55,6 +55,7 @@ public class MyInfoPublishAdapter extends BaseAdapter {
 			viewHolder.bookLocation = (TextView) convertView.findViewById(R.id.tv_my_info_publish_book_location);
 			viewHolder.bookRemark = (TextView) convertView.findViewById(R.id.tv_my_info_publish_book_remark);
 			viewHolder.bookImage = (ImageView) convertView.findViewById(R.id.iv_my_info_publish_book_image);
+			viewHolder.publishTime = (TextView) convertView.findViewById(R.id.tv_my_info_publish_time);
 			convertView.setTag(viewHolder);
 			
 		}else{
@@ -62,11 +63,11 @@ public class MyInfoPublishAdapter extends BaseAdapter {
 			
 		}
 		viewHolder.bookName.setText(publishBookBeanList.get(position).bookName);
-		viewHolder.bookAuthor.setText(publishBookBeanList.get(position).bookAuthor);
-		viewHolder.bookLocation.setText(publishBookBeanList.get(position).bookLocation);
+		viewHolder.bookAuthor.setText("作者: " + publishBookBeanList.get(position).bookAuthor);
+		viewHolder.bookLocation.setText("可借馆藏： " + publishBookBeanList.get(position).bookLocation);
 		//时间问题
-		//viewHolder.publishTime.setText(publishBookBeanList.get(position).bookPublicshTime);//后面添加
-		viewHolder.bookRemark.setText(publishBookBeanList.get(position).bookRemark);
+		viewHolder.publishTime.setText("发布时间：" + publishBookBeanList.get(position).bookPublicshTime);//后面添加
+		viewHolder.bookRemark.setText("备注：" + publishBookBeanList.get(position).bookRemark);
 		//viewHolder.bookImage.setImageResource(android.R.id.icon);
 		String url = publishBookBeanList.get(position).bookIconUrl;
 		System.out.println("图片地址" + url);

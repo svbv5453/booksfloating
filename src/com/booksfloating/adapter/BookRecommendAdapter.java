@@ -65,10 +65,28 @@ public class BookRecommendAdapter extends BaseAdapter{
 		convertView.setTag(viewHolder);	
 		
 		viewHolder.bookName.setText(booksBeanList.get(position).bookName);
-		viewHolder.bookAuthor.setText(booksBeanList.get(position).bookAuthor);
+
+		/*viewHolder.bookAuthor.setText("作者: " + booksBeanList.get(position).bookAuthor);
+		viewHolder.bookImage.setImageResource(android.R.id.icon);
+		String url = booksBeanList.get(position).bookImageUrl;*/
+		//viewHolder.bookImage.setTag(url);
+		//setImageView(url, viewHolder.bookImage);//加载速度太慢！
+		//new LoadBookImage().showImageByThread(viewHolder.bookImage, url);没有网打不开
+		/**
+		 * 不知道为什么有问题，用volley加载图片老是乱跳，并且错位，以前都没有问题！
+		 */
+			//new LoaderImageUseVelloy().LoaderImage(myContext, viewHolder.bookImage, url);
+			/*ImageLoader mImageLoader = new ImageLoader(myContext);
+		    mImageLoader.DisplayImage(url, viewHolder.bookImage, false,R.drawable.default_book);*/
+		
+		//内存溢出，使用单例模式解决，context不能为Activity，必须是context.getApplicationContext()才可以
+		//ImageManager.from(myContext).displayImage(viewHolder.bookImage, url, R.drawable.default_book);
+
+		viewHolder.bookAuthor.setText("作者: " + booksBeanList.get(position).bookAuthor);
 		viewHolder.bookRanking.setText(booksBeanList.get(position).getBookRanking());
 		ImageLoader imageLoader = new ImageLoader(myContext);
 		imageLoader.DisplayImage(booksBeanList.get(position).bookImageUrl, viewHolder.bookImage, false, R.drawable.default_book);
+
 		
 		if(position == 0){
 			viewHolder.bookRanking.setBackgroundResource(R.drawable.bg_books_ranking1);

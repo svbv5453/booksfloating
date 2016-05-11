@@ -95,8 +95,12 @@ public class AskFragment extends Fragment {
 		 */
 		SharePreferenceUtil sp = new SharePreferenceUtil(getActivity(), Constants.SAVE_USER);
 		String url = HttpUtil.BORROW_ORDER + "?token=" + sp.getToken();
-		loadData(getActivity(), url);
 		
+		if(!sp.getToken().isEmpty()){
+			loadData(getActivity(), url);
+		}else{
+			Toast.makeText(getActivity(), "你尚未登录，无法查看您的信息", Toast.LENGTH_SHORT).show();
+		}
 		myInfoOrderListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -231,6 +235,8 @@ public class AskFragment extends Fragment {
 				}
 				
 				
+			}else if(jsonObject.getString("status").equals("0")){
+				Toast.makeText(getActivity(), "您尚未发布信息", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

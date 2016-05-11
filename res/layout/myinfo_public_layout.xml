@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            
+            android:paddingLeft="5dp"
             android:layout_toLeftOf="@+id/btn_my_info_search_book"
             android:hint="书名:"
             android:ems="10" 

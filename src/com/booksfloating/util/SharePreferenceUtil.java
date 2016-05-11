@@ -94,4 +94,13 @@ public class SharePreferenceUtil {
 		return sp.getString("university", "");
 		
 	}
+	//信用积分
+	public void setCreditScore(int number){
+		int temp = getCreditScroe();
+		editor.putInt("creditScore", temp + number);
+		editor.commit();
+	}
+	public int getCreditScroe(){
+		return sp.getInt("creditScore", 0);
+	}
 }

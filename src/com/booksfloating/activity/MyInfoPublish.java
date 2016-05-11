@@ -100,8 +100,12 @@ public class MyInfoPublish extends Activity{
 		//loadData(this, urlTest);
 		SharePreferenceUtil sp = new SharePreferenceUtil(MyInfoPublish.this, Constants.SAVE_USER);
 		String url = HttpUtil.MY_PUBLISH+"?token=" + sp.getToken();
-		System.out.println(url);
-		loadData(MyInfoPublish.this, url);
+		if(!sp.getToken().isEmpty()){
+			loadData(MyInfoPublish.this, url);
+		}else{
+			Toast.makeText(MyInfoPublish.this, "你尚未登录，无法查看您的信息", Toast.LENGTH_SHORT).show();
+		}
+		
 		
 		
 		
@@ -176,7 +180,7 @@ public class MyInfoPublish extends Activity{
 					publishBookBean.bookName = jsonObject.getString("book");
 					publishBookBean.bookAuthor = jsonObject.getString("author");
 					publishBookBean.bookLocation = jsonObject.getString("university");
-					publishBookBean.bookPublicshTime = jsonObject.getString("publish_time");
+					publishBookBean.bookPublicshTime = parseDate(jsonObject.getString("publish_time"));
 					publishBookBean.bookRemark = jsonObject.getString("remarks");
 					publishBookBean.bookIconUrl =jsonObject.getString("picture");
 					myPublishBookBeanList.add(publishBookBean);
@@ -186,10 +190,22 @@ public class MyInfoPublish extends Activity{
 				
 				return myPublishBookBeanList;
 				
+			}else if(jsonObject.getString("status").equals("0")){
+				Toast.makeText(MyInfoPublish.this, "您尚未发布信息", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {
 			
 			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	private String parseDate(String date){
+		if(date != null){
+			//String[] dateString = date.split("-");
+			String[] dateYMD = date.split("-");
+			//String[] dateHM = dateString[1].split(":");
+			return dateYMD[0] + "年" + dateYMD[1] + "月" + dateYMD[2] + "日";
 		}
 		
 		return null;

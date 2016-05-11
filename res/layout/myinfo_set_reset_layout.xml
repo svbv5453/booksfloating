@@ -26,6 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:hint="请输入旧密码"
+            android:textSize="@dimen/nav_textsize_16"
             android:background="@drawable/input_box"
             />
         
@@ -48,6 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:hint="请输入新密码"
+            android:textSize="@dimen/nav_textsize_16"
             android:background="@drawable/input_box"
             />
         
@@ -70,6 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:hint="请再次确认密码"
+            android:textSize="@dimen/nav_textsize_16"
             android:background="@drawable/input_box"
             />
         

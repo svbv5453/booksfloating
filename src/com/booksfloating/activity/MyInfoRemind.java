@@ -57,7 +57,12 @@ public class MyInfoRemind extends Activity{
 		});
 		SharePreferenceUtil sp = new SharePreferenceUtil(MyInfoRemind.this, Constants.SAVE_USER);
 		String url = HttpUtil.BORROW_ORDER + "?token=" + sp.getToken();
-		loadData(MyInfoRemind.this, url);
+		
+		if(!sp.getToken().isEmpty()){
+			loadData(MyInfoRemind.this, url);
+		}else{
+			Toast.makeText(MyInfoRemind.this, "你尚未登录，无法查看您的信息", Toast.LENGTH_SHORT).show();
+		}
 	}
 	public void loadData(Context context, String url){
 		if(isNetwrokAvaliable(context)){
@@ -150,6 +155,8 @@ public class MyInfoRemind extends Activity{
 				}
 				
 				
+			}else if(jsonObject.getString("status").equals("0")){
+				Toast.makeText(MyInfoRemind.this, "您没有借书记录", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

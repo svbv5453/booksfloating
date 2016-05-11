@@ -325,7 +325,7 @@ public class RegisterActivity extends Activity implements OnClickListener,OnEdit
 					SharePreferenceUtil sp = new SharePreferenceUtil(RegisterActivity.this, Constants.SAVE_USER);
 					sp.setAccount(et_username.getText().toString().trim());
 					sp.setPassword(et_password.getText().toString().trim());
-					
+					sp.setCreditScore(5);
 					sp.setUserUniversity(et_schoolname.getText().toString().trim());
 					
 					
