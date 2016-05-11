@@ -1,8 +1,14 @@
-package com.booksfloating.activity;
+﻿package com.booksfloating.activity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
+import com.booklsfloating.activity.searchbooks.SearchBooksDetailActivity;
 import com.booksfloating.activity.infonotice.BooksInfoActivity;
 import com.booksfloating.adapter.DrawerLayoutAdapter;
 import com.booksfloating.adapter.InfoNoticeAdapter;
@@ -13,6 +19,7 @@ import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.ListViewCompat;
 import com.booksfloating.util.ListViewCompat.OnLoadListener;
 import com.booksfloating.util.ListViewCompat.OnRefreshListener;
+import com.booksfloating.util.MyComparator;
 import com.xd.booksfloating.R;
 import com.xd.connect.PostParameter;
 import com.xd.dialog.DialogFactory;
@@ -26,6 +33,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,10 +88,10 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 		btn_filter_too = (Button)view.findViewById(R.id.btn_filter_too);
 		btn_filter_too.setOnClickListener(this);
 		
-		requestFromServer(ListViewCompat.REFRESH);
+		requestFromServer(0);
 		return view;
 	}
-		
+			
 	private class DrawerItemClickListener implements OnItemClickListener{
 
 		@Override
@@ -107,7 +115,10 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 			else{
 				System.out.println("filterSchool"+filterSchool);
 				//根据筛选条件设置主页面的list
-				newList.clear();
+				if (newList != null) {
+					newList.clear();
+				}
+				
 				BooksAttr booksAttr = new BooksAttr();
 				List<String> tempList = new ArrayList<String>();
 				for (int i = 0; i < booksAttrsList.size(); i++) {
@@ -156,15 +167,10 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				PostParameter[] postParameters = new PostParameter[2];
-				if(requestTime == 1)
-				{
-					postParameters[0] = new PostParameter("university", filterSchool);
-					postParameters[1] = new PostParameter("page", Integer.toString(1));
-				}else {
-					postParameters[0] = new PostParameter("university", filterSchool);
-					postParameters[1] = new PostParameter("page", Integer.toString(requestTime));
-				}
+				PostParameter[] postParameters = new PostParameter[2];			
+				postParameters[0] = new PostParameter("university", filterSchool);
+				postParameters[1] = new PostParameter("page", Integer.toString(requestTime));
+				
 				String json = null;
 				json = HttpUtil.httpRequest(HttpUtil.BROWSE_BOOK, postParameters, HttpUtil.POST);
 				if (json != null) {
@@ -191,13 +197,20 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 			
 			String json = (String) msg.obj;
 			switch (msg.what) {
-			case ListViewCompat.REFRESH:				
-				newList.clear();
+			case ListViewCompat.REFRESH:
+				if (newList != null) {
+					newList.clear();
+				}
+				
 				newList = parseJson.parseBrowseNoticeList(json);
 				if(newList != null && newList.size() > 0)
 				{
-					booksAttrsList.clear();
+					booksAttrsList.clear();				
 					booksAttrsList.addAll(newList);
+					if (booksAttrsList.size() > 1) {
+						MyComparator comparator = new MyComparator();
+						Collections.sort(booksAttrsList, comparator);
+					}
 					System.out.println("booksAttrsList.size():"+booksAttrsList.size());
 					//刷新适配器
 					adapter.notifyDataSetChanged();
@@ -206,11 +219,18 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 				}
 				break;
 			case ListViewCompat.LOAD:
-				newList.clear();
+				if (newList != null) {
+					newList.clear();
+				}
+				
 				newList = parseJson.parseBrowseNoticeList(json);
 				if(newList != null && newList.size() > 0)
 				{
 					booksAttrsList.addAll(newList);
+					if (booksAttrsList.size() > 1) {
+						MyComparator comparator = new MyComparator();
+						Collections.sort(booksAttrsList, comparator);
+					}
 					//刷新适配器
 					adapter.notifyDataSetChanged();					
 				}
@@ -251,12 +271,14 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 	@Override
 	public void onLoad() {
 		// TODO Auto-generated method stub
+		requestTime++;
 		requestFromServer(ListViewCompat.LOAD);
 	}
 
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
+		requestTime = 1;
 		requestFromServer(ListViewCompat.REFRESH);
 	}
 

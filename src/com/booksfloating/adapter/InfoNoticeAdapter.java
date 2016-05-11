@@ -1,11 +1,14 @@
 package com.booksfloating.adapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.booksfloating.attr.BooksAttr;
 import com.booksfloating.util.ImageManager;
+import com.booksfloating.util.MyComparator;
 import com.xd.booksfloating.R;
+import com.xd.imageloader.ImageLoader;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -28,7 +31,10 @@ public class InfoNoticeAdapter extends BaseAdapter{
 		this.context = context;
 		this.booksAttrsList = booksAttrsList;
 		inflater = LayoutInflater.from(this.context);
-
+		if (booksAttrsList.size() > 1) {
+			MyComparator comparator = new MyComparator();
+			Collections.sort(booksAttrsList, comparator);
+		}
 	}
 	@Override
 	public int getCount() {
@@ -80,7 +86,9 @@ public class InfoNoticeAdapter extends BaseAdapter{
 		}
 		else {
 			//加载网络图片
-			ImageManager.from(context).displayImage(viewHolder.iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
+			//ImageManager.from(context).displayImage(viewHolder.iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
+			ImageLoader mImageLoader = new ImageLoader(context);
+		    mImageLoader.DisplayImage(booksAttr.getBookImageUrl(), viewHolder.iv_books_image, false,R.drawable.default_book);
 		}
 		
 		viewHolder.tv_books_title.setText(booksAttr.getBookTitle());
