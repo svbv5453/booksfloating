@@ -4,6 +4,35 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray"
     android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/search_box">
+     
+       
+
+        <Button
+            android:id="@+id/btn_my_info_search_book"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/shape_search"
+            android:text="@string/btn_my_info_search_book"
+            android:textColor="@color/white"
+            android:textSize="@dimen/nav_textsize_15" />
+
+        <EditText
+            android:id="@+id/et_my_info_search_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btn_my_info_search_book"
+            android:hint="书名:"
+            android:ems="10" >
+
+        </EditText>
+        </RelativeLayout>
     
     <ListView 
         android:id="@+id/lv_my_info_book_order"

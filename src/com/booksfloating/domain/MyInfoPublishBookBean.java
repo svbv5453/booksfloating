@@ -5,6 +5,7 @@ package com.booksfloating.domain;
 public class MyInfoPublishBookBean {
 	
 
+	private int id;
 	public String bookName;
 	public String bookAuthor;
 	public String bookLocation;
@@ -17,10 +18,19 @@ public class MyInfoPublishBookBean {
 	/**
 	 * 待完善
 	 */
-/*	public String getBookName() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getBookName() {
 		return bookName;
 	}
 
+	
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
@@ -72,32 +82,7 @@ public class MyInfoPublishBookBean {
 	public void setBookExpirationTime(String bookExpirationTime) {
 		this.bookExpirationTime = bookExpirationTime;
 	}
-	@Override
-	public int describeContents() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
-		
-	}
-	public static final Parcelable.Creator<MyInfoPublishBookBean> CREATOR = new Creator<MyInfoPublishBookBean>() {
-		
-		@Override
-		public MyInfoPublishBookBean[] newArray(int size) {
-			// TODO Auto-generated method stub
-			return new MyInfoPublishBookBean[size];
-		}
-		
-		@Override
-		public MyInfoPublishBookBean createFromParcel(Parcel source) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	};
-	*/
+	
 	
 
 }
