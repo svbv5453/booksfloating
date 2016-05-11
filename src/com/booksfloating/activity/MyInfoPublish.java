@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +35,7 @@ import com.xd.booksfloating.R;
 
 public class MyInfoPublish extends Activity{
 	
-	private static String urlTest = "http://www.imooc.com/api/teacher?type=4&num=30";
+	
 	private static String book_info = "{\"status\":\"1\",\"booklist\":" +
 			"[{\"book\":\"java编程思想\",\"author\":\"Bruce Eckel\",\"university\":\"西安电子科技大学北校区\",\"publishTime\":\"2016年2月1日15时01分\",\"remark\":\"希望好心人尽快帮我借到！\",\"picture\":\"https://img1.doubanio.com/lpic/s1320039.jpg\"}," +
 			"{\"book\":\"我们仨\",\"author\":\"杨绛\",\"university\":\"西安电子科技大学北校区\",\"publishTime\":\"2016年2月1日15时01分\",\"remark\":\"希望好心人尽快帮我借到！\",\"picture\":\"https://img1.doubanio.com/lpic/s1015872.jpg\"}," +
@@ -45,6 +46,7 @@ public class MyInfoPublish extends Activity{
 	private Button btn_back = null;
 	private EditText et_search = null;	
 	private List<MyInfoPublishBookBean> myPublishBookBeanList;
+	private List<MyInfoPublishBookBean> myPublishBookBeanList2;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -73,8 +75,26 @@ public class MyInfoPublish extends Activity{
 			
 			@Override
 			public void onClick(View v) {
+				String key = et_search.getText().toString().trim();
 				
-				Toast.makeText(MyInfoPublish.this, "预留搜索", Toast.LENGTH_SHORT).show();
+				if(!TextUtils.isEmpty(key)){
+					myPublishBookBeanList2 = new ArrayList<MyInfoPublishBookBean>();
+					for(MyInfoPublishBookBean myInfoPublishBookBean : myPublishBookBeanList){
+						if(myInfoPublishBookBean.getBookName().equalsIgnoreCase(key)){
+							myPublishBookBeanList2.add(myInfoPublishBookBean);
+							
+						}
+					}
+					if(!myPublishBookBeanList2.isEmpty()){
+						MyInfoPublishAdapter adapter = new MyInfoPublishAdapter(MyInfoPublish.this, myPublishBookBeanList2);
+						myInfoBookPublishListView.setAdapter(adapter);
+					}else{
+						Toast.makeText(MyInfoPublish.this, "未查到相关数据，请输入正确的书名", Toast.LENGTH_SHORT).show();
+					}
+				}else{
+					Toast.makeText(MyInfoPublish.this, "请输入查询数据", Toast.LENGTH_SHORT).show();
+				}
+				
 			}
 		});
 		//loadData(this, urlTest);
@@ -164,18 +184,6 @@ public class MyInfoPublish extends Activity{
 				}
 				
 				
-				
-				/*JSONArray jsonArray = jsonObject.getJSONArray("data");
-				for(int i = 0; i < jsonArray.length(); i++){
-					jsonObject = jsonArray.getJSONObject(i);
-					MyInfoPublishBookBean publishBookBean = new MyInfoPublishBookBean();
-					publishBookBean.bookName = jsonObject.getString("name");
-					publishBookBean.bookAuthor = jsonObject.getString("description");
-					publishBookBean.bookIconUrl = jsonObject.getString("picSmall");
-					
-					myPublishBookBeanList.add(publishBookBean);
-					
-				}*/
 				return myPublishBookBeanList;
 				
 			}

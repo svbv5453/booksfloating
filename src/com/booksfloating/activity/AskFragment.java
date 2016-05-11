@@ -14,12 +14,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,8 +31,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.booksfloating.adapter.BookRecommendAdapter;
 import com.booksfloating.adapter.MyInfoOrderAdapter;
+import com.booksfloating.adapter.MyInfoPublishAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.domain.MyInfoBookDetailBean;
+import com.booksfloating.domain.MyInfoPublishBookBean;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
@@ -42,10 +46,13 @@ public class AskFragment extends Fragment {
 	
 	
 	private List<MyInfoBookDetailBean> booksOrderList;
+	private List<MyInfoBookDetailBean> booksOrderList2;
 	private MyInfoBookDetailBean bookOrder;
 
 	private ListView myInfoOrderListView = null;
 	//private Button btn_myinfo_search_book = null;
+	private Button btn_myinfo_search_book = null;
+	private EditText et_search = null;
 	
 	private static String urlTest = "http://www.imooc.com/api/teacher?type=4&num=30";
 	
@@ -55,15 +62,33 @@ public class AskFragment extends Fragment {
 		//View view = inflater.inflate(R.layout.myinfo_order_askfragment_test, container, false);
 		View view = inflater.inflate(R.layout.myinfo_order_layout, container, false);
 		myInfoOrderListView = (ListView)view.findViewById(R.id.lv_my_info_book_order);
-	    /*btn_myinfo_search_book = (Button) view.findViewById(R.id.btn_my_info_search_book);
-		btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
+		 et_search = (EditText) view.findViewById(R.id.et_my_info_search_order);
+		 btn_myinfo_search_book = (Button) view.findViewById(R.id.btn_my_info_search_book);
+			btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
 				
-				Toast.makeText(getActivity(), "预留搜索", Toast.LENGTH_SHORT).show();
-			}
-		});*/
+				@Override
+				public void onClick(View v) {
+					String key = et_search.getText().toString().trim();
+					
+					if(!TextUtils.isEmpty(key)){
+						booksOrderList2 =new ArrayList<MyInfoBookDetailBean>();
+						for(MyInfoBookDetailBean myorderBook : booksOrderList){
+							if(myorderBook.getBookName().equalsIgnoreCase(key)){
+								
+								booksOrderList2.add(myorderBook);
+							}
+						}
+						if(!booksOrderList2.isEmpty()){
+							MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), booksOrderList2);
+							myInfoOrderListView.setAdapter(adapter);
+						}else{
+							Toast.makeText(getActivity(), "未查到相关数据，请输入正确的书名", Toast.LENGTH_SHORT).show();
+						}
+					}else{
+						Toast.makeText(getActivity(), "请输入查询数据", Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
 		//loadData(getActivity(), urlTest);
 		/**
 		 * 实际方法，

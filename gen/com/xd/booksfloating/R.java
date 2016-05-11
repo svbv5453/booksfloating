@@ -145,7 +145,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btn_my_info_order=0x7f0b005b;
         public static final int btn_my_info_publish=0x7f0b005a;
         public static final int btn_my_info_remind=0x7f0b005c;
-        public static final int btn_my_info_search_book=0x7f0b0077;
+        public static final int btn_my_info_search_book=0x7f0b0076;
         public static final int btn_my_info_set=0x7f0b005e;
         public static final int btn_my_info_set_about=0x7f0b0090;
         public static final int btn_my_info_set_feedback=0x7f0b008e;
@@ -170,7 +170,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int drawer_layout=0x7f0b0020;
         public static final int et_confirmpsd=0x7f0b0037;
         public static final int et_email=0x7f0b0012;
-        public static final int et_my_info_search_order=0x7f0b0078;
+        public static final int et_my_info_search_order=0x7f0b0077;
         public static final int et_my_info_search_publish=0x7f0b007c;
         public static final int et_myinfo_set_feedback=0x7f0b008b;
         public static final int et_myinfo_set_reset_confirmPassword=0x7f0b0093;
@@ -209,7 +209,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int lv_info_notice=0x7f0b0022;
         public static final int lv_left_drawer=0x7f0b0023;
         public static final int lv_library_collection=0x7f0b000a;
-        public static final int lv_my_info_book_order=0x7f0b0076;
+        public static final int lv_my_info_book_order=0x7f0b0078;
         public static final int lv_my_info_book_publish=0x7f0b007d;
         public static final int lv_myinfo_remind=0x7f0b0089;
         public static final int more=0x7f0b0051;
