@@ -1,13 +1,21 @@
-package com.booksfloating.adapter;
+﻿package com.booksfloating.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.booksfloating.attr.BooksAttr;
+import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ImageManager;
+import com.booksfloating.util.LoadBookImage;
+import com.booksfloating.util.LoaderImageUseVelloy;
 import com.xd.booksfloating.R;
+import com.xd.imageloader.ImageLoader;
 
+import android.R.interpolator;
+import android.R.raw;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +83,9 @@ public class SearchBooksDetailAdapter extends BaseAdapter{
 			viewHolder.iv_books_image.setImageDrawable(context.getResources().getDrawable(R.drawable.default_book));
 		}
 		else {
-			ImageManager.from(context).displayImage(viewHolder.iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
+			//ImageManager.from(context).displayImage(viewHolder.iv_books_image, booksAttr.getBookImageUrl(), -1);
+			ImageLoader mImageLoader = new ImageLoader(context);
+		    mImageLoader.DisplayImage(booksAttr.getBookImageUrl(), viewHolder.iv_books_image, false,R.drawable.default_book);
 		}
 		
 		viewHolder.tv_books_title.setText(booksAttr.getBookTitle());

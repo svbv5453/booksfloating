@@ -1,5 +1,6 @@
-package com.booklsfloating.activity.searchbooks;
+﻿package com.booklsfloating.activity.searchbooks;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.text.InputType;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -24,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
@@ -78,11 +84,10 @@ OnRefreshListener,OnLoadListener{
 		btn_search.setOnClickListener(this);
 		et_search_sh = (EditText)findViewById(R.id.et_search_sh);
 		et_search_sh.setImeOptions(EditorInfo.IME_ACTION_SEARCH);  
-		et_search_sh.setInputType(InputType.TYPE_CLASS_TEXT);  
+		et_search_sh.setInputType(EditorInfo.TYPE_CLASS_TEXT);  
 		et_search_sh.setSingleLine(true); 
 		et_search_sh.setOnEditorActionListener(new OnEditorActionListener() {
 			
-			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				// TODO Auto-generated method stub
 				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -122,7 +127,7 @@ OnRefreshListener,OnLoadListener{
 		lv_books_list.setOnRefreshListener(this);
 		lv_books_list.setOnLoadListener(this);
 		
-		refreshFromServer(0);
+		refreshFromServer(ListViewCompat.REFRESH);
 	}
 	
 	//arraylist的测试数据
@@ -167,7 +172,10 @@ OnRefreshListener,OnLoadListener{
 			else{
 				System.out.println("filterSchool"+filterSchool);
 				//根据筛选条件设置主页面的list
-				newList.clear();
+				if (newList != null) {
+					newList.clear();
+				}
+				
 				BooksAttr booksAttr = new BooksAttr();
 				List<String> tempList = new ArrayList<String>();
 				for (int i = 0; i < booksAttrsList.size(); i++) {
@@ -217,7 +225,10 @@ OnRefreshListener,OnLoadListener{
 				btn_filter.setVisibility(View.VISIBLE);
 				btn_filter_too.setVisibility(View.VISIBLE);
 				
-				newList.clear();
+				if (newList != null) {
+					newList.clear();
+				}
+				
 				//解析返回的数据
 				newList = pJson.parseBookList(jsonString);
 				if (newList != null && newList.size() != 0) {
@@ -232,7 +243,9 @@ OnRefreshListener,OnLoadListener{
 				
 				break;
 			case ListViewCompat.REFRESH:
-				newList.clear();
+				if (newList != null) {
+					newList.clear();
+				}				
 				//解析返回的数据
 				newList = pJson.parseBookList(jsonString);
 				if (newList != null && newList.size() != 0) {
@@ -240,21 +253,21 @@ OnRefreshListener,OnLoadListener{
 					booksAttrsList.addAll(newList);
 					//刷新适配器
 					adapter.notifyDataSetChanged();
-					requestTime = 1;
 				}else {
 					Toast.makeText(SearchBooksDetailActivity.this, "无数据返回！", Toast.LENGTH_SHORT).show();					
 				}
 				
 				break;
-			case ListViewCompat.LOAD:
-				newList.clear();
+			case ListViewCompat.LOAD:	
+				if (newList != null) {
+					newList.clear();
+				}
 				//解析返回的数据
 				newList = pJson.parseBookList(jsonString);
-				if (newList != null && newList.size() != 0) {		
+				if (newList != null && newList.size() != 0) {					
 					booksAttrsList.addAll(newList);
 					//刷新适配器
 					adapter.notifyDataSetChanged();
-					requestTime++;
 				}else {
 					Toast.makeText(SearchBooksDetailActivity.this, "已经到底啦！", Toast.LENGTH_SHORT).show();
 				}
@@ -278,17 +291,11 @@ OnRefreshListener,OnLoadListener{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub				
-				//第一次请求
-				if (requestTime == 1) {
-					postParameters[0] = new PostParameter("keyword", searchKeyword);
-					postParameters[1] = new PostParameter("university", university);
-					postParameters[2] = new PostParameter("page", Integer.toString(requestTime));
-				}
-				else{
-					postParameters[0] = new PostParameter("keyword", searchKeyword);
-					postParameters[1] = new PostParameter("university", university);
-					postParameters[2] = new PostParameter("page", Integer.toString(requestTime));
-				}
+
+				postParameters[0] = new PostParameter("keyword", searchKeyword);
+				postParameters[1] = new PostParameter("university", university);
+				postParameters[2] = new PostParameter("page", Integer.toString(requestTime));
+				
 				jsonString = HttpUtil.httpRequest(HttpUtil.USER_SEARCHBOOKS, postParameters, HttpUtil.POST);
 				if (jsonString != null) {					
 					Message msg = handler.obtainMessage();
@@ -326,7 +333,15 @@ OnRefreshListener,OnLoadListener{
 				btn_filter.setVisibility(View.GONE);
 				btn_filter_too.setVisibility(View.GONE);
 			}else if (et_search_sh.getVisibility() == View.VISIBLE) {
-				et_search_sh.setText("");
+				if (!searchKeyword.equals(et_search_sh.getText().toString().trim())) {
+					booksAttrsList.clear();
+					searchKeyword = et_search_sh.getText().toString();
+					et_search_sh.setText("");
+					refreshFromServer(Constants.SEARCH_KEYWORD);
+					
+					System.out.println("searchkeyword-------》 "+searchKeyword);
+					System.out.println("university----》 "+university);
+				}
 			}
 
 			break;
@@ -343,7 +358,7 @@ OnRefreshListener,OnLoadListener{
 		//长按某一项跳转到另一个页面
 		Intent intent = new Intent();
 		intent.setClass(this, BorrowBooksDetailInfoActivity.class);
-		intent.putExtra("intent_booksAttr", booksAttrsList.get(position-1));
+		intent.putExtra("intent_booksAttr", (Serializable)booksAttrsList.get(position-1));
 		startActivity(intent);
 	}
 	
@@ -369,12 +384,14 @@ OnRefreshListener,OnLoadListener{
 	@Override
 	public void onLoad() {
 		// TODO Auto-generated method stub
+		requestTime++;
 		refreshFromServer(ListViewCompat.LOAD);
 	}
 
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
+		requestTime = 1;
 		refreshFromServer(ListViewCompat.REFRESH);
 	}
 
