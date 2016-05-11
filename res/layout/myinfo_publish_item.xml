@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    
+    android:layout_margin="5dp"
     android:orientation="horizontal" >
     
         <ImageView 
@@ -11,8 +11,7 @@
             android:layout_width="64dp"
             android:layout_height="91dp"
             android:layout_marginLeft="2dp"
-            android:layout_marginTop="2dp"
-            android:src="@drawable/default_book"/>
+            android:layout_marginTop="2dp"/>
         <LinearLayout 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,37 +24,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="think in java"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 />
             <TextView 
                 android:id="@+id/tv_my_info_publish_book_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:text="作者: (美)埃克尔"
-                android:textSize="16sp"
+                android:textSize="13sp"
+                android:textColor="@color/gray"
                 />
             <TextView 
                 android:id="@+id/tv_my_info_publish_book_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="可借馆藏: 西安电子科技大学北校区"
-                android:textSize="16sp"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"
+                android:textColor="@color/gray"
                 />
              <TextView 
                 android:id="@+id/tv_my_info_publish_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="发布时间: 2016年2月1日15时01分"
-                android:textColor="@color/sh_orange"
-                android:textSize="16sp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/theme_blue"
+                android:textSize="13sp"
                 />
             <TextView 
                 android:id="@+id/tv_my_info_publish_book_remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="备注: 希望好心人尽快帮我借到"
-                android:textColor="@color/sh_orange"
-                android:textSize="16sp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/theme_blue"
+                android:textSize="13sp"
                 />
         </LinearLayout>
     

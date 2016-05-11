@@ -6,12 +6,11 @@ import org.json.JSONObject;
 import com.booksfloating.attr.BooksAttr;
 import com.booksfloating.attr.BooksAttr.BorrowInfo;
 import com.booksfloating.util.HttpUtil;
-import com.booksfloating.util.ImageLoader;
-import com.booksfloating.util.ImageManager;
 import com.xd.booksfloating.R;
 import com.xd.booksfloating.R.color;
 import com.xd.connect.PostParameter;
 import com.xd.dialog.DialogFactory;
+import com.xd.imageloader.ImageLoader;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -39,7 +38,7 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 	private TextView tv_info_publish_time, tv_library_location, tv_reference_number, tv_whether_borrow, tv_remarks;
 	private BooksAttr booksAttr;
 	private BorrowInfo borrowInfo;
-	private ImageLoader imageLoader = new ImageLoader();
+	private ImageLoader imageLoader = new ImageLoader(BooksInfoActivity.this);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +67,9 @@ public class BooksInfoActivity extends Activity implements OnClickListener{
 		
 		iv_books_image = (ImageView)findViewById(R.id.iv_books_image);
 		if (booksAttr.getBookImageUrl() != null) {
-			ImageManager.from(this).displayImage(iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
+			//ImageManager.from(this).displayImage(iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
+			imageLoader.DisplayImage(booksAttr.getBookImageUrl(), iv_books_image, false, R.drawable.default_book);
+			
 		}else {
 			iv_books_image.setImageDrawable(getResources().getDrawable(R.drawable.default_book));
 		}

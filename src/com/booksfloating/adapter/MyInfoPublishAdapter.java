@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.booksfloating.domain.MyInfoPublishBookBean;
 import com.booksfloating.util.LoaderImageUseVelloy;
 import com.xd.booksfloating.R;
+import com.xd.imageloader.ImageLoader;
 
 public class MyInfoPublishAdapter extends BaseAdapter {
 	List<MyInfoPublishBookBean> publishBookBeanList;
@@ -68,21 +69,9 @@ public class MyInfoPublishAdapter extends BaseAdapter {
 		//时间问题
 		viewHolder.publishTime.setText("发布时间：" + publishBookBeanList.get(position).bookPublicshTime);//后面添加
 		viewHolder.bookRemark.setText("备注：" + publishBookBeanList.get(position).bookRemark);
-		//viewHolder.bookImage.setImageResource(android.R.id.icon);
-		String url = publishBookBeanList.get(position).bookIconUrl;
-		System.out.println("图片地址" + url);
-		if(url == null){
-			viewHolder.bookImage.setImageDrawable(myContext.getResources().getDrawable(R.drawable.default_book));
-			
-		}else{
-			
-			/*viewHolder.bookImage.setTag(url);
-			new LoaderImageUseVelloy().LoaderImage(myContext, viewHolder.bookImage, url);*/
-		}
 		
-		//new LoadBookImage().showImageByThread(viewHolder.bookImage, url);
-		
-		//ImageManager.from(myContext).displayImage(viewHolder.bookImage, url, R.drawable.default_book);
+		ImageLoader imageLoader = new ImageLoader(myContext);
+		imageLoader.DisplayImage(publishBookBeanList.get(position).bookIconUrl, viewHolder.bookImage, false, R.drawable.default_book);
 		
 		return convertView;
 	}

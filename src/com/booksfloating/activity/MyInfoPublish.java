@@ -180,7 +180,7 @@ public class MyInfoPublish extends Activity{
 					publishBookBean.bookName = jsonObject.getString("book");
 					publishBookBean.bookAuthor = jsonObject.getString("author");
 					publishBookBean.bookLocation = jsonObject.getString("university");
-					publishBookBean.bookPublicshTime = parseDate(jsonObject.getString("publish_time"));
+					publishBookBean.bookPublicshTime = jsonObject.getString("publish_time");
 					publishBookBean.bookRemark = jsonObject.getString("remarks");
 					publishBookBean.bookIconUrl =jsonObject.getString("picture");
 					myPublishBookBeanList.add(publishBookBean);
