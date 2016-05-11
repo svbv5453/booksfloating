@@ -11,8 +11,7 @@
         android:layout_height="fill_parent"
         android:layout_above="@+id/rg_main_activity"
         android:layout_gravity="center"
-        android:background="@color/light_gray"
-        android:paddingBottom="55dip"
+        android:background="@color/light_gray"       
         android:persistentDrawingCache="animation" />
     
      <RadioGroup
