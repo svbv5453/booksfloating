@@ -82,7 +82,7 @@ public class BookRecommendAdapter extends BaseAdapter{
 		//内存溢出，使用单例模式解决，context不能为Activity，必须是context.getApplicationContext()才可以
 		//ImageManager.from(myContext).displayImage(viewHolder.bookImage, url, R.drawable.default_book);
 
-		viewHolder.bookAuthor.setText(booksBeanList.get(position).bookAuthor);
+		viewHolder.bookAuthor.setText("作者: " + booksBeanList.get(position).bookAuthor);
 		viewHolder.bookRanking.setText(booksBeanList.get(position).getBookRanking());
 		ImageLoader imageLoader = new ImageLoader(myContext);
 		imageLoader.DisplayImage(booksBeanList.get(position).bookImageUrl, viewHolder.bookImage, false, R.drawable.default_book);

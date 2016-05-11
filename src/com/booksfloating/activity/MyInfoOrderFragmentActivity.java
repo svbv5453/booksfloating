@@ -50,7 +50,7 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 				
 			}
 		});
-		 btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
+		 /*btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
 			btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
@@ -58,7 +58,7 @@ public class MyInfoOrderFragmentActivity extends FragmentActivity implements OnC
 					
 					Toast.makeText(MyInfoOrderFragmentActivity.this, "预留搜索", Toast.LENGTH_SHORT).show();
 				}
-			});
+			});*/
 	}
 	
 

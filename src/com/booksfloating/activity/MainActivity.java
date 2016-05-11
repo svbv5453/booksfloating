@@ -1,6 +1,17 @@
 package com.booksfloating.activity;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.booksfloating.adapter.FragmentAdapter;
 import com.booksfloating.adapter.MainPagerAdapter;
@@ -8,13 +19,6 @@ import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.widget.MyRadioButton;
 import com.xd.booksfloating.R;
-
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.View;
-import android.view.View.OnClickListener;
 
 /**
  * 
@@ -31,7 +35,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	public static final int TAB_INFO_NOTICE = 1;
 	public static final int TAB_BOOKS_RECOMMEND = 2;
 	public static final int TAB_MY_INFO = 3;
-	
+	private static Boolean isExit = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -139,6 +143,33 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		if (id == TAB_INFO_NOTICE) {
 			viewPager.setCurrentItem(TAB_INFO_NOTICE, true);
 		}
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			Timer tExtit = null;
+			if(isExit == false){
+				isExit = true;
+				Toast.makeText(MainActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+				tExtit = new Timer();
+				tExtit.schedule(new TimerTask() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						isExit = false;
+					}
+				}, 2000);
+			}else{
+				finish();
+				System.exit(0);
+			}
+				
+		}
+		return false;
+		
 	}
 	
 	

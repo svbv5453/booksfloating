@@ -46,9 +46,9 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 		bookName = (TextView) findViewById(R.id.tv_myinfo_ask_book_name);
 		author = (TextView) findViewById(R.id.tv_myinfo_ask_book_author);
 		bookLocation = (TextView) findViewById(R.id.tv_myinfo_ask_book_location);
-		orderNumber = (TextView) findViewById(R.id.tv_myinfo_ask_orderNumber);
+		//orderNumber = (TextView) findViewById(R.id.tv_myinfo_ask_orderNumber);
 		orderDate = (TextView) findViewById(R.id.tv_myinfo_ask_date);
-		university = (TextView) findViewById(R.id.tv_myinfo_ask_university);
+		//university = (TextView) findViewById(R.id.tv_myinfo_ask_university);
 		borrowDate = (TextView) findViewById(R.id.tv_myinfo_ask_borrowDate);
 		returnDate = (TextView) findViewById(R.id.tv_myinfo_ask_returnDate);
 		phoneNumber = (TextView) findViewById(R.id.tv_myinfo_ask_phoneNumber);
@@ -69,7 +69,7 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 			bookLocation.setText(bookOrder.getBookLocation());
 			borrowDate.setText(bookOrder.getBorrowTime());
 			returnDate.setText(bookOrder.getReturnTime());
-			university.setText(bookOrder.getLenderUniversity());
+			//university.setText(bookOrder.getLenderUniversity());
 			phoneNumber.setText( bookOrder.getPhoneNumber());
 	}
 

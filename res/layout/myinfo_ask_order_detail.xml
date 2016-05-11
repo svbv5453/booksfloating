@@ -6,7 +6,7 @@
     android:orientation="vertical" >
       <!-- 导航栏 -->  
      <include layout="@layout/nav_order_detail_layout"/>
-	 <LinearLayout 
+	 <!-- <LinearLayout 
 	     android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
 	     android:layout_marginLeft="15dp"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="100001111"
         android:textSize="@dimen/nav_textsize_16"/>
-	  </LinearLayout>
+	  </LinearLayout> -->
 	  <LinearLayout 
 	     android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
 	     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="时间: "
+        android:text="发布时间 :  "
         android:textSize="@dimen/nav_textsize_16"/>
 	     <TextView 
         android:id="@+id/tv_myinfo_ask_date"
@@ -54,7 +54,7 @@
 	     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="帮助者昵称： "
+        android:text="帮助者昵称 :  "
         android:textSize="@dimen/nav_textsize_16"/>
 	     <TextView 
         android:id="@+id/tv_myinfo_ask_helper"
@@ -75,7 +75,7 @@
 	     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="书名： "
+        android:text="书名 :  "
         android:textSize="@dimen/nav_textsize_16"/>
 	     <TextView 
         android:id="@+id/tv_myinfo_ask_book_name"
@@ -96,7 +96,7 @@
 	     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="作者： "
+        android:text="作者 :  "
         android:textSize="@dimen/nav_textsize_16"/>
 	     <TextView 
         android:id="@+id/tv_myinfo_ask_book_author"
@@ -117,7 +117,7 @@
 	     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="馆藏： "
+        android:text="馆藏 :  "
         android:textSize="@dimen/nav_textsize_16"/>
 	     <TextView 
         android:id="@+id/tv_myinfo_ask_book_location"
@@ -172,7 +172,7 @@
         
 	  </LinearLayout>
   
-    <LinearLayout 
+    <!-- <LinearLayout 
 	     android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
 	     android:layout_marginLeft="15dp"
@@ -192,7 +192,7 @@
         android:textColor="@color/sh_danblue"
         android:text="西安电子科技大学"/> 
         
-	  </LinearLayout>
+	  </LinearLayout> -->
 	  <LinearLayout 
 	     android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
@@ -203,7 +203,7 @@
 	     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="他的手机号: "
+        android:text="他的手机号 :  "
         android:textSize="@dimen/nav_textsize_16"/>
 	     <TextView 
         android:id="@+id/tv_myinfo_ask_phoneNumber"
@@ -224,10 +224,9 @@
         android:layout_marginLeft="15dp"
 	     android:layout_marginRight="15dp"
 	     android:layout_marginTop="25dp"
+	     android:textSize="@dimen/nav_textsize_16"
         android:text="您可与他线下联系！"
         />
 	 
-    
-    
 
 </LinearLayout>

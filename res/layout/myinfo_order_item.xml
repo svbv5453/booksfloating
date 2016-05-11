@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
     
+    android:layout_marginRight="2dp"
     android:background="@color/white"
      >
      <ImageView
@@ -12,13 +14,14 @@
        android:layout_alignParentRight="true"
        android:layout_alignParentTop="true"
        
-       android:layout_marginTop="13dp"
+       android:layout_marginTop="20dp"
        android:layout_marginLeft="5dp"
        android:src="@drawable/arrow"/>
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/forewalk"
+        android:layout_marginLeft="5dp"
         android:orientation="vertical">
          <TextView 
         android:id="@+id/tv_myinfo_order_date"
@@ -34,6 +37,7 @@
         android:textColor="@color/sh_blue"
         android:lineSpacingMultiplier="1.2"
         android:layout_marginTop="2dp"
+        android:layout_marginBottom="5dp"
         android:textSize="@dimen/nav_textsize_16"
         android:text="关于'think in java, (美) 埃克尔，西安电子科技大学南馆'的求助"/>
     </LinearLayout>

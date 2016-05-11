@@ -49,12 +49,12 @@ public class MyInfoOrderAdapter extends BaseAdapter {
 		}else{
 			viewHoder = (ViewHolder) convertView.getTag();
 		}
-		viewHoder.orderDate.setText("时间:" + booksBeanList.get(position).getBookPublicshTime());
+		viewHoder.orderDate.setText("时间：" + booksBeanList.get(position).getBookPublicshTime());
 		String bookName = booksBeanList.get(position).getBookName();
 		String bookAuthor = booksBeanList.get(position).getBookAuthor();
 		String bookLocation = booksBeanList.get(position).getBookLocation();
 		
-		viewHoder.orderMessage.setText("关于\"" + bookName + "," + bookAuthor + "," + bookLocation +"\"的求助" );
+		viewHoder.orderMessage.setText("关于“" + bookName + "，" + bookAuthor + "，" + bookLocation +"”的求助" );
 		return convertView;
 	}
 	class ViewHolder{
