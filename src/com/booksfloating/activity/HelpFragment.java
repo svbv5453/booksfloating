@@ -214,11 +214,11 @@ public class HelpFragment extends Fragment {
 					String bookName = jsonObject.getString("book");
 					String bookAuthor = jsonObject.getString("author");
 					String bookLocation = jsonObject.getString("university");
-					String bookPublicshTime = parseDate(jsonObject.getString("lend_time"));
+					String bookPublicshTime = jsonObject.getString("lend_time");
 					String lenderName = jsonObject.getString("borrower");
 					//String lenderUniversity = jsonObject.getString("lender_university");
-					String borrowTime = parseDate(jsonObject.getString("lend_time"));
-					String returnTime = parseDate(jsonObject.getString("return_time"));
+					String borrowTime = jsonObject.getString("lend_time");
+					String returnTime = jsonObject.getString("return_time");
 					String phoneNumber = jsonObject.getString("phone");
 					
 					bookOrder = new MyInfoBookDetailBean();

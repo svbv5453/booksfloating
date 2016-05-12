@@ -7,36 +7,20 @@
     <ImageView 
         android:id="@+id/sh_book_image"
         android:layout_width="64dp"
-        android:layout_height="91dp"
+        android:layout_height="81dp"
         android:layout_alignParentLeft="true"
         android:src="@drawable/wall"
         android:layout_margin="10dp"
-        />
-    <TextView 
-        android:id="@+id/sh_book_ranking"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:textSize="16sp"
-        android:padding="3dp"
-        
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:text="No.1"
         />
         <TextView 
         android:id="@+id/sh_book_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/sh_book_image"
-        android:layout_toLeftOf="@id/sh_book_ranking"
+        android:layout_toRightOf="@+id/sh_book_image"
+        android:layout_toLeftOf="@+id/sh_book_ranking"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
-        android:maxLines="1"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:gravity="left"
         android:text="围胜多负少粉城"
         android:textColor="@color/black"/>
@@ -46,17 +30,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sh_book_name"
-        android:layout_alignLeft="@id/sh_book_name"
-        android:layout_toLeftOf="@id/sh_book_ranking"
+        android:layout_alignLeft="@+id/sh_book_name"
+        android:layout_toLeftOf="@+id/sh_book_ranking"
+        android:layout_marginTop="3dp"
         android:padding="5dp"
-        android:maxLines="1"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:gravity="left" 
         android:text="钱钟书"
         android:textColor="@color/gray"
         />
-   
-   
-    
+
+   	   <TextView
+   	       android:id="@+id/sh_book_ranking"
+   	       android:layout_width="60dp"
+   	       android:layout_height="wrap_content"
+   	       android:layout_alignParentRight="true"
+   	       android:layout_alignTop="@+id/sh_book_image"
+   	       android:gravity="center"
+   	       android:padding="3dp"
+   	       android:text="No.1"
+   	       android:textColor="@color/white"
+   	       android:textSize="16sp" />
 
 </RelativeLayout>

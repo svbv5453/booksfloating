@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
-    android:background="@color/white">
+    android:background="@color/white"
+    android:layout_margin="15dp">
 
     <ImageView
         android:id="@+id/iv_books_image"
         android:layout_width="60dp"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
@@ -23,7 +24,7 @@
         android:layout_marginTop="5dp"
         android:text="Thinking in Java 4th"
         android:textColor="@color/black"
-        android:textSize="@dimen/nav_textsize_18" />
+        android:textSize="@dimen/nav_textsize_16" />
 
     <TextView
         android:id="@+id/tv_books_author"
@@ -35,7 +36,7 @@
         android:layout_marginTop="3dp"
         android:text="作者：（美）埃克尔" 
         android:textColor="@color/gray"
-        android:textSize="@dimen/nav_textsize_16"/>
+        android:textSize="@dimen/nav_textsize_13"/>
 
     <TextView
         android:id="@+id/tv_borrow_library"
@@ -47,6 +48,6 @@
         android:layout_marginTop="3dp"
         android:text="可借馆藏：西电、西工大..." 
         android:textColor="@color/gray"
-        android:textSize="@dimen/nav_textsize_16"/>
+        android:textSize="@dimen/nav_textsize_13"/>
 
 </RelativeLayout>

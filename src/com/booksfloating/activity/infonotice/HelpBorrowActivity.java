@@ -5,6 +5,7 @@ import java.util.Calendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.booksfloating.activity.MainActivity;
 import com.booksfloating.attr.BooksAttr;
 import com.booksfloating.attr.BooksAttr.BorrowInfo;
 import com.booksfloating.globalvar.Constants;
@@ -15,10 +16,12 @@ import com.xd.connect.PostParameter;
 import com.xd.dialog.DialogFactory;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -178,7 +181,17 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case 0:
-				DialogFactory.AlertDialog(HelpBorrowActivity.this, "恭喜你", "您成功帮助了一位同学！");
+				Toast.makeText(HelpBorrowActivity.this, "恭喜你 !你成功帮助了一位同学！", Toast.LENGTH_SHORT);
+				SharePreferenceUtil sp = new SharePreferenceUtil(HelpBorrowActivity.this, Constants.SAVE_USER);
+				sp.setCreditScore(20);
+				SystemClock.sleep(Toast.LENGTH_SHORT);
+				
+				Intent intent = new Intent();
+				intent.setClass(getApplicationContext(), MainActivity.class);
+				intent.putExtra("intent_fragmentId", MainActivity.TAB_INFO_NOTICE);
+				startActivity(intent);
+				finish();
+				
 				break;
 			case -1:
 				Toast.makeText(HelpBorrowActivity.this, "服务器错误，请稍后重试！", Toast.LENGTH_SHORT).show();

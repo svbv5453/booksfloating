@@ -79,7 +79,7 @@ public class PublishInfoActivity extends Activity implements OnClickListener{
 				}				
 			}
 			else {
-				DialogFactory.AlertDialog(this, "提示！", "你没有填写备注，如果不需要备注，请点击 直接发布 按钮吧");
+				DialogFactory.AlertDialog(this, "提示！", "你没有填写备注，如果不需要备注，请点击“直接发布”按钮吧");
 			}
 			break;
 			
