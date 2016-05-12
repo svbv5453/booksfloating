@@ -3,9 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:background="@color/white"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="25dp"
-    android:layout_marginLeft="5dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
       
         <TextView
             android:id="@+id/tv_books_title"

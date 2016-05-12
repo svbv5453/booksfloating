@@ -3,9 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:background="@color/white"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="25dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <ImageView
         android:id="@+id/iv_books_image"
