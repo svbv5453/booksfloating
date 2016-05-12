@@ -31,90 +31,100 @@
             android:textSize="@dimen/nav_textsize_20" />
     </LinearLayout>
     
-	<!-- 预期帮借时间 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp" 
-        android:layout_marginTop="10dp"
-        android:background="@color/theme_blue" >
-
-     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"   
-        android:layout_marginLeft="10dp"     
-        android:gravity="center_vertical|center_horizontal"
-        android:text="预期帮借时间："
-        android:textColor="@color/white"
-        android:textSize="@dimen/nav_textsize_16"/>
-      
-     <TextView
-        android:id="@+id/tv_expect_borrow_time"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"   
-        android:layout_marginLeft="0dp" 
-        android:gravity="center_vertical"    
-        android:text="2016-2-5"
-        android:textColor="@color/white"
-        android:textSize="@dimen/nav_textsize_16"/>
-
-    </LinearLayout>
-
-    <DatePicker
-        android:id="@+id/dp_expect_borrow_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="0dp"
-        android:calendarViewShown="false" />
-
-    <!-- 预期还书时间 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp" 
-        android:layout_marginTop="0dp"
-        android:background="@color/theme_blue" >
-
-     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"   
-        android:layout_marginLeft="10dp"     
-        android:gravity="center_vertical|center_horizontal"
-        android:text="预期还书时间："
-        android:textColor="@color/white"
-        android:textSize="@dimen/nav_textsize_16"/>
-      
-     <TextView
-        android:id="@+id/tv_expect_return_time"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"   
-        android:layout_marginLeft="0dp" 
-        android:gravity="center_vertical"    
-        android:text="2016-4-5"
-        android:textColor="@color/white"
-        android:textSize="@dimen/nav_textsize_16"/>
-
-    </LinearLayout>
-
-    <DatePicker
-        android:id="@+id/dp_expect_return_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" 
-        android:calendarViewShown="false"/>
-
-    <Button
-        android:id="@+id/btn_suretoborrow"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/theme_blue"
-        android:text="@string/btn_sure"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
+    
+   <ScrollView 
+       	android:layout_width="fill_parent"
+       	android:layout_height="wrap_content">
+         <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical">
+	        
+			<!-- 预期帮借时间 -->
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="40dp" 
+		        android:layout_marginTop="10dp"
+		        android:background="@color/theme_blue" >
+		
+		     <TextView
+		        android:id="@+id/textView1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"   
+		        android:layout_marginLeft="10dp"     
+		        android:gravity="center_vertical|center_horizontal"
+		        android:text="预期帮借时间："
+		        android:textColor="@color/white"
+		        android:textSize="@dimen/nav_textsize_16"/>
+		      
+		     <TextView
+		        android:id="@+id/tv_expect_borrow_time"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"   
+		        android:layout_marginLeft="0dp" 
+		        android:gravity="center_vertical"    
+		        android:text="2016-2-5"
+		        android:textColor="@color/white"
+		        android:textSize="@dimen/nav_textsize_16"/>
+		
+		    </LinearLayout>
+		
+		    <DatePicker
+		        android:id="@+id/dp_expect_borrow_time"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center"
+		        android:layout_marginTop="0dp"
+		        android:calendarViewShown="false" />
+		
+		    <!-- 预期还书时间 -->
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="40dp" 
+		        android:layout_marginTop="0dp"
+		        android:background="@color/theme_blue" >
+		
+		     <TextView
+		        android:id="@+id/textView2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"   
+		        android:layout_marginLeft="10dp"     
+		        android:gravity="center_vertical|center_horizontal"
+		        android:text="预期还书时间："
+		        android:textColor="@color/white"
+		        android:textSize="@dimen/nav_textsize_16"/>
+		      
+		     <TextView
+		        android:id="@+id/tv_expect_return_time"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"   
+		        android:layout_marginLeft="0dp" 
+		        android:gravity="center_vertical"    
+		        android:text="2016-4-5"
+		        android:textColor="@color/white"
+		        android:textSize="@dimen/nav_textsize_16"/>
+		
+		    </LinearLayout>
+		
+		    <DatePicker
+		        android:id="@+id/dp_expect_return_time"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center" 
+		        android:calendarViewShown="false"/>
+		
+		    <Button
+		        android:id="@+id/btn_suretoborrow"
+		        android:layout_width="match_parent"
+		        android:layout_height="40dp"
+		        android:layout_gravity="center"
+		        android:layout_marginTop="0dp"
+		        android:layout_marginLeft="5dp"
+		        android:layout_marginRight="5dp"
+		        android:background="@color/theme_blue"
+		        android:text="@string/btn_sure"
+		        android:textColor="@color/white"
+		        android:textSize="18sp" />
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>

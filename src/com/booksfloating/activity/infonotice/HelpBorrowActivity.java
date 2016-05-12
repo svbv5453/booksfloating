@@ -80,7 +80,8 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 	private void initData()
 	{
 		Calendar c =Calendar.getInstance();   
-        year1 = c.get(Calendar.YEAR);   
+        year1 = c.get(Calendar.YEAR);
+        c.add(Calendar.MONTH, 1);
         month1 = c.get(Calendar.MONTH); 
         day1 = c.get(Calendar.DAY_OF_MONTH);   
         tv_expect_borrow_time.setText(year1+"-"+month1+"-"+day1);       
@@ -106,7 +107,7 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 			}
 		});
 		
-		 year2 = c.get(Calendar.YEAR);   
+		 year2 = c.get(Calendar.YEAR); 
 	     month2 = c.get(Calendar.MONTH);
 	     day2 = c.get(Calendar.DAY_OF_MONTH); 
 	     tv_expect_return_time.setText(year2+"-"+month2+"-"+ day2);

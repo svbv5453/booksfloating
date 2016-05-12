@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:background="@color/white"
-    android:layout_margin="15dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
       
         <TextView
             android:id="@+id/tv_books_title"
@@ -62,6 +63,18 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="3dp"
             android:text="备注：希望好心人尽快帮我借到"
+            android:textColor="@color/theme_blue" 
+            android:textSize="@dimen/nav_textsize_13"/>
+        
+        <TextView
+            android:id="@+id/tv_notice_publisher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_remark"
+            android:layout_toRightOf="@+id/iv_books_image"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="3dp"
+            android:text="发布人：elaine"
             android:textColor="@color/theme_blue" 
             android:textSize="@dimen/nav_textsize_13"/>
 

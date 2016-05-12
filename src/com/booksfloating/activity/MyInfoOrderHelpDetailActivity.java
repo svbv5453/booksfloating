@@ -60,7 +60,7 @@ public class MyInfoOrderHelpDetailActivity extends FragmentActivity{
 	private void showData() {
 		// TODO Auto-generated method stub
 	    orderDate.setText(bookOrder.getBookPublicshTime());
-		helper.setText(bookOrder.getLenderName());
+		helper.setText("帮助者昵称："+bookOrder.getLenderName());
 		bookName.setText(bookOrder.getBookName());
 		author.setText(bookOrder.getBookAuthor());
 		bookLocation.setText(bookOrder.getBookLocation());
