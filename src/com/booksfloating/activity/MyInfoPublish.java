@@ -1,6 +1,7 @@
 package com.booksfloating.activity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -29,6 +30,7 @@ import com.booksfloating.domain.MyInfoPublishBookBean;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.PSHMyComparator;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
@@ -147,6 +149,10 @@ public class MyInfoPublish extends Activity{
 	}
 	protected void showListData(Context context, JSONObject response) {
 		parseJsonData(response);
+		if(myPublishBookBeanList.size() > 1){
+			PSHMyComparator comparator = new PSHMyComparator();
+			Collections.sort(myPublishBookBeanList, comparator);
+		}
 		MyInfoPublishAdapter adapter = new MyInfoPublishAdapter(context, myPublishBookBeanList);
 		myInfoBookPublishListView.setAdapter(adapter);
 	}

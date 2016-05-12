@@ -63,6 +63,7 @@ public class MyInfoOrderAskDetailActivity extends FragmentActivity{
 		
 		private void showData() {
 		// TODO Auto-generated method stub
+			orderDate.setText(bookOrder.getBookPublicshTime());
 			helper.setText(bookOrder.getLenderName());
 			bookName.setText(bookOrder.getBookName());
 			author.setText(bookOrder.getBookAuthor());
