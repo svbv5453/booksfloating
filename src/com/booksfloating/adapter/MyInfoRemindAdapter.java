@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.booksfloating.domain.MyInfoPublishBookBean;
 import com.booksfloating.util.LoadBookImage;
 import com.xd.booksfloating.R;
+import com.xd.imageloader.ImageLoader;
 
 public class MyInfoRemindAdapter extends BaseAdapter {
 	List<MyInfoPublishBookBean> publishBookBeanList;
@@ -67,9 +68,20 @@ public class MyInfoRemindAdapter extends BaseAdapter {
 		viewHolder.bookLocation.setText(publishBookBeanList.get(position).bookLocation);
 		viewHolder.expirationTime.setText(publishBookBeanList.get(position).bookExpirationTime);
 		viewHolder.bookImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.default_book));
-		/*String url = publishBookBeanList.get(position).bookIconUrl;
-		viewHolder.bookImage.setTag(url);*/
+		String url = publishBookBeanList.get(position).bookIconUrl;
+		//viewHolder.bookImage.setTag(url);
 		
+		if(url == null)
+		{
+			//加载本地图片
+			viewHolder.bookImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.default_book));
+		}
+		else {
+			//加载网络图片
+			//ImageManager.from(context).displayImage(viewHolder.iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
+			ImageLoader imageLoader = new ImageLoader(mContext);
+			imageLoader.DisplayImage(publishBookBeanList.get(position).bookIconUrl, viewHolder.bookImage, false, R.drawable.default_book);
+		}
 		return convertView;
 	}
 	class ViewHolder{
