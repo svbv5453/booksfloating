@@ -54,7 +54,7 @@
 	     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="帮助者昵称 :  "
+        android:text="用户昵称 :  "
         android:textSize="@dimen/nav_textsize_16"/>
 	     <TextView 
         android:id="@+id/tv_myinfo_ask_helper"

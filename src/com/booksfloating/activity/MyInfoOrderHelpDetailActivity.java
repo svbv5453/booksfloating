@@ -59,14 +59,15 @@ public class MyInfoOrderHelpDetailActivity extends FragmentActivity{
 	}
 	private void showData() {
 		// TODO Auto-generated method stub
-			helper.setText(bookOrder.getLenderName());
-			bookName.setText(bookOrder.getBookName());
-			author.setText(bookOrder.getBookAuthor());
-			bookLocation.setText(bookOrder.getBookLocation());
-			borrowDate.setText(bookOrder.getBorrowTime());
-			returnDate.setText(bookOrder.getReturnTime());
-			//university.setText(bookOrder.getLenderUniversity());
-			phoneNumber.setText( bookOrder.getPhoneNumber());
+	    orderDate.setText(bookOrder.getBookPublicshTime());
+		helper.setText(bookOrder.getLenderName());
+		bookName.setText(bookOrder.getBookName());
+		author.setText(bookOrder.getBookAuthor());
+		bookLocation.setText(bookOrder.getBookLocation());
+		borrowDate.setText(bookOrder.getBorrowTime());
+		returnDate.setText(bookOrder.getReturnTime());
+		//university.setText(bookOrder.getLenderUniversity());
+		phoneNumber.setText( bookOrder.getPhoneNumber());
 	}
 		
 		/*class MyInfoOrderDetailAsyncTask extends AsyncTask<String, Void, MyInfoBookDetailBean>{

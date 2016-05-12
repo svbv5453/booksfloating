@@ -1,6 +1,7 @@
 package com.booksfloating.activity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -34,6 +35,7 @@ import com.booksfloating.domain.MyInfoBookDetailBean;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.SHMyComparator;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
@@ -162,9 +164,13 @@ public class HelpFragment extends Fragment {
 	}
 	public void showListData(Context context, JSONObject response){
 		parseJsonData(response);
+		
+		if(booksOrderList.size() > 1){
+			SHMyComparator comparator = new SHMyComparator();
+			Collections.sort(booksOrderList, comparator);
+		}
 		MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), booksOrderList);
 		myInfoOrderListView.setAdapter(adapter);
-		
 	}
 	
 	
@@ -214,7 +220,7 @@ public class HelpFragment extends Fragment {
 					String bookName = jsonObject.getString("book");
 					String bookAuthor = jsonObject.getString("author");
 					String bookLocation = jsonObject.getString("university");
-					String bookPublicshTime = jsonObject.getString("lend_time");
+					String bookPublicshTime = jsonObject.getString("publish_time");
 					String lenderName = jsonObject.getString("borrower");
 					//String lenderUniversity = jsonObject.getString("lender_university");
 					String borrowTime = jsonObject.getString("lend_time");

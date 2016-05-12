@@ -1,6 +1,7 @@
 package com.booksfloating.activity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -12,7 +13,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -29,15 +29,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.booksfloating.adapter.BookRecommendAdapter;
 import com.booksfloating.adapter.MyInfoOrderAdapter;
-import com.booksfloating.adapter.MyInfoPublishAdapter;
-import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.domain.MyInfoBookDetailBean;
-import com.booksfloating.domain.MyInfoPublishBookBean;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.SHMyComparator;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
@@ -169,8 +166,16 @@ public class AskFragment extends Fragment {
 	}
 	public void showListData(Context context, JSONObject response){
 		parseJsonData(response);
+		if(booksOrderList.size() > 1){
+			SHMyComparator comparator = new SHMyComparator();
+			Collections.sort(booksOrderList, comparator);
+		}
 		MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), booksOrderList);
 		myInfoOrderListView.setAdapter(adapter);
+			
+			
+		
+		
 		
 	}
 	
@@ -213,7 +218,7 @@ public class AskFragment extends Fragment {
 					String bookName = jsonObject.getString("book");
 					String bookAuthor = jsonObject.getString("author");
 					String bookLocation = jsonObject.getString("university");
-					String bookPublicshTime = jsonObject.getString("lend_time");
+					String bookPublicshTime = jsonObject.getString("publish_time");
 					String lenderName = jsonObject.getString("lender");
 					//String lenderUniversity = jsonObject.getString("lender_university");
 					String borrowTime = jsonObject.getString("lend_time");
