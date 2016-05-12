@@ -35,6 +35,16 @@ public class BooksAttr implements Serializable{
 	private String noticePublishTime;
 	//发布信息的订单号
 	private String orderID;
+	//信息公告中的发布者
+	private String noticePublisher;
+	
+	
+	public String getNoticePublisher() {
+		return noticePublisher;
+	}
+	public void setNoticePublisher(String noticePublisher) {
+		this.noticePublisher = noticePublisher;
+	}
 	
 	public String getBookTitle() {
 		return bookTitle;
