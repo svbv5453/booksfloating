@@ -36,7 +36,7 @@
                 android:layout_toRightOf="@id/iv_my_info_image"
                 android:layout_below="@id/tv_my_info_name"
                 android:layout_marginLeft="5dp"
-                android:text="西安交通大学"
+                android:text="西安电子科技大学雁塔校区"
                 android:textSize="16sp"
                 android:textColor="@color/gray"
                 />
