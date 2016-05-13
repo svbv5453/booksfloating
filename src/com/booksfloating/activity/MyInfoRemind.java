@@ -1,6 +1,7 @@
 package com.booksfloating.activity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -27,6 +28,8 @@ import com.booksfloating.domain.MyInfoPublishBookBean;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.PSHMyComparator;
+import com.booksfloating.util.RemindMyComparator;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
@@ -102,6 +105,10 @@ public class MyInfoRemind extends Activity{
 	}
 	public void showListData(Context context, JSONObject response){
 		parseJsonData(response);
+		if(booksOrderList.size() > 1){
+			RemindMyComparator comparator = new RemindMyComparator();
+			Collections.sort(booksOrderList, comparator);
+		}
 		MyInfoRemindAdapter adapter = new MyInfoRemindAdapter(MyInfoRemind.this, booksOrderList);
 		myinfo_listview.setAdapter(adapter);
 		
@@ -146,8 +153,8 @@ public class MyInfoRemind extends Activity{
 					bookOrder.bookName = jsonObject.getString("book");
 					bookOrder.bookAuthor = jsonObject.getString("author");
 					bookOrder.bookLocation = jsonObject.getString("university");
-					
-					bookOrder.bookExpirationTime = parseDate(jsonObject.getString("return_time"));
+					//bookOrder.bookIconUrl =jsonObject.getString("picture");
+					bookOrder.bookExpirationTime = jsonObject.getString("return_time");
 					
 					booksOrderList.add(bookOrder);
 					

@@ -140,10 +140,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		super.onResume();
 		//getIntExtra的原型为getIntExtra(String name, int defaultValue),其中defaultValue为当name对应的值为null时设置的默认值
 		int id = getIntent().getIntExtra("intent_fragmentId", -1);
-		if (id == TAB_INFO_NOTICE) {
-			viewPager.setCurrentItem(TAB_INFO_NOTICE, true);
+		
+		if (id == TAB_BOOKS_RECOMMEND) {
+			viewPager.setCurrentItem(TAB_BOOKS_RECOMMEND, true);
 		}
 	}
+	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
