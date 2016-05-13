@@ -32,7 +32,7 @@ public class MyInfoOrderHelpDetailActivity extends FragmentActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.myinfo_ask_order_detail);
+		setContentView(R.layout.myinfo_help_order_detail);
 		
 		//getActionBar().setTitle("订单详情");
 		
@@ -60,7 +60,7 @@ public class MyInfoOrderHelpDetailActivity extends FragmentActivity{
 	private void showData() {
 		// TODO Auto-generated method stub
 	    orderDate.setText(bookOrder.getBookPublicshTime());
-		helper.setText("帮助者昵称："+bookOrder.getLenderName());
+		helper.setText(bookOrder.getLenderName());
 		bookName.setText(bookOrder.getBookName());
 		author.setText(bookOrder.getBookAuthor());
 		bookLocation.setText(bookOrder.getBookLocation());

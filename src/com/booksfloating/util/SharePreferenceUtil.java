@@ -103,4 +103,12 @@ public class SharePreferenceUtil {
 	public int getCreditScroe(){
 		return sp.getInt("creditScore", 0);
 	}
+	//签到时间
+	public void setQianDao(String time){
+		editor.putString("qiandao", time);
+		editor.commit();
+	}
+	public String getQianDao(){
+		return sp.getString("qiandao", "");
+	}
 }

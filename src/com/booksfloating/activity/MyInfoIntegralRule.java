@@ -1,11 +1,9 @@
 package com.booksfloating.activity;
 
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,9 +29,26 @@ public class MyInfoIntegralRule extends Activity{
 			@Override
 			public void onClick(View v) {
 				SharePreferenceUtil sp = new SharePreferenceUtil(MyInfoIntegralRule.this, Constants.SAVE_USER);
-				
-				
-				if(!TextUtils.isEmpty(sp.getAccount())){
+				Time t = new Time();
+				int nowMonth = t.month + 1;
+				String nowTime = t.year + "年" + nowMonth + "月" + t.monthDay + "日";
+				String lastTime = sp.getQianDao().toString();
+				if(!sp.getToken().isEmpty()){
+					if(sp.getQianDao().isEmpty()){
+						sp.setCreditScore(2);
+						sp.setQianDao(nowTime);
+						Toast.makeText(MyInfoIntegralRule.this, "签到成功！", Toast.LENGTH_SHORT).show();
+					}else if(lastTime.equals(nowTime)){
+						Toast.makeText(MyInfoIntegralRule.this, "今天您已经签过到，明天再来吧！", Toast.LENGTH_SHORT).show();
+					}else{
+						sp.setCreditScore(2);
+						sp.setQianDao(nowTime);
+						Toast.makeText(MyInfoIntegralRule.this, "签到成功！", Toast.LENGTH_SHORT).show();
+					}
+				}else{
+					Toast.makeText(MyInfoIntegralRule.this, "您尚未登录！", Toast.LENGTH_SHORT).show();
+				}
+				/*if(!TextUtils.isEmpty(sp.getAccount())){
 					if(preLongTime == 0){
 						preLongTime = new Date(System.currentTimeMillis()).getTime();
 						sp.setCreditScore(2);
@@ -55,7 +70,7 @@ public class MyInfoIntegralRule extends Activity{
 					
 				}else{
 					Toast.makeText(MyInfoIntegralRule.this, "您尚未登录！", Toast.LENGTH_SHORT).show();
-				}
+				}*/
 				
 			}
 		});

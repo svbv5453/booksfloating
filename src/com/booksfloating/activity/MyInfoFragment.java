@@ -145,4 +145,5 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 		}
 		
 	}
+	
 }
