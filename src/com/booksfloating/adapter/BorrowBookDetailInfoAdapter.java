@@ -88,8 +88,8 @@ public class BorrowBookDetailInfoAdapter extends BaseAdapter{
 		
 		viewHolder.cb_choose.setChecked(isSelected.get(position));
 		BorrowInfo borrowInfo = borrowInfoList.get(position);
-		viewHolder.tv_lib_collection_loc.setText(borrowInfo.borrowLoc);
-		viewHolder.tv_index_number.setText(borrowInfo.borrowIndex);
+		viewHolder.tv_lib_collection_loc.setText("馆藏位置："+borrowInfo.borrowLoc);
+		viewHolder.tv_index_number.setText("索书号："+borrowInfo.borrowIndex);
 		
 		return convertView;
 	}

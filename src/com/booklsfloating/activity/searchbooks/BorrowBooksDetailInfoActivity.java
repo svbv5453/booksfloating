@@ -7,6 +7,7 @@ import com.booksfloating.attr.BooksAttr;
 import com.booksfloating.attr.BooksAttr.BorrowInfo;
 import com.booksfloating.util.ImageManager;
 import com.xd.booksfloating.R;
+import com.xd.imageloader.ImageLoader;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -57,10 +58,12 @@ public class BorrowBooksDetailInfoActivity extends Activity implements OnClickLi
 		iv_books_image = (ImageView)findViewById(R.id.iv_books_image);
 		if(booksAttr.getBookImageUrl() != null)
 		{
-			ImageManager.from(this).displayImage(iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
+			//ImageManager.from(this).displayImage(iv_books_image, booksAttr.getBookImageUrl(), R.drawable.default_book);
+			ImageLoader imageLoader = new ImageLoader(BorrowBooksDetailInfoActivity.this);
+			imageLoader.DisplayImage(booksAttr.getBookImageUrl(), iv_books_image, false, R.drawable.default_book);
 			
 		}else {
-			iv_books_image.setImageDrawable(getResources().getDrawable(R.drawable.default_book));
+			iv_books_image.setImageDrawable(getResources().getDrawable(R.drawable.default_book));			
 		}
 		
 		lv_library_collection = (ListView)findViewById(R.id.lv_library_collection);
