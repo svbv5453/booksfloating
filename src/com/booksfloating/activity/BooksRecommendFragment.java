@@ -28,11 +28,16 @@ import com.booksfloating.adapter.BookRecommendAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.LoadingAnimation;
 import com.booksfloating.util.SingleRequestQueue;
+import com.booksfloating.widget.MyCustomProgressDialog;
+import com.booksfloating.widget.MyPullToRefreshListView;
+import com.booksfloating.widget.MyPullToRefreshListView.MyOnRefreshListener;
 import com.xd.booksfloating.R;
 
-public class BooksRecommendFragment extends Fragment{
+public class BooksRecommendFragment extends Fragment implements MyOnRefreshListener{
 	
+	private static String TAG = "BooksRecommendFragment";
 	
 	private static String url = "www.baidu.com";
 	private static String book_info = "{\"status\":\"1\",\"booklist\":" +
@@ -41,7 +46,11 @@ public class BooksRecommendFragment extends Fragment{
 			"{\"book\":\"围城\",\"author\":\"钱钟书\",\"picture\":\"https://img1.doubanio.com/lpic/s1070222.jpg\"}]}";
 	private static String urltest = "http://www.imooc.com/api/teacher?type=4&num=30";
 	private ListView booksRecommendList = null;
-	private List<BooksRecommendBean> booksBeanList;
+	private List<BooksRecommendBean> booksBeanList = new ArrayList<BooksRecommendBean>();
+	
+	private MyPullToRefreshListView prtListView;
+	private MyCustomProgressDialog myCustomProgressDialog;
+	private BookRecommendAdapter adapter;
 	
 	
 	
@@ -58,35 +67,60 @@ public class BooksRecommendFragment extends Fragment{
 		int maxMemory = (int) (Runtime.getRuntime().maxMemory()/1024);
 		Log.d("TAG", "Max memory is " + maxMemory + "KB");
 		View view = inflater.inflate(R.layout.books_recommend, container, false);
+		//booksRecommendList = (ListView) view.findViewById(R.id.books_recommend_list);
+		prtListView = (MyPullToRefreshListView) view.findViewById(R.id.books_myprtListView);
+		prtListView.setOnRefreshListener(this);
 		
-		booksRecommendList = (ListView) view.findViewById(R.id.books_recommend_list);
-
+			
 		
-		//loadData(getActivity(), urltest);
-
-		/**
-		 *实际方法
-		 */
 		
+		
+		showListData(getActivity());
 		loadData(getActivity(), HttpUtil.BOOK_RECOMMEND);
-
-		
 		return view;
 	}
+	
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		// TODO Auto-generated method stub
+		super.setUserVisibleHint(isVisibleToUser);
+		if(isVisibleToUser){
+			startLoadingAnimation();
+		}
+	}
+	public  void startLoadingAnimation(){
+		
+		if(myCustomProgressDialog == null){
+			myCustomProgressDialog = MyCustomProgressDialog.createDialog(getActivity());
+			myCustomProgressDialog.setMessage("正在拼命加载中...");
+		}
+		
+		myCustomProgressDialog.show();
+	}
+	public  void stopLoadingAnimation(){
+		if(myCustomProgressDialog != null){
+			myCustomProgressDialog.dismiss();
+			myCustomProgressDialog = null;
+		}
+	}
+	
 	
 	
 	public void loadData(Context context, String url){
 		if(isNetwrokAvaliable(context)){
 			loadListData(context, url);
+			
 		}else {
 			
 			JSONObject response = ACache.get(context).getAsJSONObject("bookRecommend");
 			if(response != null){
 				Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
-				showListData(context, response);
+				parseJsonData(response);
+				adapter.notifyDataSetChanged();
+				
 			}
 			Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
-			
+			stopLoadingAnimation();
 		}
 	}
 	
@@ -118,26 +152,32 @@ public class BooksRecommendFragment extends Fragment{
 			public void onResponse(JSONObject response) {
 				System.out.println(response.toString());
 				ACache.get(context).put("bookRecommend", response);
-				showListData(context, response);
+				parseJsonData(response);
+				stopLoadingAnimation();
+				
+				prtListView.hideHeaderView();
+				adapter.notifyDataSetChanged();
+				
 			}
 		}, new Response.ErrorListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				
+				stopLoadingAnimation();
+				Toast.makeText(context, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 			}
 		});
 		requestQueue.add(jsonObjectRequest);
 		
 	}
-	public void showListData(Context context, JSONObject response){
-		parseJsonData(response);
-		BookRecommendAdapter adapter = new BookRecommendAdapter(context, booksBeanList);
-		booksRecommendList.setAdapter(adapter);
+	public void showListData(Context context){
+		
+		adapter = new BookRecommendAdapter(context, booksBeanList);
+		prtListView.setAdapter(adapter);
 	}
 	
 	private List<BooksRecommendBean> parseJsonData(JSONObject jsonObject) {
-		booksBeanList = new ArrayList<BooksRecommendBean>();
+		
 		try {
 			
 			//JSONObject jsonObject = new JSONObject(jsonData);
@@ -155,20 +195,7 @@ public class BooksRecommendFragment extends Fragment{
 					
 					
 				}
-				/*JSONArray jsonArray = jsonObject.getJSONArray("data");
-				for(int i = 0; i < jsonArray.length(); i++){
-					jsonObject = jsonArray.getJSONObject(i);
-					BooksRecommendBean booksRecommendBean = new BooksRecommendBean();
-					booksRecommendBean.bookName = jsonObject.getString("name");
-					booksRecommendBean.bookAuthor = jsonObject.getString("description");
-					booksRecommendBean.bookImageUrl = jsonObject.getString("picSmall");
-					if(jsonArray.length() <= 2){
-						booksRecommendBean.bookRanking = "No."+ (i+1);
-					}
-					
-					booksBeanList.add(booksRecommendBean);
-					
-				}*/
+				
 				
 			}
 		} catch (JSONException e) {
@@ -177,6 +204,14 @@ public class BooksRecommendFragment extends Fragment{
 		
 		return booksBeanList;
 		
+		
+	}
+
+	@Override
+	public void myOnDownPullRefresh() {
+		// TODO Auto-generated method stub
+		
+		loadData(getActivity(), HttpUtil.BOOK_RECOMMEND);
 		
 	}
 	

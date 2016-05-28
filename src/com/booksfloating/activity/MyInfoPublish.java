@@ -30,9 +30,11 @@ import com.booksfloating.domain.MyInfoPublishBookBean;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.LoadingAnimation;
 import com.booksfloating.util.PSHMyComparator;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
+import com.booksfloating.widget.MyCustomProgressDialog;
 import com.xd.booksfloating.R;
 
 public class MyInfoPublish extends Activity{
@@ -49,6 +51,8 @@ public class MyInfoPublish extends Activity{
 	private EditText et_search = null;	
 	private List<MyInfoPublishBookBean> myPublishBookBeanList;
 	private List<MyInfoPublishBookBean> myPublishBookBeanList2;
+	private MyCustomProgressDialog myCustomProgressDialog;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -99,11 +103,14 @@ public class MyInfoPublish extends Activity{
 				
 			}
 		});
-		//loadData(this, urlTest);
+		
 		SharePreferenceUtil sp = new SharePreferenceUtil(MyInfoPublish.this, Constants.SAVE_USER);
 		String url = HttpUtil.MY_PUBLISH+"?token=" + sp.getToken();
 		if(!sp.getToken().isEmpty()){
+			startLoadingAnimation();
 			loadData(MyInfoPublish.this, url);
+			
+			
 		}else{
 			Toast.makeText(MyInfoPublish.this, "你尚未登录，无法查看您的信息", Toast.LENGTH_SHORT).show();
 		}
@@ -112,18 +119,35 @@ public class MyInfoPublish extends Activity{
 		
 		
 	}
+	public  void startLoadingAnimation(){
+		
+		if(myCustomProgressDialog == null){
+			myCustomProgressDialog = MyCustomProgressDialog.createDialog(MyInfoPublish.this);
+			myCustomProgressDialog.setMessage("正在拼命加载中...");
+		}
+		
+		myCustomProgressDialog.show();
+	}
+	public  void stopLoadingAnimation(){
+		if(myCustomProgressDialog != null){
+			myCustomProgressDialog.dismiss();
+			myCustomProgressDialog = null;
+		}
+	}
 	public void loadData(Context context, String url){
 		if(isNetworkAvailable(context)){
 			loadListData(context, url);
+			
 		}else {
 			
 			JSONObject response = ACache.get(context).getAsJSONObject("myInfoPublish");
 			if(response != null){
 				Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
 				showListData(context, response);
+				
 			}
 			Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
-			
+			stopLoadingAnimation();
 		}
 	}
 	private void loadListData(final Context context, String url) {
@@ -134,6 +158,7 @@ public class MyInfoPublish extends Activity{
 			public void onResponse(JSONObject response) {
 				System.out.println(response.toString());
 				ACache.get(context).put("myInfoPublish", response);
+				stopLoadingAnimation();
 				showListData(context, response);
 				
 			}
@@ -141,6 +166,8 @@ public class MyInfoPublish extends Activity{
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
+				stopLoadingAnimation();
+				Toast.makeText(context, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 				
 			}
 		});
@@ -176,6 +203,7 @@ public class MyInfoPublish extends Activity{
 	
 	private List<MyInfoPublishBookBean> parseJsonData(JSONObject jsonObject) {
 		myPublishBookBeanList = new ArrayList<MyInfoPublishBookBean>();
+		System.out.println(jsonObject.toString());
 		try {
 			//JSONObject jsonObject = new JSONObject(jsonData);
 			if(jsonObject.getString("status").equals("1")){
@@ -197,6 +225,7 @@ public class MyInfoPublish extends Activity{
 				return myPublishBookBeanList;
 				
 			}else if(jsonObject.getString("status").equals("0")){
+				
 				Toast.makeText(MyInfoPublish.this, "您尚未发布信息", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {

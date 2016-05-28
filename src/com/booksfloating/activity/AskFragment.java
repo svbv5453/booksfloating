@@ -34,9 +34,11 @@ import com.booksfloating.domain.MyInfoBookDetailBean;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.LoadingAnimation;
 import com.booksfloating.util.SHMyComparator;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
+import com.booksfloating.widget.MyCustomProgressDialog;
 import com.xd.booksfloating.R;
 
 public class AskFragment extends Fragment {
@@ -50,6 +52,7 @@ public class AskFragment extends Fragment {
 	//private Button btn_myinfo_search_book = null;
 	private Button btn_myinfo_search_book = null;
 	private EditText et_search = null;
+	private MyCustomProgressDialog myCustomProgressDialog;
 	
 	private static String urlTest = "http://www.imooc.com/api/teacher?type=4&num=30";
 	
@@ -90,11 +93,14 @@ public class AskFragment extends Fragment {
 		/**
 		 * 实际方法，
 		 */
+		
 		SharePreferenceUtil sp = new SharePreferenceUtil(getActivity(), Constants.SAVE_USER);
 		String url = HttpUtil.BORROW_ORDER + "?token=" + sp.getToken();
 		
 		if(!sp.getToken().isEmpty()){
+			startLoadingAnimation();
 			loadData(getActivity(), url);
+			
 		}else{
 			Toast.makeText(getActivity(), "你尚未登录，无法查看您的信息", Toast.LENGTH_SHORT).show();
 		}
@@ -112,6 +118,21 @@ public class AskFragment extends Fragment {
 			}
 		});
 		return view;
+	}
+	public  void startLoadingAnimation(){
+		
+		if(myCustomProgressDialog == null){
+			myCustomProgressDialog = MyCustomProgressDialog.createDialog(getActivity());
+			myCustomProgressDialog.setMessage("正在拼命加载中...");
+		}
+		
+		myCustomProgressDialog.show();
+	}
+	public  void stopLoadingAnimation(){
+		if(myCustomProgressDialog != null){
+			myCustomProgressDialog.dismiss();
+			myCustomProgressDialog = null;
+		}
 	}
 	
 	
@@ -137,9 +158,11 @@ public class AskFragment extends Fragment {
 			if(response != null){
 				Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
 				showListData(context, response);
+				
+				
 			}
 			Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
-			
+			stopLoadingAnimation();
 			
 		}
 	}
@@ -152,13 +175,15 @@ public class AskFragment extends Fragment {
 			public void onResponse(JSONObject response) {
 				System.out.println(response.toString());
 				ACache.get(context).put("求助订单", response);
+				stopLoadingAnimation();
 				showListData(context, response);
 			}
 		}, new Response.ErrorListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				
+				stopLoadingAnimation();
+				Toast.makeText(context, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 			}
 		});
 		requestQueue.add(jsonObjectRequest);
@@ -241,7 +266,7 @@ public class AskFragment extends Fragment {
 				
 				
 			}else if(jsonObject.getString("status").equals("0")){
-				Toast.makeText(getActivity(), "您尚未发布信息", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "您还没有求助订单", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
