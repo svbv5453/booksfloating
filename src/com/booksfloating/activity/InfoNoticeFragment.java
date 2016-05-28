@@ -110,7 +110,9 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 			}
 			if(filterSchool.equals("所有学校"))
 			{
-				//啥也不干
+				requestTime = 1;				
+				showLoadingDialog();
+				requestFromServer(ListViewCompat.REFRESH);
 			}
 			else{
 				System.out.println("filterSchool"+filterSchool);

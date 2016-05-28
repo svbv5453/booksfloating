@@ -97,9 +97,12 @@ public class PublishInfoActivity extends Activity implements OnClickListener{
 		case R.id.btn_login:
 			Intent intent3 = new Intent();
 			intent3.setClass(getApplicationContext(), LoginActivity.class);
-			startActivity(intent3);
-			
+			startActivity(intent3);			
 			break;
+		case R.id.btn_back:
+			finish();
+			break;
+			
 		default:
 			break;
 		}
@@ -125,6 +128,7 @@ public class PublishInfoActivity extends Activity implements OnClickListener{
 						Intent intent = new Intent();
 						intent.setClass(getApplicationContext(), MainActivity.class);
 						intent.putExtra("intent_fragmentId", MainActivity.TAB_INFO_NOTICE);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 						startActivity(intent);
 						finish();
 						

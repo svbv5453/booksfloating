@@ -167,7 +167,9 @@ OnRefreshListener,OnLoadListener{
 			}
 			if(filterSchool.equals(university))
 			{
-				//啥也不干
+				requestTime = 1;
+				university = filterSchool;
+				refreshFromServer(ListViewCompat.REFRESH);
 			}
 			else{
 				System.out.println("filterSchool"+filterSchool);
