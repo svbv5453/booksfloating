@@ -80,9 +80,6 @@ public class BorrowBooksDetailInfoActivity extends Activity implements OnClickLi
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {		
-		case R.id.btn_back:
-			
-			break;
 		//如果是全选，则直接把booksAttr传到下一个页面即可
 		case R.id.btn_choose_all:
 			/*Intent intent1 = new Intent();
@@ -105,6 +102,10 @@ public class BorrowBooksDetailInfoActivity extends Activity implements OnClickLi
 			}
 			
 			break;
+		case R.id.btn_back:
+			finish();
+			break;
+			
 		default:
 			break;
 		}

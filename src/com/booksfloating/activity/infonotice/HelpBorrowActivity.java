@@ -84,16 +84,17 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
         c.add(Calendar.MONTH, 1);
         month1 = c.get(Calendar.MONTH); 
         day1 = c.get(Calendar.DAY_OF_MONTH);   
-        tv_expect_borrow_time.setText(year1+"-"+month1+"-"+day1);       
-
-		dp_expect_borrow_time.init(year1, month1, day1, new OnDateChangedListener() {
+        tv_expect_borrow_time.setText(year1+"-"+month1+"-"+day1); 
+		
+		dp_expect_borrow_time.init(dp_expect_borrow_time.getYear(), dp_expect_borrow_time.getMonth(), 
+				dp_expect_borrow_time.getDayOfMonth(), new OnDateChangedListener() {
 			
 			@Override
 			public void onDateChanged(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
 				// TODO Auto-generated method stub
 				year1 = year;
-				month1 = monthOfYear + 1;
+				month1 = monthOfYear+1;
 				day1 = dayOfMonth;
 				
 				StringBuffer lend_time = new StringBuffer();
@@ -112,14 +113,15 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 	     day2 = c.get(Calendar.DAY_OF_MONTH); 
 	     tv_expect_return_time.setText(year2+"-"+month2+"-"+ day2);
 	     
-		dp_expect_return_time.init(year2, month2, day2, new OnDateChangedListener() {
+		dp_expect_return_time.init(dp_expect_return_time.getYear(), dp_expect_return_time.getMonth(), 
+				dp_expect_return_time.getDayOfMonth(), new OnDateChangedListener() {
 			
 			@Override
 			public void onDateChanged(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
 				// TODO Auto-generated method stub
 				year2 = year;
-				month2 = monthOfYear + 1;
+				month2 = monthOfYear+1;
 				day2 = dayOfMonth;
 				
 				StringBuffer return_time = new StringBuffer();
@@ -192,7 +194,7 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 				intent.putExtra("intent_fragmentId", MainActivity.TAB_INFO_NOTICE);
 				startActivity(intent);
 				finish();
-				
+				//HelpBorrowActivity.this.startActivityForResult(intent, requestCode)
 				break;
 			case -1:
 				Toast.makeText(HelpBorrowActivity.this, "服务器错误，请稍后重试！", Toast.LENGTH_SHORT).show();

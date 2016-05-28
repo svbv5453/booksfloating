@@ -15,7 +15,7 @@
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="25dp"
+            android:layout_width="30dp"
             android:layout_height="25dp"
             android:layout_marginLeft="@dimen/nav_marginLeft_10"
             android:layout_marginTop="@dimen/nav_marginTop_10"
