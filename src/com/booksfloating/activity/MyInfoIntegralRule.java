@@ -15,6 +15,7 @@ import com.xd.booksfloating.R;
 
 public class MyInfoIntegralRule extends Activity{
 	private Button btn_integral_rule_sign = null;
+	private Button btn_back = null;
 	private long preLongTime = 0;
 	private long currentTime = 0;
 	@Override
@@ -38,13 +39,15 @@ public class MyInfoIntegralRule extends Activity{
 						sp.setCreditScore(2);
 						sp.setQianDao(nowTime);
 						Toast.makeText(MyInfoIntegralRule.this, "签到成功！", Toast.LENGTH_SHORT).show();
+						finish();
 					}else if(lastTime.equals(nowTime)){
 						Toast.makeText(MyInfoIntegralRule.this, "今天您已经签过到，明天再来吧！", Toast.LENGTH_SHORT).show();
-					}else{
-						sp.setCreditScore(2);
-						sp.setQianDao(nowTime);
-						Toast.makeText(MyInfoIntegralRule.this, "签到成功！", Toast.LENGTH_SHORT).show();
-					}
+						}else{
+							sp.setCreditScore(2);
+							sp.setQianDao(nowTime);
+							Toast.makeText(MyInfoIntegralRule.this, "签到成功！", Toast.LENGTH_SHORT).show();
+							finish();
+						}
 				}else{
 					Toast.makeText(MyInfoIntegralRule.this, "您尚未登录！", Toast.LENGTH_SHORT).show();
 				}
@@ -74,7 +77,16 @@ public class MyInfoIntegralRule extends Activity{
 				
 			}
 		});
-		
+		btn_back = (Button)findViewById(R.id.back);
+		btn_back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				/*Intent intent = new Intent(MyInfoRemind.this, MyInfoFragment.class);
+				startActivity(intent);*/
+				finish();
+			}
+		});
 	}
 
 }

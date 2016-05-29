@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -35,10 +36,13 @@ import com.booksfloating.domain.MyInfoBookDetailBean;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.LoadingAnimation;
 import com.booksfloating.util.SHMyComparator;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
+import com.booksfloating.widget.MyCustomProgressDialog;
 import com.xd.booksfloating.R;
+import com.xd.dialog.DialogFactory;
 
 public class HelpFragment extends Fragment {
 	
@@ -51,6 +55,7 @@ public class HelpFragment extends Fragment {
 	private Button btn_myinfo_search_book = null;
 	private EditText et_search = null;
 	private static String urlTest = "http://www.imooc.com/api/teacher?type=4&num=30";
+	private MyCustomProgressDialog myCustomProgressDialog;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,11 +94,15 @@ public class HelpFragment extends Fragment {
 		/**
 		 * 实际方法，如同askFragment
 		 */
+		
 		SharePreferenceUtil sp = new SharePreferenceUtil(getActivity(), Constants.SAVE_USER);
 		String url = HttpUtil.LEND_ORDER + "?token=" + sp.getToken();
 		
 		if(!sp.getToken().isEmpty()){
+			//startLoadingAnimation();
+			showLoadingDialog();
 			loadData(getActivity(), url);
+			
 		}else{
 			Toast.makeText(getActivity(), "你尚未登录，无法查看您的信息", Toast.LENGTH_SHORT).show();
 		}
@@ -112,6 +121,7 @@ public class HelpFragment extends Fragment {
 		}); 
 		return view;
 	}
+	
 	private void IntentToActivity(int position) {
 		
 		Intent intent = new Intent(getActivity(), MyInfoOrderHelpDetailActivity.class);
@@ -135,7 +145,11 @@ public class HelpFragment extends Fragment {
 			if(response != null){
 				Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
 				showListData(context, response);
+				
 			}
+			//stopLoadingAnimation();
+			dismissLoadingDialog();
+			
 			Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
 			
 			
@@ -150,13 +164,17 @@ public class HelpFragment extends Fragment {
 			public void onResponse(JSONObject response) {
 				System.out.println(response.toString());
 				ACache.get(context).put("帮助订单", response);
+				//stopLoadingAnimation();
+				dismissLoadingDialog();
 				showListData(context, response);
 			}
 		}, new Response.ErrorListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				
+				//stopLoadingAnimation();
+				dismissLoadingDialog();
+				Toast.makeText(context, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 			}
 		});
 		requestQueue.add(jsonObjectRequest);
@@ -243,7 +261,7 @@ public class HelpFragment extends Fragment {
 				
 				
 			}else if(jsonObject.getString("status").equals("0")){
-				Toast.makeText(getActivity(), "您尚未发布信息", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "您还没有帮助订单", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -252,15 +270,41 @@ public class HelpFragment extends Fragment {
 		return booksOrderList;
 		
 	}
-	private String parseDate(String date){
-		if(date != null){
-			//String[] dateString = date.split("-");
-			String[] dateYMD = date.split("-");
-			//String[] dateHM = dateString[1].split(":");
-			return dateYMD[0] + "年" + dateYMD[1] + "月" + dateYMD[2] + "日";
+	public  void startLoadingAnimation(){
+		
+		if(myCustomProgressDialog == null){
+			myCustomProgressDialog = MyCustomProgressDialog.createDialog(getActivity());
+			myCustomProgressDialog.setMessage("正在拼命加载中...");
 		}
 		
-		return null;
+		myCustomProgressDialog.show();
+	}
+	public  void stopLoadingAnimation(){
+		if(myCustomProgressDialog != null){
+			myCustomProgressDialog.dismiss();
+			myCustomProgressDialog = null;
+		}
+	}
+	/**
+	 * 刘文苑的加载动画
+	 */
+	private Dialog dialog = null;
+	private void showLoadingDialog(){
+		if(dialog == null)
+		{
+			dialog = DialogFactory.creatLoadingDialog(getActivity(), "正在搜索，请稍后...");
+			dialog.show();
+		}
+		else {
+			dialog.dismiss();
+		}
+	}
+	
+	private void dismissLoadingDialog() {
+		if (dialog != null) {
+			dialog.dismiss();
+			dialog = null;
+		}
 	}
 
 }

@@ -17,4 +17,8 @@
     <color name="red">#FF0000</color>
 	<color name="listView_item_color_nor">#ffdedede</color>
 	<color name="listview_selected_color">#b4f7ff</color>
+	<!--自定义progressbar的渐变颜色-->
+    <color name="startColor">#000000</color>
+    <color name="endColor">#1E90FF</color>
+    <color name="centerColor">#FFFFFF</color>
 </resources>

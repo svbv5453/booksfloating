@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -33,6 +34,7 @@ import com.booksfloating.util.RemindMyComparator;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.xd.booksfloating.R;
+import com.xd.dialog.DialogFactory;
 
 public class MyInfoRemind extends Activity{
 	private Button btn_back = null;
@@ -63,6 +65,7 @@ public class MyInfoRemind extends Activity{
 		
 		if(!sp.getToken().isEmpty()){
 			loadData(MyInfoRemind.this, url);
+			showLoadingDialog();
 		}else{
 			Toast.makeText(MyInfoRemind.this, "你尚未登录，无法查看您的信息", Toast.LENGTH_SHORT).show();
 		}
@@ -91,13 +94,15 @@ public class MyInfoRemind extends Activity{
 			public void onResponse(JSONObject response) {
 				System.out.println(response.toString());
 				ACache.get(context).put("到期提醒", response);
+				dismissLoadingDialog();
 				showListData(context, response);
 			}
 		}, new Response.ErrorListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				
+				dismissLoadingDialog();
+				Toast.makeText(context, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 			}
 		});
 		requestQueue.add(jsonObjectRequest);
@@ -172,14 +177,25 @@ public class MyInfoRemind extends Activity{
 		return booksOrderList;
 		
 	}
-	private String parseDate(String date){
-		if(date != null){
-			//String[] dateString = date.split("-");
-			String[] dateYMD = date.split("-");
-			//String[] dateHM = dateString[1].split(":");
-			return dateYMD[0] + "年" + dateYMD[1] + "月" + dateYMD[2] + "日";
+	/**
+	 * 刘文苑的加载动画
+	 */
+	private Dialog dialog = null;
+	private void showLoadingDialog(){
+		if(dialog == null)
+		{
+			dialog = DialogFactory.creatLoadingDialog(this, "正在搜索，请稍后...");
+			dialog.show();
 		}
-		
-		return null;
+		else {
+			dialog.dismiss();
+		}
+	}
+	
+	private void dismissLoadingDialog() {
+		if (dialog != null) {
+			dialog.dismiss();
+			dialog = null;
+		}
 	}
 }
