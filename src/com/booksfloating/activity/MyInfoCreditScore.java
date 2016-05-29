@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,26 +35,8 @@ public class MyInfoCreditScore extends Activity{
 		progressBar1 = (ProgressBar) findViewById(R.id.pb_myinfo_crditscore);
 		progressBar2 = (ProgressBar) findViewById(R.id.pb_myinfo_crditscore2);
 		tv_currentScore = (TextView) findViewById(R.id.current_score);
-		SharePreferenceUtil sp = new SharePreferenceUtil(MyInfoCreditScore.this, Constants.SAVE_USER);
 		
-		if(sp.getCreditScroe() != 0){
-			tv_currentScore.setText(sp.getCreditScroe() + "");
-			if(sp.getCreditScroe() <= 100){
-				progressBar1.setProgress(sp.getCreditScroe());
-			}else{
-				progressBar1.setProgress(100);
-				progressBar2.setProgress(sp.getCreditScroe() - 100);
-			}
-			
-			
-		}else if(!TextUtils.isEmpty(sp.getAccount())){
-			tv_currentScore.setText("5");
-			progressBar1.setProgress(5);
-		}else{
-			tv_currentScore.setText("0");
-			progressBar1.setProgress(0);
-		}
-		
+		getCreditScore();
 		
 		btn_integral_rule.setOnClickListener(new OnClickListener() {
 			
@@ -95,6 +78,35 @@ public class MyInfoCreditScore extends Activity{
 		}
 		
 		
+	}
+	public void getCreditScore(){
+		SharePreferenceUtil sp = new SharePreferenceUtil(MyInfoCreditScore.this, Constants.SAVE_USER);
+		
+		if(sp.getCreditScroe() != 0){
+			tv_currentScore.setText(sp.getCreditScroe() + "");
+			if(sp.getCreditScroe() <= 100){
+				progressBar1.setProgress(sp.getCreditScroe());
+			}else{
+				progressBar1.setProgress(100);
+				progressBar2.setProgress(sp.getCreditScroe() - 100);
+			}
+			
+			
+		}else if(!TextUtils.isEmpty(sp.getToken())){
+			sp.setCreditScore(5);
+			tv_currentScore.setText("5");
+			progressBar1.setProgress(5);
+		}else{
+			tv_currentScore.setText("0");
+			progressBar1.setProgress(0);
+		}
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Log.d("MyInfoCreditScore", "-----onResume()");
+		getCreditScore();
 	}
 
 }

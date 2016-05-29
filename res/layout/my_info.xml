@@ -18,14 +18,35 @@
             android:layout_margin="5dp"
             
             android:src="@drawable/head_girl"/>
-         <TextView 
+         
+             <Button 
+                 android:id="@+id/btn_goLogin"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginLeft="5dp"
+                 android:layout_centerInParent="true"
+                 android:layout_toRightOf="@id/iv_my_info_image"
+                 style="@style/myinfoButton"
+                 android:text="点击登录"
+                 android:gravity="center"
+                 />
+             <LinearLayout 
+                 android:id="@+id/ll_myinfo"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+                 android:layout_gravity="center"
+                 android:layout_marginLeft="5dp"
+                 android:layout_centerInParent="true"
+                 android:layout_toRightOf="@id/iv_my_info_image"
+                 android:visibility="gone">
+                 <TextView 
                 android:id="@+id/tv_my_info_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="王大锤"
-                android:layout_toRightOf="@id/iv_my_info_image"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="5dp"
+                
+                android:layout_marginTop="10dp"
+                
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 />
@@ -33,37 +54,25 @@
                 android:id="@+id/tv_my_info_university"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/iv_my_info_image"
-                android:layout_below="@id/tv_my_info_name"
-                android:layout_marginLeft="5dp"
+               
                 android:text="西安电子科技大学雁塔校区"
                 android:textSize="16sp"
                 android:textColor="@color/gray"
                 />
-         <TextView 
-                android:id="@+id/fuzhu_creditRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/iv_my_info_image"
-                android:layout_marginLeft="5dp"
-                android:layout_below="@id/tv_my_info_university"
-                android:text="信用等级:"
-                android:textSize="16sp"
-                android:textColor="@color/gray"
-                
-                />
+         
          <TextView 
                 android:id="@+id/tv_my_info_creditRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/fuzhu_creditRating"
-                android:layout_marginLeft="10dp"
-                android:layout_below="@id/tv_my_info_university"
-                android:text="5"
+                android:text="信用等级: 5"
                 android:textSize="16sp"
                 android:textColor="@color/gray"
                 
                 />
+                 
+             </LinearLayout>
+         
+         
     </RelativeLayout>
     
    

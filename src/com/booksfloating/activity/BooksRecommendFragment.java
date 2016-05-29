@@ -28,7 +28,6 @@ import com.booksfloating.adapter.BookRecommendAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
-import com.booksfloating.util.LoadingAnimation;
 import com.booksfloating.util.SingleRequestQueue;
 import com.booksfloating.widget.MyCustomProgressDialog;
 import com.booksfloating.widget.MyPullToRefreshListView;
@@ -47,6 +46,7 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 	private static String urltest = "http://www.imooc.com/api/teacher?type=4&num=30";
 	private ListView booksRecommendList = null;
 	private List<BooksRecommendBean> booksBeanList = new ArrayList<BooksRecommendBean>();
+	private List<BooksRecommendBean> booksList = new ArrayList<BooksRecommendBean>();
 	
 	private MyPullToRefreshListView prtListView;
 	private MyCustomProgressDialog myCustomProgressDialog;
@@ -70,24 +70,22 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 		//booksRecommendList = (ListView) view.findViewById(R.id.books_recommend_list);
 		prtListView = (MyPullToRefreshListView) view.findViewById(R.id.books_myprtListView);
 		prtListView.setOnRefreshListener(this);
-		
-			
-		
+		//startLoadingAnimation();
 		
 		
-		showListData(getActivity());
 		loadData(getActivity(), HttpUtil.BOOK_RECOMMEND);
+		showListData(getActivity());
 		return view;
 	}
 	
-	@Override
+	/*@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
 		// TODO Auto-generated method stub
 		super.setUserVisibleHint(isVisibleToUser);
 		if(isVisibleToUser){
-			startLoadingAnimation();
+			
 		}
-	}
+	}*/
 	public  void startLoadingAnimation(){
 		
 		if(myCustomProgressDialog == null){
@@ -120,7 +118,7 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 				
 			}
 			Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
-			stopLoadingAnimation();
+			//stopLoadingAnimation();
 		}
 	}
 	
@@ -153,17 +151,25 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 				System.out.println(response.toString());
 				ACache.get(context).put("bookRecommend", response);
 				parseJsonData(response);
-				stopLoadingAnimation();
+				//stopLoadingAnimation();
 				
+				
+				if(booksList.size() > 0){
+					booksList.clear();
+				}
+				booksList.addAll(booksBeanList);
+				booksBeanList.clear();
 				prtListView.hideHeaderView();
 				adapter.notifyDataSetChanged();
+				
 				
 			}
 		}, new Response.ErrorListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				stopLoadingAnimation();
+				//stopLoadingAnimation();
+				prtListView.hideHeaderView();
 				Toast.makeText(context, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -172,8 +178,9 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 	}
 	public void showListData(Context context){
 		
-		adapter = new BookRecommendAdapter(context, booksBeanList);
+		adapter = new BookRecommendAdapter(context, booksList);
 		prtListView.setAdapter(adapter);
+		
 	}
 	
 	private List<BooksRecommendBean> parseJsonData(JSONObject jsonObject) {

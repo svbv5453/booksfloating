@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -36,6 +38,7 @@ import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.SingleRequestQueue;
 import com.booksfloating.widget.MyCustomProgressDialog;
 import com.xd.booksfloating.R;
+import com.xd.dialog.DialogFactory;
 
 public class MyInfoPublish extends Activity{
 	
@@ -58,9 +61,6 @@ public class MyInfoPublish extends Activity{
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.myinfo_public_layout);
-		//getActionBar().setTitle("我的发布");
-		
-		
 		Intent intent =getIntent();
 		myInfoBookPublishListView= (ListView)findViewById(R.id.lv_my_info_book_publish);
 		btn_myinfo_search_book = (Button) findViewById(R.id.btn_my_info_search_book);
@@ -107,7 +107,8 @@ public class MyInfoPublish extends Activity{
 		SharePreferenceUtil sp = new SharePreferenceUtil(MyInfoPublish.this, Constants.SAVE_USER);
 		String url = HttpUtil.MY_PUBLISH+"?token=" + sp.getToken();
 		if(!sp.getToken().isEmpty()){
-			startLoadingAnimation();
+			//startLoadingAnimation();
+			showLoadingDialog();
 			loadData(MyInfoPublish.this, url);
 			
 			
@@ -119,21 +120,7 @@ public class MyInfoPublish extends Activity{
 		
 		
 	}
-	public  void startLoadingAnimation(){
-		
-		if(myCustomProgressDialog == null){
-			myCustomProgressDialog = MyCustomProgressDialog.createDialog(MyInfoPublish.this);
-			myCustomProgressDialog.setMessage("正在拼命加载中...");
-		}
-		
-		myCustomProgressDialog.show();
-	}
-	public  void stopLoadingAnimation(){
-		if(myCustomProgressDialog != null){
-			myCustomProgressDialog.dismiss();
-			myCustomProgressDialog = null;
-		}
-	}
+	
 	public void loadData(Context context, String url){
 		if(isNetworkAvailable(context)){
 			loadListData(context, url);
@@ -147,7 +134,8 @@ public class MyInfoPublish extends Activity{
 				
 			}
 			Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
-			stopLoadingAnimation();
+			//stopLoadingAnimation();
+			dismissLoadingDialog();
 		}
 	}
 	private void loadListData(final Context context, String url) {
@@ -158,7 +146,8 @@ public class MyInfoPublish extends Activity{
 			public void onResponse(JSONObject response) {
 				System.out.println(response.toString());
 				ACache.get(context).put("myInfoPublish", response);
-				stopLoadingAnimation();
+				//stopLoadingAnimation();
+				dismissLoadingDialog();
 				showListData(context, response);
 				
 			}
@@ -166,7 +155,8 @@ public class MyInfoPublish extends Activity{
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				stopLoadingAnimation();
+				//stopLoadingAnimation();
+				dismissLoadingDialog();
 				Toast.makeText(context, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 				
 			}
@@ -235,15 +225,42 @@ public class MyInfoPublish extends Activity{
 		
 		return null;
 	}
-	private String parseDate(String date){
-		if(date != null){
-			//String[] dateString = date.split("-");
-			String[] dateYMD = date.split("-");
-			//String[] dateHM = dateString[1].split(":");
-			return dateYMD[0] + "年" + dateYMD[1] + "月" + dateYMD[2] + "日";
+
+	public  void startLoadingAnimation(){
+		
+		if(myCustomProgressDialog == null){
+			myCustomProgressDialog = MyCustomProgressDialog.createDialog(MyInfoPublish.this);
+			myCustomProgressDialog.setMessage("正在拼命加载中...");
 		}
 		
-		return null;
+		myCustomProgressDialog.show();
+	}
+	public  void stopLoadingAnimation(){
+		if(myCustomProgressDialog != null){
+			myCustomProgressDialog.dismiss();
+			myCustomProgressDialog = null;
+		}
+	}
+	/**
+	 * 刘文苑的加载动画
+	 */
+	private Dialog dialog = null;
+	private void showLoadingDialog(){
+		if(dialog == null)
+		{
+			dialog = DialogFactory.creatLoadingDialog(this, "正在搜索，请稍后...");
+			dialog.show();
+		}
+		else {
+			dialog.dismiss();
+		}
+	}
+	
+	private void dismissLoadingDialog() {
+		if (dialog != null) {
+			dialog.dismiss();
+			dialog = null;
+		}
 	}
 	
 	
