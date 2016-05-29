@@ -21,7 +21,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/main_logo2"
         android:theme="@style/AppTheme" >
         
         <activity
