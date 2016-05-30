@@ -142,11 +142,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int wall=0x7f02004f;
     }
     public static final class id {
-        public static final int action_integral_rule=0x7f0b00a1;
+        public static final int action_integral_rule=0x7f0b00a3;
         public static final int actv_email=0x7f0b0036;
         public static final int arrow=0x7f0b00a0;
         public static final int back=0x7f0b0024;
-        public static final int books_myprtListView=0x7f0b0048;
+        public static final int books_lwy_prtListView=0x7f0b0048;
         public static final int btn_back=0x7f0b0000;
         public static final int btn_choose_all=0x7f0b0004;
         public static final int btn_direct_release=0x7f0b003a;
@@ -243,6 +243,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pb_loading=0x7f0b005b;
         public static final int pb_myinfo_crditscore=0x7f0b0077;
         public static final int pb_myinfo_crditscore2=0x7f0b0078;
+        public static final int pb_prt_footer=0x7f0b00a1;
         public static final int pb_prt_header=0x7f0b0057;
         public static final int refreshing=0x7f0b009f;
         public static final int rg_main_activity=0x7f0b002e;
@@ -297,6 +298,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tv_myinfo_order_message=0x7f0b007b;
         public static final int tv_notice_publish_time=0x7f0b004c;
         public static final int tv_notice_publisher=0x7f0b004e;
+        public static final int tv_prt_footerMsg=0x7f0b00a2;
         public static final int tv_prt_headerMsg=0x7f0b0058;
         public static final int tv_prt_time=0x7f0b0059;
         public static final int tv_reference_number=0x7f0b000e;
@@ -356,6 +358,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int nav_set_layout=0x7f03002f;
         public static final int nav_version_check_layout=0x7f030030;
         public static final int pull_to_refresh_header=0x7f030031;
+        public static final int sh_listview_footer=0x7f030032;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;

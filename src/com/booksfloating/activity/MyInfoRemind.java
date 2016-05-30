@@ -92,7 +92,7 @@ public class MyInfoRemind extends Activity{
 
 			@Override
 			public void onResponse(JSONObject response) {
-				System.out.println(response.toString());
+				System.out.println("MyinfoRemind" + response.toString());
 				ACache.get(context).put("到期提醒", response);
 				dismissLoadingDialog();
 				showListData(context, response);
@@ -168,6 +168,7 @@ public class MyInfoRemind extends Activity{
 				
 				
 			}else if(jsonObject.getString("status").equals("0")){
+				System.out.println("您没有借书记录");
 				Toast.makeText(MyInfoRemind.this, "您没有借书记录", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {

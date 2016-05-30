@@ -144,7 +144,7 @@ public class MyInfoPublish extends Activity{
 
 			@Override
 			public void onResponse(JSONObject response) {
-				System.out.println(response.toString());
+				System.out.println("MyinPublish" + response.toString());
 				ACache.get(context).put("myInfoPublish", response);
 				//stopLoadingAnimation();
 				dismissLoadingDialog();
@@ -198,32 +198,34 @@ public class MyInfoPublish extends Activity{
 			//JSONObject jsonObject = new JSONObject(jsonData);
 			if(jsonObject.getString("status").equals("1")){
 				JSONArray jsonArray = jsonObject.getJSONArray("message");
-				for(int i = 0; i<jsonArray.length(); i++){
-					jsonObject = jsonArray.getJSONObject(i);
-					MyInfoPublishBookBean publishBookBean = new MyInfoPublishBookBean();
-					publishBookBean.bookName = jsonObject.getString("book");
-					publishBookBean.bookAuthor = jsonObject.getString("author");
-					publishBookBean.bookLocation = jsonObject.getString("university");
-					publishBookBean.bookPublicshTime = jsonObject.getString("publish_time");
-					publishBookBean.bookRemark = jsonObject.getString("remarks");
-					publishBookBean.bookIconUrl =jsonObject.getString("picture");
-					myPublishBookBeanList.add(publishBookBean);
-					
+				if(jsonArray.length() > 0){
+					for(int i = 0; i<jsonArray.length(); i++){
+						jsonObject = jsonArray.getJSONObject(i);
+						MyInfoPublishBookBean publishBookBean = new MyInfoPublishBookBean();
+						publishBookBean.bookName = jsonObject.getString("book");
+						publishBookBean.bookAuthor = jsonObject.getString("author");
+						publishBookBean.bookLocation = jsonObject.getString("university");
+						publishBookBean.bookPublicshTime = jsonObject.getString("publish_time");
+						publishBookBean.bookRemark = jsonObject.getString("remarks");
+						publishBookBean.bookIconUrl =jsonObject.getString("picture");
+						myPublishBookBeanList.add(publishBookBean);
+						
+					}
+				}else {
+					Toast.makeText(MyInfoPublish.this, "您尚未发布信息", Toast.LENGTH_SHORT).show();
 				}
 				
 				
-				return myPublishBookBeanList;
-				
 			}else if(jsonObject.getString("status").equals("0")){
+				Toast.makeText(MyInfoPublish.this, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 				
-				Toast.makeText(MyInfoPublish.this, "您尚未发布信息", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {
 			
 			e.printStackTrace();
 		}
 		
-		return null;
+		return myPublishBookBeanList;
 	}
 
 	public  void startLoadingAnimation(){
