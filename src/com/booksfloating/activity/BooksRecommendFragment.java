@@ -28,13 +28,16 @@ import com.booksfloating.adapter.BookRecommendAdapter;
 import com.booksfloating.domain.BooksRecommendBean;
 import com.booksfloating.util.ACache;
 import com.booksfloating.util.HttpUtil;
+import com.booksfloating.util.ListViewCompat;
+import com.booksfloating.util.ListViewCompat.OnLoadListener;
+import com.booksfloating.util.ListViewCompat.OnRefreshListener;
 import com.booksfloating.util.SingleRequestQueue;
 import com.booksfloating.widget.MyCustomProgressDialog;
 import com.booksfloating.widget.MyPullToRefreshListView;
 import com.booksfloating.widget.MyPullToRefreshListView.MyOnRefreshListener;
 import com.xd.booksfloating.R;
 
-public class BooksRecommendFragment extends Fragment implements MyOnRefreshListener{
+public class BooksRecommendFragment extends Fragment implements OnRefreshListener, OnLoadListener{
 	
 	private static String TAG = "BooksRecommendFragment";
 	
@@ -49,6 +52,7 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 	private List<BooksRecommendBean> booksList = new ArrayList<BooksRecommendBean>();
 	
 	private MyPullToRefreshListView prtListView;
+	private ListViewCompat lwy_prtListView;
 	private MyCustomProgressDialog myCustomProgressDialog;
 	private BookRecommendAdapter adapter;
 	
@@ -68,13 +72,17 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 		Log.d("TAG", "Max memory is " + maxMemory + "KB");
 		View view = inflater.inflate(R.layout.books_recommend, container, false);
 		//booksRecommendList = (ListView) view.findViewById(R.id.books_recommend_list);
-		prtListView = (MyPullToRefreshListView) view.findViewById(R.id.books_myprtListView);
-		prtListView.setOnRefreshListener(this);
+		/*prtListView = (MyPullToRefreshListView) view.findViewById(R.id.books_myprtListView);
+		prtListView.setOnRefreshListener(this);*/
+		lwy_prtListView = (ListViewCompat) view.findViewById(R.id.books_lwy_prtListView);
+		lwy_prtListView.setOnLoadListener(this);
+		lwy_prtListView.setOnRefreshListener(this);
 		//startLoadingAnimation();
 		
-		
+		adapter = new BookRecommendAdapter(getActivity(), booksList);
+		lwy_prtListView.setAdapter(adapter);
 		loadData(getActivity(), HttpUtil.BOOK_RECOMMEND);
-		showListData(getActivity());
+		
 		return view;
 	}
 	
@@ -159,7 +167,8 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 				}
 				booksList.addAll(booksBeanList);
 				booksBeanList.clear();
-				prtListView.hideHeaderView();
+				//prtListView.hideHeaderView();
+				lwy_prtListView.onRefreshComplete();
 				adapter.notifyDataSetChanged();
 				
 				
@@ -169,19 +178,14 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				//stopLoadingAnimation();
-				prtListView.hideHeaderView();
+				//prtListView.hideHeaderView();
 				Toast.makeText(context, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 			}
 		});
 		requestQueue.add(jsonObjectRequest);
 		
 	}
-	public void showListData(Context context){
-		
-		adapter = new BookRecommendAdapter(context, booksList);
-		prtListView.setAdapter(adapter);
-		
-	}
+	
 	
 	private List<BooksRecommendBean> parseJsonData(JSONObject jsonObject) {
 		
@@ -214,12 +218,21 @@ public class BooksRecommendFragment extends Fragment implements MyOnRefreshListe
 		
 	}
 
+	/**
+	 * 刘文苑下拉刷新
+	 */
+
 	@Override
-	public void myOnDownPullRefresh() {
+	public void onRefresh() {
 		// TODO Auto-generated method stub
-		
 		loadData(getActivity(), HttpUtil.BOOK_RECOMMEND);
-		
+	}
+
+	@Override
+	public void onLoad() {
+		// TODO Auto-generated method stub
+		Toast.makeText(getActivity(), "已经到底了，没有更多数据了！", Toast.LENGTH_SHORT).show();
+		lwy_prtListView.onLoadComplete();
 	}
 	
 }

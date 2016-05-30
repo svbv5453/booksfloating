@@ -17,7 +17,7 @@
         android:text="@string/tv_books_recommend"
         android:textColor="@color/black"
         android:textSize="@dimen/nav_textsize_18"/>
-    <com.booksfloating.widget.MyPullToRefreshListView
+    <!-- <com.booksfloating.widget.MyPullToRefreshListView
         android:id="@+id/books_myprtListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,17 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:choiceMode="singleChoice"
+        android:dividerHeight="2dp"/> -->
+    <com.booksfloating.util.ListViewCompat
+       android:id="@+id/books_lwy_prtListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:choiceMode="singleChoice"
         android:dividerHeight="2dp"/>
+   
         
    
     <!-- <ListView 

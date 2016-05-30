@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -17,6 +18,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +47,9 @@ import com.xd.booksfloating.R;
 import com.xd.dialog.DialogFactory;
 
 public class HelpFragment extends Fragment {
+	private static String TAG = "Fragment";
 	
-	
-	private List<MyInfoBookDetailBean> booksOrderList;
+	private List<MyInfoBookDetailBean> booksOrderList = new ArrayList<MyInfoBookDetailBean>();
 	private List<MyInfoBookDetailBean> booksOrderList2;
 	//private Button btn_myinfo_search_book = null;
 	private ListView myInfoOrderListView = null;
@@ -60,6 +62,7 @@ public class HelpFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		Log.d(TAG, "Help--------onCreateView()");
 		//View view = inflater.inflate(R.layout.myinfo_order_askfragment_test, container, false);
 		View view = inflater.inflate(R.layout.myinfo_order_layout, container, false);
 		
@@ -162,7 +165,7 @@ public class HelpFragment extends Fragment {
 
 			@Override
 			public void onResponse(JSONObject response) {
-				System.out.println(response.toString());
+				System.out.println("HelpFragment" + response.toString());
 				ACache.get(context).put("帮助订单", response);
 				//stopLoadingAnimation();
 				dismissLoadingDialog();
@@ -222,7 +225,7 @@ public class HelpFragment extends Fragment {
 	 */
 	public List<MyInfoBookDetailBean> parseJsonData(JSONObject jsonObject) {
 		
-		booksOrderList = new ArrayList<MyInfoBookDetailBean>();
+		
 		try {
 			
 			
@@ -231,37 +234,42 @@ public class HelpFragment extends Fragment {
 				//预留解析
 				
 				JSONArray jsonArray = jsonObject.getJSONArray("message");
-				for(int i = 0; i < jsonArray.length(); i++){
-					jsonObject = jsonArray.getJSONObject(i);
-					
-					
-					String bookName = jsonObject.getString("book");
-					String bookAuthor = jsonObject.getString("author");
-					String bookLocation = jsonObject.getString("university");
-					String bookPublicshTime = jsonObject.getString("publish_time");
-					String lenderName = jsonObject.getString("borrower");
-					//String lenderUniversity = jsonObject.getString("lender_university");
-					String borrowTime = jsonObject.getString("lend_time");
-					String returnTime = jsonObject.getString("return_time");
-					String phoneNumber = jsonObject.getString("phone");
-					
-					bookOrder = new MyInfoBookDetailBean();
-					bookOrder.setBookAuthor(bookAuthor);
-					bookOrder.setBookLocation(bookLocation);
-					bookOrder.setBookName(bookName);
-					bookOrder.setBookPublicshTime(bookPublicshTime);
-					bookOrder.setBorrowTime(borrowTime);
-					bookOrder.setLenderName(lenderName);
-					bookOrder.setPhoneNumber(phoneNumber);
-					bookOrder.setReturnTime(returnTime);
-					booksOrderList.add(bookOrder);
-					
-					
+				if(jsonArray.length() > 0){
+					for(int i = 0; i < jsonArray.length(); i++){
+						jsonObject = jsonArray.getJSONObject(i);
+						
+						
+						String bookName = jsonObject.getString("book");
+						String bookAuthor = jsonObject.getString("author");
+						String bookLocation = jsonObject.getString("university");
+						String bookPublicshTime = jsonObject.getString("publish_time");
+						String lenderName = jsonObject.getString("borrower");
+						//String lenderUniversity = jsonObject.getString("lender_university");
+						String borrowTime = jsonObject.getString("lend_time");
+						String returnTime = jsonObject.getString("return_time");
+						String phoneNumber = jsonObject.getString("phone");
+						
+						bookOrder = new MyInfoBookDetailBean();
+						bookOrder.setBookAuthor(bookAuthor);
+						bookOrder.setBookLocation(bookLocation);
+						bookOrder.setBookName(bookName);
+						bookOrder.setBookPublicshTime(bookPublicshTime);
+						bookOrder.setBorrowTime(borrowTime);
+						bookOrder.setLenderName(lenderName);
+						bookOrder.setPhoneNumber(phoneNumber);
+						bookOrder.setReturnTime(returnTime);
+						booksOrderList.add(bookOrder);
+						
+						
+					}
+				}else {
+					Toast.makeText(getActivity(), "您还没有帮助订单", Toast.LENGTH_SHORT).show();
 				}
 				
 				
+				
 			}else if(jsonObject.getString("status").equals("0")){
-				Toast.makeText(getActivity(), "您还没有帮助订单", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -307,4 +315,90 @@ public class HelpFragment extends Fragment {
 		}
 	}
 
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Log.d(TAG, "Help--------onResume()");
+		if(booksOrderList.size() > 0){
+			MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), booksOrderList);
+			myInfoOrderListView.setAdapter(adapter);
+		}
+		
+		
+	}
+
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		Log.d(TAG, "Help--------onActivityCreated()");
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.d(TAG, "Help--------onActivityResult()");
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		super.onAttach(activity);
+		Log.d(TAG, "Help--------onAttach()");
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		Log.d(TAG, "Help--------onCreate()");
+	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		Log.d(TAG, "Help--------onDestroy()");
+	}
+
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		Log.d(TAG, "Help--------onDestroyView()");
+	}
+
+	@Override
+	public void onDetach() {
+		// TODO Auto-generated method stub
+		super.onDetach();
+		Log.d(TAG, "Help--------onDetach()");
+	}
+
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		Log.d(TAG, "Help--------onPause()");
+	}
+
+	
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		Log.d(TAG, "Help--------onStart()");
+	}
+
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		Log.d(TAG, "Help--------onStop()");
+	}
+
 }
+
