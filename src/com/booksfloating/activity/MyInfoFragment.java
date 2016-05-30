@@ -157,16 +157,16 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 			btn_goLogin.setVisibility(View.GONE);
 			ll_myinfo.setVisibility(View.VISIBLE);
 			tv_user.setText(sp.getAccount());
-			tv_user_ranking.setText("信用等级：1");
+			tv_user_ranking.setText("信用等级：普通用户");
 			
 			
 		}
 		if(sp.getCreditScroe() > 200){
-			tv_user_ranking.setText("信用等级：3");
+			tv_user_ranking.setText("信用等级：金牌用户");
 		}else if(sp.getCreditScroe() > 100){
-			tv_user_ranking.setText("信用等级：2");
+			tv_user_ranking.setText("信用等级：银牌用户");
 		}else if(sp.getCreditScroe() > 0){
-			tv_user_ranking.setText("信用等级：1");
+			tv_user_ranking.setText("信用等级：普通用户");
 		}
 		if(!TextUtils.isEmpty(sp.getUserUniversity())){
 			tv_user_school.setText(sp.getUserUniversity());
