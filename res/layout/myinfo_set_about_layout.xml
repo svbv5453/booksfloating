@@ -13,7 +13,7 @@
         android:layout_height="64dp"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:background="@drawable/logo"/>
+        android:background="@drawable/main_logo2"/>
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="230dp"
