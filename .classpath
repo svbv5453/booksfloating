@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="libs/volley.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="/VoiceToText/libs/Msc.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
