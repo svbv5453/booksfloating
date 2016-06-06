@@ -30,6 +30,7 @@
         <item name="android:gravity">center_horizontal|bottom</item>
         <item name="android:padding">4dip</item>
     </style>
+    
     <style name="nav_main_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/nav_bar</item>

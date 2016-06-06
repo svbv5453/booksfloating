@@ -1,8 +1,13 @@
 package com.booksfloating.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,13 +17,23 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.booklsfloating.activity.searchbooks.SearchBooksFragment;
 import com.booksfloating.adapter.FragmentAdapter;
 import com.booksfloating.adapter.MainPagerAdapter;
 import com.booksfloating.globalvar.Constants;
+import com.booksfloating.parse.JsonParser;
 import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.widget.MyRadioButton;
+import com.iflytek.cloud.InitListener;
+import com.iflytek.cloud.RecognizerResult;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechUtility;
+import com.iflytek.cloud.ui.RecognizerDialog;
+import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.xd.booksfloating.R;
 
 /**
@@ -30,17 +45,31 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	private ViewPager viewPager;
 	private MyRadioButton mrb_search_books,mrb_info_notice,
 			mrb_books_recommend,mrb_my_info;
-	private ArrayList<View> views;
-	private MainPagerAdapter adapter;
+
 	public static final int TAB_SEARCH_BOOKS = 0;
 	public static final int TAB_INFO_NOTICE = 1;
 	public static final int TAB_BOOKS_RECOMMEND = 2;
 	public static final int TAB_MY_INFO = 3;
 	private static Boolean isExit = false;
+	private Button btn_voice;
+	
+	private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
+	private String voiceSearch;
+	
+	
+	public String getVoiceSearch() {
+		return voiceSearch;
+	}
+
+	public void setVoiceSearch(String voiceSearch) {
+		this.voiceSearch = voiceSearch;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		SpeechUtility.createUtility(this, SpeechConstant.APPID + "=5628aaa4");
 		setContentView(R.layout.activity_main);
 		initViewPager();
 		SharePreferenceUtil sp = new SharePreferenceUtil(this, Constants.SAVE_USER);
@@ -53,8 +82,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	
 	private void initViewPager()
 	{
-		//views = new ArrayList<View>();
-		//adapter = new MainPagerAdapter(views);
+
 		viewPager = (ViewPager)findViewById(R.id.vp_main_activity);
 		mrb_search_books = (MyRadioButton)findViewById(R.id.mrb_search_books);
 		mrb_info_notice = (MyRadioButton)findViewById(R.id.mrb_info_notice);
@@ -70,6 +98,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		viewPager.setAdapter(adapter);
 		viewPager.setOffscreenPageLimit(0);
 		ViewPagerListener();
+
 	}
 
 	private void ViewPagerListener()
@@ -129,12 +158,66 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		case R.id.mrb_my_info:
 			viewPager.setCurrentItem(TAB_MY_INFO);
 			break;
-
+			/*case R.id.btn_voice:
+			// 1.创建RecognizerDialog对象
+			RecognizerDialog mDialog = new RecognizerDialog(
+					MainActivity.this, mInitListener);
+			// 2.设置accent、language等参数
+			mDialog.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
+			mDialog.setParameter(SpeechConstant.ACCENT, "mandarin");
+			// 3.设置回调接口
+			mDialog.setListener(mRecognizerDialogListener);
+			// 4.显示dialog，接收语音输入
+			mDialog.show();
+			break;*/
 		default:
 			break;
 		}
 	}
 
+	private RecognizerDialogListener mRecognizerDialogListener = new RecognizerDialogListener() {
+		@Override
+		public void onResult(RecognizerResult arg0, boolean arg1) {
+			String text = JsonParser.parseIatResult(arg0.getResultString());
+			System.out.println("text" + text);
+			String sn = null;
+			// 读取json结果中的sn字段
+			try {
+				JSONObject resultJson = new JSONObject(arg0.getResultString());
+				sn = resultJson.optString("sn");
+				System.out.println("sn" + sn);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+			mIatResults.put(sn, text);
+
+			StringBuffer resultBuffer = new StringBuffer();
+			for (String key : mIatResults.keySet()) {
+				resultBuffer.append(mIatResults.get(key));
+			}
+			voiceSearch = resultBuffer.toString();
+			if (voiceSearch != null) {
+				setVoiceSearch(voiceSearch);
+			}
+		}
+
+		@Override
+		public void onError(SpeechError arg0) {
+
+		}
+	};
+	
+	/**
+	 * 初始化监听器。
+	 */
+	private InitListener mInitListener = new InitListener() {
+
+		@Override
+		public void onInit(int code) {
+		}
+	};
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
