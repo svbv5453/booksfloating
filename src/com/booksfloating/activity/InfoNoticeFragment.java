@@ -17,6 +17,7 @@ import com.booksfloating.globalvar.Constants;
 import com.booksfloating.parse.ParseBooksAttrJson;
 import com.booksfloating.util.HttpUtil;
 import com.booksfloating.util.ListViewCompat;
+import com.booksfloating.util.SharePreferenceUtil;
 import com.booksfloating.util.ListViewCompat.OnLoadListener;
 import com.booksfloating.util.ListViewCompat.OnRefreshListener;
 import com.booksfloating.util.MyComparator;
@@ -150,7 +151,16 @@ public class InfoNoticeFragment extends Fragment implements OnItemClickListener,
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// TODO Auto-generated method stub
+		SharePreferenceUtil spUtil = new SharePreferenceUtil(getActivity(), Constants.SAVE_USER);
+		if (spUtil.getToken() == null || spUtil.getToken().length() == 0) {
+			DialogFactory.AlertDialog(getActivity(),"提示", "您还未登录，请登录！");
+			return;
+		}
 		BooksAttr booksAttr = (BooksAttr)adapter.getItem(position-1);
+		if (booksAttr.getNoticePublisher().equals(spUtil.getAccount())) {
+			DialogFactory.AlertDialog(getActivity(), "错误", "不能帮自己借书！");
+			return;
+		}
 		Intent intent = new Intent();
 		intent.setClass(getActivity(), BooksInfoActivity.class);
 		intent.putExtra("intent_booksAttr", booksAttr);

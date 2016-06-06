@@ -48,6 +48,16 @@
             lwy:image="@drawable/logo_info_notice"
             android:text="@string/info_notice"
             android:textColor="@color/black"/>
+        
+        <!-- button voice 
+        <Button
+            android:id="@+id/btn_voice"
+            style="@style/radioButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/voice"
+            android:text="" />-->
+
 
         <!-- tab 3 -->
         <com.booksfloating.widget.MyRadioButton
@@ -74,5 +84,6 @@
             android:textColor="@color/black"/>
 
     </RadioGroup>
+
     
 </RelativeLayout>

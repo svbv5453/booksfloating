@@ -6,6 +6,7 @@
 	<classpathentry kind="lib" path="libs/volley.jar"/>
 	<classpathentry kind="lib" path="libs/okhttp-3.3.1.jar"/>
 	<classpathentry kind="lib" path="libs/okio-1.8.0.jar"/>
+	<classpathentry kind="lib" path="libs/Msc.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
