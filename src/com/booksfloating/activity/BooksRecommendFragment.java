@@ -122,6 +122,11 @@ public class BooksRecommendFragment extends Fragment implements OnRefreshListene
 			if(response != null){
 				Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
 				parseJsonData(response);
+				if(booksList.size() > 0){
+					booksList.clear();
+				}
+				booksList.addAll(booksBeanList);
+				booksBeanList.clear();
 				adapter.notifyDataSetChanged();
 				
 			}

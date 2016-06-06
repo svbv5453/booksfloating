@@ -64,8 +64,9 @@ public class MyInfoRemind extends Activity{
 		String url = HttpUtil.BORROW_ORDER + "?token=" + sp.getToken();
 		
 		if(!sp.getToken().isEmpty()){
-			loadData(MyInfoRemind.this, url);
 			showLoadingDialog();
+			loadData(MyInfoRemind.this, url);
+			
 		}else{
 			Toast.makeText(MyInfoRemind.this, "你尚未登录，无法查看您的信息", Toast.LENGTH_SHORT).show();
 		}
@@ -81,7 +82,7 @@ public class MyInfoRemind extends Activity{
 				showListData(context, response);
 			}
 			Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
-			
+			dismissLoadingDialog();
 			
 		}
 	}
@@ -158,7 +159,7 @@ public class MyInfoRemind extends Activity{
 					bookOrder.bookName = jsonObject.getString("book");
 					bookOrder.bookAuthor = jsonObject.getString("author");
 					bookOrder.bookLocation = jsonObject.getString("university");
-					//bookOrder.bookIconUrl =jsonObject.getString("picture");
+					bookOrder.bookIconUrl =jsonObject.getString("picture");
 					bookOrder.bookExpirationTime = jsonObject.getString("return_time");
 					
 					booksOrderList.add(bookOrder);
