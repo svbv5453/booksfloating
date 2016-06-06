@@ -6,25 +6,7 @@
     android:orientation="vertical" >
       <!-- 导航栏 -->  
      <include layout="@layout/nav_order_detail_layout"/>
-	 <!-- <LinearLayout 
-	     android:layout_width="match_parent"
-	     android:layout_height="wrap_content"
-	     android:layout_marginLeft="15dp"
-	     android:layout_marginRight="15dp"
-	     android:layout_marginTop="25dp"
-	     android:orientation="horizontal">
-	     <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="订单号 : "
-        android:textSize="@dimen/nav_textsize_16"/>
-	     <TextView 
-        android:id="@+id/tv_myinfo_ask_orderNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="100001111"
-        android:textSize="@dimen/nav_textsize_16"/>
-	  </LinearLayout> -->
+	
 	  <LinearLayout 
 	     android:layout_width="match_parent"
 	     android:layout_height="wrap_content"
@@ -227,6 +209,16 @@
 	     android:textSize="@dimen/nav_textsize_16"
         android:text="您可与他线下联系！"
         />
+    <Button 
+        android:id="@+id/btn_confirm_return"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape"
+        android:textColor="@color/white"
+        android:text="确认归还"/>
 	 
 
 </LinearLayout>

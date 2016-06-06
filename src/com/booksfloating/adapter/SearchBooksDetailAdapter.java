@@ -6,7 +6,7 @@ import java.util.List;
 import com.booksfloating.attr.BooksAttr;
 import com.booksfloating.globalvar.Constants;
 import com.booksfloating.util.ImageManager;
-import com.booksfloating.util.LoadBookImage;
+
 import com.booksfloating.util.LoaderImageUseVelloy;
 import com.xd.booksfloating.R;
 import com.xd.imageloader.ImageLoader;

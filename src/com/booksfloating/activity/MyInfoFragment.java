@@ -161,11 +161,11 @@ public class MyInfoFragment extends Fragment implements OnClickListener{
 			
 			
 		}
-		if(sp.getCreditScroe() > 200){
+		if(sp.getCreditScroe()/5 > 200){
 			tv_user_ranking.setText("信用等级：金牌用户");
-		}else if(sp.getCreditScroe() > 100){
+		}else if(sp.getCreditScroe()/5 > 100){
 			tv_user_ranking.setText("信用等级：银牌用户");
-		}else if(sp.getCreditScroe() > 0){
+		}else if(sp.getCreditScroe()/5 > 0){
 			tv_user_ranking.setText("信用等级：普通用户");
 		}
 		if(!TextUtils.isEmpty(sp.getUserUniversity())){

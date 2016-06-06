@@ -145,9 +145,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="7.5dp"
         android:progressDrawable="@drawable/prgressbar"
-        
         android:max="100"
-        android:progress="5"
         style="@android:style/Widget.ProgressBar.Horizontal"/>
        
         <ProgressBar 
@@ -184,9 +182,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-         android:textSize="16sp"
-        
-        android:text="5"/>
+         android:textSize="16sp"/>
     </LinearLayout>
     
     

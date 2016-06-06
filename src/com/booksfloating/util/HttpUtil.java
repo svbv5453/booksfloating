@@ -48,6 +48,10 @@ public class HttpUtil {
 	public static final String BORROW_ORDER = Constants.SERVER_IP + "/borrow_order";
 	public static final String LEND_ORDER = Constants.SERVER_IP + "/lend_order";
 	public static final String FORGET_PASSWORD = Constants.SERVER_IP + "/forget_password";
+	public static final String FINISH_ORDER = Constants.SERVER_IP + "/finish_order";
+	public static final String SIGN_IN = Constants.SERVER_IP + "/sign_in";
+	public static final String MY_CREDIT = Constants.SERVER_IP + "/my_credit";
+	
 	
 	public static String getJsonData(final String urlString) {
 		

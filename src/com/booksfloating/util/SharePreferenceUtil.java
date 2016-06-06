@@ -96,8 +96,8 @@ public class SharePreferenceUtil {
 	}
 	//信用积分
 	public void setCreditScore(int number){
-		int temp = getCreditScroe();
-		editor.putInt("creditScore", temp + number);
+		//int temp = getCreditScroe();
+		editor.putInt("creditScore", number);
 		editor.commit();
 	}
 	public int getCreditScroe(){

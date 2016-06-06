@@ -55,16 +55,19 @@ public class BookRecommendAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		System.out.println("getCount:"+getCount());		
 		ViewHolder viewHolder = null;
+		if(convertView == null){
+			viewHolder = new ViewHolder();
+			convertView = mLayoutInflater.inflate(R.layout.booklist_item, null);
+			viewHolder.bookName = (TextView) convertView.findViewById(R.id.sh_book_name);
+			viewHolder.bookAuthor = (TextView) convertView.findViewById(R.id.sh_book_author);
+			viewHolder.bookImage = (ImageView) convertView.findViewById(R.id.sh_book_image);
+			viewHolder.bookRanking = (TextView) convertView.findViewById(R.id.sh_book_ranking);
+			convertView.setTag(viewHolder);	
+		}else {
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
 
-		viewHolder = new ViewHolder();
-		convertView = mLayoutInflater.inflate(R.layout.booklist_item, null);
-		viewHolder.bookName = (TextView) convertView.findViewById(R.id.sh_book_name);
-		viewHolder.bookAuthor = (TextView) convertView.findViewById(R.id.sh_book_author);
-		viewHolder.bookImage = (ImageView) convertView.findViewById(R.id.sh_book_image);
-		viewHolder.bookRanking = (TextView) convertView.findViewById(R.id.sh_book_ranking);
-		convertView.setTag(viewHolder);	
 		
-		viewHolder.bookName.setText(booksBeanList.get(position).bookName);
 
 		/*viewHolder.bookAuthor.setText("作者: " + booksBeanList.get(position).bookAuthor);
 		viewHolder.bookImage.setImageResource(android.R.id.icon);
@@ -81,12 +84,17 @@ public class BookRecommendAdapter extends BaseAdapter{
 		
 		//内存溢出，使用单例模式解决，context不能为Activity，必须是context.getApplicationContext()才可以
 		//ImageManager.from(myContext).displayImage(viewHolder.bookImage, url, R.drawable.default_book);
-
+		String url = booksBeanList.get(position).bookImageUrl;
+		if(url == null){
+			viewHolder.bookImage.setImageDrawable(myContext.getResources().getDrawable(R.drawable.default_book));
+		} else {
+			ImageLoader imageLoader = new ImageLoader(myContext);
+			imageLoader.DisplayImage(url, viewHolder.bookImage, false, R.drawable.default_book);
+		}
+		
+		viewHolder.bookName.setText(booksBeanList.get(position).bookName);
 		viewHolder.bookAuthor.setText("作者: " + booksBeanList.get(position).bookAuthor);
 		viewHolder.bookRanking.setText(booksBeanList.get(position).getBookRanking());
-		ImageLoader imageLoader = new ImageLoader(myContext);
-		imageLoader.DisplayImage(booksBeanList.get(position).bookImageUrl, viewHolder.bookImage, false, R.drawable.default_book);
-
 		
 		if(position == 0){
 			viewHolder.bookRanking.setBackgroundResource(R.drawable.bg_books_ranking1);
@@ -99,7 +107,7 @@ public class BookRecommendAdapter extends BaseAdapter{
 		
 		return convertView;
 	}
-	class ViewHolder{
+	public static class ViewHolder{
 		ImageView bookImage;
 		TextView bookName;
 		TextView bookAuthor;

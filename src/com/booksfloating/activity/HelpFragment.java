@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -46,18 +47,22 @@ import com.booksfloating.widget.MyCustomProgressDialog;
 import com.xd.booksfloating.R;
 import com.xd.dialog.DialogFactory;
 
-public class HelpFragment extends Fragment {
+public class HelpFragment extends Fragment implements OnClickListener {
 	private static String TAG = "Fragment";
 	
 	private List<MyInfoBookDetailBean> booksOrderList = new ArrayList<MyInfoBookDetailBean>();
+	private List<MyInfoBookDetailBean> booksList = new ArrayList<MyInfoBookDetailBean>();
 	private List<MyInfoBookDetailBean> booksOrderList2;
 	//private Button btn_myinfo_search_book = null;
 	private ListView myInfoOrderListView = null;
 	private MyInfoBookDetailBean bookOrder;
 	private Button btn_myinfo_search_book = null;
+	
 	private EditText et_search = null;
 	private static String urlTest = "http://www.imooc.com/api/teacher?type=4&num=30";
 	private MyCustomProgressDialog myCustomProgressDialog;
+	private String url;
+	private MyInfoOrderAdapter adapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,42 +73,23 @@ public class HelpFragment extends Fragment {
 		
 		myInfoOrderListView = (ListView)view.findViewById(R.id.lv_my_info_book_order);
 		et_search = (EditText) view.findViewById(R.id.et_my_info_search_order);
-		 btn_myinfo_search_book = (Button) view.findViewById(R.id.btn_my_info_search_book);
-			btn_myinfo_search_book.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					String key = et_search.getText().toString().trim();
-					if(!TextUtils.isEmpty(key)){
-						booksOrderList2 =new ArrayList<MyInfoBookDetailBean>();
-						for(MyInfoBookDetailBean myorderBook : booksOrderList){
-							if(myorderBook.getBookName().equalsIgnoreCase(key)){
-								
-								booksOrderList2.add(myorderBook);
-							}
-						}
-						if(!booksOrderList2.isEmpty()){
-							MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), booksOrderList2);
-							myInfoOrderListView.setAdapter(adapter);
-						}else{
-							Toast.makeText(getActivity(), "未查到相关数据，请输入正确的书名", Toast.LENGTH_SHORT).show();
-						}
-					}else{
-						Toast.makeText(getActivity(), "请输入查询数据", Toast.LENGTH_SHORT).show();
-					}
-				}
-			});
+		btn_myinfo_search_book = (Button) view.findViewById(R.id.btn_my_info_search_book);
+		btn_myinfo_search_book.setOnClickListener(this);
+			
 		//loadData(getActivity(), urlTest);
 		/**
 		 * 实际方法，如同askFragment
 		 */
 		
 		SharePreferenceUtil sp = new SharePreferenceUtil(getActivity(), Constants.SAVE_USER);
-		String url = HttpUtil.LEND_ORDER + "?token=" + sp.getToken();
+		url = HttpUtil.LEND_ORDER + "?token=" + sp.getToken();
 		
 		if(!sp.getToken().isEmpty()){
 			//startLoadingAnimation();
 			showLoadingDialog();
+			
+			adapter = new MyInfoOrderAdapter(getActivity(), booksList);
+			myInfoOrderListView.setAdapter(adapter);
 			loadData(getActivity(), url);
 			
 		}else{
@@ -124,6 +110,37 @@ public class HelpFragment extends Fragment {
 		}); 
 		return view;
 	}
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.btn_my_info_search_book:
+			String key = et_search.getText().toString().trim();
+			if(!TextUtils.isEmpty(key)){
+				booksOrderList2 =new ArrayList<MyInfoBookDetailBean>();
+				for(MyInfoBookDetailBean myorderBook : booksOrderList){
+					if(myorderBook.getBookName().equalsIgnoreCase(key)){
+						
+						booksOrderList2.add(myorderBook);
+					}
+				}
+				if(!booksOrderList2.isEmpty()){
+					MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), booksOrderList2);
+					myInfoOrderListView.setAdapter(adapter);
+				}else{
+					Toast.makeText(getActivity(), "未查到相关数据，请输入正确的书名", Toast.LENGTH_SHORT).show();
+				}
+			}else{
+				Toast.makeText(getActivity(), "请输入查询数据", Toast.LENGTH_SHORT).show();
+			}
+			break;
+		
+			
+		default:
+			break;
+		}
+		
+	}
 	
 	private void IntentToActivity(int position) {
 		
@@ -133,7 +150,7 @@ public class HelpFragment extends Fragment {
 		mBundle.putParcelable("lendOrder", booksOrderList.get(position));
 		System.out.println(booksOrderList.get(position).getLenderName());
 		intent.putExtras(mBundle);*/
-		intent.putExtra("lendOrder", booksOrderList.get(position));
+		intent.putExtra("lendOrder", booksList.get(position));
 		startActivity(intent);
 		
 
@@ -147,7 +164,17 @@ public class HelpFragment extends Fragment {
 			JSONObject response = ACache.get(context).getAsJSONObject("帮助订单");
 			if(response != null){
 				Toast.makeText(context, "请检查网络连接", Toast.LENGTH_SHORT).show();
-				showListData(context, response);
+				parseJsonData(response);
+				if(booksList.size() > 0){
+					booksList.clear();
+				}
+				booksList.addAll(booksOrderList);
+				booksOrderList.clear();
+				if(booksList.size() > 1){
+					SHMyComparator comparator = new SHMyComparator();
+					Collections.sort(booksList, comparator);
+				}
+				adapter.notifyDataSetChanged();
 				
 			}
 			//stopLoadingAnimation();
@@ -169,7 +196,18 @@ public class HelpFragment extends Fragment {
 				ACache.get(context).put("帮助订单", response);
 				//stopLoadingAnimation();
 				dismissLoadingDialog();
-				showListData(context, response);
+				parseJsonData(response);
+				if(booksList.size() > 0){
+					booksList.clear();
+				}
+				booksList.addAll(booksOrderList);
+				booksOrderList.clear();
+				if(booksList.size() > 1){
+					SHMyComparator comparator = new SHMyComparator();
+					Collections.sort(booksList, comparator);
+				}
+				adapter.notifyDataSetChanged();
+				
 			}
 		}, new Response.ErrorListener() {
 
@@ -183,16 +221,7 @@ public class HelpFragment extends Fragment {
 		requestQueue.add(jsonObjectRequest);
 		
 	}
-	public void showListData(Context context, JSONObject response){
-		parseJsonData(response);
-		
-		if(booksOrderList.size() > 1){
-			SHMyComparator comparator = new SHMyComparator();
-			Collections.sort(booksOrderList, comparator);
-		}
-		MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), booksOrderList);
-		myInfoOrderListView.setAdapter(adapter);
-	}
+	
 	
 	
 	public boolean isNetwrokAvaliable(Context context){
@@ -248,6 +277,7 @@ public class HelpFragment extends Fragment {
 						String borrowTime = jsonObject.getString("lend_time");
 						String returnTime = jsonObject.getString("return_time");
 						String phoneNumber = jsonObject.getString("phone");
+						String orderID = jsonObject.getString("orderID");
 						
 						bookOrder = new MyInfoBookDetailBean();
 						bookOrder.setBookAuthor(bookAuthor);
@@ -258,6 +288,7 @@ public class HelpFragment extends Fragment {
 						bookOrder.setLenderName(lenderName);
 						bookOrder.setPhoneNumber(phoneNumber);
 						bookOrder.setReturnTime(returnTime);
+						bookOrder.setOrderID(orderID);
 						booksOrderList.add(bookOrder);
 						
 						
@@ -320,11 +351,11 @@ public class HelpFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		Log.d(TAG, "Help--------onResume()");
-		if(booksOrderList.size() > 0){
+		/*if(booksOrderList.size() > 0){
 			MyInfoOrderAdapter adapter = new MyInfoOrderAdapter(getActivity(), booksOrderList);
 			myInfoOrderListView.setAdapter(adapter);
-		}
-		
+		}*/
+		loadData(getActivity(), url);
 		
 	}
 
@@ -399,6 +430,8 @@ public class HelpFragment extends Fragment {
 		super.onStop();
 		Log.d(TAG, "Help--------onStop()");
 	}
+
+	
 
 }
 
