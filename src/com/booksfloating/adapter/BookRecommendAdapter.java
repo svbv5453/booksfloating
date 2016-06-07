@@ -54,18 +54,16 @@ public class BookRecommendAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		System.out.println("getCount:"+getCount());		
-		ViewHolder viewHolder = null;
-		if(convertView == null){
-			viewHolder = new ViewHolder();
-			convertView = mLayoutInflater.inflate(R.layout.booklist_item, null);
-			viewHolder.bookName = (TextView) convertView.findViewById(R.id.sh_book_name);
-			viewHolder.bookAuthor = (TextView) convertView.findViewById(R.id.sh_book_author);
-			viewHolder.bookImage = (ImageView) convertView.findViewById(R.id.sh_book_image);
-			viewHolder.bookRanking = (TextView) convertView.findViewById(R.id.sh_book_ranking);
-			convertView.setTag(viewHolder);	
-		}else {
-			viewHolder = (ViewHolder) convertView.getTag();
-		}
+		
+		
+		ViewHolder viewHolder = new ViewHolder();
+		convertView = mLayoutInflater.inflate(R.layout.booklist_item, null);
+		viewHolder.bookName = (TextView) convertView.findViewById(R.id.sh_book_name);
+		viewHolder.bookAuthor = (TextView) convertView.findViewById(R.id.sh_book_author);
+		viewHolder.bookImage = (ImageView) convertView.findViewById(R.id.sh_book_image);
+		viewHolder.bookRanking = (TextView) convertView.findViewById(R.id.sh_book_ranking);
+		
+		
 
 		
 

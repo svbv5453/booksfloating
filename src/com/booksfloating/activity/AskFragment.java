@@ -57,9 +57,6 @@ public class AskFragment extends Fragment {
 	private Button btn_myinfo_search_book = null;
 	private EditText et_search = null;
 	private MyCustomProgressDialog myCustomProgressDialog;
-	
-	private static String urlTest = "http://www.imooc.com/api/teacher?type=4&num=30";
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -225,13 +222,7 @@ public class AskFragment extends Fragment {
 		
 		
 		try {
-			
-			
 			if(jsonObject.getString("status").equals("1")){
-				
-				
-				//预留解析
-				
 				JSONArray jsonArray = jsonObject.getJSONArray("message");
 				if(jsonArray.length() > 0){
 					for(int i = 0; i < jsonArray.length(); i++){
@@ -269,6 +260,8 @@ public class AskFragment extends Fragment {
 				
 			}else if(jsonObject.getString("status").equals("0")){
 				Toast.makeText(getActivity(), "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
+			}else if(jsonObject.getString("status").equals("-1")){
+				Toast.makeText(getActivity(), "登陆超时，请重新登陆", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
