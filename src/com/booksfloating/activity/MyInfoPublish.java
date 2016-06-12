@@ -219,6 +219,8 @@ public class MyInfoPublish extends Activity{
 			}else if(jsonObject.getString("status").equals("0")){
 				Toast.makeText(MyInfoPublish.this, "服务器错误，请稍后重试", Toast.LENGTH_SHORT).show();
 				
+			}else if(jsonObject.getString("status").equals("-1")){
+				Toast.makeText(MyInfoPublish.this, "登陆超时，请重新登陆", Toast.LENGTH_SHORT).show();
 			}
 		} catch (JSONException e) {
 			

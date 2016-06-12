@@ -5,7 +5,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,7 +32,7 @@ public class MyInfoSetResetPassword extends Activity{
 	private EditText confimPassword = null;
 	private Button btn_back = null;
 	SharePreferenceUtil sp;
-	public static final int OK = 0,SERVER_ERROR = -1, NETWORK_ERROR = -2, NULL_ERROR = -3,OLDPASSWORD_ERROR = -4,PASSWORD_ERROR = -5;
+	public static final int OK = 0,SERVER_ERROR = -1, TOKEN_ERROR = -2, NULL_ERROR = -3,OLDPASSWORD_ERROR = -4,PASSWORD_ERROR = -5;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -62,7 +65,12 @@ public class MyInfoSetResetPassword extends Activity{
 			public void onClick(View v) {
 				
 				if(!sp.getToken().isEmpty()){
-					changePassword();
+					if(isNetworkAvailable(MyInfoSetResetPassword.this)){
+						changePassword();
+					}else {
+						Toast.makeText(MyInfoSetResetPassword.this, "请检查网络连接！", Toast.LENGTH_SHORT).show();
+					}
+					
 				}else{
 					Toast.makeText(MyInfoSetResetPassword.this, "您尚未登陆，请您登陆！", Toast.LENGTH_SHORT).show();
 				}
@@ -97,8 +105,8 @@ public class MyInfoSetResetPassword extends Activity{
 			case PASSWORD_ERROR:
 				Toast.makeText(MyInfoSetResetPassword.this, "密码输入不一致，请核对后输入！", Toast.LENGTH_SHORT).show();
 				break;
-			case NETWORK_ERROR:
-				Toast.makeText(MyInfoSetResetPassword.this, "请检查网络连接！", Toast.LENGTH_SHORT).show();
+			case TOKEN_ERROR:
+				Toast.makeText(MyInfoSetResetPassword.this, "登陆失效，请重新登陆！", Toast.LENGTH_SHORT).show();
 				break;
 				
 			}
@@ -126,10 +134,12 @@ public class MyInfoSetResetPassword extends Activity{
 						parameters[2] = new PostParameter("new_password", confimPasswordString);
 						String responseJson = HttpUtil.httpRequest(HttpUtil.CHANGE_PASSWORD, parameters, HttpUtil.POST);
 						if(responseJson != null){
-							if(parseResponseJson(responseJson)){
+							if(parseResponseJson(responseJson) == 1){
 								handler.sendEmptyMessage(OK);
-							}else{
+							}else if(parseResponseJson(responseJson) == -2){
 								handler.sendEmptyMessage(OLDPASSWORD_ERROR);
+							}else if(parseResponseJson(responseJson) == -1){
+								handler.sendEmptyMessage(TOKEN_ERROR);
 							}
 							
 							
@@ -144,22 +154,43 @@ public class MyInfoSetResetPassword extends Activity{
 		
 		}
 		
-	public boolean parseResponseJson(String responseJson){
+	public int parseResponseJson(String responseJson){
 		JSONObject jsonObject;
 		try {
 			jsonObject = new JSONObject(responseJson);
 			if(jsonObject.getString("status").equals("1")){
 				
-				return true;
-			}else{
+				return 1;
+			}else if(jsonObject.getString("status").equals("0")){
 				
-				return false;
+				return 0;
+			}else if(jsonObject.getString("status").equals("-1")){
+				
+				return -1;
+			}else if(jsonObject.getString("status").equals("-2")){
+				
+				return -2;
 			}
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return 0;
+		
+		
+	}
+	public boolean isNetworkAvailable(Context context){
+		ConnectivityManager conecntivityMananger = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo[] info = conecntivityMananger.getAllNetworkInfo();
+		if(info != null){
+			for(int i = 0; i < info.length; i++){
+				if(info[i].getState() == NetworkInfo.State.CONNECTED){
+					return true;
+				}
+			}
+		}
+		
 		return false;
 		
 		
