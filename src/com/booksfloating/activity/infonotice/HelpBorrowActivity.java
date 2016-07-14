@@ -192,9 +192,9 @@ public class HelpBorrowActivity extends Activity implements OnClickListener{
 				Intent intent = new Intent();
 				intent.setClass(getApplicationContext(), MainActivity.class);
 				intent.putExtra("intent_fragmentId", MainActivity.TAB_INFO_NOTICE);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
 				finish();
-				//HelpBorrowActivity.this.startActivityForResult(intent, requestCode)
 				break;
 			case -1:
 				Toast.makeText(HelpBorrowActivity.this, "服务器错误，请稍后重试！", Toast.LENGTH_SHORT).show();
