@@ -2,6 +2,7 @@ package com.booklsfloating.activity.searchbooks;
 
 import java.util.ArrayList;
 
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -153,14 +154,14 @@ public class PublishInfoActivity extends Activity implements OnClickListener{
 
 	//这里发布信息可能发布多条数据
 	private void submitDataToServer(final BorrowInfo borrowInfo){
-		final PostParameter[] postParameters = new PostParameter[9];
+		//final PostParameter[] postParameters = new PostParameter[9];
 		final SharePreferenceUtil sp = new SharePreferenceUtil(PublishInfoActivity.this, Constants.SAVE_USER);
 		
 		new Thread(new Runnable() {			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub				
-				postParameters[0] = new PostParameter("book", booksAttr.getBookTitle());
+				/*postParameters[0] = new PostParameter("book", booksAttr.getBookTitle());
 				postParameters[1] = new PostParameter("author", booksAttr.getBookAuthor());
 				postParameters[2] = new PostParameter("university", borrowInfo.borrowLoc);
 				postParameters[3] = new PostParameter("index", borrowInfo.borrowIndex);
@@ -168,9 +169,21 @@ public class PublishInfoActivity extends Activity implements OnClickListener{
 				postParameters[5] = new PostParameter("publishdate", booksAttr.getPublishDate());
 				postParameters[6] = new PostParameter("publisher", booksAttr.getBookPublisher());
 				postParameters[7] = new PostParameter("borrower", sp.getAccount());
-				postParameters[8] = new PostParameter("token", sp.getToken());
+				postParameters[8] = new PostParameter("token", sp.getToken());*/
+				
+				ArrayList<BasicNameValuePair> list = new ArrayList<BasicNameValuePair>();
+				list.add(new BasicNameValuePair("book", booksAttr.getBookTitle()));
+				list.add(new BasicNameValuePair("author", booksAttr.getBookAuthor()));
+				list.add(new BasicNameValuePair("university", borrowInfo.borrowLoc));
+				list.add(new BasicNameValuePair("index", borrowInfo.borrowIndex));
+				list.add(new BasicNameValuePair("remarks", booksAttr.getRemark()));
+				list.add(new BasicNameValuePair("publishdate", booksAttr.getPublishDate()));
+				list.add(new BasicNameValuePair("publisher", booksAttr.getBookPublisher()));
+				list.add(new BasicNameValuePair("borrower", sp.getAccount()));
+				list.add(new BasicNameValuePair("token", sp.getToken()));
+				list.add(new BasicNameValuePair("picture", booksAttr.getBookImageUrl()));
 								
-				jsonString = HttpUtil.httpRequest(HttpUtil.PUBLISH_INFO, postParameters, HttpUtil.POST);
+				jsonString = HttpUtil.postRequest(HttpUtil.PUBLISH_INFO, list);
 				if (jsonString != null) {
 					handler.sendEmptyMessage(Constants.OK);
 				}

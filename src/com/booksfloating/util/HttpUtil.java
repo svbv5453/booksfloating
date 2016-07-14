@@ -10,6 +10,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.util.Log;
 
@@ -78,7 +89,7 @@ public class HttpUtil {
 	}
 	
 	/**
-	 * 通用的http请求类（默认采用POST方式）
+	 * 通用的http请求类（这里其实是Get方法）
 	 * 这种方式是将参数作为post的地址的参数传输的
 	 * @param url 请求地址
 	 * @param postParams post传递的参数
@@ -141,6 +152,46 @@ public class HttpUtil {
         	return jsonStr;
         }
     }
+	
+	public static String postRequest(String url, List<BasicNameValuePair> postParams){		
+		StringBuffer sbBuffer = null;
+		try {
+			HttpClient client = new DefaultHttpClient();
+			HttpPost postJson = new HttpPost(url);
+			UrlEncodedFormEntity entityIn = new UrlEncodedFormEntity(postParams,"UTF-8");
+			postJson.setEntity(entityIn);
+			HttpResponse response;
+			try {
+				response = client.execute(postJson);			
+				HttpEntity entityOut = response.getEntity();
+				if (entityOut != null) {
+					BufferedReader br = new BufferedReader(new InputStreamReader(entityOut.getContent(),"UTF-8"));
+					sbBuffer = new StringBuffer();
+					String lineString = "";
+					try {
+						while((lineString = br.readLine()) != null)
+						{
+							sbBuffer.append(lineString);
+						}
+						br.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} catch (ClientProtocolException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sbBuffer.toString();
+	}
 
 	/**
 	 * 将传递的参数进行编码    
